@@ -1,9 +1,9 @@
 //! Main entry point for Scarus application.
 
-#![deny(clippy::pedantic)]
+// #![deny(clippy::pedantic)]
 #![allow(clippy::must_use_candidate)]
 #![allow(clippy::module_name_repetitions)]
-#![warn(missing_docs)]
+// #![warn(missing_docs)]
 
 use clap::{Parser, Subcommand};
 

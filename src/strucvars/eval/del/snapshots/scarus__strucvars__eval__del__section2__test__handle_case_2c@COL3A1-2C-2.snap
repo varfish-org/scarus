@@ -1,0 +1,13 @@
+---
+source: src/strucvars/eval/del/section2.rs
+expression: res
+---
+L2:
+  L2C2:
+    suggested_score: 0
+    gene:
+      hgnc_id: "HGNC:2201"
+      hgnc_symbol: COL3A1
+      ensembl_gene_id: ENSG00000168542
+      ncbi_gene_id: "1281"
+

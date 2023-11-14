@@ -1,0 +1,16 @@
+---
+source: src/strucvars/eval/del/section2.rs
+expression: res_rev3l
+---
+gene:
+  hgnc_id: "HGNC:9968"
+  hgnc_symbol: REV3L
+  ensembl_gene_id: ENSG00000009413
+  ncbi_gene_id: "5980"
+results:
+  - DecipherHiIndex:
+      hi_index: 0.03
+  - GnomadPli:
+      pli_score: 1
+      oe_lof_upper: 0.117
+

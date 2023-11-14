@@ -1,0 +1,25 @@
+---
+source: src/strucvars/data/hgnc.rs
+expression: "&records[0..5]"
+---
+- hgnc_id: "HGNC:5"
+  hgnc_symbol: A1BG
+  ensembl_gene_id: ENSG00000121410
+  ncbi_gene_id: "1"
+- hgnc_id: "HGNC:37133"
+  hgnc_symbol: A1BG-AS1
+  ensembl_gene_id: ENSG00000268895
+  ncbi_gene_id: "503538"
+- hgnc_id: "HGNC:24086"
+  hgnc_symbol: A1CF
+  ensembl_gene_id: ENSG00000148584
+  ncbi_gene_id: "29974"
+- hgnc_id: "HGNC:7"
+  hgnc_symbol: A2M
+  ensembl_gene_id: ENSG00000175899
+  ncbi_gene_id: "2"
+- hgnc_id: "HGNC:27057"
+  hgnc_symbol: A2M-AS1
+  ensembl_gene_id: ENSG00000245105
+  ncbi_gene_id: "144571"
+
