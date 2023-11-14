@@ -1,4 +1,4 @@
-# Test data with example for haploinsufficiency (HI)
+# Test data with example for HI and TS.
 
 We create test data for HI using the following data.
 
@@ -46,3 +46,22 @@ We use them for extended test data.
 
 - we extract all ClinVar variants in all genes from above
 - also, we build an "empty" clinvar file with no variants
+
+# Test data with example for triplosensitivity (TS)
+
+We also incorporate the HI genes as this is a handled in ACMG for CN gain.
+
+We create test data for TS using the following data.
+
+- gene: LMNB1
+    - gene: HGNC:6637
+    - chr5:126112315-126172712
+- gene: PLP1
+    - gene: HGNC:9086
+    - chrX:103031434-103047548
+
+These are the two only (2023-11-14) established TS genes with level 3.
+
+## Established Non-TS genes
+
+There currently is no established benign gene.

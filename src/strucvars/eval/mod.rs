@@ -252,13 +252,13 @@ pub mod test {
     pub fn global_evaluator_37() -> Evaluator {
         Evaluator::new(
             biocommons_bioutils::assemblies::Assembly::Grch37p10,
-            "tests/data/strucvars/hi/txs_example_hi.bin.zst",
+            "tests/data/strucvars/hi_ts/txs_example_hi.bin.zst",
             "tests/data/hgnc.tsv",
             "tests/data/strucvars/ClinGen_gene_curation_list_GRCh37.tsv",
             "tests/data/strucvars/ClinGen_region_curation_list_GRCh37.tsv",
             "tests/data/strucvars/decipher_hi_prediction.tsv",
             "tests/data/strucvars/gnomad_constraints.tsv",
-            "tests/data/strucvars/hi/clinvar/rocksdb",
+            "tests/data/strucvars/hi_ts/clinvar/rocksdb",
         )
         .expect("could not initialize global evaluator")
     }

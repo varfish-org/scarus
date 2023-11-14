@@ -17,6 +17,9 @@ ACVRL1
 APOB
 COL3A1
 
+LMNB1
+PLP1
+
 MFN2
 REV3L
 RERE
@@ -46,20 +49,20 @@ cat <<EOF | tr ' ' '\t' > $TMPDIR/regions.bed
 12 52314487 52314714
 EOF
 
-mkdir -p tests/data/strucvars/hi/clinvar
-rm -rf tests/data/strucvars/hi/clinvar/rocksdb
+mkdir -p tests/data/strucvars/hi_ts/clinvar
+rm -rf tests/data/strucvars/hi_ts/clinvar/rocksdb
 
 annonars db-utils copy -vvv \
     --path-in $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.24.2/rocksdb \
-    --path-out tests/data/strucvars/hi/clinvar/rocksdb \
+    --path-out tests/data/strucvars/hi_ts/clinvar/rocksdb \
     --path-beds $TMPDIR/regions.bed
 
 # -- clinvar (empty) --
 
-mkdir -p tests/data/strucvars/hi/clinvar-empty
-rm -rf tests/data/strucvars/hi/clinvar-empty/rocksdb
+mkdir -p tests/data/strucvars/hi_ts/clinvar-empty
+rm -rf tests/data/strucvars/hi_ts/clinvar-empty/rocksdb
 
 annonars db-utils copy -vvv \
     --path-in $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.24.2/rocksdb \
-    --path-out tests/data/strucvars/hi/clinvar-empty/rocksdb \
+    --path-out tests/data/strucvars/hi_ts/clinvar-empty/rocksdb \
     --path-beds /dev/null
