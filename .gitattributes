@@ -1,0 +1,4 @@
+tests/**/hgnc.tsv filter=lfs diff=lfs merge=lfs -text
+tests/**/*.tsv filter=lfs diff=lfs merge=lfs -text
+tests/**/*.bin* filter=lfs diff=lfs merge=lfs -text
+tests/**/rocksdb/** filter=lfs diff=lfs merge=lfs -text

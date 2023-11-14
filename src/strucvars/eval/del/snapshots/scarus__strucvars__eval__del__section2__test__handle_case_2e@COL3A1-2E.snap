@@ -1,0 +1,9 @@
+---
+source: src/strucvars/eval/del/section2.rs
+expression: section
+---
+L2:
+  L2E:
+    suggested_score: 0.9
+    pvs1_result: Pvs1
+

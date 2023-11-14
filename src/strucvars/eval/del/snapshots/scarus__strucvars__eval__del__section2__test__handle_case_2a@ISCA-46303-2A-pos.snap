@@ -1,0 +1,17 @@
+---
+source: src/strucvars/eval/del/section2.rs
+expression: res
+---
+- L2:
+    L2A:
+      suggested_score: 1
+      hi_genes: []
+      hi_regions:
+        - isca_id: ISCA-46303
+          isca_region_name: SOX9 upstream enhancer region
+          genomic_location: "17:67892996-69792434"
+          haploinsufficiency_score: SufficientEvidence
+          triplosensitivity_score: LittleEvidence
+          haploinsufficiency_disease_id: "MONDO:0007134"
+          triplosensitivity_disease_id: "MONDO:0009869"
+

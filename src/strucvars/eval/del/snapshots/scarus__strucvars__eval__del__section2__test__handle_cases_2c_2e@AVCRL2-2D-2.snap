@@ -1,0 +1,18 @@
+---
+source: src/strucvars/eval/del/section2.rs
+expression: res
+---
+L2:
+  L2D2:
+    suggested_score: 0.9
+    gene:
+      hgnc_id: "HGNC:175"
+      hgnc_symbol: ACVRL1
+      ensembl_gene_id: ENSG00000139567
+      ncbi_gene_id: "94"
+    clinvar_ids:
+      - VCV000008252
+      - VCV000212796
+      - VCV000372722
+      - VCV000426035
+
