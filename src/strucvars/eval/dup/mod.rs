@@ -2,6 +2,7 @@
 
 pub mod result;
 pub mod section1;
+pub mod section2;
 pub mod section3;
 pub mod section4;
 
@@ -45,7 +46,7 @@ impl<'a> Evaluator<'a> {
         // Evaluate section 2: "Overlap wih established/predicted haploinsufficient (HI) or
         // established benign genes/genomic regions (skip to seciton 3 if your copy number loss
         // does not overlap these types of genes/regions)".
-        // let result_s2 = section2::Evaluator::with_parent(self.parent).evaluate(strucvar)?;
+        let result_s2 = section2::Evaluator::with_parent(self.parent).evaluate(strucvar)?;
         // Evaluate section 3: "Evaluation of gene number".
         let result_s3 = section3::Evaluator::new().evaluate(&result_s1)?;
         // Evaluate section 4: "Detailed evaluation of genomic content using cases from published literature,
@@ -54,7 +55,7 @@ impl<'a> Evaluator<'a> {
 
         let mut result = Vec::default();
         result.push(result_s1);
-        // result.append(&mut result_s2.clone());
+        result.append(&mut result_s2.clone());
         result.push(result_s3);
         result.append(&mut result_s4.clone());
         Ok(result)
