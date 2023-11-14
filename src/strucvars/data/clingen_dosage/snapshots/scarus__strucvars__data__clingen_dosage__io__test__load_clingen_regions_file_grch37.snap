@@ -30,11 +30,11 @@ expression: "&regions[0..5]"
   triplosensitivity_score: 1
   haploinsufficiency_disease_id: "MONDO:0000508"
   triplosensitivity_disease_id: "MONDO:0100038"
-- isca_id: ISCA-46739
-  isca_region_name: Yq11.223 population region (DGV_Gold_Standard_June_2021_gssvL138428)
-  genomic_location: "Y:25853189-26146959"
-  haploinsufficiency_score: 40
-  triplosensitivity_score: 0
-  haploinsufficiency_disease_id: ~
+- isca_id: ISCA-46741
+  isca_region_name: 9p24.3 Region (includes DMRT1)
+  genomic_location: "9:1-1982069"
+  haploinsufficiency_score: 2
+  triplosensitivity_score: ~
+  haploinsufficiency_disease_id: "MONDO:0002145"
   triplosensitivity_disease_id: ~
 

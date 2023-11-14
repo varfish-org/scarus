@@ -352,7 +352,7 @@ mod test {
         )?;
 
         assert_eq!(info.genes.len(), 1518);
-        assert_eq!(info.regions.len(), 512);
+        assert_eq!(info.regions.len(), 513);
 
         Ok(())
     }

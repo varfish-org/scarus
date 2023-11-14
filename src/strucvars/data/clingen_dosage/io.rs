@@ -211,7 +211,7 @@ mod test {
             Assembly::Grch37,
         )?;
 
-        assert_eq!(regions.len(), 513);
+        assert_eq!(regions.len(), 514);
         insta::assert_yaml_snapshot!(&regions[0..5]);
 
         Ok(())
