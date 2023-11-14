@@ -4,7 +4,7 @@ use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     ds::StructuralVariant,
     eval::{
-        common::{ScoreRange, SuggestedScore},
+        common::{GeneOverlap, ScoreRange, SuggestedScore},
         result::Pvs1Result,
     },
 };
@@ -105,31 +105,6 @@ pub enum L1 {
     L1A(L1A),
     /// Does NOT contain protein-coding or any functionally important elements.
     L1B(L1B),
-}
-
-/// Per-gene transcript overlaps as part of `L1A`.
-#[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-pub struct GeneOverlap {
-    /// Gene identifiers.
-    pub gene: GeneIdInfo,
-    /// Transcript identifiers of this gene.
-    pub tx_ids: Vec<String>,
-}
-
-impl GeneOverlap {
-    /// Create a new `GeneOverlap`.
-    ///
-    /// # Arguments
-    ///
-    /// * `gene` - Gene identifier.
-    /// * `tx_ids` - Transcript identifiers of this gene.
-    ///
-    /// # Returns
-    ///
-    /// A new `GeneOverlap`.
-    pub fn new(gene: GeneIdInfo, tx_ids: Vec<String>) -> Self {
-        Self { gene, tx_ids }
-    }
 }
 
 /// Result of the L1A subsection (important feature).

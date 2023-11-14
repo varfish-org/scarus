@@ -8,7 +8,10 @@ pub mod result;
 use std::{path::Path, sync::Arc};
 
 use hgvs::data::interface::Provider;
+use itertools::Itertools as _;
 use prost::Message as _;
+
+use self::common::GeneOverlap;
 
 use super::data::clingen_dosage::Data as ClingenDosageData;
 use super::data::decipher_hi::Data as DecipherHiData;
@@ -241,6 +244,85 @@ impl Evaluator {
 
         Ok(result)
     }
+
+    /// Determines whether `strucvar` overlaps with any functionally important elements.
+    ///
+    /// # Arguments
+    ///
+    /// * `chrom` - Chromosome name.
+    /// * `start` - Start position (1-based).
+    /// * `stop` - Stop position (1-based).
+    ///
+    /// # Returns
+    ///
+    /// Overlapping gene / transcript information.
+    ///
+    /// # Errors
+    ///
+    /// When the chromosome name could not be resolved or there was a problem with
+    /// accessing the transcript database.
+    fn overlapping_elements(
+        &self,
+        chrom: &str,
+        start: u32,
+        stop: u32,
+    ) -> Result<Vec<GeneOverlap>, anyhow::Error> {
+        // Map chromosome name (e.g., chr1) to chromosome accession in this assembly.
+        let chrom_acc = self
+            .chrom_to_ac
+            .get(chrom)
+            .ok_or_else(|| anyhow::anyhow!("could not resolve chromosome name `{}`", chrom))?;
+
+        // Obtain the overlapping transcripts for the given region.
+        let txs = self
+            .provider
+            .get_tx_for_region(chrom_acc, "splign", start as i32, stop as i32)
+            .map_err(|e| anyhow::anyhow!("problem query transcript database with range: {}", e))?;
+
+        // Extract HGNC ids / transcript ids of coding transcripts.
+        let mut gene_txs = txs
+            .into_iter()
+            .filter_map(|tx| {
+                let tx_info = self
+                    .provider
+                    .get_tx_info(&tx.tx_ac, &tx.alt_ac, "splign")
+                    .expect("no tx info?");
+                assert!(tx_info.hgnc.starts_with("HGNC:"));
+                if tx_info.cds_start_i.is_some() && tx_info.cds_end_i.is_some() {
+                    Some((tx_info.hgnc, tx_info.tx_ac))
+                } else {
+                    None
+                }
+            })
+            .collect::<Vec<_>>();
+        gene_txs.sort();
+
+        // Group by and collect for each gene HGNC ID.
+        let gene_ovls = gene_txs
+            .into_iter()
+            .group_by(|(hgnc, _)| hgnc.clone())
+            .into_iter()
+            .map(|(hgnc, group)| {
+                let txs = group.map(|(_, tx)| tx).collect::<Vec<_>>();
+                let gene = self
+                    .gene_id_data
+                    .by_hgnc_id(&hgnc)
+                    .expect("could not resolve HGNC ID")
+                    .clone();
+                GeneOverlap::new(gene, txs)
+            })
+            .collect::<Vec<_>>();
+
+        tracing::trace!(
+            "found gene overlaps for strucvar {}:{}-{}: {:?}",
+            chrom,
+            start,
+            stop,
+            &gene_ovls
+        );
+
+        Ok(gene_ovls)
+    }
 }
 
 #[cfg(test)]
@@ -261,5 +343,14 @@ pub mod test {
             "tests/data/strucvars/hi_ts/clinvar/rocksdb",
         )
         .expect("could not initialize global evaluator")
+    }
+
+    #[rstest::rstest]
+    fn overlapping_elements(global_evaluator_37: super::Evaluator) {
+        let res = global_evaluator_37
+            .overlapping_elements("1", 8412464, 8877699)
+            .expect("could not obtain overlapping elements");
+
+        insta::assert_yaml_snapshot!(res);
     }
 }

@@ -1,9 +1,9 @@
-//! Implementation of evaluation of copy number loss section 1.
+//! Implementation of evaluation of copy number gain section 1.
 
-use super::result::{Section, L1, L1A, L1B};
+use super::result::{Section, G1, G1A, G1B};
 use crate::strucvars::ds::StructuralVariant;
 
-/// Evaluation of deletions, loss of copy number.
+/// Evaluation of deletions, gain of copy number.
 ///
 /// This is mainly used to encapsulate the functionality.  Creating new such
 /// objects is very straightforward and cheap.
@@ -18,7 +18,7 @@ impl<'a> Evaluator<'a> {
         Self { parent }
     }
 
-    /// Perform the evaluation of copy number loss Section 1 and all subsection.
+    /// Perform the evaluation of copy number gain Section 1 and all subsection.
     ///
     /// # Arguments
     ///
@@ -40,23 +40,24 @@ impl<'a> Evaluator<'a> {
             })?;
 
         if !genes.is_empty() {
-            Ok(Section::L1(L1::L1A(L1A { genes })))
+            Ok(Section::G1(G1::G1A(G1A { genes })))
         } else {
-            Ok(Section::L1(L1::L1B(L1B::default())))
+            Ok(Section::G1(G1::G1B(G1B::default())))
         }
     }
 }
 
+
 #[cfg(test)]
 pub mod test {
     use crate::strucvars::ds;
-    use crate::strucvars::eval::del::result::{Section, L1};
+    use crate::strucvars::eval::dup::result::{Section, G1};
 
     use super::super::super::test::global_evaluator_37;
     use super::Evaluator;
 
     #[rstest::rstest]
-    fn evaluate_l1a(
+    fn evaluate_g1a(
         global_evaluator_37: super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         let evaluator = Evaluator::with_parent(&global_evaluator_37);
@@ -64,13 +65,13 @@ pub mod test {
             chrom: "1".to_string(),
             start: 8412464,
             stop: 8877699,
-            svtype: ds::SvType::Del,
+            svtype: ds::SvType::Dup,
             ambiguous_range: None,
         };
 
         let res = evaluator.evaluate(&strucvar)?;
 
-        assert!(matches!(res, Section::L1(L1::L1A(_))));
+        assert!(matches!(res, Section::G1(G1::G1A(_))));
         insta::assert_yaml_snapshot!(res);
 
         Ok(())
@@ -78,7 +79,7 @@ pub mod test {
 
 
     #[rstest::rstest]
-    fn evaluate_l1b(
+    fn evaluate_g1b(
         global_evaluator_37: super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         let evaluator = Evaluator::with_parent(&global_evaluator_37);
@@ -86,13 +87,13 @@ pub mod test {
             chrom: "22".to_string(),
             start: 1,
             stop: 1,
-            svtype: ds::SvType::Del,
+            svtype: ds::SvType::Dup,
             ambiguous_range: None,
         };
 
         let res = evaluator.evaluate(&strucvar)?;
 
-        assert!(matches!(res, Section::L1(L1::L1B(_))));
+        assert!(matches!(res, Section::G1(G1::G1B(_))));
         insta::assert_yaml_snapshot!(res);
 
         Ok(())
