@@ -58,6 +58,7 @@ impl Evaluator {
     /// # Errors
     ///
     /// If anything goes wrong, it returns a generic `anyhow::Error`.
+    #[allow(clippy::too_many_arguments)]
     pub fn new<P1, P2, P3, P4, P5, P6, P7>(
         assembly: biocommons_bioutils::assemblies::Assembly,
         path_tx_db: P1,
