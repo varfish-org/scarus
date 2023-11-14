@@ -47,7 +47,6 @@ impl<'a> Evaluator<'a> {
     }
 }
 
-
 #[cfg(test)]
 pub mod test {
     use crate::strucvars::ds;
@@ -76,7 +75,6 @@ pub mod test {
 
         Ok(())
     }
-
 
     #[rstest::rstest]
     fn evaluate_g1b(

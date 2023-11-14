@@ -76,7 +76,6 @@ pub mod test {
         Ok(())
     }
 
-
     #[rstest::rstest]
     fn evaluate_l1b(
         global_evaluator_37: super::super::super::Evaluator,
