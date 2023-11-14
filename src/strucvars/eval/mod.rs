@@ -3,6 +3,7 @@
 pub mod common;
 pub mod del;
 pub mod dup;
+pub mod result;
 
 use std::{path::Path, sync::Arc};
 

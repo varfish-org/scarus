@@ -11,7 +11,7 @@ use crate::strucvars::{
         intervals::{contains, do_overlap, exon_to_interval, Interval},
     },
     ds::StructuralVariant,
-    eval::del::result::{Pvs1Result, L2, L2A, L2B, L2C1, L2C2, L2D1, L2D2, L2D4, L2E, L2F, L2G},
+    eval::{del::result::{L2, L2A, L2B, L2C1, L2C2, L2D1, L2D2, L2D4, L2E, L2F, L2G}, result::Pvs1Result},
     eval::{common::SuggestedScore as _, del::result::L2D3},
 };
 

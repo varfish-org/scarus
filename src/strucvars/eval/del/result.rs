@@ -1,9 +1,12 @@
-//! Data structures for representing the actual results.
+//! Data structures for representing the actual results of DEL/copy number loss.
 
 use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     ds::StructuralVariant,
-    eval::common::{ScoreRange, SuggestedScore},
+    eval::{
+        common::{ScoreRange, SuggestedScore},
+        result::Pvs1Result,
+    },
 };
 
 /// Evaluation results for each section of the ACMG rule.
@@ -95,7 +98,7 @@ impl ScoreRange for Section {
     }
 }
 
-/// Enumeration of the categories for the structural variant evaluation, Section 1.
+/// Enumeration of the categories for the copy number loss evaluation, Section 1.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
 pub enum L1 {
     /// Contains protein-coding or other known functionally important elements.
@@ -317,38 +320,13 @@ impl SuggestedScore for L2D4 {
     }
 }
 
-/// Enumeration describing the PVS1 results.
-#[derive(
-    Debug,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    PartialOrd,
-    Ord,
-    Default,
-    serde::Deserialize,
-    serde::Serialize,
-)]
-pub enum Pvs1Result {
-    /// PVS1
-    #[default]
-    Pvs1,
-    /// PVS1_Strong
-    Pvs1Strong,
-    /// PVS1_Moderate
-    Pvs1Moderate,
-    /// PVS1_Supporting
-    Pvs1Supporting,
-}
-
 /// Result of the L2E subsection (both breakpoints are within the same gene (intragenic
 /// CNV, gene-level sequence variant). PVS1 rules apply from ClinGen SVI WG.
 #[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
 pub struct L2E {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
-    /// VCV identifiers of ClinVar variants supporting the score.
+    /// PVS1 assessment result.
     pub pvs1_result: Pvs1Result,
 }
 
