@@ -493,8 +493,11 @@ impl<'a> Evaluator<'a> {
                 })?
                 .iter()
                 .map(|tx| {
-                    self.parent.provider.get_tx_exons(&tx.tx_ac, chrom_acc, "splign")
-                }).collect::<Result<Vec<_>, _>>()?;
+                    self.parent
+                        .provider
+                        .get_tx_exons(&tx.tx_ac, chrom_acc, "splign")
+                })
+                .collect::<Result<Vec<_>, _>>()?;
 
             tracing::trace!("txs = {:?}", &txs);
 
@@ -511,12 +514,14 @@ impl<'a> Evaluator<'a> {
                     .map(|exon| exon.alt_end_i)
                     .max()
                     .expect("no exons?") as u64;
-                let tx_interval = Interval::new(
-                    sv_interval.contig().to_string(),
-                    tx_start..tx_end,
-                );
+                let tx_interval = Interval::new(sv_interval.contig().to_string(), tx_start..tx_end);
                 if !contains(sv_interval, &tx_interval) && !contains(&tx_interval, sv_interval) {
-                    hgnc_ids.push(self.parent.provider.get_tx_identity_info(&tx_exons.first().expect("no exons?").tx_ac)?.hgnc);
+                    hgnc_ids.push(
+                        self.parent
+                            .provider
+                            .get_tx_identity_info(&tx_exons.first().expect("no exons?").tx_ac)?
+                            .hgnc,
+                    );
                 }
             }
             hgnc_ids.sort();
@@ -547,6 +552,67 @@ pub mod test {
     use crate::strucvars::ds;
 
     use super::super::super::test::global_evaluator_37;
+
+    /// Test the `evaluate` function with the different cases of Section 2.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    // Case 2A
+    #[case("X", 123_034_319, 123_236_519, "ISCA-46743", "2A-pos")]
+    #[case("X", 103_031_434, 103_047_548, "LMNB1", "2A-pos")]
+    // Case 2C
+    #[case("2", 110_862_108, 110_983_703, "ISCA-37405", "2C-pos-1")] // exact match
+    #[case("2", 110_802_355, 110_984_922, "ISCA-37405", "2C-pos-2")] // full: MALL, MTLN
+    #[case("2", 110_862_108, 111_246_742, "ISCA-37405", "2C-neg-1")] // extra: LIMS4
+    #[case("2", 110_879_569, 110_983_703, "ISCA-37405", "2C-neg-2")]
+    // excludes: MALL
+    // Case 2D: smaller than established benign region, no coding genes interrupted.
+    #[case("2", 110_876_929, 110_965_509, "ISCA-37405", "2D-pos-1")]
+    // smaller, no interrupt
+    // Case 2E: smaller than established benign region, potential protein coding interrupt.
+    #[case("2", 110_862_109, 110_983_702, "ISCA-37405", "2E-pos-1")] // region (-1bp) interrupts
+    #[case("2", 110_878_786, 110_969_992, "ISCA-37405", "2E-pos-2")] // interrupt MTLN
+    #[case("2", 110_882_589, 110_961_118, "ISCA-37405", "2E-pos-3")]
+    // interrupt NPHP1
+    // Case 2F: larger than established benign region, no additional genetic material.
+    #[case("2", 110_862_107, 110_983_704, "ISCA-37405", "2F-pos-1")] // +1bp
+    // Case 2G: larger than established benign region, additional protein-coding gene.
+    #[case("2", 110_833_712, 111_236_476, "ISCA-37405", "2G-pos-1")] // adds LIMS4
+    // Case 2H: HI gene fully contained within observed copy number gain.
+    #[case("2", 189839099, 189877472, "COL3A1", "2H-pos-1")]
+    // Case 2I: Both breakpoints in the same HI gene.
+    #[case("2", 189839100, 189877471, "COL3A1", "2I-pos-1")]
+    // Case 2J: One breakpoint in an HI gene.
+    #[case("2", 189877072, 189877500, "COL3A1", "2J-pos-1")] // left bp
+    #[case("2", 189839000, 189839599, "COL3A1", "2J-pos-2")]
+    // right bp
+    // No Case 2K: we cannot handle phenotypes well.
+    // Case 2L: One breakpoint in any gene.
+    #[case("6", 111_620_000, 111_621_000, "REV3L", "2L-pos-1")] // REV3L left bp
+    #[case("6", 111_800_000, 111_805_000, "REV3L", "2L-pos-1")] // REV3L right bp
+    fn evaluate(
+        #[case] chrom: &str,
+        #[case] start: u64,
+        #[case] stop: u64,
+        #[case] hgnc_id: &str,
+        #[case] label: &str,
+        global_evaluator_37: super::super::super::Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
+        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+
+        let strucvar = ds::StructuralVariant {
+            chrom: chrom.into(),
+            start: start as u32,
+            stop: stop as u32,
+            svtype: ds::SvType::Del,
+            ambiguous_range: None,
+        };
+
+        let res = evaluator.evaluate(&strucvar)?;
+        insta::assert_yaml_snapshot!(res);
+
+        Ok(())
+    }
 
     /// Test internal working of `handle_case_2a` (complete overlap).
     #[tracing_test::traced_test]
@@ -687,7 +753,8 @@ pub mod test {
     #[case("2", 189839100, 189877471, "COL3A1", "2I-pos-1")]
     // Case 2J: One breakpoint in an HI gene.
     #[case("2", 189877072, 189877500, "COL3A1", "2J-pos-1")] // left bp
-    #[case("2", 189839000, 189839599, "COL3A1", "2J-pos-2")] // right bp
+    #[case("2", 189839000, 189839599, "COL3A1", "2J-pos-2")]
+    // right bp
     // No Case 2K: we cannot handle phenotypes well.
     // Case 2L: One breakpoint in any gene.
     #[case("6", 111_620_000, 111_621_000, "REV3L", "2L-pos-1")] // REV3L left bp

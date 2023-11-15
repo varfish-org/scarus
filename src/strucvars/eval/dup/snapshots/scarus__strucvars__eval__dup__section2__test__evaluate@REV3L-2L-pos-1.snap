@@ -1,0 +1,13 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- G2:
+    G2L:
+      suggested_score: 0.45
+      genes:
+        - hgnc_id: "HGNC:9968"
+          hgnc_symbol: REV3L
+          ensembl_gene_id: ENSG00000009413
+          ncbi_gene_id: "5980"
+
