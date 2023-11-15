@@ -78,7 +78,7 @@ mod test {
         #[case] start: u32,
         #[case] stop: u32,
         #[case] expected_score: f32,
-        global_evaluator_37: super::super::Evaluator,
+        global_evaluator_37: &super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}-{}", chrom, start, stop);
 
