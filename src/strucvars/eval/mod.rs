@@ -355,7 +355,7 @@ impl Evaluator {
     ///
     /// If there was an issue with querying for gene data.
     pub fn protein_coding(&self, hgnc_id: &str) -> Result<Option<bool>, anyhow::Error> {
-        match self.provider.get_tx_for_gene(&hgnc_id) {
+        match self.provider.get_tx_for_gene(hgnc_id) {
             Ok(txs) => Ok(Some(txs.iter().any(|tx| tx.cds_start_i.is_some()))),
             Err(hgvs::data::error::Error::NoGeneFound(_)) => Ok(None),
             Err(e) => anyhow::bail!("problem querying transcript database: {}", e),

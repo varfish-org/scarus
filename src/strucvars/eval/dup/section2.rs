@@ -224,15 +224,13 @@ impl<'a> Evaluator<'a> {
         // Obtain CDSs of overlapping coding transcripts.
         let coding_tx_cds = sv_genes
             .iter()
-            .map(|overlap| {
+            .flat_map(|overlap| {
                 overlap
                     .tx_ids
                     .iter()
                     .flat_map(|tx_id| -> Option<(GeneIdInfo, Interval)> {
-                        self.parent
-                            .provider
-                            .get_tx(tx_id)
-                            .map(|tx| -> Option<(GeneIdInfo, Interval)> {
+                        self.parent.provider.get_tx(tx_id).and_then(
+                            |tx| -> Option<(GeneIdInfo, Interval)> {
                                 for genome_alignment in &tx.genome_alignments {
                                     if let (Some(cds_start), Some(cds_end)) =
                                         (genome_alignment.cds_start, genome_alignment.cds_end)
@@ -249,12 +247,10 @@ impl<'a> Evaluator<'a> {
                                     }
                                 }
                                 None
-                            })
-                            .flatten()
+                            },
+                        )
                     })
-                    .into_iter()
             })
-            .flatten()
             .collect::<Vec<_>>();
 
         // Cases 2D/2E: SV is smaller than the benign interval
@@ -358,19 +354,21 @@ impl<'a> Evaluator<'a> {
             found_additional,
             &contained_region
         );
-        if !found_additional && contained_region.is_some() {
-            tracing::debug!("case 2F fired");
-            result.push(Section::G2(G2::G2F(G2F {
-                suggested_score: -1.0,
-                benign_region: contained_region.expect("checked above"),
-            })));
+        if !found_additional {
+            if let Some(contained_region) = contained_region {
+                tracing::debug!("case 2F fired");
+                result.push(Section::G2(G2::G2F(G2F {
+                    suggested_score: -1.0,
+                    benign_region: contained_region,
+                })));
+            }
         }
 
         Ok(result)
     }
 
     /// Handle cases 2H..2L.
-    fn handle_cases_2h_2l(&self, sv_interval: &Interval) -> Result<Vec<Section>, anyhow::Error> {
+    fn handle_cases_2h_2l(&self, _sv_interval: &Interval) -> Result<Vec<Section>, anyhow::Error> {
         todo!()
     }
 }
