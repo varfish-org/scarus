@@ -89,3 +89,7 @@ The following genes were extracted for proximity to benign regions for "same gen
         - gene: LIMS4
             - HGNC:39941
     
+The following lincRNA genes are included for testing protein-coding/non-coding gene distinction.
+
+- gene: LINCADL
+  - HGNC:53956

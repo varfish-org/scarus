@@ -219,8 +219,8 @@ impl SuggestedScore for G2C {
 pub struct G2D {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
-    /// Overlapping TS genomic regions.
-    pub ts_regions: Vec<clingen_dosage::Region>,
+    /// Overlapping benign genomic region.
+    pub benign_region: clingen_dosage::Region,
 }
 
 impl SuggestedScore for G2D {
@@ -233,15 +233,17 @@ impl SuggestedScore for G2D {
 /// breakpoint(s) potentially interrupt protein-coding gene).
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct G2E {
-    /// Overlapping TS genomic regions.
-    pub ts_regions: Vec<clingen_dosage::Region>,
+    /// Suggested score for the subsection.
+    pub suggested_score: f32,
+    /// Overlapping benign genomic regions.
+    pub benign_region: clingen_dosage::Region,
     /// Potentially affected genes.
     pub genes: Vec<GeneIdInfo>,
 }
 
 impl SuggestedScore for G2E {
     fn suggested_score(&self) -> f32 {
-        0.0
+        self.suggested_score
     }
 }
 
@@ -251,8 +253,8 @@ impl SuggestedScore for G2E {
 pub struct G2F {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
-    /// Overlapping TS genomic regions.
-    pub ts_regions: Vec<clingen_dosage::Region>,
+    /// Overlapping benign genomic regions.
+    pub benign_region: clingen_dosage::Region,
 }
 
 impl SuggestedScore for G2F {
@@ -263,12 +265,14 @@ impl SuggestedScore for G2F {
 
 /// Result of the G2G subsection (overlaps a benign copy-number gain but includes
 /// additional genomic material).
-#[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
+#[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct G2G {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
-    /// Overlapping TS genomic regions.
-    pub ts_regions: Vec<clingen_dosage::Region>,
+    /// Overlapping benign genomic regions.
+    pub benign_region: clingen_dosage::Region,
+    /// Additional genes.
+    pub genes: Vec<GeneIdInfo>,
 }
 
 impl SuggestedScore for G2G {

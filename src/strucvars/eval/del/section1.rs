@@ -34,7 +34,7 @@ impl<'a> Evaluator<'a> {
     pub fn evaluate(&self, strucvar: &StructuralVariant) -> Result<Section, anyhow::Error> {
         let genes = self
             .parent
-            .overlapping_elements(&strucvar.chrom, strucvar.start, strucvar.stop)
+            .overlapping_genes(&strucvar.chrom, strucvar.start, strucvar.stop)
             .map_err(|e| {
                 anyhow::anyhow!("issue with overlap computation of {:?}: {}", strucvar, e)
             })?;

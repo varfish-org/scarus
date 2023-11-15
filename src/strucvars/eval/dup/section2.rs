@@ -3,7 +3,13 @@
 use bio::bio_types::genome::AbstractInterval;
 use bio::bio_types::genome::Interval;
 
+use crate::strucvars::data::hgnc::GeneIdInfo;
+use crate::strucvars::data::intervals::do_overlap;
 use crate::strucvars::eval::dup::result::G2C;
+use crate::strucvars::eval::dup::result::G2D;
+use crate::strucvars::eval::dup::result::G2E;
+use crate::strucvars::eval::dup::result::G2F;
+use crate::strucvars::eval::dup::result::G2G;
 use crate::strucvars::{
     data::{
         clingen_dosage::{Gene, Region, Score},
@@ -84,7 +90,30 @@ impl<'a> Evaluator<'a> {
             return Ok(result);
         }
 
-        Ok(result)
+        // Handle cases 2D..2G and return if 2D/2F fired.
+        let result_2d_2g = self.handle_cases_2d_2g(&sv_interval, &benign_regions)?;
+        for entry in &result_2d_2g {
+            tracing::debug!("case 2D..2G fired: {:?}", &entry);
+            match entry {
+                Section::G2(G2::G2D(_)) | Section::G2(G2::G2F(_)) => {
+                    tracing::debug!("case 2D/2F fired");
+                    result.push(entry.clone());
+                    return Ok(result);
+                }
+                Section::G2(G2::G2E(_)) | Section::G2(G2::G2G(_)) => {
+                    tracing::debug!("case 2E/2G fired");
+                    result.push(entry.clone());
+                    // continue evaluating
+                }
+                _ => unreachable!(),
+            }
+        }
+
+        // Handle cases 2H..2L.
+        // let mut result_2h_2l = self.handle_cases_2h_2l(&sv_interval, &benign_regions)?;
+        // result.append(&mut result_2h_2l);
+        // Ok(result);
+        todo!()
     }
 
     /// Handle case 2A.
@@ -128,7 +157,7 @@ impl<'a> Evaluator<'a> {
         }
     }
 
-    // Handle case 2C (identical in gene content to the established benign copy-number gain).
+    /// Handle case 2C (identical in gene content to the established benign copy-number gain).
     fn handle_case_2c(
         &self,
         sv_interval: &Interval,
@@ -171,12 +200,183 @@ impl<'a> Evaluator<'a> {
             }))))
         }
     }
+
+    /// Handle cases 2D..2G.
+    ///
+    /// Precondition: negative for 2C, not identical in gene content to established benign region.
+    fn handle_cases_2d_2g(
+        &self,
+        sv_interval: &Interval,
+        benign_regions: &[&Region],
+    ) -> Result<Vec<Section>, anyhow::Error> {
+        // Get overlapping genes and transcripts.
+        let sv_genes = self.parent.overlapping_genes(
+            sv_interval.contig(),
+            sv_interval.range().start as u32,
+            sv_interval.range().end as u32,
+        )?;
+        let contig_ac = self
+            .parent
+            .chrom_to_ac
+            .get(sv_interval.contig())
+            .expect("unknown contig");
+
+        // Obtain CDSs of overlapping coding transcripts.
+        let coding_tx_cds = sv_genes
+            .iter()
+            .map(|overlap| {
+                overlap
+                    .tx_ids
+                    .iter()
+                    .flat_map(|tx_id| -> Option<(GeneIdInfo, Interval)> {
+                        self.parent
+                            .provider
+                            .get_tx(tx_id)
+                            .map(|tx| -> Option<(GeneIdInfo, Interval)> {
+                                for genome_alignment in &tx.genome_alignments {
+                                    if let (Some(cds_start), Some(cds_end)) =
+                                        (genome_alignment.cds_start, genome_alignment.cds_end)
+                                    {
+                                        if contig_ac == &genome_alignment.contig {
+                                            return Some((
+                                                overlap.gene.clone(),
+                                                Interval::new(
+                                                    sv_interval.contig().to_string(),
+                                                    (cds_start as u64)..(cds_end as u64),
+                                                ),
+                                            ));
+                                        }
+                                    }
+                                }
+                                None
+                            })
+                            .flatten()
+                    })
+                    .into_iter()
+            })
+            .flatten()
+            .collect::<Vec<_>>();
+
+        // Cases 2D/2E: SV is smaller than the benign interval
+        //
+        // Collect potentially interrupted gene HGNC IDs.
+        let mut containing_region = None;
+        let mut result = Vec::new();
+        for &benign_region in benign_regions {
+            let benign_interval: Interval = benign_region.clone().try_into().map_err(|e| {
+                anyhow::anyhow!("failed to convert genomic location to interval: {}", e)
+            })?;
+
+            if contains(&benign_interval, sv_interval) {
+                containing_region = Some(benign_region.clone());
+                let mut interrupted_genes = Vec::new();
+                for (hgnc_id, cds) in &coding_tx_cds {
+                    // Any breakpoint of sv_interval within CDS is the same as
+                    // having an overlap but none containg the CDS.
+                    if do_overlap(sv_interval, cds) && !contains(sv_interval, cds) {
+                        interrupted_genes.push(hgnc_id.clone());
+                    }
+                }
+                interrupted_genes.sort_by(|a, b| a.hgnc_id.cmp(&b.hgnc_id));
+                interrupted_genes.dedup_by(|a, b| a.hgnc_id == b.hgnc_id);
+
+                if !interrupted_genes.is_empty() {
+                    tracing::debug!("case 2E fired: {:?}", &interrupted_genes);
+                    // Case 2E, potentially interrupts coding region.
+                    result.push(Section::G2(G2::G2E(G2E {
+                        suggested_score: 0.0,
+                        benign_region: benign_region.clone(),
+                        genes: interrupted_genes,
+                    })));
+                }
+            }
+        }
+        if containing_region.is_some() && result.is_empty() {
+            tracing::debug!("case 2D fired: {:?}", &containing_region);
+            return Ok(vec![Section::G2(G2::G2D(G2D {
+                suggested_score: -1.0,
+                benign_region: containing_region.expect("checked above"),
+            }))]);
+        }
+
+        // If we reach here, then the DUP is larger than the region.
+        let mut contained_region = None; // for 2F
+        let mut found_additional = false;
+        for &benign_region in benign_regions {
+            let benign_interval: Interval = benign_region.clone().try_into().map_err(|e| {
+                anyhow::anyhow!("failed to convert genomic location to interval: {}", e)
+            })?;
+
+            // Get all overlapping genes in benign region.
+            let benign_genes = self
+                .parent
+                .overlapping_gene_hcnc_ids(
+                    benign_interval.contig(),
+                    benign_interval.range().start as u32,
+                    benign_interval.range().end as u32,
+                )?
+                .into_iter()
+                .collect::<rustc_hash::FxHashSet<_>>();
+            // Check whether all protein-coding genes of the SV are also in the benign region.
+            let mut additional_genes: Vec<GeneIdInfo> = coding_tx_cds
+                .iter()
+                .flat_map(|(gene_id_info, _)| {
+                    if benign_genes.contains(&gene_id_info.hgnc_id) {
+                        None
+                    } else {
+                        Some(gene_id_info.clone())
+                    }
+                })
+                .collect::<Vec<_>>();
+            additional_genes.sort_by(|a, b| a.hgnc_id.cmp(&b.hgnc_id));
+            additional_genes.dedup_by(|a, b| a.hgnc_id == b.hgnc_id);
+
+            if additional_genes.is_empty() {
+                // For 2F, SV must be larger than benign interval (not the same).
+                tracing::trace!(
+                    "sv_interval = {:?}, benign_interval = {:?}",
+                    sv_interval,
+                    &benign_interval
+                );
+                if contains(sv_interval, &benign_interval)
+                    && !contains(&benign_interval, sv_interval)
+                {
+                    contained_region = Some(benign_region.clone());
+                }
+            } else {
+                tracing::debug!("case 2G fired: {:?}", &additional_genes);
+                found_additional = true;
+                result.push(Section::G2(G2::G2G(G2G {
+                    suggested_score: 0.0,
+                    benign_region: benign_region.clone(),
+                    genes: additional_genes,
+                })));
+            }
+        }
+        tracing::trace!(
+            "found_additional: {}, contained_region: {:?}",
+            found_additional,
+            &contained_region
+        );
+        if !found_additional && contained_region.is_some() {
+            tracing::debug!("case 2F fired");
+            result.push(Section::G2(G2::G2F(G2F {
+                suggested_score: -1.0,
+                benign_region: contained_region.expect("checked above"),
+            })));
+        }
+
+        Ok(result)
+    }
+
+    /// Handle cases 2H..2L.
+    fn handle_cases_2h_2l(&self, sv_interval: &Interval) -> Result<Vec<Section>, anyhow::Error> {
+        todo!()
+    }
 }
 
 #[cfg(test)]
 pub mod test {
-    use hgvs::data::interface::Provider;
-
     use crate::strucvars::data::clingen_dosage::Score;
     use crate::strucvars::ds;
 
@@ -254,6 +454,55 @@ pub mod test {
             .collect::<Vec<_>>();
 
         let res = evaluator.handle_case_2c(&sv_interval, &benign_regions)?;
+        insta::assert_yaml_snapshot!(res);
+
+        Ok(())
+    }
+
+    /// Test internal working of `handle_cases_2d_2g`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    // Note: same cases as in `evaluate` above -- keep in sync!
+    //
+    // Case 2D: smaller than established benign region, no coding genes interrupted.
+    #[case("2", 110_876_929, 110_965_509, "ISCA-37405", "2D-pos-1")]
+    // smaller, no interrupt
+    // Case 2E: smaller than established benign region, potential protein coding interrupt.
+    #[case("2", 110_862_109, 110_983_702, "ISCA-37405", "2E-pos-1")] // region (-1bp) interrupts
+    #[case("2", 110_878_786, 110_969_992, "ISCA-37405", "2E-pos-2")] // interrupt MTLN
+    #[case("2", 110_882_589, 110_961_118, "ISCA-37405", "2E-pos-3")]
+    // interrupt NPHP1
+    // Case 2F: larger than established benign region, no additional genetic material.
+    #[case("2", 110_862_107, 110_983_704, "ISCA-37405", "2F-pos-1")] // +1bp
+    // Case 2G: larger than established benign region, additional protein-coding gene.
+    #[case("2", 110_833_712, 111_236_476, "ISCA-37405", "2G-pos-1")] // adds LIMS4
+    fn handle_cases_2d_2g(
+        #[case] chrom: &str,
+        #[case] start: u64,
+        #[case] stop: u64,
+        #[case] hgnc_id: &str,
+        #[case] label: &str,
+        global_evaluator_37: super::super::super::Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
+        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+
+        let strucvar = ds::StructuralVariant {
+            chrom: chrom.into(),
+            start: start as u32,
+            stop: stop as u32,
+            svtype: ds::SvType::Del,
+            ambiguous_range: None,
+        };
+        let sv_interval = strucvar.into();
+
+        let (_, clingen_regions) = global_evaluator_37.clingen_overlaps(&sv_interval);
+        let benign_regions = clingen_regions
+            .iter()
+            .filter(|region| region.triplosensitivity_score == Score::DosageSensitivityUnlikely)
+            .collect::<Vec<_>>();
+
+        let res = evaluator.handle_cases_2d_2g(&sv_interval, &benign_regions)?;
         insta::assert_yaml_snapshot!(res);
 
         Ok(())

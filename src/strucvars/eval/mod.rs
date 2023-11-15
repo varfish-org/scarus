@@ -245,7 +245,7 @@ impl Evaluator {
         Ok(result)
     }
 
-    /// Determines whether `strucvar` overlaps with any functionally important elements.
+    /// Determine overlapping genes.
     ///
     /// # Arguments
     ///
@@ -261,7 +261,7 @@ impl Evaluator {
     ///
     /// When the chromosome name could not be resolved or there was a problem with
     /// accessing the transcript database.
-    fn overlapping_elements(
+    fn overlapping_genes(
         &self,
         chrom: &str,
         start: u32,
@@ -332,13 +332,34 @@ impl Evaluator {
         stop: u32,
     ) -> Result<Vec<String>, anyhow::Error> {
         let mut hgncs = self
-            .overlapping_elements(chrom, start, stop)
+            .overlapping_genes(chrom, start, stop)
             .map_err(|e| anyhow::anyhow!("failed to obtain overlapping genes: {}", e))?
             .into_iter()
             .map(|element| element.gene.hgnc_id)
             .collect::<Vec<_>>();
         hgncs.sort();
         Ok(hgncs)
+    }
+
+    /// Returns whether the given HGNC ID is protein-coding.
+    ///
+    /// # Arguments
+    ///
+    /// - `hgnc_id` -- HGNC ID to use in query.
+    ///
+    /// # Returns
+    ///
+    /// Whether the gene is protein-coding, `None`` if gene was not found.
+    ///
+    /// # Errors
+    ///
+    /// If there was an issue with querying for gene data.
+    pub fn protein_coding(&self, hgnc_id: &str) -> Result<Option<bool>, anyhow::Error> {
+        match self.provider.get_tx_for_gene(&hgnc_id) {
+            Ok(txs) => Ok(Some(txs.iter().any(|tx| tx.cds_start_i.is_some()))),
+            Err(hgvs::data::error::Error::NoGeneFound(_)) => Ok(None),
+            Err(e) => anyhow::bail!("problem querying transcript database: {}", e),
+        }
     }
 
     /// Query ClinGen by overlap.
@@ -382,7 +403,7 @@ pub mod test {
     #[rstest::rstest]
     fn overlapping_elements(global_evaluator_37: super::Evaluator) {
         let res = global_evaluator_37
-            .overlapping_elements("1", 8412464, 8877699)
+            .overlapping_genes("1", 8412464, 8877699)
             .expect("could not obtain overlapping elements");
 
         insta::assert_yaml_snapshot!(res);
@@ -409,6 +430,24 @@ pub mod test {
 
         insta::assert_yaml_snapshot!(genes);
         insta::assert_yaml_snapshot!(regions);
+
+        Ok(())
+    }
+
+    /// Test `is_protein_coding`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    #[case("HGNC:53956", Some(false))]
+    #[case("HGNC:39941", Some(true))]
+    #[case("HGNC:xxx", None)]
+    fn is_protein_coding(
+        #[case] hgnc_id: &str,
+        #[case] expected: Option<bool>,
+        global_evaluator_37: super::Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", hgnc_id);
+
+        assert_eq!(global_evaluator_37.protein_coding(hgnc_id)?, expected);
 
         Ok(())
     }
