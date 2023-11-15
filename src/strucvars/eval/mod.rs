@@ -13,7 +13,7 @@ use prost::Message as _;
 
 use self::common::GeneOverlap;
 
-use super::data::clingen_dosage::{Data as ClingenDosageData, Region, Gene};
+use super::data::clingen_dosage::{Data as ClingenDosageData, Gene, Region};
 use super::data::decipher_hi::Data as DecipherHiData;
 use super::data::gnomad::Data as GnomadConstraintData;
 use super::data::hgnc::Data as GeneIdData;
@@ -324,6 +324,23 @@ impl Evaluator {
         Ok(gene_ovls)
     }
 
+    /// Return (sorted) HGNC IDs of overlapping genes.
+    pub fn overlapping_gene_hcnc_ids(
+        &self,
+        chrom: &str,
+        start: u32,
+        stop: u32,
+    ) -> Result<Vec<String>, anyhow::Error> {
+        let mut hgncs = self
+            .overlapping_elements(chrom, start, stop)
+            .map_err(|e| anyhow::anyhow!("failed to obtain overlapping genes: {}", e))?
+            .into_iter()
+            .map(|element| element.gene.hgnc_id)
+            .collect::<Vec<_>>();
+        hgncs.sort();
+        Ok(hgncs)
+    }
+
     /// Query ClinGen by overlap.
     pub fn clingen_overlaps(
         &self,
@@ -331,9 +348,7 @@ impl Evaluator {
     ) -> (Vec<Gene>, Vec<Region>) {
         let mut clingen_genes = self.clingen_dosage_data.gene_by_overlap(sv_interval);
         clingen_genes.sort_by(|a, b| a.ncbi_gene_id.cmp(&b.ncbi_gene_id));
-        let mut clingen_regions = self
-            .clingen_dosage_data
-            .region_by_overlap(sv_interval);
+        let mut clingen_regions = self.clingen_dosage_data.region_by_overlap(sv_interval);
         clingen_regions.sort_by(|a, b| a.isca_id.cmp(&b.isca_id));
         tracing::debug!(
             "overlaps with {} ClinGen regions and {} genes",
@@ -387,7 +402,8 @@ pub mod test {
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}", label);
 
-        let sv_interval = crate::strucvars::data::intervals::Interval::new(chrom.into(), start..stop);
+        let sv_interval =
+            crate::strucvars::data::intervals::Interval::new(chrom.into(), start..stop);
 
         let (genes, regions) = global_evaluator_37.clingen_overlaps(&sv_interval);
 

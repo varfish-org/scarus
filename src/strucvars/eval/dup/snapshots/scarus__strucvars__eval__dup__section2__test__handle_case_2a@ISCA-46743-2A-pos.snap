@@ -1,0 +1,17 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- G2:
+    G2A:
+      suggested_score: 1
+      ts_genes: []
+      ts_regions:
+        - isca_id: ISCA-46743
+          isca_region_name: Xq25 region (includes STAG2)
+          genomic_location: "X:123034319-123236519"
+          haploinsufficiency_score: SufficientEvidence
+          triplosensitivity_score: SufficientEvidence
+          haploinsufficiency_disease_id: ~
+          triplosensitivity_disease_id: "MONDO:0100038"
+

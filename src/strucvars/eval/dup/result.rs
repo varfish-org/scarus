@@ -173,7 +173,7 @@ pub struct G2A {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping TS genes.
-    pub hi_genes: Vec<clingen_dosage::Gene>,
+    pub ts_genes: Vec<clingen_dosage::Gene>,
     /// Overlapping TS genomic regions.
     pub ts_regions: Vec<clingen_dosage::Region>,
 }
@@ -204,7 +204,7 @@ pub struct G2C {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping TS genomic regions.
-    pub ts_regions: Vec<clingen_dosage::Region>,
+    pub benign_regions: Vec<clingen_dosage::Region>,
 }
 
 impl SuggestedScore for G2C {

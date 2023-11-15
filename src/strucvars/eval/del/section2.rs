@@ -63,8 +63,11 @@ impl<'a> Evaluator<'a> {
         // Otherwise, we need to test case 2B.
         let has_hi_genes = clingen_genes
             .iter()
-            .any(|clingen_gene| clingen_gene.haploinsufficiency_score == Score::SufficientEvidence);
-        let mut result = if has_hi_genes {
+            .any(|gene| gene.haploinsufficiency_score == Score::SufficientEvidence);
+        let has_hi_region = clingen_regions
+            .iter()
+            .any(|region| region.haploinsufficiency_score == Score::SufficientEvidence);
+        let mut result = if has_hi_genes || has_hi_region {
             let result = vec![Section::L2(L2::L2B(L2B::default()))];
             tracing::debug!("case 2B fired: {:?}", &result);
             result
@@ -842,7 +845,7 @@ mod test {
         #[case] label: &str,
         global_evaluator_37: super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
-        mehari::common::set_snapshot_suffix!("{}", label);
+        mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
 
         let strucvar = ds::StructuralVariant {
             chrom: chrom.into(),

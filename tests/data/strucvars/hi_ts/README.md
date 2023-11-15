@@ -64,4 +64,28 @@ These are the two only (2023-11-14) established TS genes with level 3.
 
 ## Established Non-TS genes
 
-There currently is no established benign gene.
+- gene: VCX3A
+    - gene: HGNC:18159
+    - chrX:6451659-6453159
+
+## Additional Gnes
+
+The following genes were extracted for proximity to benign regions for "same genomic material" condition.
+
+- region ISCA-37405
+    - fully contains NPHP1
+    - partially contains MALL
+    - completely contains MTLN
+    - genes
+        - gene: NPHP1
+            - HGNC:7905
+            - chr2:110880913-110962639
+            - contained in ISCA-37405
+        - gene: MALL
+            - HGNC:6818
+        - gene: MTLN
+            - HGNC:27339
+    - extra genes:
+        - gene: LIMS4
+            - HGNC:39941
+    

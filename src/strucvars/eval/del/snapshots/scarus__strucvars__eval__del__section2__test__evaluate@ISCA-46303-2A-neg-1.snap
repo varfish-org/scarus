@@ -2,5 +2,6 @@
 source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
-[]
+- L2:
+    L2B: {}
 
