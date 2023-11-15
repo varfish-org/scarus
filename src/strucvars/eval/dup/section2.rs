@@ -14,7 +14,7 @@ use crate::strucvars::{
         intervals::do_overlap,
     },
     ds::StructuralVariant,
-    eval::dup::result::{G2, G2B, G2C, G2D, G2E, G2F, G2G, G2H, G2I, G2K},
+    eval::dup::result::{G2, G2B, G2C, G2D, G2E, G2F, G2G, G2H, G2I, G2J},
 };
 
 use super::result::{Section, G2A};
@@ -408,8 +408,10 @@ impl<'a> Evaluator<'a> {
                 .filter(|gene| {
                     let gene_interval: Interval =
                         (*gene).clone().try_into().expect("conversion failed");
+                    // no reciprocal containment => true containment
                     gene.haploinsufficiency_score == Score::SufficientEvidence
-                        && contains(sv_interval, &gene_interval)
+                        && contains(&gene_interval, sv_interval)
+                        && !contains(sv_interval, &gene_interval)
                 })
                 .flat_map(|gene| {
                     self.parent
@@ -425,6 +427,7 @@ impl<'a> Evaluator<'a> {
                 result.push(Section::G2(G2::G2I(G2I {
                     suggested_score: 0.9,
                     pvs1_result: Pvs1Result::Pvs1,
+                    hi_genes,
                 })));
                 return Ok(result);
             }
@@ -453,9 +456,9 @@ impl<'a> Evaluator<'a> {
                 })
                 .collect::<Vec<_>>();
             if !hi_genes.is_empty() {
-                // Case 2K: one breakpoint is in HI gene
-                tracing::debug!("case 2K fired: {:?}", &hi_genes);
-                result.push(Section::G2(G2::G2K(G2K {
+                // Case 2J: one breakpoint is in HI gene
+                tracing::debug!("case 2J fired: {:?}", &hi_genes);
+                result.push(Section::G2(G2::G2J(G2J {
                     suggested_score: 0.45,
                     hi_genes,
                 })));
@@ -487,17 +490,33 @@ impl<'a> Evaluator<'a> {
                 )
                 .map_err(|e| {
                     anyhow::anyhow!("problem query transcript database with range: {}", e)
-                })?;
+                })?
+                .iter()
+                .map(|tx| {
+                    self.parent.provider.get_tx_exons(&tx.tx_ac, chrom_acc, "splign")
+                }).collect::<Result<Vec<_>, _>>()?;
+
+            tracing::trace!("txs = {:?}", &txs);
 
             // Obtain truly overlapping genes.
             let mut hgnc_ids = Vec::new();
-            for tx in &txs {
+            for tx_exons in &txs {
+                let tx_start = tx_exons
+                    .iter()
+                    .map(|exon| exon.alt_start_i - 1)
+                    .min()
+                    .expect("no exons?") as u64;
+                let tx_end = tx_exons
+                    .iter()
+                    .map(|exon| exon.alt_end_i)
+                    .max()
+                    .expect("no exons?") as u64;
                 let tx_interval = Interval::new(
                     sv_interval.contig().to_string(),
-                    (tx.start_i as u64)..(tx.end_i as u64),
+                    tx_start..tx_end,
                 );
                 if !contains(sv_interval, &tx_interval) && !contains(&tx_interval, sv_interval) {
-                    hgnc_ids.push(self.parent.provider.get_tx_identity_info(&tx.tx_ac)?.hgnc);
+                    hgnc_ids.push(self.parent.provider.get_tx_identity_info(&tx_exons.first().expect("no exons?").tx_ac)?.hgnc);
                 }
             }
             hgnc_ids.sort();
@@ -650,6 +669,51 @@ pub mod test {
             .collect::<Vec<_>>();
 
         let res = evaluator.handle_cases_2d_2g(&sv_interval, &benign_regions)?;
+        insta::assert_yaml_snapshot!(res);
+
+        Ok(())
+    }
+
+    /// Test internal working of `handle_cases_2h_l`.
+    ///
+    /// We cannot match phenotypes, so we never return 2K and just test 2J.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    // Note: same cases as in `evaluate` above -- keep in sync!
+    //
+    // Case 2H: HI gene fully contained within observed copy number gain.
+    #[case("2", 189839099, 189877472, "COL3A1", "2H-pos-1")]
+    // Case 2I: Both breakpoints in the same HI gene.
+    #[case("2", 189839100, 189877471, "COL3A1", "2I-pos-1")]
+    // Case 2J: One breakpoint in an HI gene.
+    #[case("2", 189877072, 189877500, "COL3A1", "2J-pos-1")] // left bp
+    #[case("2", 189839000, 189839599, "COL3A1", "2J-pos-2")] // right bp
+    // No Case 2K: we cannot handle phenotypes well.
+    // Case 2L: One breakpoint in any gene.
+    #[case("6", 111_620_000, 111_621_000, "REV3L", "2L-pos-1")] // REV3L left bp
+    #[case("6", 111_800_000, 111_805_000, "REV3L", "2L-pos-1")] // REV3L right bp
+    fn handle_cases_2h_2l(
+        #[case] chrom: &str,
+        #[case] start: u64,
+        #[case] stop: u64,
+        #[case] hgnc_id: &str,
+        #[case] label: &str,
+        global_evaluator_37: super::super::super::Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
+        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+
+        let strucvar = ds::StructuralVariant {
+            chrom: chrom.into(),
+            start: start as u32,
+            stop: stop as u32,
+            svtype: ds::SvType::Del,
+            ambiguous_range: None,
+        };
+        let sv_interval = strucvar.into();
+
+        let (clingen_genes, _) = global_evaluator_37.clingen_overlaps(&sv_interval);
+        let res = evaluator.handle_cases_2h_2l(&sv_interval, &clingen_genes)?;
         insta::assert_yaml_snapshot!(res);
 
         Ok(())

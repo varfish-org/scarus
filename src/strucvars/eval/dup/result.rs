@@ -36,7 +36,6 @@ impl SuggestedScore for Section {
             Section::G2(G2::G2H(g2h)) => g2h.suggested_score(),
             Section::G2(G2::G2I(g2i)) => g2i.suggested_score(),
             Section::G2(G2::G2J(g2j)) => g2j.suggested_score(),
-            Section::G2(G2::G2K(g2k)) => g2k.suggested_score(),
             Section::G2(G2::G2L(g2l)) => g2l.suggested_score(),
             Section::G3(G3::G3A(g3a)) => g3a.suggested_score(),
             Section::G3(G3::G3B(g3b)) => g3b.suggested_score(),
@@ -62,7 +61,6 @@ impl ScoreRange for Section {
             Section::G2(G2::G2H(_)) => 0.0,
             Section::G2(G2::G2I(_)) => 0.0,
             Section::G2(G2::G2J(_)) => 0.0,
-            Section::G2(G2::G2K(_)) => 0.45,
             Section::G2(G2::G2L(_)) => 0.0,
             Section::G3(G3::G3A(_)) => 0.0,
             Section::G3(G3::G3B(_)) => 0.45,
@@ -86,7 +84,6 @@ impl ScoreRange for Section {
             Section::G2(G2::G2H(_)) => 0.0,
             Section::G2(G2::G2I(_)) => 0.9,
             Section::G2(G2::G2J(_)) => 0.0,
-            Section::G2(G2::G2K(_)) => 0.45,
             Section::G2(G2::G2L(_)) => 0.0,
             Section::G3(G3::G3A(_)) => 0.0,
             Section::G3(G3::G3B(_)) => 0.45,
@@ -160,9 +157,6 @@ pub enum G2 {
     /// One breakpoint is within an established TS gene, patient's phenotype is either
     /// inconsistent with what is expecte for LOF or that gene OR unknown
     G2J(G2J),
-    /// One breakpoint is within an established TS gene, patient's phenotype is highly
-    /// specific and consistent with what is expected for LOF of that gene.
-    G2K(G2K),
     /// One or both breakpoints are within gene(s) of no established clinical significance.
     G2L(G2L),
 }
@@ -305,6 +299,8 @@ pub struct G2I {
     pub suggested_score: f32,
     /// PVS assessment result.
     pub pvs1_result: Pvs1Result,
+    /// HI genes for which the assessment was made.
+    pub hi_genes: Vec<GeneIdInfo>,
 }
 
 impl SuggestedScore for G2I {
@@ -325,23 +321,6 @@ pub struct G2J {
 }
 
 impl SuggestedScore for G2J {
-    fn suggested_score(&self) -> f32 {
-        self.suggested_score
-    }
-}
-
-/// Result of the G2K subsection (One breakpoint is within an esbalished HI gene,
-/// patient's phenotype is either inconsistent with what is expected for LOF of
-/// that gene OR unknown).
-#[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
-pub struct G2K {
-    /// Suggested score for the subsection.
-    pub suggested_score: f32,
-    /// HI genes overlapping with the CNV.
-    pub hi_genes: Vec<GeneIdInfo>,
-}
-
-impl SuggestedScore for G2K {
     fn suggested_score(&self) -> f32 {
         self.suggested_score
     }
