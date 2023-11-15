@@ -1,6 +1,6 @@
 //! Implementation of evaluation of copy number gain section 2.
 
-use crate::strucvars::ds::StructuralVariant;
+use crate::strucvars::{ds::StructuralVariant, data::intervals::Interval};
 
 use super::result::Section;
 
@@ -33,7 +33,30 @@ impl<'a> Evaluator<'a> {
     ///
     /// If anything goes wrong, it returns a generic `anyhow::Error`.
     pub fn evaluate(&self, strucvar: &StructuralVariant) -> Result<Vec<Section>, anyhow::Error> {
+        tracing::debug!("evaluating section 2 for {:?}", strucvar);
+        let sv_interval: Interval = strucvar.clone().into();
+
+
         Ok(Default::default())
+    }
+
+    /// Evaluate subsection 2a.
+    ///
+    /// # Arguments
+    ///
+    /// * `sv_interval` - The interval of the structural variant.
+    ///
+    /// # Returns
+    ///
+    /// Returns the evaluation results of the subsection.
+    ///
+    /// # Errors
+    ///
+    /// If anything goes wrong, it returns a generic `anyhow::Error`.
+    fn evaluate_2a(&self, sv_interval: bio::bio_types::genome::Interval) -> Result<Section, anyhow::Error> {
+        // self.parent.overlapping_elements()
+
+        todo!()
     }
 }
 

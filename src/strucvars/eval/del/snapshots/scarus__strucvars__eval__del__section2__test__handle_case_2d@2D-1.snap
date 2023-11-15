@@ -5,8 +5,8 @@ expression: res
 L2:
   L2D1:
     gene:
-      hgnc_id: "HGNC:2201"
-      hgnc_symbol: COL3A1
-      ensembl_gene_id: ENSG00000168542
-      ncbi_gene_id: "1281"
+      hgnc_id: "HGNC:603"
+      hgnc_symbol: APOB
+      ensembl_gene_id: ENSG00000084674
+      ncbi_gene_id: "338"
 

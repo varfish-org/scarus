@@ -13,7 +13,7 @@ use prost::Message as _;
 
 use self::common::GeneOverlap;
 
-use super::data::clingen_dosage::Data as ClingenDosageData;
+use super::data::clingen_dosage::{Data as ClingenDosageData, Region, Gene};
 use super::data::decipher_hi::Data as DecipherHiData;
 use super::data::gnomad::Data as GnomadConstraintData;
 use super::data::hgnc::Data as GeneIdData;
@@ -323,6 +323,25 @@ impl Evaluator {
 
         Ok(gene_ovls)
     }
+
+    /// Query ClinGen by overlap.
+    pub fn clingen_overlaps(
+        &self,
+        sv_interval: &bio::bio_types::genome::Interval,
+    ) -> (Vec<Gene>, Vec<Region>) {
+        let mut clingen_genes = self.clingen_dosage_data.gene_by_overlap(sv_interval);
+        clingen_genes.sort_by(|a, b| a.ncbi_gene_id.cmp(&b.ncbi_gene_id));
+        let mut clingen_regions = self
+            .clingen_dosage_data
+            .region_by_overlap(sv_interval);
+        clingen_regions.sort_by(|a, b| a.isca_id.cmp(&b.isca_id));
+        tracing::debug!(
+            "overlaps with {} ClinGen regions and {} genes",
+            clingen_regions.len(),
+            clingen_genes.len()
+        );
+        (clingen_genes, clingen_regions)
+    }
 }
 
 #[cfg(test)]
@@ -352,5 +371,29 @@ pub mod test {
             .expect("could not obtain overlapping elements");
 
         insta::assert_yaml_snapshot!(res);
+    }
+
+    /// Test internal working of `clingen_overlaps`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    #[case("17", 67_892_000, 69_793_000, "region-match")]
+    #[case("X", 152_990_000, 153_011_000, "gene-abcd1")]
+    fn clingen_overlaps(
+        #[case] chrom: &str,
+        #[case] start: u64,
+        #[case] stop: u64,
+        #[case] label: &str,
+        global_evaluator_37: Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let sv_interval = crate::strucvars::data::intervals::Interval::new(chrom.into(), start..stop);
+
+        let (genes, regions) = global_evaluator_37.clingen_overlaps(&sv_interval);
+
+        insta::assert_yaml_snapshot!(genes);
+        insta::assert_yaml_snapshot!(regions);
+
+        Ok(())
     }
 }
