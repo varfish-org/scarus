@@ -2,21 +2,19 @@
 
 use bio::bio_types::genome::AbstractInterval;
 use bio::bio_types::genome::Interval;
+use hgvs::data::interface::Provider as _;
 
-use crate::strucvars::data::hgnc::GeneIdInfo;
-use crate::strucvars::data::intervals::do_overlap;
-use crate::strucvars::eval::dup::result::G2C;
-use crate::strucvars::eval::dup::result::G2D;
-use crate::strucvars::eval::dup::result::G2E;
-use crate::strucvars::eval::dup::result::G2F;
-use crate::strucvars::eval::dup::result::G2G;
+use crate::strucvars::eval::dup::result::G2L;
+use crate::strucvars::eval::result::Pvs1Result;
 use crate::strucvars::{
     data::{
         clingen_dosage::{Gene, Region, Score},
+        hgnc::GeneIdInfo,
         intervals::contains,
+        intervals::do_overlap,
     },
     ds::StructuralVariant,
-    eval::dup::result::{G2, G2B},
+    eval::dup::result::{G2, G2B, G2C, G2D, G2E, G2F, G2G, G2H, G2I, G2K},
 };
 
 use super::result::{Section, G2A};
@@ -110,10 +108,9 @@ impl<'a> Evaluator<'a> {
         }
 
         // Handle cases 2H..2L.
-        // let mut result_2h_2l = self.handle_cases_2h_2l(&sv_interval, &benign_regions)?;
-        // result.append(&mut result_2h_2l);
-        // Ok(result);
-        todo!()
+        let mut result_2h_2l = self.handle_cases_2h_2l(&sv_interval, &clingen_genes)?;
+        result.append(&mut result_2h_2l);
+        Ok(result)
     }
 
     /// Handle case 2A.
@@ -368,8 +365,160 @@ impl<'a> Evaluator<'a> {
     }
 
     /// Handle cases 2H..2L.
-    fn handle_cases_2h_2l(&self, _sv_interval: &Interval) -> Result<Vec<Section>, anyhow::Error> {
-        todo!()
+    ///
+    /// Note that we cannot reiliably decide for 2K, so we will only return 2J.
+    fn handle_cases_2h_2l(
+        &self,
+        sv_interval: &Interval,
+        clingen_genes: &[Gene],
+    ) -> Result<Vec<Section>, anyhow::Error> {
+        let mut result = Vec::new();
+
+        {
+            // For case 2H: get HGNC IDs of overlapping HI genes
+            let hi_genes = clingen_genes
+                .iter()
+                .filter(|gene| {
+                    let gene_interval: Interval =
+                        (*gene).clone().try_into().expect("conversion failed");
+                    gene.haploinsufficiency_score == Score::SufficientEvidence
+                        && contains(sv_interval, &gene_interval)
+                })
+                .flat_map(|gene| {
+                    self.parent
+                        .gene_id_data
+                        .by_ncbi_gene_id(&gene.ncbi_gene_id)
+                        .cloned()
+                })
+                .collect::<Vec<_>>();
+            if !hi_genes.is_empty() {
+                // Case 2H: HI gene(s) are completely contained in the SV.
+                tracing::debug!("case 2H fired: {:?}", &hi_genes);
+                result.push(Section::G2(G2::G2H(G2H {
+                    suggested_score: 0.0,
+                    hi_genes,
+                })));
+            }
+        }
+
+        {
+            // For case 2I: both breakpoints in the same HI gene.
+            let hi_genes = clingen_genes
+                .iter()
+                .filter(|gene| {
+                    let gene_interval: Interval =
+                        (*gene).clone().try_into().expect("conversion failed");
+                    gene.haploinsufficiency_score == Score::SufficientEvidence
+                        && contains(sv_interval, &gene_interval)
+                })
+                .flat_map(|gene| {
+                    self.parent
+                        .gene_id_data
+                        .by_ncbi_gene_id(&gene.ncbi_gene_id)
+                        .cloned()
+                })
+                .collect::<Vec<_>>();
+            if !hi_genes.is_empty() {
+                // Case 2I: HI gene(s) are completely contained in the SV.
+                tracing::debug!("case 2I fired: {:?}", &hi_genes);
+                // TODO: proper implementat with PVS1
+                result.push(Section::G2(G2::G2I(G2I {
+                    suggested_score: 0.9,
+                    pvs1_result: Pvs1Result::Pvs1,
+                })));
+                return Ok(result);
+            }
+        }
+
+        {
+            // For case 2K: one breakpoint in HI gene.
+            //
+            // As mentioned above, we won't do 2J as we cannot incorporate the phenotype.
+            let hi_genes = clingen_genes
+                .iter()
+                .filter(|gene| {
+                    let gene_interval: Interval =
+                        (*gene).clone().try_into().expect("conversion failed");
+                    // We look for true overlap here, no equality
+                    gene.haploinsufficiency_score == Score::SufficientEvidence
+                        && do_overlap(sv_interval, &gene_interval)
+                        && !contains(sv_interval, &gene_interval)
+                        && !contains(&gene_interval, sv_interval)
+                })
+                .flat_map(|gene| {
+                    self.parent
+                        .gene_id_data
+                        .by_ncbi_gene_id(&gene.ncbi_gene_id)
+                        .cloned()
+                })
+                .collect::<Vec<_>>();
+            if !hi_genes.is_empty() {
+                // Case 2K: one breakpoint is in HI gene
+                tracing::debug!("case 2K fired: {:?}", &hi_genes);
+                result.push(Section::G2(G2::G2K(G2K {
+                    suggested_score: 0.45,
+                    hi_genes,
+                })));
+                return Ok(result);
+            }
+        }
+
+        {
+            // For case 2L: one breakpoint in any gene.
+
+            // Map chromosome name (e.g., chr1) to chromosome accession in this assembly.
+            let chrom_acc = self
+                .parent
+                .chrom_to_ac
+                .get(sv_interval.contig())
+                .ok_or_else(|| {
+                    anyhow::anyhow!("could not resolve contig name `{}`", sv_interval.contig())
+                })?;
+
+            // Obtain the overlapping transcripts for the given region.
+            let txs = self
+                .parent
+                .provider
+                .get_tx_for_region(
+                    chrom_acc,
+                    "splign",
+                    sv_interval.range().start as i32,
+                    sv_interval.range().end as i32,
+                )
+                .map_err(|e| {
+                    anyhow::anyhow!("problem query transcript database with range: {}", e)
+                })?;
+
+            // Obtain truly overlapping genes.
+            let mut hgnc_ids = Vec::new();
+            for tx in &txs {
+                let tx_interval = Interval::new(
+                    sv_interval.contig().to_string(),
+                    (tx.start_i as u64)..(tx.end_i as u64),
+                );
+                if !contains(sv_interval, &tx_interval) && !contains(&tx_interval, sv_interval) {
+                    hgnc_ids.push(self.parent.provider.get_tx_identity_info(&tx.tx_ac)?.hgnc);
+                }
+            }
+            hgnc_ids.sort();
+            hgnc_ids.dedup();
+
+            if !hgnc_ids.is_empty() {
+                let genes = hgnc_ids
+                    .iter()
+                    .flat_map(|hgnc_id| self.parent.gene_id_data.by_hgnc_id(hgnc_id).cloned())
+                    .collect::<Vec<_>>();
+
+                // Case 2L: one breakpoint is in any gene
+                tracing::debug!("case 2L fired: {:?}", &hgnc_ids);
+                result.push(Section::G2(G2::G2L(G2L {
+                    suggested_score: 0.45,
+                    genes,
+                })));
+            }
+        }
+
+        Ok(result)
     }
 }
 

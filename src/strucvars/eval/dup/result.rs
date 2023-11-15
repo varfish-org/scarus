@@ -320,8 +320,8 @@ impl SuggestedScore for G2I {
 pub struct G2J {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
-    /// Overlapping CNV benign genomic regions.
-    pub hi_genes: Vec<GeneOverlap>,
+    /// HI genes overlapping with the CNV.
+    pub hi_genes: Vec<GeneIdInfo>,
 }
 
 impl SuggestedScore for G2J {
@@ -337,8 +337,8 @@ impl SuggestedScore for G2J {
 pub struct G2K {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
-    /// Overlapping CNV benign genomic regions.
-    pub hi_genes: Vec<GeneOverlap>,
+    /// HI genes overlapping with the CNV.
+    pub hi_genes: Vec<GeneIdInfo>,
 }
 
 impl SuggestedScore for G2K {
@@ -353,8 +353,8 @@ impl SuggestedScore for G2K {
 pub struct G2L {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
-    /// Overlapping CNV benign genomic regions.
-    pub hi_genes: Vec<GeneOverlap>,
+    /// Genes overlapping with the DUP.
+    pub genes: Vec<GeneIdInfo>,
 }
 
 impl SuggestedScore for G2L {
