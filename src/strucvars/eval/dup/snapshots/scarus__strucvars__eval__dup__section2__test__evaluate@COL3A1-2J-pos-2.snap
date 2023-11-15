@@ -1,0 +1,13 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- G2:
+    G2J:
+      suggested_score: 0.45
+      hi_genes:
+        - hgnc_id: "HGNC:2201"
+          hgnc_symbol: COL3A1
+          ensembl_gene_id: ENSG00000168542
+          ncbi_gene_id: "1281"
+

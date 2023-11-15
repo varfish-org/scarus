@@ -71,7 +71,7 @@ mod test {
     use crate::strucvars::ds::{StructuralVariant, SvType};
     use crate::strucvars::eval::common::SuggestedScore;
 
-    // #[tracing_test::traced_test]
+    #[tracing_test::traced_test]
     #[rstest::rstest]
     #[case("1", 11_937_319, 11_944_386, -0.6)] // empty region left of MFN2
     #[case("1", 12_098_550, 12_103_898, -0.6)] // empty region right of MFN2

@@ -1,0 +1,21 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- G2:
+    G2E:
+      suggested_score: 0
+      benign_region:
+        isca_id: ISCA-37405
+        isca_region_name: 2q13 recurrent region (includes NPHP1)
+        genomic_location: "2:110862108-110983703"
+        haploinsufficiency_score: GeneAssociatedWithRecessivePhenotype
+        triplosensitivity_score: DosageSensitivityUnlikely
+        haploinsufficiency_disease_id: ~
+        triplosensitivity_disease_id: ~
+      genes:
+        - hgnc_id: "HGNC:27339"
+          hgnc_symbol: MTLN
+          ensembl_gene_id: ENSG00000175701
+          ncbi_gene_id: "205251"
+

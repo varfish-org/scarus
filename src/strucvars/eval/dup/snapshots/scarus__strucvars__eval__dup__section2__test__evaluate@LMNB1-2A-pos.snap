@@ -1,0 +1,17 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- G2:
+    G2A:
+      suggested_score: 1
+      ts_genes:
+        - gene_symbol: PLP1
+          ncbi_gene_id: "5354"
+          genomic_location: "X:103031434-103047548"
+          haploinsufficiency_score: SufficientEvidence
+          triplosensitivity_score: SufficientEvidence
+          haploinsufficiency_disease_id: "MONDO:0010714"
+          triplosensitivity_disease_id: "MONDO:0010714"
+      ts_regions: []
+

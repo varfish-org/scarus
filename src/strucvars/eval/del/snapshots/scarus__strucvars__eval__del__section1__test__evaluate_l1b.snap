@@ -1,0 +1,7 @@
+---
+source: src/strucvars/eval/del/section1.rs
+expression: res
+---
+L1:
+  L1B: {}
+

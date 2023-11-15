@@ -11,8 +11,11 @@ use crate::strucvars::{
         intervals::{contains, do_overlap, exon_to_interval, Interval},
     },
     ds::StructuralVariant,
-    eval::del::result::{Pvs1Result, L2, L2A, L2B, L2C1, L2C2, L2D1, L2D2, L2D4, L2E, L2F, L2G},
     eval::{common::SuggestedScore as _, del::result::L2D3},
+    eval::{
+        del::result::{L2, L2A, L2B, L2C1, L2C2, L2D1, L2D2, L2D4, L2E, L2F, L2G},
+        result::Pvs1Result,
+    },
 };
 
 /// Evaluation of deletions, loss of copy number.
@@ -48,7 +51,7 @@ impl<'a> Evaluator<'a> {
         let sv_interval: Interval = strucvar.clone().into();
 
         // Obtain any overlapping ClinGen region and gene dosage info.
-        let (clingen_genes, clingen_regions) = self.clingen_overlaps(&sv_interval);
+        let (clingen_genes, clingen_regions) = self.parent.clingen_overlaps(&sv_interval);
 
         // Check each overlapping ClinGen region/gene.  If `sv_interval` completely contains
         // a region/gene and the region/gene has a "sufficient evidence" score for HI then we
@@ -60,8 +63,11 @@ impl<'a> Evaluator<'a> {
         // Otherwise, we need to test case 2B.
         let has_hi_genes = clingen_genes
             .iter()
-            .any(|clingen_gene| clingen_gene.haploinsufficiency_score == Score::SufficientEvidence);
-        let mut result = if has_hi_genes {
+            .any(|gene| gene.haploinsufficiency_score == Score::SufficientEvidence);
+        let has_hi_region = clingen_regions
+            .iter()
+            .any(|region| region.haploinsufficiency_score == Score::SufficientEvidence);
+        let mut result = if has_hi_genes || has_hi_region {
             let result = vec![Section::L2(L2::L2B(L2B::default()))];
             tracing::debug!("case 2B fired: {:?}", &result);
             result
@@ -120,24 +126,6 @@ impl<'a> Evaluator<'a> {
             result
         };
         Ok(result)
-    }
-
-    /// Query ClinGen by overlap.
-    fn clingen_overlaps(
-        &self,
-        sv_interval: &bio::bio_types::genome::Interval,
-    ) -> (Vec<Gene>, Vec<Region>) {
-        let clingen_genes = self.parent.clingen_dosage_data.gene_by_overlap(sv_interval);
-        let clingen_regions = self
-            .parent
-            .clingen_dosage_data
-            .region_by_overlap(sv_interval);
-        tracing::debug!(
-            "overlaps with {} ClinGen regions and {} genes",
-            clingen_regions.len(),
-            clingen_genes.len()
-        );
-        (clingen_genes, clingen_regions)
     }
 
     /// Handle case 2A.
@@ -696,31 +684,6 @@ mod test {
         Ok(())
     }
 
-    /// Test internal working of `clingen_overlaps`.
-    #[tracing_test::traced_test]
-    #[rstest::rstest]
-    #[case("17", 67_892_000, 69_793_000, "region-match")]
-    #[case("X", 152_990_000, 153_011_000, "gene-abcd1")]
-    fn clingen_overlaps(
-        #[case] chrom: &str,
-        #[case] start: u64,
-        #[case] stop: u64,
-        #[case] label: &str,
-        global_evaluator_37: super::super::super::Evaluator,
-    ) -> Result<(), anyhow::Error> {
-        mehari::common::set_snapshot_suffix!("{}", label);
-
-        let sv_interval = super::Interval::new(chrom.into(), start..stop);
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
-
-        let (genes, regions) = evaluator.clingen_overlaps(&sv_interval);
-
-        insta::assert_yaml_snapshot!(genes);
-        insta::assert_yaml_snapshot!(regions);
-
-        Ok(())
-    }
-
     /// Test inernal working of `handle_case_2a` (complete overlap).
     #[tracing_test::traced_test]
     #[rstest::rstest]
@@ -802,7 +765,7 @@ mod test {
         };
         let sv_interval = strucvar.into();
         let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
-        let (genes, _) = evaluator.clingen_overlaps(&sv_interval);
+        let (genes, _) = global_evaluator_37.clingen_overlaps(&sv_interval);
 
         let res = evaluator.handle_cases_2c_2e(&sv_interval, &genes)?;
         insta::assert_yaml_snapshot!(res);
@@ -882,7 +845,7 @@ mod test {
         #[case] label: &str,
         global_evaluator_37: super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
-        mehari::common::set_snapshot_suffix!("{}", label);
+        mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
 
         let strucvar = ds::StructuralVariant {
             chrom: chrom.into(),
@@ -985,8 +948,7 @@ mod test {
         };
         let sv_interval = strucvar.into();
 
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
-        let (gene_overlaps, region_overlaps) = evaluator.clingen_overlaps(&sv_interval);
+        let (gene_overlaps, region_overlaps) = global_evaluator_37.clingen_overlaps(&sv_interval);
 
         insta::assert_yaml_snapshot!(&gene_overlaps);
         insta::assert_yaml_snapshot!(&region_overlaps);

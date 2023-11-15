@@ -1,4 +1,6 @@
-//! Common functions and data strucdtures for evaluation.
+//! Common functions and data structures for evaluation.
+
+use crate::strucvars::data::hgnc::GeneIdInfo;
 
 /// Scores of the results in individual categories.
 pub trait SuggestedScore {
@@ -13,4 +15,29 @@ pub trait ScoreRange {
 
     /// Maximum score for the category.
     fn max_score(&self) -> f32;
+}
+
+/// Per-gene transcript overlaps as part of `L1A`.
+#[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct GeneOverlap {
+    /// Gene identifiers.
+    pub gene: GeneIdInfo,
+    /// Transcript identifiers of this gene.
+    pub tx_ids: Vec<String>,
+}
+
+impl GeneOverlap {
+    /// Create a new `GeneOverlap`.
+    ///
+    /// # Arguments
+    ///
+    /// * `gene` - Gene identifier.
+    /// * `tx_ids` - Transcript identifiers of this gene.
+    ///
+    /// # Returns
+    ///
+    /// A new `GeneOverlap`.
+    pub fn new(gene: GeneIdInfo, tx_ids: Vec<String>) -> Self {
+        Self { gene, tx_ids }
+    }
 }

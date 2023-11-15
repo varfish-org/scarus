@@ -70,7 +70,8 @@ impl Evaluator {
 #[cfg(test)]
 mod test {
     use crate::strucvars::data::hgnc::GeneIdInfo;
-    use crate::strucvars::eval::del::result::{GeneOverlap, L3Count, Section, L1, L1A, L1B, L3};
+    use crate::strucvars::eval::common::GeneOverlap;
+    use crate::strucvars::eval::del::result::{L3Count, Section, L1, L1A, L1B, L3};
 
     // #[tracing_test::traced_test]
     #[rstest::rstest]

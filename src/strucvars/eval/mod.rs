@@ -3,13 +3,17 @@
 pub mod common;
 pub mod del;
 pub mod dup;
+pub mod result;
 
 use std::{path::Path, sync::Arc};
 
 use hgvs::data::interface::Provider;
+use itertools::Itertools as _;
 use prost::Message as _;
 
-use super::data::clingen_dosage::Data as ClingenDosageData;
+use self::common::GeneOverlap;
+
+use super::data::clingen_dosage::{Data as ClingenDosageData, Gene, Region};
 use super::data::decipher_hi::Data as DecipherHiData;
 use super::data::gnomad::Data as GnomadConstraintData;
 use super::data::hgnc::Data as GeneIdData;
@@ -240,6 +244,140 @@ impl Evaluator {
 
         Ok(result)
     }
+
+    /// Determine overlapping genes.
+    ///
+    /// # Arguments
+    ///
+    /// * `chrom` - Chromosome name.
+    /// * `start` - Start position (1-based).
+    /// * `stop` - Stop position (1-based).
+    ///
+    /// # Returns
+    ///
+    /// Overlapping gene / transcript information.
+    ///
+    /// # Errors
+    ///
+    /// When the chromosome name could not be resolved or there was a problem with
+    /// accessing the transcript database.
+    fn overlapping_genes(
+        &self,
+        chrom: &str,
+        start: u32,
+        stop: u32,
+    ) -> Result<Vec<GeneOverlap>, anyhow::Error> {
+        // Map chromosome name (e.g., chr1) to chromosome accession in this assembly.
+        let chrom_acc = self
+            .chrom_to_ac
+            .get(chrom)
+            .ok_or_else(|| anyhow::anyhow!("could not resolve chromosome name `{}`", chrom))?;
+
+        // Obtain the overlapping transcripts for the given region.
+        let txs = self
+            .provider
+            .get_tx_for_region(chrom_acc, "splign", start as i32, stop as i32)
+            .map_err(|e| anyhow::anyhow!("problem query transcript database with range: {}", e))?;
+
+        // Extract HGNC ids / transcript ids of coding transcripts.
+        let mut gene_txs = txs
+            .into_iter()
+            .filter_map(|tx| {
+                let tx_info = self
+                    .provider
+                    .get_tx_info(&tx.tx_ac, &tx.alt_ac, "splign")
+                    .expect("no tx info?");
+                assert!(tx_info.hgnc.starts_with("HGNC:"));
+                if tx_info.cds_start_i.is_some() && tx_info.cds_end_i.is_some() {
+                    Some((tx_info.hgnc, tx_info.tx_ac))
+                } else {
+                    None
+                }
+            })
+            .collect::<Vec<_>>();
+        gene_txs.sort();
+
+        // Group by and collect for each gene HGNC ID.
+        let gene_ovls = gene_txs
+            .into_iter()
+            .group_by(|(hgnc, _)| hgnc.clone())
+            .into_iter()
+            .map(|(hgnc, group)| {
+                let txs = group.map(|(_, tx)| tx).collect::<Vec<_>>();
+                let gene = self
+                    .gene_id_data
+                    .by_hgnc_id(&hgnc)
+                    .expect("could not resolve HGNC ID")
+                    .clone();
+                GeneOverlap::new(gene, txs)
+            })
+            .collect::<Vec<_>>();
+
+        tracing::trace!(
+            "found gene overlaps for strucvar {}:{}-{}: {:?}",
+            chrom,
+            start,
+            stop,
+            &gene_ovls
+        );
+
+        Ok(gene_ovls)
+    }
+
+    /// Return (sorted) HGNC IDs of overlapping genes.
+    pub fn overlapping_gene_hcnc_ids(
+        &self,
+        chrom: &str,
+        start: u32,
+        stop: u32,
+    ) -> Result<Vec<String>, anyhow::Error> {
+        let mut hgncs = self
+            .overlapping_genes(chrom, start, stop)
+            .map_err(|e| anyhow::anyhow!("failed to obtain overlapping genes: {}", e))?
+            .into_iter()
+            .map(|element| element.gene.hgnc_id)
+            .collect::<Vec<_>>();
+        hgncs.sort();
+        Ok(hgncs)
+    }
+
+    /// Returns whether the given HGNC ID is protein-coding.
+    ///
+    /// # Arguments
+    ///
+    /// - `hgnc_id` -- HGNC ID to use in query.
+    ///
+    /// # Returns
+    ///
+    /// Whether the gene is protein-coding, `None`` if gene was not found.
+    ///
+    /// # Errors
+    ///
+    /// If there was an issue with querying for gene data.
+    pub fn protein_coding(&self, hgnc_id: &str) -> Result<Option<bool>, anyhow::Error> {
+        match self.provider.get_tx_for_gene(hgnc_id) {
+            Ok(txs) => Ok(Some(txs.iter().any(|tx| tx.cds_start_i.is_some()))),
+            Err(hgvs::data::error::Error::NoGeneFound(_)) => Ok(None),
+            Err(e) => anyhow::bail!("problem querying transcript database: {}", e),
+        }
+    }
+
+    /// Query ClinGen by overlap.
+    pub fn clingen_overlaps(
+        &self,
+        sv_interval: &bio::bio_types::genome::Interval,
+    ) -> (Vec<Gene>, Vec<Region>) {
+        let mut clingen_genes = self.clingen_dosage_data.gene_by_overlap(sv_interval);
+        clingen_genes.sort_by(|a, b| a.ncbi_gene_id.cmp(&b.ncbi_gene_id));
+        let mut clingen_regions = self.clingen_dosage_data.region_by_overlap(sv_interval);
+        clingen_regions.sort_by(|a, b| a.isca_id.cmp(&b.isca_id));
+        tracing::debug!(
+            "overlaps with {} ClinGen regions and {} genes",
+            clingen_regions.len(),
+            clingen_genes.len()
+        );
+        (clingen_genes, clingen_regions)
+    }
 }
 
 #[cfg(test)]
@@ -251,14 +389,66 @@ pub mod test {
     pub fn global_evaluator_37() -> Evaluator {
         Evaluator::new(
             biocommons_bioutils::assemblies::Assembly::Grch37p10,
-            "tests/data/strucvars/hi/txs_example_hi.bin.zst",
+            "tests/data/strucvars/hi_ts/txs_example_hi.bin.zst",
             "tests/data/hgnc.tsv",
             "tests/data/strucvars/ClinGen_gene_curation_list_GRCh37.tsv",
             "tests/data/strucvars/ClinGen_region_curation_list_GRCh37.tsv",
             "tests/data/strucvars/decipher_hi_prediction.tsv",
             "tests/data/strucvars/gnomad_constraints.tsv",
-            "tests/data/strucvars/hi/clinvar/rocksdb",
+            "tests/data/strucvars/hi_ts/clinvar/rocksdb",
         )
         .expect("could not initialize global evaluator")
+    }
+
+    #[rstest::rstest]
+    fn overlapping_elements(global_evaluator_37: super::Evaluator) {
+        let res = global_evaluator_37
+            .overlapping_genes("1", 8412464, 8877699)
+            .expect("could not obtain overlapping elements");
+
+        insta::assert_yaml_snapshot!(res);
+    }
+
+    /// Test internal working of `clingen_overlaps`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    #[case("17", 67_892_000, 69_793_000, "region-match")]
+    #[case("X", 152_990_000, 153_011_000, "gene-abcd1")]
+    fn clingen_overlaps(
+        #[case] chrom: &str,
+        #[case] start: u64,
+        #[case] stop: u64,
+        #[case] label: &str,
+        global_evaluator_37: Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let sv_interval =
+            crate::strucvars::data::intervals::Interval::new(chrom.into(), start..stop);
+
+        let (genes, regions) = global_evaluator_37.clingen_overlaps(&sv_interval);
+
+        insta::assert_yaml_snapshot!(genes);
+        insta::assert_yaml_snapshot!(regions);
+
+        Ok(())
+    }
+
+    /// Test `is_protein_coding`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    #[case("HGNC:53956", Some(false))]
+    #[case("HGNC:39941", Some(true))]
+    #[case("HGNC:xxx", None)]
+    fn is_protein_coding(
+        #[case] hgnc_id: &str,
+        #[case] expected: Option<bool>,
+        global_evaluator_37: super::Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", hgnc_id);
+
+        assert_eq!(global_evaluator_37.protein_coding(hgnc_id)?, expected);
+
+        Ok(())
     }
 }
