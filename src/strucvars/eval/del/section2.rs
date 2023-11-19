@@ -147,16 +147,14 @@ impl<'a> Evaluator<'a> {
             .cloned()
             .collect::<Vec<_>>();
         let hi_regions = clingen_regions
-            .iter()
-            .cloned()
-            .filter(|clingen_region| {
+            .iter().filter(|&clingen_region| {
                 let clingen_interval: Interval = clingen_region
                     .clone()
                     .try_into()
                     .expect("no interval for region");
                 contains(sv_interval, &clingen_interval)
                     && clingen_region.haploinsufficiency_score == Score::SufficientEvidence
-            })
+            }).cloned()
             .collect::<Vec<_>>();
         if !hi_regions.is_empty() || !hi_genes.is_empty() {
             Some(vec![Section::L2(L2::L2A(L2A {
@@ -669,7 +667,7 @@ mod test {
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", gene, label);
 
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let strucvar = ds::StructuralVariant {
             chrom: chrom.into(),
             start: start as u32,
@@ -764,7 +762,7 @@ mod test {
             ambiguous_range: None,
         };
         let sv_interval = strucvar.into();
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let (genes, _) = global_evaluator_37.clingen_overlaps(&sv_interval);
 
         let res = evaluator.handle_cases_2c_2e(&sv_interval, &genes)?;
@@ -814,7 +812,7 @@ mod test {
         let exons = global_evaluator_37
             .provider
             .get_tx_exons(tx_id, "NC_000002.11", "splign")?;
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let res = evaluator.handle_case_2c(&tx_info, &exons, &sv_interval);
         insta::assert_yaml_snapshot!(res);
@@ -868,7 +866,7 @@ mod test {
         let exons = global_evaluator_37
             .provider
             .get_tx_exons(tx_id, "NC_000002.11", "splign")?;
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let res = evaluator.handle_case_2d(&tx_info, &exons, &sv_interval)?;
 
@@ -913,7 +911,7 @@ mod test {
         let tx_info = global_evaluator_37
             .provider
             .get_tx_info(tx_id, "NC_000002.11", "splign")?;
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let section = evaluator.handle_case_2e(&tx_info, &sv_interval);
         insta::assert_yaml_snapshot!(section);
@@ -990,7 +988,7 @@ mod test {
         };
         let sv_interval = strucvar.into();
 
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let res = evaluator.handle_case_2h(&sv_interval)?;
         insta::assert_yaml_snapshot!(res);
@@ -1004,7 +1002,7 @@ mod test {
     fn get_gene_hi_predictions(
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         // MFN2 is not in DECIPHER HI.
         let res_mfn2 = evaluator.get_gene_hi_predictions("HGNC:16877");

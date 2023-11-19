@@ -85,7 +85,7 @@ mod test {
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}-{}", chrom, start, stop);
 
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let result = evaluator.evaluate(&StructuralVariant {
             chrom: chrom.into(),
             start,
