@@ -7,6 +7,7 @@ pub mod result;
 
 use std::{path::Path, sync::Arc};
 
+use annonars::pbs::annonars::clinvar::v1::minimal::Record;
 use hgvs::data::interface::Provider;
 use itertools::Itertools as _;
 use prost::Message as _;
@@ -102,6 +103,7 @@ impl Evaluator {
             path_clinvar_minimal,
             "clinvar",
             "meta",
+            "clinvar_by_accession",
         )
         .map_err(|e| anyhow::anyhow!("failed to open 'minimal' ClinVar RocksDB: {}", e))?;
 
@@ -187,7 +189,7 @@ impl Evaluator {
         chrom: &str,
         start: u32,
         stop: u32,
-    ) -> Result<Vec<annonars::clinvar_minimal::pbs::Record>, anyhow::Error> {
+    ) -> Result<Vec<Record>, anyhow::Error> {
         tracing::trace!("starting clinvar query {}:{}-{}", &chrom, start, stop);
         let start = start as i32;
         let stop = stop as i32;
@@ -227,7 +229,7 @@ impl Evaluator {
                 }
 
                 // Otherwise, decode the value from the database.
-                let record = annonars::clinvar_minimal::pbs::Record::decode(value)?;
+                let record = Record::decode(value)?;
                 result.push(record);
 
                 // Proceed to the next database row.

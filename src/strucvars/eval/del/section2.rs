@@ -1,6 +1,6 @@
 //! Implementation of evaluation of copy number loss section 2.
 
-use annonars::{clinvar_minimal::pbs::ClinicalSignificance, clinvar_minimal::pbs::ReviewStatus};
+use annonars::pbs::annonars::clinvar::v1::minimal::{ClinicalSignificance, ReviewStatus};
 use bio::bio_types::genome::AbstractInterval;
 use hgvs::data::interface::{Provider, TxExonsRecord, TxInfoRecord};
 

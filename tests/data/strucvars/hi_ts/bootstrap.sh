@@ -32,12 +32,16 @@ RERE
 LINCADL
 "
 
+wget -O /tmp/cdot-0.2.22.GCF_000001405.25_GRCh37.p13_genomic.105.20201022.gff.json.gz \
+    https://github.com/SACGF/cdot/releases/download/data_v0.2.22/cdot-0.2.22.GCF_000001405.25_GRCh37.p13_genomic.105.20201022.gff.json.gz
+
+rm -rf $SCRIPTPATH/txs_example_hi.bin.zst
 mehari db create \
     -vvv \
     --genome-release grch37 \
     --path-mane-txs-tsv $SCRIPTPATH/tx-mane.tsv \
     --path-out $SCRIPTPATH/txs_example_hi.bin.zst \
-    --path-cdot-json ~/mehari-data-tx/cdot-refseq-vep110~0+0.2.21.json.gz \
+    --path-cdot-json /tmp/cdot-0.2.22.GCF_000001405.25_GRCh37.p13_genomic.105.20201022.gff.json.gz \
     --path-seqrepo-instance ~/mehari-data-tx/seqrepo/main \
     $(for gene_symbol in $gene_symbols; do echo --gene-symbols $gene_symbol; done)
 
