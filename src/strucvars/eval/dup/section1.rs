@@ -52,13 +52,13 @@ impl<'a> Evaluator<'a> {
             .map(FunctionalElement::RefSeq)
             .collect::<Vec<_>>();
 
-        if !genes.is_empty() {
+        if genes.is_empty() && functional_elements.is_empty() {
+            Ok(Section::G1(G1::G1B(G1B::default())))
+        } else {
             Ok(Section::G1(G1::G1A(G1A {
                 genes,
                 functional_elements,
             })))
-        } else {
-            Ok(Section::G1(G1::G1B(G1B::default())))
         }
     }
 }
@@ -72,14 +72,22 @@ pub mod test {
     use super::Evaluator;
 
     #[rstest::rstest]
+    #[case("1", 8_412_464, 8_877_699, "gene-RERE")]
+    #[case("11", 125_423_939, 125_424_204, "no-gene")]
     fn evaluate_g1a(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
         let evaluator = Evaluator::with_parent(global_evaluator_37);
         let strucvar = ds::StructuralVariant {
-            chrom: "1".to_string(),
-            start: 8412464,
-            stop: 8877699,
+            chrom: chrom.to_string(),
+            start,
+            stop,
             svtype: ds::SvType::Dup,
             ambiguous_range: None,
         };
@@ -93,14 +101,21 @@ pub mod test {
     }
 
     #[rstest::rstest]
+    #[case("2", 1, 1, "empty")]
     fn evaluate_g1b(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
         let evaluator = Evaluator::with_parent(global_evaluator_37);
         let strucvar = ds::StructuralVariant {
-            chrom: "22".to_string(),
-            start: 1,
-            stop: 1,
+            chrom: chrom.to_string(),
+            start,
+            stop,
             svtype: ds::SvType::Dup,
             ambiguous_range: None,
         };
