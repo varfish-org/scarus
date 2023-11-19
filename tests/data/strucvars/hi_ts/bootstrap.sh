@@ -37,7 +37,6 @@ wget -O /tmp/cdot-0.2.22.GCF_000001405.25_GRCh37.p13_genomic.105.20201022.gff.js
 
 rm -rf $SCRIPTPATH/txs_example_hi.bin.zst
 mehari db create \
-    -vvv \
     --genome-release grch37 \
     --path-mane-txs-tsv $SCRIPTPATH/tx-mane.tsv \
     --path-out $SCRIPTPATH/txs_example_hi.bin.zst \
@@ -47,9 +46,9 @@ mehari db create \
 
 # -- clinvar (filled) --
 
-wget -O $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.24.5.tar.gz \
-  https://github.com/bihealth/annonars-data-clinvar/releases/download/annonars-data-clinvar-20231112/annonars-clinvar-minimal-grch37-20231112+0.24.5.tar.gz
-tar -C $TMPDIR -xf $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.24.5.tar.gz
+wget -O $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.25.0.tar.gz \
+  https://github.com/bihealth/annonars-data-clinvar/releases/download/annonars-data-clinvar-20231112/annonars-clinvar-minimal-grch37-20231112+0.25.0.tar.gz
+tar -C $TMPDIR -xf $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.25.0.tar.gz
 
 cat <<EOF | tr ' ' '\t' > $TMPDIR/regions.bed
 1 8412464 8877699
@@ -63,8 +62,8 @@ EOF
 mkdir -p tests/data/strucvars/hi_ts/clinvar
 rm -rf tests/data/strucvars/hi_ts/clinvar/rocksdb
 
-annonars db-utils copy -vvv \
-    --path-in $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.24.5/rocksdb \
+annonars db-utils copy \
+    --path-in $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.25.0/rocksdb \
     --path-out tests/data/strucvars/hi_ts/clinvar/rocksdb \
     --path-beds $TMPDIR/regions.bed
 
@@ -73,7 +72,7 @@ annonars db-utils copy -vvv \
 mkdir -p tests/data/strucvars/hi_ts/clinvar-empty
 rm -rf tests/data/strucvars/hi_ts/clinvar-empty/rocksdb
 
-annonars db-utils copy -vvv \
-    --path-in $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.24.5/rocksdb \
+annonars db-utils copy \
+    --path-in $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.25.0/rocksdb \
     --path-out tests/data/strucvars/hi_ts/clinvar-empty/rocksdb \
     --path-beds /dev/null
