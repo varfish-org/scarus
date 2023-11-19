@@ -1,7 +1,7 @@
 //! Implementation of evaluation of copy number gain section 1.
 
 use super::result::{Section, G1, G1A, G1B};
-use crate::strucvars::ds::StructuralVariant;
+use crate::strucvars::{ds::StructuralVariant, eval::common::FunctionalElement};
 
 /// Evaluation of deletions, gain of copy number.
 ///
@@ -38,9 +38,25 @@ impl<'a> Evaluator<'a> {
             .map_err(|e| {
                 anyhow::anyhow!("issue with overlap computation of {:?}: {}", strucvar, e)
             })?;
+        let functional_elements = self
+            .parent
+            .functional_overlaps(&strucvar.chrom, strucvar.start, strucvar.stop)
+            .map_err(|e| {
+                anyhow::anyhow!(
+                    "issue with overlap computation of {:?} with functional elements: {}",
+                    strucvar,
+                    e
+                )
+            })?
+            .into_iter()
+            .map(FunctionalElement::RefSeq)
+            .collect::<Vec<_>>();
 
         if !genes.is_empty() {
-            Ok(Section::G1(G1::G1A(G1A { genes })))
+            Ok(Section::G1(G1::G1A(G1A {
+                genes,
+                functional_elements,
+            })))
         } else {
             Ok(Section::G1(G1::G1B(G1B::default())))
         }

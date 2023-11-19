@@ -14,4 +14,27 @@ G1:
           - NM_001042681.2
           - NM_001042682.2
           - NM_012102.4
+    functional_elements:
+      - RefSeq:
+          chromosome: "1"
+          start: 8877649
+          stop: 8877943
+          id: "id-GeneID:112590823"
+          dbxref: "GeneID:112590823"
+          category: 6
+          regulatory_class: 2
+          note: ~
+          experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
+          function: activates a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 and K562 cells
+      - RefSeq:
+          chromosome: "1"
+          start: 8877649
+          stop: 8877943
+          id: "id-GeneID:112590823-2"
+          dbxref: "GeneID:112590823"
+          category: 5
+          regulatory_class: ~
+          note: ~
+          experiment: ~
+          function: ~
 

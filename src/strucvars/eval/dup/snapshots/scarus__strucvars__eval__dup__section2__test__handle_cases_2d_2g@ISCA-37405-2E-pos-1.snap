@@ -18,4 +18,5 @@ expression: res
           hgnc_symbol: MALL
           ensembl_gene_id: ENSG00000144063
           ncbi_gene_id: "7851"
+      functional_elements: []
 

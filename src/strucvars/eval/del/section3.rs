@@ -32,7 +32,7 @@ impl Evaluator {
     pub fn evaluate(&self, l1: &Section) -> Result<Section, anyhow::Error> {
         tracing::debug!("re-evaluating Section 1 results for Section 3 for {:?}", l1);
         let result = match l1 {
-            Section::L1(L1::L1A(L1A { genes })) => {
+            Section::L1(L1::L1A(L1A { genes, .. })) => {
                 if genes.len() < 25 {
                     Section::L3(L3::L3A(L3Count {
                         suggested_score: 0.0,
@@ -93,10 +93,14 @@ mod test {
                 tx_ids: vec![String::from("fake-tx-id")],
             })
             .collect();
+        let functional_elements = Vec::new();
 
         let evaluator = super::Evaluator::new();
 
-        let result = evaluator.evaluate(&Section::L1(L1::L1A(L1A { genes })))?;
+        let result = evaluator.evaluate(&Section::L1(L1::L1A(L1A {
+            genes,
+            functional_elements,
+        })))?;
         match result {
             Section::L3(L3::L3A(L3Count {
                 suggested_score,

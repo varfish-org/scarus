@@ -3,7 +3,7 @@
 use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     eval::{
-        common::{GeneOverlap, ScoreRange, SuggestedScore},
+        common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
         result::Pvs1Result,
     },
 };
@@ -108,6 +108,8 @@ pub enum G1 {
 pub struct G1A {
     /// Overlapping transcripts/genes.
     pub genes: Vec<GeneOverlap>,
+    /// Overlapping functional elements.
+    pub functional_elements: Vec<FunctionalElement>,
 }
 
 impl SuggestedScore for G1A {
@@ -233,6 +235,8 @@ pub struct G2E {
     pub benign_region: clingen_dosage::Region,
     /// Potentially affected genes.
     pub genes: Vec<GeneIdInfo>,
+    /// Overlapping functional elements.
+    pub functional_elements: Vec<FunctionalElement>,
 }
 
 impl SuggestedScore for G2E {
@@ -267,6 +271,8 @@ pub struct G2G {
     pub benign_region: clingen_dosage::Region,
     /// Additional genes.
     pub genes: Vec<GeneIdInfo>,
+    /// Overlapping functional elements.
+    pub functional_elements: Vec<FunctionalElement>,
 }
 
 impl SuggestedScore for G2G {
