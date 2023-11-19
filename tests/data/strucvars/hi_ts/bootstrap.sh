@@ -76,3 +76,18 @@ annonars db-utils copy \
     --path-in $TMPDIR/annonars-clinvar-minimal-grch37-20231112+0.25.0/rocksdb \
     --path-out tests/data/strucvars/hi_ts/clinvar-empty/rocksdb \
     --path-beds /dev/null
+
+# -- functional elements --
+
+wget \
+    -O /tmp/GCF_000001405.25_GRCh37.p13_genomic.gff.gz \
+    https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/9606/105.20201022/GCF_000001405.25_GRCh37.p13/GCF_000001405.25_GRCh37.p13_genomic.gff.gz
+zgrep '^#\|RefSeqFE' \
+    /tmp/GCF_000001405.25_GRCh37.p13_genomic.gff.gz \
+    > /tmp/GCF_000001405.25_GRCh37.p13_genomic.functional.gff
+
+rm -rf tests/data/strucvars/hi_ts/functional/rocksdb
+annonars functional import \
+    --genome-release grch37 \
+    --path-in-gff /tmp/GCF_000001405.25_GRCh37.p13_genomic.functional.gff \
+    --path-out-rocksdb tests/data/strucvars/hi_ts/functional/rocksdb
