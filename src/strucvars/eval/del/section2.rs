@@ -147,14 +147,16 @@ impl<'a> Evaluator<'a> {
             .cloned()
             .collect::<Vec<_>>();
         let hi_regions = clingen_regions
-            .iter().filter(|&clingen_region| {
+            .iter()
+            .filter(|&clingen_region| {
                 let clingen_interval: Interval = clingen_region
                     .clone()
                     .try_into()
                     .expect("no interval for region");
                 contains(sv_interval, &clingen_interval)
                     && clingen_region.haploinsufficiency_score == Score::SufficientEvidence
-            }).cloned()
+            })
+            .cloned()
             .collect::<Vec<_>>();
         if !hi_regions.is_empty() || !hi_genes.is_empty() {
             Some(vec![Section::L2(L2::L2A(L2A {

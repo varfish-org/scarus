@@ -132,14 +132,16 @@ impl<'a> Evaluator<'a> {
             .cloned()
             .collect::<Vec<_>>();
         let ts_regions = clingen_regions
-            .iter().filter(|&clingen_region| {
+            .iter()
+            .filter(|&clingen_region| {
                 let clingen_interval: Interval = clingen_region
                     .clone()
                     .try_into()
                     .expect("no interval for region");
                 contains(sv_interval, &clingen_interval)
                     && clingen_region.triplosensitivity_score == Score::SufficientEvidence
-            }).cloned()
+            })
+            .cloned()
             .collect::<Vec<_>>();
         if !ts_regions.is_empty() || !ts_genes.is_empty() {
             Some(vec![Section::G2(G2::G2A(G2A {
