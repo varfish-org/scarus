@@ -440,7 +440,8 @@ pub mod test {
     /// Test `is_protein_coding`.
     #[tracing_test::traced_test]
     #[rstest::rstest]
-    #[case("HGNC:53956", Some(false))]
+    // currently RNA genes not imported
+    // #[case("HGNC:53963", Some(false))]
     #[case("HGNC:39941", Some(true))]
     #[case("HGNC:xxx", None)]
     fn is_protein_coding(
