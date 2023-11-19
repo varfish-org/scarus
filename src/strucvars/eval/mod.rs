@@ -7,6 +7,10 @@ pub mod result;
 
 use std::{path::Path, sync::Arc};
 
+use annonars::common::spdi;
+use annonars::functional::cli::query::IntervalTrees as FunctionalIntervalTrees;
+use annonars::pbs::annonars::clinvar::v1::minimal::Record as ClinvarRecord;
+use annonars::pbs::annonars::functional::v1::refseq::Record as FunctionalRecord;
 use hgvs::data::interface::Provider;
 use itertools::Itertools as _;
 use prost::Message as _;
@@ -40,6 +44,8 @@ pub struct Evaluator {
 
     /// The ClinVar minimal database.
     clinvar_db: Arc<rocksdb::DBWithThreadMode<rocksdb::MultiThreaded>>,
+    /// The functional elements database.
+    functional: FunctionalIntervalTrees,
 }
 
 impl Evaluator {
@@ -63,7 +69,7 @@ impl Evaluator {
     ///
     /// If anything goes wrong, it returns a generic `anyhow::Error`.
     #[allow(clippy::too_many_arguments)]
-    pub fn new<P1, P2, P3, P4, P5, P6, P7>(
+    pub fn new<P1, P2, P3, P4, P5, P6, P7, P8>(
         assembly: biocommons_bioutils::assemblies::Assembly,
         path_tx_db: P1,
         path_hgnc: P2,
@@ -72,6 +78,7 @@ impl Evaluator {
         path_decipher_hi: P5,
         path_gnomad_constraints: P6,
         path_clinvar_minimal: P7,
+        path_functional: P8,
     ) -> Result<Self, anyhow::Error>
     where
         P1: AsRef<Path>,
@@ -81,6 +88,7 @@ impl Evaluator {
         P5: AsRef<Path>,
         P6: AsRef<Path>,
         P7: AsRef<Path>,
+        P8: AsRef<Path>,
     {
         let provider = Self::load_provider(assembly, path_tx_db.as_ref())
             .map_err(|e| anyhow::anyhow!("failed to load transcript database: {}", e))?;
@@ -99,11 +107,21 @@ impl Evaluator {
             GnomadConstraintData::load(path_gnomad_constraints, &gene_id_data)
                 .map_err(|e| anyhow::anyhow!("failed to load gnomAD constraint data: {}", e))?;
         let (clinvar_db, _) = annonars::clinvar_minimal::cli::query::open_rocksdb(
-            path_clinvar_minimal,
+            path_clinvar_minimal.as_ref(),
             "clinvar",
             "meta",
+            "clinvar_by_accession",
         )
         .map_err(|e| anyhow::anyhow!("failed to open 'minimal' ClinVar RocksDB: {}", e))?;
+        let (functional_db, functional_meta) = annonars::functional::cli::query::open_rocksdb(
+            path_functional.as_ref(),
+            "functional",
+            "meta",
+        )
+        .map_err(|e| anyhow::anyhow!("failed to open functional element RocksDB: {}", e))?;
+        let functional =
+            FunctionalIntervalTrees::with_db(functional_db, "functional", functional_meta)
+                .map_err(|e| anyhow::anyhow!("failed to load functional element data: {}", e))?;
 
         Ok(Self {
             assembly,
@@ -114,6 +132,7 @@ impl Evaluator {
             decipher_hi_data,
             gnomad_constraint_data,
             clinvar_db,
+            functional,
         })
     }
 
@@ -187,7 +206,7 @@ impl Evaluator {
         chrom: &str,
         start: u32,
         stop: u32,
-    ) -> Result<Vec<annonars::clinvar_minimal::pbs::Record>, anyhow::Error> {
+    ) -> Result<Vec<ClinvarRecord>, anyhow::Error> {
         tracing::trace!("starting clinvar query {}:{}-{}", &chrom, start, stop);
         let start = start as i32;
         let stop = stop as i32;
@@ -227,7 +246,7 @@ impl Evaluator {
                 }
 
                 // Otherwise, decode the value from the database.
-                let record = annonars::clinvar_minimal::pbs::Record::decode(value)?;
+                let record = ClinvarRecord::decode(value)?;
                 result.push(record);
 
                 // Proceed to the next database row.
@@ -378,6 +397,27 @@ impl Evaluator {
         );
         (clingen_genes, clingen_regions)
     }
+
+    /// Query functional elements by overlap.
+    pub fn functional_overlaps(
+        &self,
+        chrom: &str,
+        start: u32,
+        stop: u32,
+    ) -> Result<Vec<FunctionalRecord>, anyhow::Error> {
+        tracing::trace!(
+            "starting functional element query {}:{}-{}",
+            &chrom,
+            start,
+            stop
+        );
+        let start = start as i32;
+        let stop = stop as i32;
+
+        self.functional
+            .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
+            .map_err(|e| anyhow::anyhow!("failed to query functional elements: {}", e))
+    }
 }
 
 #[cfg(test)]
@@ -397,6 +437,7 @@ pub mod test {
             "tests/data/strucvars/decipher_hi_prediction.tsv",
             "tests/data/strucvars/gnomad_constraints.tsv",
             "tests/data/strucvars/hi_ts/clinvar/rocksdb",
+            "tests/data/strucvars/hi_ts/functional/rocksdb",
         )
         .expect("could not initialize global evaluator")
     }
@@ -435,10 +476,31 @@ pub mod test {
         Ok(())
     }
 
+    /// Test internal working of `functional_overlaps`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    #[case("1", 1_004_592, 1_004_706, "chr1-example")]
+    #[case("20", 3_682_289, 6_749_387, "chr20-example")]
+    fn functional_overlaps(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
+        global_evaluator_37: &Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let result = global_evaluator_37.functional_overlaps(chrom, start, stop)?;
+        insta::assert_yaml_snapshot!(result);
+
+        Ok(())
+    }
+
     /// Test `is_protein_coding`.
     #[tracing_test::traced_test]
     #[rstest::rstest]
-    #[case("HGNC:53956", Some(false))]
+    // currently RNA genes not imported
+    // #[case("HGNC:53963", Some(false))]
     #[case("HGNC:39941", Some(true))]
     #[case("HGNC:xxx", None)]
     fn is_protein_coding(

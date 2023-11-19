@@ -1,0 +1,505 @@
+---
+source: src/strucvars/eval/mod.rs
+expression: result
+---
+- chromosome: "20"
+  start: 3682289
+  stop: 3682583
+  id: "id-GeneID:112694697"
+  dbxref: "GeneID:112694697"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 3682289
+  stop: 3682583
+  id: "id-GeneID:112694697-2"
+  dbxref: "GeneID:112694697"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
+  function: activates a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 cells
+- chromosome: "20"
+  start: 3761989
+  stop: 3762283
+  id: "id-GeneID:112694698"
+  dbxref: "GeneID:112694698"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 3761989
+  stop: 3762283
+  id: "id-GeneID:112694698-2"
+  dbxref: "GeneID:112694698"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
+  function: activates a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 and K562 cells
+- chromosome: "20"
+  start: 3780109
+  stop: 3780403
+  id: "id-GeneID:112694699"
+  dbxref: "GeneID:112694699"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
+  function: activates a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 cells
+- chromosome: "20"
+  start: 3780109
+  stop: 3780403
+  id: "id-GeneID:112694699-2"
+  dbxref: "GeneID:112694699"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 3792104
+  stop: 3793163
+  id: "id-GeneID:106799846"
+  dbxref: "GeneID:106799846"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:17135569]"
+  function: enhancer in Jurkat T cells
+- chromosome: "20"
+  start: 3792104
+  stop: 3793163
+  id: "id-GeneID:106799846-2"
+  dbxref: "GeneID:106799846"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 3824264
+  stop: 3824408
+  id: "id-GeneID:111365169"
+  dbxref: "GeneID:111365169"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:23512712]"
+  function: activates an SV40 promoter by MPRA in HepG2 and K562 cells
+- chromosome: "20"
+  start: 3824264
+  stop: 3824408
+  id: "id-GeneID:111365169-2"
+  dbxref: "GeneID:111365169"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 3824331
+  stop: 3824341
+  id: "id-GeneID:111365169-3"
+  dbxref: "GeneID:111365169"
+  category: 6
+  regulatory_class: 16
+  note: ~
+  experiment: "EXISTENCE:site-directed mutagenesis evidence [ECO:0005528][PMID:23512712]"
+  function: necessary for full enhancer activity
+- chromosome: "20"
+  start: 4055709
+  stop: 4056003
+  id: "id-GeneID:112694712"
+  dbxref: "GeneID:112694712"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 4055709
+  stop: 4056003
+  id: "id-GeneID:112694712-2"
+  dbxref: "GeneID:112694712"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
+  function: activates a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 and K562 cells
+- chromosome: "20"
+  start: 4063368
+  stop: 4064065
+  id: "id-GeneID:116286202"
+  dbxref: "GeneID:116286202"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: "regulatory_interactions: RNF24"
+- chromosome: "20"
+  start: 4063368
+  stop: 4064065
+  id: "id-GeneID:116286202-2"
+  dbxref: "GeneID:116286202"
+  category: 6
+  regulatory_class: 16
+  note: ~
+  experiment: "EXISTENCE:mutant phenotype evidence [ECO:0000015][PMID:30612741]"
+  function: positively regulates RNF24 gene expression with high confidence in K562 cells
+- chromosome: "20"
+  start: 4654111
+  stop: 4654795
+  id: "id-GeneID:116286203"
+  dbxref: "GeneID:116286203"
+  category: 6
+  regulatory_class: 16
+  note: ~
+  experiment: "EXISTENCE:mutant phenotype evidence [ECO:0000015][PMID:30612741]"
+  function: positively regulates PRNP gene expression in K562 cells
+- chromosome: "20"
+  start: 4654111
+  stop: 4654795
+  id: "id-GeneID:116286203-2"
+  dbxref: "GeneID:116286203"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: "regulatory_interactions: PRNP"
+- chromosome: "20"
+  start: 4906849
+  stop: 4907143
+  id: "id-GeneID:112694713"
+  dbxref: "GeneID:112694713"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 4906849
+  stop: 4907143
+  id: "id-GeneID:112694713-2"
+  dbxref: "GeneID:112694713"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
+  function: activates a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 and K562 cells
+- chromosome: "20"
+  start: 4982045
+  stop: 4982252
+  id: "id-GeneID:111240479"
+  dbxref: "GeneID:111240479"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: "regulatory_interactions: SLC23A2"
+- chromosome: "20"
+  start: 4982045
+  stop: 4982243
+  id: "id-GeneID:111240479-2"
+  dbxref: "GeneID:111240479"
+  category: 6
+  regulatory_class: 11
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:16380174]"
+  function: ~
+- chromosome: "20"
+  start: 4982139
+  stop: 4982165
+  id: "id-GeneID:111240479-3"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: positive regulation of promoter activity
+- chromosome: "20"
+  start: 4982154
+  stop: 4982178
+  id: "id-GeneID:111240479-4"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: ~
+- chromosome: "20"
+  start: 4982167
+  stop: 4982194
+  id: "id-GeneID:111240479-5"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: ~
+- chromosome: "20"
+  start: 4982167
+  stop: 4982194
+  id: "id-GeneID:111240479-6"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: ~
+- chromosome: "20"
+  start: 4982189
+  stop: 4982217
+  id: "id-GeneID:111240479-7"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: ~
+- chromosome: "20"
+  start: 4982189
+  stop: 4982217
+  id: "id-GeneID:111240479-8"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: ~
+- chromosome: "20"
+  start: 4982223
+  stop: 4982252
+  id: "id-GeneID:111240479-10"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: ~
+- chromosome: "20"
+  start: 4982223
+  stop: 4982252
+  id: "id-GeneID:111240479-9"
+  dbxref: "GeneID:111240479"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21335086]"
+  function: ~
+- chromosome: "20"
+  start: 4990674
+  stop: 4991175
+  id: "id-GeneID:111240478"
+  dbxref: "GeneID:111240478"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: "regulatory_interactions: SLC23A2"
+- chromosome: "20"
+  start: 4990674
+  stop: 4990939
+  id: "id-GeneID:111240478-2"
+  dbxref: "GeneID:111240478"
+  category: 6
+  regulatory_class: 11
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:16380174]"
+  function: ~
+- chromosome: "20"
+  start: 4990758
+  stop: 4991175
+  id: "id-GeneID:111240478-3"
+  dbxref: "GeneID:111240478"
+  category: 3
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 4990786
+  stop: 4990815
+  id: "id-GeneID:111240478-4"
+  dbxref: "GeneID:111240478"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21770893]"
+  function: ~
+- chromosome: "20"
+  start: 4990921
+  stop: 4990948
+  id: "id-GeneID:111240478-5"
+  dbxref: "GeneID:111240478"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:22532872]"
+  function: positive regulation of promoter activity
+- chromosome: "20"
+  start: 4990997
+  stop: 4991025
+  id: "id-GeneID:111240478-6"
+  dbxref: "GeneID:111240478"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21770893]"
+  function: ~
+- chromosome: "20"
+  start: 4991014
+  stop: 4991043
+  id: "id-GeneID:111240478-7"
+  dbxref: "GeneID:111240478"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:21770893]"
+  function: important for promoter activity; blocked by cytosine methylation
+- chromosome: "20"
+  start: 5212475
+  stop: 5216153
+  id: "id-GeneID:107457602"
+  dbxref: "GeneID:107457602"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 5212475
+  stop: 5216153
+  id: "id-GeneID:107457602-2"
+  dbxref: "GeneID:107457602"
+  category: 1
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:nucleotide sequencing assay evidence [ECO:0000219][PMID:20981099]"
+  function: ~
+- chromosome: "20"
+  start: 5212563
+  stop: 5215681
+  id: "id-GeneID:107457602-3"
+  dbxref: "GeneID:107457602"
+  category: 1
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:chromatin immunoprecipitation-seq evidence [ECO:0000229][PMID:25395542]"
+  function: ~
+- chromosome: "20"
+  start: 5212781
+  stop: 5214680
+  id: "id-GeneID:107457602-4"
+  dbxref: "GeneID:107457602"
+  category: 1
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:DNA detection assay evidence [ECO:0005519][PMID:18650392]"
+  function: ~
+- chromosome: "20"
+  start: 5988969
+  stop: 5989263
+  id: "id-GeneID:114004355"
+  dbxref: "GeneID:114004355"
+  category: 6
+  regulatory_class: 14
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
+  function: represses a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 cells
+- chromosome: "20"
+  start: 5988969
+  stop: 5989263
+  id: "id-GeneID:114004355-2"
+  dbxref: "GeneID:114004355"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+- chromosome: "20"
+  start: 6744509
+  stop: 6749387
+  id: "id-GeneID:109363676"
+  dbxref: "GeneID:109363676"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: "regulatory_interactions: BMP2"
+- chromosome: "20"
+  start: 6744509
+  stop: 6749387
+  id: "id-GeneID:109363676-2"
+  dbxref: "GeneID:109363676"
+  category: 6
+  regulatory_class: 11
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:10024520]"
+  function: ~
+- chromosome: "20"
+  start: 6746286
+  stop: 6746306
+  id: "id-GeneID:109363676-3"
+  dbxref: "GeneID:109363676"
+  category: 4
+  regulatory_class: ~
+  note: ~
+  experiment: "EXISTENCE:protein binding evidence [ECO:0000024][PMID:11054542]"
+  function: ~
+- chromosome: "20"
+  start: 6747301
+  stop: 6748091
+  id: "id-GeneID:109363676-4"
+  dbxref: "GeneID:109363676"
+  category: 6
+  regulatory_class: 16
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:10024520]"
+  function: negative regulation of promoter activity
+- chromosome: "20"
+  start: 6748098
+  stop: 6748197
+  id: "id-GeneID:109363676-5"
+  dbxref: "GeneID:109363676"
+  category: 6
+  regulatory_class: 16
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:20060812]"
+  function: negative regulation of promoter activity
+- chromosome: "20"
+  start: 6748197
+  stop: 6748838
+  id: "id-GeneID:109363676-6"
+  dbxref: "GeneID:109363676"
+  category: 6
+  regulatory_class: 11
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:20060812]"
+  function: ~
+- chromosome: "20"
+  start: 6748228
+  stop: 6749387
+  id: "id-GeneID:109363676-7"
+  dbxref: "GeneID:109363676"
+  category: 6
+  regulatory_class: 11
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:10024520]"
+  function: ~
+- chromosome: "20"
+  start: 6748838
+  stop: 6749012
+  id: "id-GeneID:109363676-8"
+  dbxref: "GeneID:109363676"
+  category: 6
+  regulatory_class: 16
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:20060812]"
+  function: negative regulation of promoter activity; may block response to an enhancer
+

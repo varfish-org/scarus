@@ -4,7 +4,7 @@ use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     ds::StructuralVariant,
     eval::{
-        common::{GeneOverlap, ScoreRange, SuggestedScore},
+        common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
         result::Pvs1Result,
     },
 };
@@ -112,6 +112,8 @@ pub enum L1 {
 pub struct L1A {
     /// Overlapping transcripts/genes.
     pub genes: Vec<GeneOverlap>,
+    /// Overlapping functional elements.
+    pub functional_elements: Vec<FunctionalElement>,
 }
 
 impl SuggestedScore for L1A {

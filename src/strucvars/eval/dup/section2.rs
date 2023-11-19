@@ -4,6 +4,7 @@ use bio::bio_types::genome::AbstractInterval;
 use bio::bio_types::genome::Interval;
 use hgvs::data::interface::Provider as _;
 
+use crate::strucvars::eval::common::FunctionalElement;
 use crate::strucvars::eval::dup::result::G2L;
 use crate::strucvars::eval::result::Pvs1Result;
 use crate::strucvars::{
@@ -133,8 +134,7 @@ impl<'a> Evaluator<'a> {
             .collect::<Vec<_>>();
         let ts_regions = clingen_regions
             .iter()
-            .cloned()
-            .filter(|clingen_region| {
+            .filter(|&clingen_region| {
                 let clingen_interval: Interval = clingen_region
                     .clone()
                     .try_into()
@@ -142,6 +142,7 @@ impl<'a> Evaluator<'a> {
                 contains(sv_interval, &clingen_interval)
                     && clingen_region.triplosensitivity_score == Score::SufficientEvidence
             })
+            .cloned()
             .collect::<Vec<_>>();
         if !ts_regions.is_empty() || !ts_genes.is_empty() {
             Some(vec![Section::G2(G2::G2A(G2A {
@@ -272,6 +273,23 @@ impl<'a> Evaluator<'a> {
                 }
                 interrupted_genes.sort_by(|a, b| a.hgnc_id.cmp(&b.hgnc_id));
                 interrupted_genes.dedup_by(|a, b| a.hgnc_id == b.hgnc_id);
+                let functional_elements = self
+                    .parent
+                    .functional_overlaps(
+                        sv_interval.contig(),
+                        sv_interval.range().start as u32 + 1,
+                        sv_interval.range().end as u32,
+                    )
+                    .map_err(|e| {
+                        anyhow::anyhow!(
+                            "issue with overlap computation of {:?} with functional elements: {}",
+                            sv_interval,
+                            e
+                        )
+                    })?
+                    .into_iter()
+                    .map(FunctionalElement::RefSeq)
+                    .collect::<Vec<_>>();
 
                 if !interrupted_genes.is_empty() {
                     tracing::debug!("case 2E fired: {:?}", &interrupted_genes);
@@ -280,6 +298,7 @@ impl<'a> Evaluator<'a> {
                         suggested_score: 0.0,
                         benign_region: benign_region.clone(),
                         genes: interrupted_genes,
+                        functional_elements,
                     })));
                 }
             }
@@ -324,6 +343,51 @@ impl<'a> Evaluator<'a> {
             additional_genes.sort_by(|a, b| a.hgnc_id.cmp(&b.hgnc_id));
             additional_genes.dedup_by(|a, b| a.hgnc_id == b.hgnc_id);
 
+            // Get all functional elements in benign region.
+            let benign_fe_ids = self
+                .parent
+                .functional_overlaps(
+                    benign_interval.contig(),
+                    benign_interval.range().start as u32,
+                    benign_interval.range().end as u32,
+                )
+                .map_err(|e| {
+                    anyhow::anyhow!(
+                        "issue with overlap computation of {:?} with functional elements: {}",
+                        &benign_interval,
+                        e
+                    )
+                })?
+                .into_iter()
+                .map(|record| record.id)
+                .collect::<Vec<_>>();
+            // Check whether all functional elements of the SV are also in the benign region.
+            let mut additional_fes: Vec<FunctionalElement> = self
+                .parent
+                .functional_overlaps(
+                    benign_interval.contig(),
+                    benign_interval.range().start as u32,
+                    benign_interval.range().end as u32,
+                )
+                .map_err(|e| {
+                    anyhow::anyhow!(
+                        "issue with overlap computation of {:?} with functional elements: {}",
+                        &benign_interval,
+                        e
+                    )
+                })?
+                .into_iter()
+                .flat_map(|record| {
+                    if benign_fe_ids.contains(&record.id) {
+                        None
+                    } else {
+                        Some(FunctionalElement::RefSeq(record))
+                    }
+                })
+                .collect::<Vec<_>>();
+            additional_fes.sort_by(|a, b| a.id().cmp(b.id()));
+            additional_fes.dedup_by(|a, b| a.id() == b.id());
+
             if additional_genes.is_empty() {
                 // For 2F, SV must be larger than benign interval (not the same).
                 tracing::trace!(
@@ -343,6 +407,7 @@ impl<'a> Evaluator<'a> {
                     suggested_score: 0.0,
                     benign_region: benign_region.clone(),
                     genes: additional_genes,
+                    functional_elements: additional_fes,
                 })));
             }
         }
@@ -598,7 +663,7 @@ pub mod test {
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let strucvar = ds::StructuralVariant {
             chrom: chrom.into(),
@@ -668,7 +733,7 @@ pub mod test {
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let strucvar = ds::StructuralVariant {
             chrom: chrom.into(),
@@ -717,7 +782,7 @@ pub mod test {
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let strucvar = ds::StructuralVariant {
             chrom: chrom.into(),
@@ -768,7 +833,7 @@ pub mod test {
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         let strucvar = ds::StructuralVariant {
             chrom: chrom.into(),

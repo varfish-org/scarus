@@ -74,7 +74,7 @@ mod test {
     #[tracing_test::traced_test]
     #[rstest::rstest]
     #[case("1", 11_937_319, 11_944_386, -0.6)] // empty region left of MFN2
-    #[case("1", 12_098_550, 12_103_898, -0.6)] // empty region right of MFN2
+    #[case("1", 12_098_550, 12_103_898, 0.0)] // contains regulatory region
     #[case("1", 12_050_913, 12_054_733, 0.0)] // contains exon 4 of MFN2
     fn test_evaluate(
         #[case] chrom: &str,
@@ -85,7 +85,7 @@ mod test {
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}-{}", chrom, start, stop);
 
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let result = evaluator.evaluate(&StructuralVariant {
             chrom: chrom.into(),
             start,

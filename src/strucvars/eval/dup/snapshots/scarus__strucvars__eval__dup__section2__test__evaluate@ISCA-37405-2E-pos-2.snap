@@ -18,6 +18,7 @@ expression: res
           hgnc_symbol: MTLN
           ensembl_gene_id: ENSG00000175701
           ncbi_gene_id: "205251"
+      functional_elements: []
 - G2:
     G2L:
       suggested_score: 0.45

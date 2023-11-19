@@ -18,4 +18,5 @@ expression: res
           hgnc_symbol: MTLN
           ensembl_gene_id: ENSG00000175701
           ncbi_gene_id: "205251"
+      functional_elements: []
 

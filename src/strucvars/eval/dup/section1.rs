@@ -1,7 +1,7 @@
 //! Implementation of evaluation of copy number gain section 1.
 
 use super::result::{Section, G1, G1A, G1B};
-use crate::strucvars::ds::StructuralVariant;
+use crate::strucvars::{ds::StructuralVariant, eval::common::FunctionalElement};
 
 /// Evaluation of deletions, gain of copy number.
 ///
@@ -38,11 +38,27 @@ impl<'a> Evaluator<'a> {
             .map_err(|e| {
                 anyhow::anyhow!("issue with overlap computation of {:?}: {}", strucvar, e)
             })?;
+        let functional_elements = self
+            .parent
+            .functional_overlaps(&strucvar.chrom, strucvar.start, strucvar.stop)
+            .map_err(|e| {
+                anyhow::anyhow!(
+                    "issue with overlap computation of {:?} with functional elements: {}",
+                    strucvar,
+                    e
+                )
+            })?
+            .into_iter()
+            .map(FunctionalElement::RefSeq)
+            .collect::<Vec<_>>();
 
-        if !genes.is_empty() {
-            Ok(Section::G1(G1::G1A(G1A { genes })))
-        } else {
+        if genes.is_empty() && functional_elements.is_empty() {
             Ok(Section::G1(G1::G1B(G1B::default())))
+        } else {
+            Ok(Section::G1(G1::G1A(G1A {
+                genes,
+                functional_elements,
+            })))
         }
     }
 }
@@ -56,14 +72,22 @@ pub mod test {
     use super::Evaluator;
 
     #[rstest::rstest]
+    #[case("1", 8_412_464, 8_877_699, "gene-RERE")]
+    #[case("11", 125_423_939, 125_424_204, "no-gene")]
     fn evaluate_g1a(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
-        let evaluator = Evaluator::with_parent(&global_evaluator_37);
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let evaluator = Evaluator::with_parent(global_evaluator_37);
         let strucvar = ds::StructuralVariant {
-            chrom: "1".to_string(),
-            start: 8412464,
-            stop: 8877699,
+            chrom: chrom.to_string(),
+            start,
+            stop,
             svtype: ds::SvType::Dup,
             ambiguous_range: None,
         };
@@ -77,14 +101,21 @@ pub mod test {
     }
 
     #[rstest::rstest]
+    #[case("2", 1, 1, "empty")]
     fn evaluate_g1b(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
-        let evaluator = Evaluator::with_parent(&global_evaluator_37);
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let evaluator = Evaluator::with_parent(global_evaluator_37);
         let strucvar = ds::StructuralVariant {
-            chrom: "22".to_string(),
-            start: 1,
-            stop: 1,
+            chrom: chrom.to_string(),
+            start,
+            stop,
             svtype: ds::SvType::Dup,
             ambiguous_range: None,
         };

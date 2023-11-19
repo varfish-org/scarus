@@ -18,4 +18,5 @@ expression: res
           hgnc_symbol: NPHP1
           ensembl_gene_id: ENSG00000144061
           ncbi_gene_id: "4867"
+      functional_elements: []
 

@@ -54,7 +54,7 @@ mod test {
     fn test_evaluate(
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
-        let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
         // TODO: write test after we have an actual implementation
         assert_eq!(

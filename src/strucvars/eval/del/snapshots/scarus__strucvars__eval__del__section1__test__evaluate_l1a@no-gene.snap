@@ -1,0 +1,31 @@
+---
+source: src/strucvars/eval/del/section1.rs
+expression: res
+---
+L1:
+  L1A:
+    genes: []
+    functional_elements:
+      - RefSeq:
+          chromosome: "11"
+          start: 125423938
+          stop: 125424204
+          id: "id-GeneID:116225306"
+          dbxref: "GeneID:116225306"
+          category: 5
+          regulatory_class: ~
+          note: ~
+          experiment: ~
+          function: "regulatory_interactions: FEZ1"
+      - RefSeq:
+          chromosome: "11"
+          start: 125423938
+          stop: 125424204
+          id: "id-GeneID:116225306-2"
+          dbxref: "GeneID:116225306"
+          category: 6
+          regulatory_class: 16
+          note: ~
+          experiment: "EXISTENCE:mutant phenotype evidence [ECO:0000015][PMID:30612741]"
+          function: positively regulates FEZ1 gene expression with high confidence in K562 cells
+

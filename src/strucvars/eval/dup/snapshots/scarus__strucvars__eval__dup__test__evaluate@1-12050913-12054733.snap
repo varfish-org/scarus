@@ -13,6 +13,7 @@ expression: result
           tx_ids:
             - NM_001127660.2
             - NM_014874.4
+      functional_elements: []
 - G3:
     G3A:
       suggested_score: 0

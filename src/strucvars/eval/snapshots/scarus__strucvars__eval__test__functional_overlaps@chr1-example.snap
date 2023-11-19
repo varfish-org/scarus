@@ -1,0 +1,25 @@
+---
+source: src/strucvars/eval/mod.rs
+expression: result
+---
+- chromosome: "1"
+  start: 1004592
+  stop: 1004706
+  id: "id-GeneID:106783496"
+  dbxref: "GeneID:106783496"
+  category: 6
+  regulatory_class: 2
+  note: ~
+  experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:17135569]"
+  function: enhancer in Jurkat T cells
+- chromosome: "1"
+  start: 1004592
+  stop: 1004706
+  id: "id-GeneID:106783496-2"
+  dbxref: "GeneID:106783496"
+  category: 5
+  regulatory_class: ~
+  note: ~
+  experiment: ~
+  function: ~
+

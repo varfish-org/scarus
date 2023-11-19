@@ -18,4 +18,5 @@ expression: res
           hgnc_symbol: LIMS4
           ensembl_gene_id: ENSG00000256671
           ncbi_gene_id: "100288695"
+      functional_elements: []
 
