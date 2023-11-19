@@ -595,7 +595,7 @@ pub mod test {
         #[case] stop: u64,
         #[case] hgnc_id: &str,
         #[case] label: &str,
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
         let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
@@ -626,7 +626,7 @@ pub mod test {
         #[case] stop: u64,
         #[case] hgnc_id: &str,
         #[case] label: &str,
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
 
@@ -665,7 +665,7 @@ pub mod test {
         #[case] stop: u64,
         #[case] hgnc_id: &str,
         #[case] label: &str,
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
         let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
@@ -714,7 +714,7 @@ pub mod test {
         #[case] stop: u64,
         #[case] hgnc_id: &str,
         #[case] label: &str,
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
         let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
@@ -765,7 +765,7 @@ pub mod test {
         #[case] stop: u64,
         #[case] hgnc_id: &str,
         #[case] label: &str,
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}-{}", hgnc_id, label);
         let evaluator = super::Evaluator::with_parent(&global_evaluator_37);

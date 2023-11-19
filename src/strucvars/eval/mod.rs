@@ -386,6 +386,7 @@ pub mod test {
 
     /// Fixture with the global evaluator initialize with all data paths.
     #[rstest::fixture]
+    #[once]
     pub fn global_evaluator_37() -> Evaluator {
         Evaluator::new(
             biocommons_bioutils::assemblies::Assembly::Grch37p10,
@@ -401,7 +402,7 @@ pub mod test {
     }
 
     #[rstest::rstest]
-    fn overlapping_elements(global_evaluator_37: super::Evaluator) {
+    fn overlapping_elements(global_evaluator_37: &super::Evaluator) {
         let res = global_evaluator_37
             .overlapping_genes("1", 8412464, 8877699)
             .expect("could not obtain overlapping elements");
@@ -419,7 +420,7 @@ pub mod test {
         #[case] start: u64,
         #[case] stop: u64,
         #[case] label: &str,
-        global_evaluator_37: Evaluator,
+        global_evaluator_37: &Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}", label);
 
@@ -443,7 +444,7 @@ pub mod test {
     fn is_protein_coding(
         #[case] hgnc_id: &str,
         #[case] expected: Option<bool>,
-        global_evaluator_37: super::Evaluator,
+        global_evaluator_37: &super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}", hgnc_id);
 

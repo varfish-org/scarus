@@ -57,7 +57,7 @@ pub mod test {
 
     #[rstest::rstest]
     fn evaluate_g1a(
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         let evaluator = Evaluator::with_parent(&global_evaluator_37);
         let strucvar = ds::StructuralVariant {
@@ -78,7 +78,7 @@ pub mod test {
 
     #[rstest::rstest]
     fn evaluate_g1b(
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         let evaluator = Evaluator::with_parent(&global_evaluator_37);
         let strucvar = ds::StructuralVariant {

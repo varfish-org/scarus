@@ -52,7 +52,7 @@ mod test {
     // #[tracing_test::traced_test]
     #[rstest::rstest]
     fn test_evaluate(
-        global_evaluator_37: super::super::super::Evaluator,
+        global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
         let evaluator = super::Evaluator::with_parent(&global_evaluator_37);
 
