@@ -5,6 +5,7 @@ pub mod del;
 pub mod dup;
 pub mod result;
 
+use std::path::PathBuf;
 use std::{path::Path, sync::Arc};
 
 use annonars::clinvar_sv::cli::query::IntervalTrees as ClinvarSvIntervalTrees;
@@ -29,7 +30,7 @@ use super::data::clingen_dosage::{Data as ClingenDosageData, Gene, Region};
 use super::data::decipher_hi::Data as DecipherHiData;
 use super::data::gnomad::Data as GnomadConstraintData;
 use super::data::hgnc::Data as GeneIdData;
-
+use super::ds::StructuralVariant;
 /// Configuration for the evaluator.
 #[derive(Debug, Clone)]
 pub struct Config {
@@ -57,17 +58,17 @@ impl Default for Config {
 /// Path specification for `Evaluator``.
 #[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct Paths {
-    pub path_tx_db: String,
-    pub path_hgnc: String,
-    pub path_clingen_dosage_genes: String,
-    pub path_clingen_dosage_regions: String,
-    pub path_decipher_hi: String,
-    pub path_gnomad_constraints: String,
-    pub path_clinvar_minimal: String,
-    pub path_functional: String,
-    pub path_clinvar_sv: String,
-    pub path_gnomad_sv_genomes: String,
-    pub path_gnomad_sv_exomes: String,
+    pub path_tx_db: PathBuf,
+    pub path_hgnc: PathBuf,
+    pub path_clingen_dosage_genes: PathBuf,
+    pub path_clingen_dosage_regions: PathBuf,
+    pub path_decipher_hi: PathBuf,
+    pub path_gnomad_constraints: PathBuf,
+    pub path_clinvar_minimal: PathBuf,
+    pub path_functional: PathBuf,
+    pub path_clinvar_sv: PathBuf,
+    pub path_gnomad_sv_genomes: PathBuf,
+    pub path_gnomad_sv_exomes: PathBuf,
 }
 
 /// Evaluator for structural variants.
@@ -251,6 +252,9 @@ impl Evaluator {
 
         chrom_to_acc
     }
+
+    // /// Perform evaluation of the given structural variant.
+    // pub fn evaluate(&self, sv: &StructuralVariant) -> Result<
 
     /// Return the gene identifier data.
     ///
@@ -536,6 +540,35 @@ impl Evaluator {
 
         Ok(result)
     }
+
+    /// Evaluate the given `StructuralVariant`.
+    pub fn evaluate(
+        &self,
+        strucvar: &StructuralVariant,
+    ) -> Result<result::Evaluation, anyhow::Error> {
+        match strucvar.svtype {
+            super::ds::SvType::Del => {
+                let evaluator = del::Evaluator::with_parent(self);
+                Ok(result::Evaluation::Del(
+                    del::result::Evaluation::from_sections(
+                        evaluator
+                            .evaluate(strucvar)
+                            .map_err(|e| anyhow::anyhow!("failed to evaluate deletion: {}", e))?,
+                    ),
+                ))
+            }
+            super::ds::SvType::Dup => {
+                let evaluator = dup::Evaluator::with_parent(self);
+                Ok(result::Evaluation::Dup(
+                    dup::result::Evaluation::from_sections(
+                        evaluator.evaluate(strucvar).map_err(|e| {
+                            anyhow::anyhow!("failed to evaluate duplication: {}", e)
+                        })?,
+                    ),
+                ))
+            }
+        }
+    }
 }
 
 pub trait IntoInterval {
@@ -803,8 +836,10 @@ pub mod test {
                 path_clinvar_minimal: "tests/data/strucvars/hi_ts/clinvar/rocksdb".into(),
                 path_functional: "tests/data/strucvars/hi_ts/functional/rocksdb".into(),
                 path_clinvar_sv: "tests/data/strucvars/hi_ts/clinvar-sv/rocksdb".into(),
-                path_gnomad_sv_genomes: "tests/data/strucvars/hi_ts/gnomad-sv/gnomad-sv2/rocksdb".into(),
-                path_gnomad_sv_exomes: "tests/data/strucvars/hi_ts/gnomad-sv/exac-cnv/rocksdb".into(),
+                path_gnomad_sv_genomes: "tests/data/strucvars/hi_ts/gnomad-sv/gnomad-sv2/rocksdb"
+                    .into(),
+                path_gnomad_sv_exomes: "tests/data/strucvars/hi_ts/gnomad-sv/exac-cnv/rocksdb"
+                    .into(),
             },
             Default::default(),
         )
