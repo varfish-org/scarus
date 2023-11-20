@@ -7,7 +7,11 @@
 use super::result::{G4Patho, Section, G4, G4N};
 use crate::strucvars::{
     ds::StructuralVariant,
-    eval::{result::{ClinvarSvOverlap, GnomadSvOverlap}, IntoInterval, Overlaps, SvType, CarrierFrequency, dup::result::G4O},
+    eval::{
+        dup::result::G4O,
+        result::{ClinvarSvOverlap, GnomadSvOverlap},
+        CarrierFrequency, IntoInterval, Overlaps, SvType,
+    },
 };
 use annonars::{
     clinvar_sv::cli::query::EXAC_CNV_CASES,
@@ -270,7 +274,8 @@ impl<'a> Evaluator<'a> {
                 suggested_score,
                 overlaps,
             })))
-        })    }
+        })
+    }
 }
 
 #[cfg(test)]

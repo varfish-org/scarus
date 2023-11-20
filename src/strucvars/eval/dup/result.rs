@@ -4,7 +4,7 @@ use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     eval::{
         common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
-        result::{ClinvarSvOverlap, Pvs1Result, GnomadSvOverlap},
+        result::{ClinvarSvOverlap, GnomadSvOverlap, Pvs1Result},
     },
 };
 
