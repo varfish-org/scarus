@@ -10,6 +10,8 @@ use std::{path::Path, sync::Arc};
 use annonars::clinvar_sv::cli::query::IntervalTrees as ClinvarSvIntervalTrees;
 use annonars::common::spdi;
 use annonars::functional::cli::query::IntervalTrees as FunctionalIntervalTrees;
+use annonars::gnomad_sv::cli::query::IntervalTrees as GnomadSvIntervalTrees;
+use annonars::gnomad_sv::cli::query::Record as GnomadSvRecord;
 use annonars::pbs::annonars::clinvar::v1::minimal::Record as ClinvarRecord;
 use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
 use annonars::pbs::annonars::functional::v1::refseq::Record as FunctionalRecord;
@@ -69,6 +71,10 @@ pub struct Evaluator {
     clinvar_db: Arc<rocksdb::DBWithThreadMode<rocksdb::MultiThreaded>>,
     /// The ClinVar SV database wrapped/indexed by `IntervalTrees`.
     clinvar_sv: ClinvarSvIntervalTrees,
+    /// The gnomAD SV (genomes) database wrapped/indexed by `IntervalTrees`.
+    gnomad_sv_genomes: GnomadSvIntervalTrees,
+    /// The gnomAD SV (exomes) database wrapped/indexed by `IntervalTrees`.
+    gnomad_sv_exomes: GnomadSvIntervalTrees,
     /// The functional elements database wrapped/indexed by `IntervalTrees`.
     functional: FunctionalIntervalTrees,
 }
@@ -85,6 +91,8 @@ impl Evaluator {
     /// * `path_decipher_hi` - Path to the `decipher_hi_prediction.tsv` file.
     /// * `path_gnomad_constraints` - Path to the `gnomad_constraints.tsv` file.
     /// * `path_clinvar_minimal` - Path to the "minimal" ClinVar RocksDB directory.
+    /// * `path_gnomad_sv_genomes` - Path to gnomAD SV genomes RocksDB directory.
+    /// * `path_gnomad_sv_exomes` - Path to gnomAD SV genomes RocksDB directory.
     ///
     /// # Returns
     ///
@@ -94,7 +102,7 @@ impl Evaluator {
     ///
     /// If anything goes wrong, it returns a generic `anyhow::Error`.
     #[allow(clippy::too_many_arguments)]
-    pub fn new<P1, P2, P3, P4, P5, P6, P7, P8, P9>(
+    pub fn new<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11>(
         config: Config,
         assembly: biocommons_bioutils::assemblies::Assembly,
         path_tx_db: P1,
@@ -106,6 +114,8 @@ impl Evaluator {
         path_clinvar_minimal: P7,
         path_functional: P8,
         path_clinvar_sv: P9,
+        path_gnomad_sv_genomes: P10,
+        path_gnomad_sv_exomes: P11,
     ) -> Result<Self, anyhow::Error>
     where
         P1: AsRef<Path>,
@@ -117,6 +127,8 @@ impl Evaluator {
         P7: AsRef<Path>,
         P8: AsRef<Path>,
         P9: AsRef<Path>,
+        P10: AsRef<Path>,
+        P11: AsRef<Path>,
     {
         let provider = Self::load_provider(assembly, path_tx_db.as_ref())
             .map_err(|e| anyhow::anyhow!("failed to load transcript database: {}", e))?;
@@ -153,6 +165,31 @@ impl Evaluator {
             ClinvarSvIntervalTrees::with_db(clinvar_sv_db, "clinvar_sv", clinvar_sv_meta)
                 .map_err(|e| anyhow::anyhow!("failed to load ClinVar SV data: {}", e))?;
 
+        let (gnomad_sv_genomes_db, gnomad_sv_genomes_meta) =
+            annonars::gnomad_sv::cli::query::open_rocksdb(
+                path_gnomad_sv_genomes.as_ref(),
+                "gnomad_sv",
+                "meta",
+            )
+            .map_err(|e| anyhow::anyhow!("failed to open gnomad_sv RocksDB: {}", e))?;
+        let gnomad_sv_genomes = GnomadSvIntervalTrees::with_db(
+            gnomad_sv_genomes_db,
+            "gnomad_sv",
+            gnomad_sv_genomes_meta,
+        )
+        .map_err(|e| anyhow::anyhow!("failed to load gnomAD SV data: {}", e))?;
+
+        let (gnomad_sv_exomes_db, gnomad_sv_exomes_meta) =
+            annonars::gnomad_sv::cli::query::open_rocksdb(
+                path_gnomad_sv_exomes.as_ref(),
+                "gnomad_sv",
+                "meta",
+            )
+            .map_err(|e| anyhow::anyhow!("failed to open gnomad_sv RocksDB: {}", e))?;
+        let gnomad_sv_exomes =
+            GnomadSvIntervalTrees::with_db(gnomad_sv_exomes_db, "gnomad_sv", gnomad_sv_exomes_meta)
+                .map_err(|e| anyhow::anyhow!("failed to load gnomAD SV data: {}", e))?;
+
         let (functional_db, functional_meta) = annonars::functional::cli::query::open_rocksdb(
             path_functional.as_ref(),
             "functional",
@@ -174,6 +211,8 @@ impl Evaluator {
             gnomad_constraint_data,
             clinvar_db,
             clinvar_sv,
+            gnomad_sv_genomes,
+            gnomad_sv_exomes,
             functional,
         })
     }
@@ -476,6 +515,31 @@ impl Evaluator {
             .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
             .map_err(|e| anyhow::anyhow!("failed to query ClinVar SV db: {}", e))
     }
+
+    /// Query gnomAD SV records by overlap.
+    pub fn gnomad_sv_overlaps(
+        &self,
+        chrom: &str,
+        start: u32,
+        stop: u32,
+    ) -> Result<Vec<GnomadSvRecord>, anyhow::Error> {
+        tracing::trace!("starting gnomAD SV query {}:{}-{}", &chrom, start, stop);
+        let start = start as i32;
+        let stop = stop as i32;
+
+        let mut res_exomes = self.gnomad_sv_exomes
+            .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
+            .map_err(|e| anyhow::anyhow!("failed to query gnomAD SV db: {}", e))?;
+        let mut res_genomes = self.gnomad_sv_genomes
+            .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
+            .map_err(|e| anyhow::anyhow!("failed to query gnomAD SV db: {}", e))?;
+
+        let mut result = Vec::new();
+        result.append(&mut res_exomes);
+        result.append(&mut res_genomes);
+
+        Ok(result)
+    }
 }
 
 pub trait IntoInterval {
@@ -583,6 +647,8 @@ pub mod test {
             "tests/data/strucvars/hi_ts/clinvar/rocksdb",
             "tests/data/strucvars/hi_ts/functional/rocksdb",
             "tests/data/strucvars/hi_ts/clinvar-sv/rocksdb",
+            "tests/data/strucvars/hi_ts/gnomad-sv/gnomad-sv2/rocksdb",
+            "tests/data/strucvars/hi_ts/gnomad-sv/exac-cnv/rocksdb",
         )
         .expect("could not initialize global evaluator")
     }
@@ -656,6 +722,28 @@ pub mod test {
         mehari::common::set_snapshot_suffix!("{}", label);
 
         let result = global_evaluator_37.clinvar_sv_overlaps(chrom, start, stop)?;
+        insta::assert_yaml_snapshot!(result);
+
+        Ok(())
+    }
+
+    /// Test internal working of `gnomad_sv_overlap`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    // ExAC-CNV
+    #[case("10", 51_620_321, 51_748_701, "chr10-51620321-51748701-NFE")]
+    // gnomAD-SV2
+    #[case("1", 21000, 26000, "gnomAD-SV_v2.1_DEL_1_")]
+    fn gnomad_sv_overlaps(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
+        global_evaluator_37: &Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let result = global_evaluator_37.gnomad_sv_overlaps(chrom, start, stop)?;
         insta::assert_yaml_snapshot!(result);
 
         Ok(())
