@@ -54,6 +54,22 @@ impl Default for Config {
     }
 }
 
+/// Path specification for `Evaluator``.
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+pub struct Paths {
+    pub path_tx_db: String,
+    pub path_hgnc: String,
+    pub path_clingen_dosage_genes: String,
+    pub path_clingen_dosage_regions: String,
+    pub path_decipher_hi: String,
+    pub path_gnomad_constraints: String,
+    pub path_clinvar_minimal: String,
+    pub path_functional: String,
+    pub path_clinvar_sv: String,
+    pub path_gnomad_sv_genomes: String,
+    pub path_gnomad_sv_exomes: String,
+}
+
 /// Evaluator for structural variants.
 pub struct Evaluator {
     /// The assembly to be used.
@@ -93,15 +109,7 @@ impl Evaluator {
     ///
     /// # Arguments
     ///
-    /// * `path_tx_db` - Path to Mehari transcript database
-    /// * `path_hgnc` - Path to HGNC gene identifier mapping file
-    /// * `path_clingen_dosage_genes` - Path to the `ClinGen_gene_curation_list_GRCh37.tsv` file.
-    /// * `path_clingen_dosage_regions` - Path to the `ClinGen_region_curation_list_GRCh37.tsv` file.
-    /// * `path_decipher_hi` - Path to the `decipher_hi_prediction.tsv` file.
-    /// * `path_gnomad_constraints` - Path to the `gnomad_constraints.tsv` file.
-    /// * `path_clinvar_minimal` - Path to the "minimal" ClinVar RocksDB directory.
-    /// * `path_gnomad_sv_genomes` - Path to gnomAD SV genomes RocksDB directory.
-    /// * `path_gnomad_sv_exomes` - Path to gnomAD SV genomes RocksDB directory.
+    /// * `paths` - Path specification.
     ///
     /// # Returns
     ///
@@ -111,52 +119,29 @@ impl Evaluator {
     ///
     /// If anything goes wrong, it returns a generic `anyhow::Error`.
     #[allow(clippy::too_many_arguments)]
-    pub fn new<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11>(
-        config: Config,
+    pub fn new(
         assembly: biocommons_bioutils::assemblies::Assembly,
-        path_tx_db: P1,
-        path_hgnc: P2,
-        path_clingen_dosage_genes: P3,
-        path_clingen_dosage_regions: P4,
-        path_decipher_hi: P5,
-        path_gnomad_constraints: P6,
-        path_clinvar_minimal: P7,
-        path_functional: P8,
-        path_clinvar_sv: P9,
-        path_gnomad_sv_genomes: P10,
-        path_gnomad_sv_exomes: P11,
-    ) -> Result<Self, anyhow::Error>
-    where
-        P1: AsRef<Path>,
-        P2: AsRef<Path>,
-        P3: AsRef<Path>,
-        P4: AsRef<Path>,
-        P5: AsRef<Path>,
-        P6: AsRef<Path>,
-        P7: AsRef<Path>,
-        P8: AsRef<Path>,
-        P9: AsRef<Path>,
-        P10: AsRef<Path>,
-        P11: AsRef<Path>,
-    {
-        let provider = Self::load_provider(assembly, path_tx_db.as_ref())
+        paths: Paths,
+        config: Config,
+    ) -> Result<Self, anyhow::Error> {
+        let provider = Self::load_provider(assembly, paths.path_tx_db.as_ref())
             .map_err(|e| anyhow::anyhow!("failed to load transcript database: {}", e))?;
-        let gene_id_data = GeneIdData::new(path_hgnc)
+        let gene_id_data = GeneIdData::new(paths.path_hgnc)
             .map_err(|e| anyhow::anyhow!("failed to load gene identifier data: {}", e))?;
         let clingen_dosage_data = ClingenDosageData::new(
-            path_clingen_dosage_genes,
-            path_clingen_dosage_regions,
+            paths.path_clingen_dosage_genes,
+            paths.path_clingen_dosage_regions,
             &gene_id_data,
             assembly.into(),
         )
         .map_err(|e| anyhow::anyhow!("failed to load clingen dosage data: {}", e))?;
-        let decipher_hi_data = DecipherHiData::load(path_decipher_hi)
+        let decipher_hi_data = DecipherHiData::load(paths.path_decipher_hi)
             .map_err(|e| anyhow::anyhow!("failed to load decipher hi data: {}", e))?;
         let gnomad_constraint_data =
-            GnomadConstraintData::load(path_gnomad_constraints, &gene_id_data)
+            GnomadConstraintData::load(paths.path_gnomad_constraints, &gene_id_data)
                 .map_err(|e| anyhow::anyhow!("failed to load gnomAD constraint data: {}", e))?;
         let (clinvar_db, _) = annonars::clinvar_minimal::cli::query::open_rocksdb(
-            path_clinvar_minimal.as_ref(),
+            &paths.path_clinvar_minimal,
             "clinvar",
             "meta",
             "clinvar_by_accession",
@@ -164,7 +149,7 @@ impl Evaluator {
         .map_err(|e| anyhow::anyhow!("failed to open 'minimal' ClinVar RocksDB: {}", e))?;
 
         let (clinvar_sv_db, clinvar_sv_meta) = annonars::clinvar_sv::cli::query::open_rocksdb(
-            path_clinvar_sv.as_ref(),
+            &paths.path_clinvar_sv,
             "clinvar_sv",
             "meta",
             "clinvar_sv_by_rcv",
@@ -176,7 +161,7 @@ impl Evaluator {
 
         let (gnomad_sv_genomes_db, gnomad_sv_genomes_meta) =
             annonars::gnomad_sv::cli::query::open_rocksdb(
-                path_gnomad_sv_genomes.as_ref(),
+                &paths.path_gnomad_sv_genomes,
                 "gnomad_sv",
                 "meta",
             )
@@ -190,7 +175,7 @@ impl Evaluator {
 
         let (gnomad_sv_exomes_db, gnomad_sv_exomes_meta) =
             annonars::gnomad_sv::cli::query::open_rocksdb(
-                path_gnomad_sv_exomes.as_ref(),
+                &paths.path_gnomad_sv_exomes,
                 "gnomad_sv",
                 "meta",
             )
@@ -200,7 +185,7 @@ impl Evaluator {
                 .map_err(|e| anyhow::anyhow!("failed to load gnomAD SV data: {}", e))?;
 
         let (functional_db, functional_meta) = annonars::functional::cli::query::open_rocksdb(
-            path_functional.as_ref(),
+            &paths.path_functional,
             "functional",
             "meta",
         )
@@ -805,19 +790,23 @@ pub mod test {
     #[once]
     pub fn global_evaluator_37() -> Evaluator {
         Evaluator::new(
-            Default::default(),
             biocommons_bioutils::assemblies::Assembly::Grch37p10,
-            "tests/data/strucvars/hi_ts/txs_example_hi.bin.zst",
-            "tests/data/hgnc.tsv",
-            "tests/data/strucvars/ClinGen_gene_curation_list_GRCh37.tsv",
-            "tests/data/strucvars/ClinGen_region_curation_list_GRCh37.tsv",
-            "tests/data/strucvars/decipher_hi_prediction.tsv",
-            "tests/data/strucvars/gnomad_constraints.tsv",
-            "tests/data/strucvars/hi_ts/clinvar/rocksdb",
-            "tests/data/strucvars/hi_ts/functional/rocksdb",
-            "tests/data/strucvars/hi_ts/clinvar-sv/rocksdb",
-            "tests/data/strucvars/hi_ts/gnomad-sv/gnomad-sv2/rocksdb",
-            "tests/data/strucvars/hi_ts/gnomad-sv/exac-cnv/rocksdb",
+            super::Paths {
+                path_tx_db: "tests/data/strucvars/hi_ts/txs_example_hi.bin.zst".into(),
+                path_hgnc: "tests/data/hgnc.tsv".into(),
+                path_clingen_dosage_genes:
+                    "tests/data/strucvars/ClinGen_gene_curation_list_GRCh37.tsv".into(),
+                path_clingen_dosage_regions:
+                    "tests/data/strucvars/ClinGen_region_curation_list_GRCh37.tsv".into(),
+                path_decipher_hi: "tests/data/strucvars/decipher_hi_prediction.tsv".into(),
+                path_gnomad_constraints: "tests/data/strucvars/gnomad_constraints.tsv".into(),
+                path_clinvar_minimal: "tests/data/strucvars/hi_ts/clinvar/rocksdb".into(),
+                path_functional: "tests/data/strucvars/hi_ts/functional/rocksdb".into(),
+                path_clinvar_sv: "tests/data/strucvars/hi_ts/clinvar-sv/rocksdb".into(),
+                path_gnomad_sv_genomes: "tests/data/strucvars/hi_ts/gnomad-sv/gnomad-sv2/rocksdb".into(),
+                path_gnomad_sv_exomes: "tests/data/strucvars/hi_ts/gnomad-sv/exac-cnv/rocksdb".into(),
+            },
+            Default::default(),
         )
         .expect("could not initialize global evaluator")
     }
