@@ -1,0 +1,22 @@
+---
+source: src/strucvars/eval/mod.rs
+expression: result
+---
+- release: GRCh37
+  chromosome: "21"
+  start: 1
+  stop: 48129895
+  reference: ~
+  alternative: ~
+  inner_start: ~
+  inner_stop: 1
+  outer_start: ~
+  outer_stop: 48129895
+  variant_type: 1
+  vcv: VCV001321998
+  reference_assertions:
+    - rcv: RCV001780078
+      title: "GRCh37/hg19 21p13-q22.3(chr21:1-48129895)x3 AND See cases"
+      clinical_significance: 0
+      review_status: 3
+

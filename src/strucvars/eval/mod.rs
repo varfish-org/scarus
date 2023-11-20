@@ -7,10 +7,13 @@ pub mod result;
 
 use std::{path::Path, sync::Arc};
 
+use annonars::clinvar_sv::cli::query::IntervalTrees as ClinvarSvIntervalTrees;
 use annonars::common::spdi;
 use annonars::functional::cli::query::IntervalTrees as FunctionalIntervalTrees;
 use annonars::pbs::annonars::clinvar::v1::minimal::Record as ClinvarRecord;
+use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
 use annonars::pbs::annonars::functional::v1::refseq::Record as FunctionalRecord;
+use bio::bio_types::genome::{AbstractInterval, Interval};
 use hgvs::data::interface::Provider;
 use itertools::Itertools as _;
 use prost::Message as _;
@@ -22,11 +25,31 @@ use super::data::decipher_hi::Data as DecipherHiData;
 use super::data::gnomad::Data as GnomadConstraintData;
 use super::data::hgnc::Data as GeneIdData;
 
+/// Configuration for the evaluator.
+#[derive(Debug, Clone)]
+pub struct Config {
+    /// Minimal reciprocal overlap for benign ClinVar SV records.
+    pub clinvar_sv_min_overlap_benign: f32,
+    /// Minimal reciprocal overlap for pathogenic ClinVar SV records.
+    pub clinvar_sv_min_overlap_pathogenic: f32,
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            clinvar_sv_min_overlap_benign: 0.8,
+            clinvar_sv_min_overlap_pathogenic: 0.8,
+        }
+    }
+}
+
 /// Evaluator for structural variants.
 pub struct Evaluator {
     /// The assembly to be used.
     #[allow(dead_code)]
     assembly: biocommons_bioutils::assemblies::Assembly,
+    /// Configuration
+    config: Config,
 
     /// Mehari data/transcript provider.
     provider: Arc<mehari::annotate::seqvars::provider::Provider>,
@@ -44,7 +67,9 @@ pub struct Evaluator {
 
     /// The ClinVar minimal database.
     clinvar_db: Arc<rocksdb::DBWithThreadMode<rocksdb::MultiThreaded>>,
-    /// The functional elements database.
+    /// The ClinVar SV database wrapped/indexed by `IntervalTrees`.
+    clinvar_sv: ClinvarSvIntervalTrees,
+    /// The functional elements database wrapped/indexed by `IntervalTrees`.
     functional: FunctionalIntervalTrees,
 }
 
@@ -69,7 +94,8 @@ impl Evaluator {
     ///
     /// If anything goes wrong, it returns a generic `anyhow::Error`.
     #[allow(clippy::too_many_arguments)]
-    pub fn new<P1, P2, P3, P4, P5, P6, P7, P8>(
+    pub fn new<P1, P2, P3, P4, P5, P6, P7, P8, P9>(
+        config: Config,
         assembly: biocommons_bioutils::assemblies::Assembly,
         path_tx_db: P1,
         path_hgnc: P2,
@@ -79,6 +105,7 @@ impl Evaluator {
         path_gnomad_constraints: P6,
         path_clinvar_minimal: P7,
         path_functional: P8,
+        path_clinvar_sv: P9,
     ) -> Result<Self, anyhow::Error>
     where
         P1: AsRef<Path>,
@@ -89,6 +116,7 @@ impl Evaluator {
         P6: AsRef<Path>,
         P7: AsRef<Path>,
         P8: AsRef<Path>,
+        P9: AsRef<Path>,
     {
         let provider = Self::load_provider(assembly, path_tx_db.as_ref())
             .map_err(|e| anyhow::anyhow!("failed to load transcript database: {}", e))?;
@@ -113,6 +141,18 @@ impl Evaluator {
             "clinvar_by_accession",
         )
         .map_err(|e| anyhow::anyhow!("failed to open 'minimal' ClinVar RocksDB: {}", e))?;
+
+        let (clinvar_sv_db, clinvar_sv_meta) = annonars::clinvar_sv::cli::query::open_rocksdb(
+            path_clinvar_sv.as_ref(),
+            "clinvar_sv",
+            "meta",
+            "clinvar_sv_by_rcv",
+        )
+        .map_err(|e| anyhow::anyhow!("failed to open clinvar_sv RocksDB: {}", e))?;
+        let clinvar_sv =
+            ClinvarSvIntervalTrees::with_db(clinvar_sv_db, "clinvar_sv", clinvar_sv_meta)
+                .map_err(|e| anyhow::anyhow!("failed to load ClinVar SV data: {}", e))?;
+
         let (functional_db, functional_meta) = annonars::functional::cli::query::open_rocksdb(
             path_functional.as_ref(),
             "functional",
@@ -124,6 +164,7 @@ impl Evaluator {
                 .map_err(|e| anyhow::anyhow!("failed to load functional element data: {}", e))?;
 
         Ok(Self {
+            config,
             assembly,
             chrom_to_ac: Self::chrom_to_acc(assembly, &provider),
             provider,
@@ -132,6 +173,7 @@ impl Evaluator {
             decipher_hi_data,
             gnomad_constraint_data,
             clinvar_db,
+            clinvar_sv,
             functional,
         })
     }
@@ -418,17 +460,119 @@ impl Evaluator {
             .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
             .map_err(|e| anyhow::anyhow!("failed to query functional elements: {}", e))
     }
+
+    /// Query ClinVar SV records by overlap.
+    pub fn clinvar_sv_overlaps(
+        &self,
+        chrom: &str,
+        start: u32,
+        stop: u32,
+    ) -> Result<Vec<ClinvarSvRecord>, anyhow::Error> {
+        tracing::trace!("starting ClinVar SV query {}:{}-{}", &chrom, start, stop);
+        let start = start as i32;
+        let stop = stop as i32;
+
+        self.clinvar_sv
+            .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
+            .map_err(|e| anyhow::anyhow!("failed to query ClinVar SV db: {}", e))
+    }
+}
+
+pub trait IntoInterval {
+    fn into_interval(self) -> Interval;
+}
+
+/// Convert ClinVar SV record into interval.
+impl IntoInterval for &ClinvarSvRecord {
+    fn into_interval(self) -> Interval {
+        Interval::new(
+            self.chromosome.clone(),
+            (self.start as u64 - 1)..(self.stop as u64),
+        )
+    }
+}
+
+/// Reciprocal overlap between two intervals.
+pub trait Overlaps {
+    fn overlap_len(&self, other: &Self) -> u64;
+    fn reciprocal_overlap(&self, other: &Self) -> f64;
+}
+
+impl Overlaps for Interval {
+    fn overlap_len(&self, other: &Self) -> u64 {
+        if self.contig() != other.contig() {
+            0
+        } else {
+            let start = std::cmp::max(self.range().start, other.range().start);
+            let end = std::cmp::min(self.range().end, other.range().end);
+            if start < end {
+                end - start
+            } else {
+                0
+            }
+        }
+    }
+
+    fn reciprocal_overlap(&self, other: &Self) -> f64 {
+        let self_len = self.range().end - self.range().start;
+        let other_len = other.range().end - other.range().start;
+        let overlap_len = self.overlap_len(other) as f64;
+        overlap_len / std::cmp::max(self_len, other_len) as f64
+    }
 }
 
 #[cfg(test)]
 pub mod test {
+    use crate::strucvars::eval::Overlaps;
+
     use super::Evaluator;
 
+    #[rstest::rstest]
+    #[case("1", 1, 10, "1", 5, 15, 5)]
+    #[case("1", 1, 10, "1", 10, 15, 0)]
+    #[case("1", 1, 10, "2", 1, 10, 0)]
+    fn overlap_len(
+        #[case] contig1: &str,
+        #[case] start1: u64,
+        #[case] stop1: u64,
+        #[case] contig2: &str,
+        #[case] start2: u64,
+        #[case] stop2: u64,
+        #[case] expected: u64,
+    ) {
+        assert_eq!(
+            super::Interval::new(contig1.into(), start1..stop1)
+                .overlap_len(&super::Interval::new(contig2.into(), start2..stop2)),
+            expected
+        );
+    }
+
+    #[rstest::rstest]
+    #[case("1", 0, 10, "1", 5, 15, 0.5)]
+    #[case("1", 0, 10, "1", 10, 20, 0.0)]
+    #[case("1", 0, 10, "2", 0, 10, 0.0)]
+    #[case("1", 0, 10, "1", 5, 25, 0.25)]
+    fn reciprocal_overlap(
+        #[case] contig1: &str,
+        #[case] start1: u64,
+        #[case] stop1: u64,
+        #[case] contig2: &str,
+        #[case] start2: u64,
+        #[case] stop2: u64,
+        #[case] expected: f64,
+    ) {
+        assert_eq!(
+            super::Interval::new(contig1.into(), start1..stop1)
+                .reciprocal_overlap(&super::Interval::new(contig2.into(), start2..stop2)),
+            expected
+        );
+    }
     /// Fixture with the global evaluator initialize with all data paths.
     #[rstest::fixture]
     #[once]
     pub fn global_evaluator_37() -> Evaluator {
         Evaluator::new(
+            Default::default(),
             biocommons_bioutils::assemblies::Assembly::Grch37p10,
             "tests/data/strucvars/hi_ts/txs_example_hi.bin.zst",
             "tests/data/hgnc.tsv",
@@ -438,6 +582,7 @@ pub mod test {
             "tests/data/strucvars/gnomad_constraints.tsv",
             "tests/data/strucvars/hi_ts/clinvar/rocksdb",
             "tests/data/strucvars/hi_ts/functional/rocksdb",
+            "tests/data/strucvars/hi_ts/clinvar-sv/rocksdb",
         )
         .expect("could not initialize global evaluator")
     }
@@ -491,6 +636,26 @@ pub mod test {
         mehari::common::set_snapshot_suffix!("{}", label);
 
         let result = global_evaluator_37.functional_overlaps(chrom, start, stop)?;
+        insta::assert_yaml_snapshot!(result);
+
+        Ok(())
+    }
+
+    /// Test internal working of `clinvar_sv_overlaps`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    #[case("1", 8_018_845, 8_044_954, "VCV000007063")]
+    #[case("21", 1, 1, "almost-empty")]
+    fn clinvar_sv_overlaps(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
+        global_evaluator_37: &Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let result = global_evaluator_37.clinvar_sv_overlaps(chrom, start, stop)?;
         insta::assert_yaml_snapshot!(result);
 
         Ok(())
