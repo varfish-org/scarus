@@ -2,12 +2,12 @@
 
 use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
-    ds::StructuralVariant,
     eval::{
         common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
         result::Pvs1Result,
     },
 };
+use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
 
 /// Evaluation results for each section of the ACMG rule.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -42,7 +42,8 @@ impl SuggestedScore for Section {
             Section::L3(L3::L3A(l3a)) => l3a.suggested_score(),
             Section::L3(L3::L3B(l3b)) => l3b.suggested_score(),
             Section::L3(L3::L3C(l3c)) => l3c.suggested_score(),
-            Section::L4(L4::L4Dangling(l4x)) => l4x.suggested_score(),
+            Section::L4(L4::L4Patho(l4p)) => l4p.suggested_score(),
+            Section::L4(L4::L4N(l4b)) => l4b.suggested_score(),
             Section::L4(L4::L4O(l4o)) => l4o.suggested_score(),
         }
     }
@@ -68,7 +69,8 @@ impl ScoreRange for Section {
             Section::L3(L3::L3A(_)) => 0.0,
             Section::L3(L3::L3B(_)) => 0.45,
             Section::L3(L3::L3C(_)) => 0.9,
-            Section::L4(L4::L4Dangling(_)) => -0.9,
+            Section::L4(L4::L4Patho(_)) => -0.9,
+            Section::L4(L4::L4N(_)) => -0.9,
             Section::L4(L4::L4O(_)) => -1.0,
         }
     }
@@ -92,7 +94,8 @@ impl ScoreRange for Section {
             Section::L3(L3::L3A(_)) => 0.0,
             Section::L3(L3::L3B(_)) => 0.45,
             Section::L3(L3::L3C(_)) => 0.9,
-            Section::L4(L4::L4Dangling(_)) => 0.45,
+            Section::L4(L4::L4Patho(_)) => 0.9,
+            Section::L4(L4::L4N(_)) => 0.0,
             Section::L4(L4::L4O(_)) => 0.0,
         }
     }
@@ -420,42 +423,54 @@ impl SuggestedScore for L3Count {
 /// Only 4O can be automatically determined.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
 pub enum L4 {
-    /// "Dangling" information of overlapping variants - must be resolved by a human.
-    L4Dangling(L4Dangling),
+    /// Overlap with pathogenic variants; must be evaluated by a human.
+    ///
+    /// This could be one of 4A, 4B, 4C, 4D, 4E, 4L, 4M.
+    L4Patho(L4Patho),
+    /// Overlap with benign variants; must be evaluated by a human.
+    ///
+    /// This is roughly equiavalent to 4N.
+    L4N(L4N),
     /// Case–control and population evidence; Overlap with common population variation.
     L4O(L4O),
 }
 
-/// Information abbout a SV from ClinVar (RCV level; dependent on condition).
-#[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
-pub struct ClinvarRcvRecord {
-    /// ClinVar RCV identifier.
-    pub rcv: String,
-    /// The free text condition description.
-    pub condition: String,
+/// Information about one overlapping ClinVar record.
+#[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct ClinvarSvOverlap {
+    /// Reciprocal overlap.
+    pub overlap: f32,
+    /// Overlapping ClinVar record.
+    pub record: ClinvarSvRecord,
 }
 
-/// Information about a SV from ClinVar (VCV level; independent of condition).
+/// Pathogenic variants from ClinVar, must be resolved by a human.
+///
+/// This could be 4D, 4E, 4M.
 #[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
-pub struct ClinvarStructuralVariant {
-    /// ClinVar VCV identifier.
-    pub vcv: String,
-    /// The structural variant.
-    pub sv: StructuralVariant,
-    /// The RCVs, corresponding to occurence of variant in a case with a condition.
-    pub rcv_records: Vec<ClinvarRcvRecord>,
+pub struct L4Patho {
+    /// Overlapping ClinVar variants, descendingly by overlap.
+    pub overlaps: Vec<ClinvarSvOverlap>,
 }
 
-/// Result of the 4O subsection (overlap with common population variation).
-#[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
-pub struct L4Dangling {
-    /// Accession identifiers of overlapping variants.
-    pub common_variant_ids: Vec<String>,
-}
-
-impl SuggestedScore for L4Dangling {
+impl SuggestedScore for L4Patho {
     fn suggested_score(&self) -> f32 {
         0.0
+    }
+}
+
+/// Benign variants from ClinVar.
+///
+/// This is roughly 4N.
+#[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
+pub struct L4N {
+    /// Overlapping ClinVar variants, descendingly by overlap.
+    pub overlaps: Vec<ClinvarSvOverlap>,
+}
+
+impl SuggestedScore for L4N {
+    fn suggested_score(&self) -> f32 {
+        -0.9
     }
 }
 

@@ -54,6 +54,9 @@ impl<'a> Evaluator<'a> {
         let result_s3 = section3::Evaluator::new().evaluate(&result_s1)?;
         // Evaluate section 4: "Detailed evaluation of genomic content using cases from published literature,
         // public databases, and/or internal lab data".
+        //
+        // Note that we always evaluate section 4, even if we have results from Section 2.  We will just
+        // not use it in the evaluation.
         let result_s4 = section4::Evaluator::with_parent(self.parent).evaluate(strucvar)?;
 
         let mut result = Vec::default();
