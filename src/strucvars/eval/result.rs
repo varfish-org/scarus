@@ -1,5 +1,7 @@
 //! Common code for evaluation results of CNVs.
 
+use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
+
 /// Enumeration describing the PVS1 results.
 #[derive(
     Debug,
@@ -23,4 +25,13 @@ pub enum Pvs1Result {
     Pvs1Moderate,
     /// PVS1_Supporting
     Pvs1Supporting,
+}
+
+/// Information about one overlapping ClinVar record.
+#[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct ClinvarSvOverlap {
+    /// Reciprocal overlap.
+    pub overlap: f32,
+    /// Overlapping ClinVar record.
+    pub record: ClinvarSvRecord,
 }

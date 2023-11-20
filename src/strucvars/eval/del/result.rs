@@ -4,10 +4,9 @@ use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     eval::{
         common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
-        result::Pvs1Result,
+        result::{ClinvarSvOverlap, Pvs1Result},
     },
 };
-use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
 
 /// Evaluation results for each section of the ACMG rule.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -433,15 +432,6 @@ pub enum L4 {
     L4N(L4N),
     /// Case–control and population evidence; Overlap with common population variation.
     L4O(L4O),
-}
-
-/// Information about one overlapping ClinVar record.
-#[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-pub struct ClinvarSvOverlap {
-    /// Reciprocal overlap.
-    pub overlap: f32,
-    /// Overlapping ClinVar record.
-    pub record: ClinvarSvRecord,
 }
 
 /// Pathogenic variants from ClinVar, must be resolved by a human.

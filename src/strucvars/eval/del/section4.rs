@@ -4,14 +4,14 @@
 //! reporting overlapping variants from ClinVar but leave them as "dangle" because a
 //! human must evaluate the phenotype.
 
-use super::result::{ClinvarSvOverlap, L4Patho, Section, L4, L4N};
+use super::result::{L4Patho, Section, L4, L4N};
 use crate::strucvars::{
     ds::StructuralVariant,
-    eval::{IntoInterval, Overlaps},
+    eval::{result::ClinvarSvOverlap, IntoInterval, Overlaps},
 };
-use annonars::{
-    clinvar_minimal::cli::reading::{ClinicalSignificance, VariantType},
-    pbs::annonars::clinvar::v1::{minimal::ReviewStatus, sv::Record as ClinvarSvRecord},
+use annonars::pbs::annonars::clinvar::v1::{
+    minimal::{ClinicalSignificance, ReviewStatus, VariantType},
+    sv::Record as ClinvarSvRecord,
 };
 use bio::bio_types::genome::{AbstractInterval, Interval};
 

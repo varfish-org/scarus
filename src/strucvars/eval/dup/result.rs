@@ -4,7 +4,7 @@ use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     eval::{
         common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
-        result::Pvs1Result,
+        result::{ClinvarSvOverlap, Pvs1Result},
     },
 };
 
@@ -40,7 +40,8 @@ impl SuggestedScore for Section {
             Section::G3(G3::G3A(g3a)) => g3a.suggested_score(),
             Section::G3(G3::G3B(g3b)) => g3b.suggested_score(),
             Section::G3(G3::G3C(g3c)) => g3c.suggested_score(),
-            Section::G4(G4::G4Dangling(g4x)) => g4x.suggested_score(),
+            Section::G4(G4::G4Patho(g4p)) => g4p.suggested_score(),
+            Section::G4(G4::G4N(g4n)) => g4n.suggested_score(),
             Section::G4(G4::G4O(g4o)) => g4o.suggested_score(),
         }
     }
@@ -65,7 +66,8 @@ impl ScoreRange for Section {
             Section::G3(G3::G3A(_)) => 0.0,
             Section::G3(G3::G3B(_)) => 0.45,
             Section::G3(G3::G3C(_)) => 0.9,
-            Section::G4(G4::G4Dangling(_)) => -0.9,
+            Section::G4(G4::G4Patho(_)) => -0.9,
+            Section::G4(G4::G4N(_)) => -0.9,
             Section::G4(G4::G4O(_)) => -1.0,
         }
     }
@@ -88,7 +90,8 @@ impl ScoreRange for Section {
             Section::G3(G3::G3A(_)) => 0.0,
             Section::G3(G3::G3B(_)) => 0.45,
             Section::G3(G3::G3C(_)) => 0.9,
-            Section::G4(G4::G4Dangling(_)) => 0.9,
+            Section::G4(G4::G4Patho(_)) => 0.9,
+            Section::G4(G4::G4N(_)) => 0.9,
             Section::G4(G4::G4O(_)) => 0.0,
         }
     }
@@ -382,22 +385,43 @@ impl SuggestedScore for G3Count {
 /// Only 4O can be automatically determined.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
 pub enum G4 {
-    /// "Dangling" information of overlapping variants - must be resolved by a human.
-    G4Dangling(G4Dangling),
+    /// Overlap with pathogenic variants; must be evaluated by a human.
+    ///
+    /// This could be one of 4A, 4B, 4C, 4D, 4E, 4L, 4M.
+    G4Patho(G4Patho),
+    /// Overlap with benign variants; must be evaluated by a human.
+    ///
+    /// This is roughly equiavalent to 4N.
+    G4N(G4N),
     /// Case–control and population evidence; Overlap with common population variation.
     G4O(G4O),
 }
 
 /// Result of the 4O subsection (overlap with common population variation).
 #[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
-pub struct G4Dangling {
-    /// Accession identifiers of overlapping variants.
-    pub common_variant_ids: Vec<String>,
+pub struct G4Patho {
+    /// Overlapping ClinVar variants, descendingly by overlap.
+    pub overlaps: Vec<ClinvarSvOverlap>,
 }
 
-impl SuggestedScore for G4Dangling {
+impl SuggestedScore for G4Patho {
     fn suggested_score(&self) -> f32 {
         0.0
+    }
+}
+
+/// Benign variants from ClinVar.
+///
+/// This is roughly 4N.
+#[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
+pub struct G4N {
+    /// Overlapping ClinVar variants, descendingly by overlap.
+    pub overlaps: Vec<ClinvarSvOverlap>,
+}
+
+impl SuggestedScore for G4N {
+    fn suggested_score(&self) -> f32 {
+        -0.9
     }
 }
 
