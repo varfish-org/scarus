@@ -1,0 +1,17 @@
+---
+source: src/strucvars/eval/mod.rs
+expression: result
+---
+- exac_cnv:
+    chrom: "10"
+    start: 92994
+    stop: 95183
+    sv_type: 1
+    population: 3
+- exac_cnv:
+    chrom: "10"
+    start: 92994
+    stop: 95183
+    sv_type: 1
+    population: 3
+

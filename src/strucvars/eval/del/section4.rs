@@ -7,11 +7,19 @@
 use super::result::{L4Patho, Section, L4, L4N};
 use crate::strucvars::{
     ds::StructuralVariant,
-    eval::{result::ClinvarSvOverlap, IntoInterval, Overlaps},
+    eval::{
+        del::result::L4O,
+        result::{ClinvarSvOverlap, GnomadSvOverlap},
+        CarrierFrequency, IntoInterval, Overlaps, SvType,
+    },
 };
-use annonars::pbs::annonars::clinvar::v1::{
-    minimal::{ClinicalSignificance, ReviewStatus, VariantType},
-    sv::Record as ClinvarSvRecord,
+use annonars::{
+    clinvar_sv::cli::query::EXAC_CNV_CASES,
+    gnomad_sv::cli::query::Record as GnomadSvRecord,
+    pbs::annonars::clinvar::v1::{
+        minimal::{ClinicalSignificance, ReviewStatus, VariantType},
+        sv::Record as ClinvarSvRecord,
+    },
 };
 use bio::bio_types::genome::{AbstractInterval, Interval};
 
@@ -65,6 +73,9 @@ impl<'a> Evaluator<'a> {
             self.handle_clinvar_benign(&sv_interval, &clinvar_records)?
         {
             result.push(result_clinvar_benign)
+        }
+        if let Some(result_gnomad_sv) = self.handle_gnomad_sv(&sv_interval)? {
+            result.push(result_gnomad_sv)
         }
 
         tracing::warn!("Section 4 evaluation not implemented yet");
@@ -188,6 +199,87 @@ impl<'a> Evaluator<'a> {
             Ok(Some(Section::L4(L4::L4N(L4N { overlaps }))))
         }
     }
+
+    /// Handle overlap in gnomAD-SV.
+    ///
+    /// This corresponds to case 4O.
+    fn handle_gnomad_sv(&self, sv_interval: &Interval) -> Result<Option<Section>, anyhow::Error> {
+        // Query gnomAD-SV for all records.
+        tracing::debug!("querying gnomAD-SV for {:?}", sv_interval);
+        let raw_records = self
+            .parent
+            .gnomad_sv_overlaps(
+                sv_interval.contig(),
+                sv_interval.range().start as u32,
+                sv_interval.range().end as u32,
+            )
+            .map_err(|e| anyhow::anyhow!("gnomAD-SV query failed: {}", e))?;
+        tracing::debug!("found {} overlapping gnomAD-SV records", raw_records.len());
+        tracing::trace!("records are {:#?}", &raw_records);
+
+        // Filter to records with the correct type and appropriate overlap.
+        let mut overlaps: Vec<GnomadSvOverlap> = raw_records
+            .into_iter()
+            .flat_map(|record| {
+                let record_interval = record.into_interval();
+                let overlap = sv_interval.reciprocal_overlap(&record_interval) as f32;
+                let sv_type = SvType::try_from(&record);
+                let interesting = matches!(sv_type, Ok(SvType::Del | SvType::Cnv))
+                    && overlap >= self.parent.config.gnomad_sv_min_overlap;
+                if interesting {
+                    Some(GnomadSvOverlap { overlap, record })
+                } else {
+                    None
+                }
+            })
+            .collect::<Vec<_>>();
+        overlaps.sort_by(|a, b| {
+            b.overlap
+                .partial_cmp(&a.overlap)
+                .unwrap_or(std::cmp::Ordering::Equal)
+        });
+        tracing::trace!("filtered overlaps are {:#?}", &overlaps);
+
+        // We have to manually count ExAC CNV records as they are per-sample and not aggregated.
+        let exac_cnv_count = overlaps
+            .iter()
+            .filter(|GnomadSvOverlap { record, .. }| matches!(record, &GnomadSvRecord::ExacCnv(_)))
+            .count();
+        let exac_freq = exac_cnv_count as f32 / EXAC_CNV_CASES as f32;
+        // For the rest, we can obtain the frequency from the records.
+        let other_freqs = overlaps
+            .iter()
+            .flat_map(|GnomadSvOverlap { record, .. }| {
+                if matches!(record, &GnomadSvRecord::ExacCnv(_)) {
+                    None
+                } else {
+                    Some(record.carrier_freq().expect("no carrier freq?"))
+                }
+            })
+            .collect::<Vec<_>>();
+        let max_freq = other_freqs
+            .iter()
+            .max_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal))
+            .copied()
+            .unwrap_or(0.0);
+
+        let suggested_score = if exac_freq >= self.parent.config.gnomad_sv_min_freq_common
+            || max_freq >= self.parent.config.gnomad_sv_min_freq_common
+        {
+            -1.0
+        } else {
+            0.0
+        };
+
+        Ok(if overlaps.is_empty() {
+            None
+        } else {
+            Some(Section::L4(L4::L4O(L4O {
+                suggested_score,
+                overlaps,
+            })))
+        })
+    }
 }
 
 #[cfg(test)]
@@ -198,10 +290,15 @@ mod test {
 
     #[tracing_test::traced_test]
     #[rstest::rstest]
-    // pathogenic variant
+    // ClinVar pathogenic variant
     #[case("17", 43_005_866, 43_377_096, "VCV000059587")]
-    // benign variant
+    // ClinVar benign variant
     #[case("X", 155_231_256, 155_251_871, "VCV000161054")]
+    // gnomAD SV variants
+    // ExAC CNV
+    #[case("10", 51_620_321, 51_748_701, "chr10-51620321-51748701-NFE")]
+    // gnomAD-SV v2
+    #[case("1", 21000, 26000, "gnomAD-SV_v2.1_DEL_1_")]
     fn test_evaluate(
         #[case] chrom: &str,
         #[case] start: u32,
@@ -286,6 +383,37 @@ mod test {
         insta::assert_yaml_snapshot!(
             evaluator.handle_clinvar_benign(&sv_interval, &clinvar_records)?
         );
+
+        Ok(())
+    }
+
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    // same as in `evaluate` test above, keep in sync
+    // ExAC CNV
+    #[case("10", 51_620_321, 51_748_701, "chr10-51620321-51748701-NFE")]
+    // gnomAD-SV v2
+    #[case("1", 21000, 26000, "gnomAD-SV_v2.1_DEL_1_")]
+    fn handle_gnomad_sv(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
+        global_evaluator_37: &super::super::super::Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
+        let strucvar = StructuralVariant {
+            chrom: chrom.into(),
+            start: start,
+            stop: stop,
+            svtype: SvType::Del,
+            ambiguous_range: None,
+        };
+        let sv_interval = strucvar.into();
+
+        insta::assert_yaml_snapshot!(evaluator.handle_gnomad_sv(&sv_interval)?);
 
         Ok(())
     }
