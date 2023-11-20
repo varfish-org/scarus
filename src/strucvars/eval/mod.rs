@@ -479,12 +479,12 @@ impl Evaluator {
 }
 
 pub trait IntoInterval {
-    fn into_interval(&self) -> Interval;
+    fn into_interval(self) -> Interval;
 }
 
 /// Convert ClinVar SV record into interval.
-impl IntoInterval for ClinvarSvRecord {
-    fn into_interval(&self) -> Interval {
+impl IntoInterval for &ClinvarSvRecord {
+    fn into_interval(self) -> Interval {
         Interval::new(
             self.chromosome.clone(),
             (self.start as u64 - 1)..(self.stop as u64),

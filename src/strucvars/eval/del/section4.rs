@@ -56,10 +56,8 @@ impl<'a> Evaluator<'a> {
         // Retrieve all overlapping ClinVar records.
         let clinvar_records = self.overlapping_clinvar_records(&sv_interval)?;
 
-        self.handle_clinvar_pathogenic(&sv_interval, &clinvar_records)?
-            .map(|result_clinvar_patho| result.push(result_clinvar_patho));
-        self.handle_clinvar_benign(&sv_interval, &clinvar_records)?
-            .map(|result_clinvar_benign| result.push(result_clinvar_benign));
+        if let Some(result_clinvar_patho) = self.handle_clinvar_pathogenic(&sv_interval, &clinvar_records)? { result.push(result_clinvar_patho) }
+        if let Some(result_clinvar_benign) = self.handle_clinvar_benign(&sv_interval, &clinvar_records)? { result.push(result_clinvar_benign) }
 
         tracing::warn!("Section 4 evaluation not implemented yet");
         Ok(result)
@@ -98,7 +96,7 @@ impl<'a> Evaluator<'a> {
         ];
         // Filter intervals to pathogenic ones without conflicts and sufficient overlap.
         let mut overlaps = clinvar_records
-            .into_iter()
+            .iter()
             .flat_map(|record| {
                 let rc = record.reference_assertions.first().expect("no RCV");
                 let record_interval = record.into_interval();
@@ -149,7 +147,7 @@ impl<'a> Evaluator<'a> {
         ];
         // Filter intervals to pathogenic ones without conflicts and sufficient overlap.
         let mut overlaps = clinvar_records
-            .into_iter()
+            .iter()
             .flat_map(|record| {
                 let rc = record.reference_assertions.first().expect("no RCV");
                 let record_interval = record.into_interval();
@@ -221,8 +219,8 @@ mod test {
         let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let strucvar = StructuralVariant {
             chrom: chrom.into(),
-            start: start as u32,
-            stop: stop as u32,
+            start: start,
+            stop: stop,
             svtype: SvType::Del,
             ambiguous_range: None,
         };
@@ -252,8 +250,8 @@ mod test {
         let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let strucvar = StructuralVariant {
             chrom: chrom.into(),
-            start: start as u32,
-            stop: stop as u32,
+            start: start,
+            stop: stop,
             svtype: SvType::Del,
             ambiguous_range: None,
         };
