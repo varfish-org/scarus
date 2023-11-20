@@ -2,10 +2,10 @@
 source: src/strucvars/eval/dup/section2.rs
 expression: res
 ---
-- G2:
-    G2I:
+- g2:
+    g2_i:
       suggested_score: 0.9
-      pvs1_result: Pvs1
+      pvs1_result: pvs1
       hi_genes:
         - hgnc_id: "HGNC:2201"
           hgnc_symbol: COL3A1

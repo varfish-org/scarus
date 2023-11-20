@@ -2,8 +2,8 @@
 source: src/strucvars/eval/dup/mod.rs
 expression: result
 ---
-- G1:
-    G1A:
+- g1:
+    g1_a:
       genes:
         - gene:
             hgnc_id: "HGNC:16877"
@@ -14,8 +14,8 @@ expression: result
             - NM_001127660.2
             - NM_014874.4
       functional_elements: []
-- G3:
-    G3A:
+- g3:
+    g3_a:
       suggested_score: 0
       num_genes: 1
       genes:

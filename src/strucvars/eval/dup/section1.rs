@@ -49,7 +49,7 @@ impl<'a> Evaluator<'a> {
                 )
             })?
             .into_iter()
-            .map(FunctionalElement::RefSeq)
+            .map(FunctionalElement::Refseq)
             .collect::<Vec<_>>();
 
         if genes.is_empty() && functional_elements.is_empty() {

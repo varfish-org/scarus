@@ -8,9 +8,9 @@ gene:
   ensembl_gene_id: ENSG00000142599
   ncbi_gene_id: "473"
 results:
-  - DecipherHiIndex:
+  - decipher_hi_index:
       hi_index: 1.92
-  - GnomadPli:
+  - gnomad_pli:
       pli_score: 1
       oe_lof_upper: 0.12
 

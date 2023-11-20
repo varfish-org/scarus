@@ -2,15 +2,15 @@
 source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
-- L2:
-    L2G:
+- l2:
+    l2_g:
       suggested_score: 0
       benign_regions:
         - isca_id: ISCA-46311
           isca_region_name: 1p36.21 population region (gnomAD-SV_v2.1_DEL_1_1094)
           genomic_location: "1:12989199-12998900"
-          haploinsufficiency_score: DosageSensitivityUnlikely
-          triplosensitivity_score: NoEvidenceAvailable
+          haploinsufficiency_score: dosage_sensitivity_unlikely
+          triplosensitivity_score: no_evidence_available
           haploinsufficiency_disease_id: ~
           triplosensitivity_disease_id: ~
 

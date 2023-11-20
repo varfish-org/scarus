@@ -2,8 +2,8 @@
 source: src/strucvars/eval/del/section4.rs
 expression: evaluator.evaluate(&strucvar)?
 ---
-- L4:
-    L4Patho:
+- l4:
+    l4_patho:
       overlaps:
         - overlap: 1
           record:

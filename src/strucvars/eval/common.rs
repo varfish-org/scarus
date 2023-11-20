@@ -44,16 +44,17 @@ impl GeneOverlap {
 
 /// Functional element.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum FunctionalElement {
     /// Overlap with functional element with RefSeq.
-    RefSeq(annonars::pbs::annonars::functional::v1::refseq::Record),
+    Refseq(annonars::pbs::annonars::functional::v1::refseq::Record),
 }
 
 impl FunctionalElement {
     // Return the identifier of the functional element.
     pub fn id(&self) -> &str {
         match self {
-            Self::RefSeq(record) => &record.id,
+            Self::Refseq(record) => &record.id,
         }
     }
 }

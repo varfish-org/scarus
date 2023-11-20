@@ -2,10 +2,10 @@
 source: src/strucvars/eval/dup/mod.rs
 expression: result
 ---
-- G1:
-    G1B: {}
-- G3:
-    G3A:
+- g1:
+    g1_b: {}
+- g3:
+    g3_a:
       suggested_score: 0
       num_genes: 0
       genes: []

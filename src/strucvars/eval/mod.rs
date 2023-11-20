@@ -598,12 +598,26 @@ impl IntoInterval for &annonars::gnomad_sv::cli::query::Record {
 }
 
 /// Local consensus SV type.
+#[derive(
+    Debug,
+    Clone,
+    Copy,
+    Default,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    serde::Deserialize,
+    serde::Serialize,
+)]
+#[serde(rename_all = "snake_case")]
 pub enum SvType {
     /// Deletion
     Del,
     /// Duplication
     Dup,
     /// Copy number variable region
+    #[default]
     Cnv,
 }
 

@@ -2,8 +2,8 @@
 source: src/strucvars/eval/dup/section4.rs
 expression: evaluator.evaluate(&strucvar)?
 ---
-- G4:
-    G4O:
+- g4:
+    g4_o:
       suggested_score: -1
       overlaps:
         - overlap: 1

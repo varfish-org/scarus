@@ -2,8 +2,8 @@
 source: src/strucvars/eval/dup/section4.rs
 expression: "evaluator.handle_clinvar_benign(&sv_interval, &clinvar_records)?"
 ---
-G4:
-  G4N:
+g4:
+  g4_n:
     overlaps:
       - overlap: 1
         record:

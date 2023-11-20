@@ -2,8 +2,8 @@
 source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
-L2:
-  L2D1:
+l2:
+  l2_d1:
     gene:
       hgnc_id: "HGNC:603"
       hgnc_symbol: APOB

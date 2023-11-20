@@ -21,6 +21,7 @@ pub mod io;
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, serde::Deserialize, serde::Serialize,
 )]
+#[serde(rename_all = "snake_case")]
 pub enum Score {
     /// Sufficient evidence for dosage pathogenicity (3)
     SufficientEvidence,

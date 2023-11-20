@@ -2,15 +2,15 @@
 source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
-- L2:
-    L2A:
+- l2:
+    l2_a:
       suggested_score: 1
       hi_genes:
         - gene_symbol: COL3A1
           ncbi_gene_id: "1281"
           genomic_location: "2:189839099-189877472"
-          haploinsufficiency_score: SufficientEvidence
-          triplosensitivity_score: NoEvidenceAvailable
+          haploinsufficiency_score: sufficient_evidence
+          triplosensitivity_score: no_evidence_available
           haploinsufficiency_disease_id: "MONDO:0007524"
           triplosensitivity_disease_id: ~
       hi_regions: []

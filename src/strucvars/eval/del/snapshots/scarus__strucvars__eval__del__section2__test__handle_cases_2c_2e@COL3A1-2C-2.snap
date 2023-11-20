@@ -2,8 +2,8 @@
 source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
-L2:
-  L2C2:
+l2:
+  l2_c2:
     suggested_score: 0
     gene:
       hgnc_id: "HGNC:2201"

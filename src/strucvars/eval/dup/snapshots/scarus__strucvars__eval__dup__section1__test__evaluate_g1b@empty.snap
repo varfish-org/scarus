@@ -2,6 +2,6 @@
 source: src/strucvars/eval/dup/section1.rs
 expression: res
 ---
-G1:
-  G1B: {}
+g1:
+  g1_b: {}
 

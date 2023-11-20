@@ -10,6 +10,7 @@ use crate::strucvars::{
 
 /// Evaluation results for each section of the ACMG rule.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum Section {
     /// Results of Section G1.
     G1(G1),
@@ -99,6 +100,7 @@ impl ScoreRange for Section {
 
 /// Enumeration of the categories for the copy number gain evaluation, Section 1.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum G1 {
     /// Contains protein-coding or other known functionally important elements.
     G1A(G1A),
@@ -135,6 +137,7 @@ impl SuggestedScore for G1B {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum G2 {
     /// Complete overlap; Tthe TS gene or minimal criticala reegion is fully contained
     /// within the observed copy number gain.
@@ -353,6 +356,7 @@ impl SuggestedScore for G2L {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum G3 {
     /// <=34 genes.
     G3A(G3Count),
@@ -384,6 +388,7 @@ impl SuggestedScore for G3Count {
 ///
 /// Only 4O can be automatically determined.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum G4 {
     /// Overlap with pathogenic variants; must be evaluated by a human.
     ///

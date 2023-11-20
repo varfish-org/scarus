@@ -16,6 +16,7 @@ use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
     serde::Deserialize,
     serde::Serialize,
 )]
+#[serde(rename_all = "snake_case")]
 pub enum Pvs1Result {
     /// PVS1
     #[default]

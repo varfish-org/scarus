@@ -2,8 +2,8 @@
 source: src/strucvars/eval/dup/section4.rs
 expression: evaluator.evaluate(&strucvar)?
 ---
-- G4:
-    G4N:
+- g4:
+    g4_n:
       overlaps:
         - overlap: 1
           record:
