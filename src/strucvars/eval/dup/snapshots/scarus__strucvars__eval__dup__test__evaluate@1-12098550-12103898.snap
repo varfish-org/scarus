@@ -2,11 +2,11 @@
 source: src/strucvars/eval/dup/mod.rs
 expression: result
 ---
-- G1:
-    G1A:
+- g1:
+    g1_a:
       genes: []
       functional_elements:
-        - RefSeq:
+        - refseq:
             chromosome: "1"
             start: 12098306
             stop: 12099428
@@ -17,7 +17,7 @@ expression: result
             note: ~
             experiment: "EXISTENCE:mutant phenotype evidence [ECO:0000015][PMID:30612741]"
             function: positively regulates MIIP gene expression in K562 cells
-        - RefSeq:
+        - refseq:
             chromosome: "1"
             start: 12098306
             stop: 12099428
@@ -28,8 +28,8 @@ expression: result
             note: ~
             experiment: ~
             function: "regulatory_interactions: MIIP"
-- G3:
-    G3A:
+- g3:
+    g3_a:
       suggested_score: 0
       num_genes: 0
       genes: []

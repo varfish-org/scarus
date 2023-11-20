@@ -2,11 +2,11 @@
 source: src/strucvars/eval/del/section1.rs
 expression: res
 ---
-L1:
-  L1A:
+l1:
+  l1_a:
     genes: []
     functional_elements:
-      - RefSeq:
+      - refseq:
           chromosome: "11"
           start: 125423938
           stop: 125424204
@@ -17,7 +17,7 @@ L1:
           note: ~
           experiment: ~
           function: "regulatory_interactions: FEZ1"
-      - RefSeq:
+      - refseq:
           chromosome: "11"
           start: 125423938
           stop: 125424204

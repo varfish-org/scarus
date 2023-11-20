@@ -2,10 +2,10 @@
 source: src/strucvars/eval/del/mod.rs
 expression: result
 ---
-- L1:
-    L1B: {}
-- L3:
-    L3A:
+- l1:
+    l1_b: {}
+- l3:
+    l3_a:
       suggested_score: 0
       num_genes: 0
       genes: []

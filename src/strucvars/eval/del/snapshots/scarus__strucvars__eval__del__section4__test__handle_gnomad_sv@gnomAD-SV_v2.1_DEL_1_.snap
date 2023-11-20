@@ -2,8 +2,8 @@
 source: src/strucvars/eval/del/section4.rs
 expression: evaluator.handle_gnomad_sv(&sv_interval)?
 ---
-L4:
-  L4O:
+l4:
+  l4_o:
     suggested_score: -1
     overlaps:
       - overlap: 1

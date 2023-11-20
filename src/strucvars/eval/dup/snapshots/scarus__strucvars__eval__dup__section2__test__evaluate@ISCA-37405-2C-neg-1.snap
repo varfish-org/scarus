@@ -2,15 +2,15 @@
 source: src/strucvars/eval/dup/section2.rs
 expression: res
 ---
-- G2:
-    G2G:
+- g2:
+    g2_g:
       suggested_score: 0
       benign_region:
         isca_id: ISCA-37405
         isca_region_name: 2q13 recurrent region (includes NPHP1)
         genomic_location: "2:110862108-110983703"
-        haploinsufficiency_score: GeneAssociatedWithRecessivePhenotype
-        triplosensitivity_score: DosageSensitivityUnlikely
+        haploinsufficiency_score: gene_associated_with_recessive_phenotype
+        triplosensitivity_score: dosage_sensitivity_unlikely
         haploinsufficiency_disease_id: ~
         triplosensitivity_disease_id: ~
       genes:
@@ -19,8 +19,8 @@ expression: res
           ensembl_gene_id: ENSG00000256671
           ncbi_gene_id: "100288695"
       functional_elements: []
-- G2:
-    G2L:
+- g2:
+    g2_l:
       suggested_score: 0.45
       genes:
         - hgnc_id: "HGNC:6818"

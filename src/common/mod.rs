@@ -24,6 +24,7 @@ pub struct Args {
     serde::Deserialize,
     serde::Serialize,
 )]
+#[serde(rename_all = "snake_case")]
 pub enum Assembly {
     /// GRCh37
     Grch37,

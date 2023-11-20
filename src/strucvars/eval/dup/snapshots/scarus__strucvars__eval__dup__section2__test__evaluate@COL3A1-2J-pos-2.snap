@@ -2,8 +2,8 @@
 source: src/strucvars/eval/dup/section2.rs
 expression: res
 ---
-- G2:
-    G2J:
+- g2:
+    g2_j:
       suggested_score: 0.45
       hi_genes:
         - hgnc_id: "HGNC:2201"

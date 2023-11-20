@@ -5,8 +5,8 @@ expression: regions
 - isca_id: ISCA-46303
   isca_region_name: SOX9 upstream enhancer region
   genomic_location: "17:67892996-69792434"
-  haploinsufficiency_score: SufficientEvidence
-  triplosensitivity_score: LittleEvidence
+  haploinsufficiency_score: sufficient_evidence
+  triplosensitivity_score: little_evidence
   haploinsufficiency_disease_id: "MONDO:0007134"
   triplosensitivity_disease_id: "MONDO:0009869"
 

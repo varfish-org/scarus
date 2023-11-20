@@ -288,7 +288,7 @@ impl<'a> Evaluator<'a> {
                         )
                     })?
                     .into_iter()
-                    .map(FunctionalElement::RefSeq)
+                    .map(FunctionalElement::Refseq)
                     .collect::<Vec<_>>();
 
                 if !interrupted_genes.is_empty() {
@@ -381,7 +381,7 @@ impl<'a> Evaluator<'a> {
                     if benign_fe_ids.contains(&record.id) {
                         None
                     } else {
-                        Some(FunctionalElement::RefSeq(record))
+                        Some(FunctionalElement::Refseq(record))
                     }
                 })
                 .collect::<Vec<_>>();

@@ -2,8 +2,8 @@
 source: src/strucvars/eval/dup/section4.rs
 expression: evaluator.handle_gnomad_sv(&sv_interval)?
 ---
-G4:
-  G4O:
+g4:
+  g4_o:
     suggested_score: 0
     overlaps:
       - overlap: 1

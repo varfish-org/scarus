@@ -10,6 +10,7 @@ use crate::strucvars::{
 
 /// Evaluation results for each section of the ACMG rule.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum Section {
     /// Results of Section L1.
     L1(L1),
@@ -102,6 +103,7 @@ impl ScoreRange for Section {
 
 /// Enumeration of the categories for the copy number loss evaluation, Section 1.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum L1 {
     /// Contains protein-coding or other known functionally important elements.
     L1A(L1A),
@@ -138,6 +140,7 @@ impl SuggestedScore for L1B {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum L2 {
     /// Complete overlap of an established HI gene/genomic region.
     L2A(L2A),
@@ -348,6 +351,7 @@ impl SuggestedScore for L2G {
 
 /// HI predictor results for use in `L2H`.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum GeneHiPredictorResult {
     /// gnomAD pLI results
     GnomadPli {
@@ -390,6 +394,7 @@ impl SuggestedScore for L2H {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum L3 {
     /// <=24 genes.
     L3A(L3Count),
@@ -421,6 +426,7 @@ impl SuggestedScore for L3Count {
 ///
 /// Only 4O can be automatically determined.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum L4 {
     /// Overlap with pathogenic variants; must be evaluated by a human.
     ///

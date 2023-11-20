@@ -16,6 +16,7 @@ use super::data::intervals::Interval;
     serde::Deserialize,
     serde::Serialize,
 )]
+#[serde(rename_all = "snake_case")]
 pub enum SvType {
     /// Deletion, copy number loss.
     #[default]
