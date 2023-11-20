@@ -21,7 +21,7 @@ clap-verbosity-flag = "2.0"
 clap = { version = "4.4", features = ["derive", "help"] }
 csv = "1.3"
 displaydoc = "0.2.4"
-hgvs = "0.13.2"
+hgvs = "0.14.1"
 itertools = "0.11.0"
 log = "0.4"
 mehari = "0.17.1"
