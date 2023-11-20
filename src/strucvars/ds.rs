@@ -1,5 +1,7 @@
 //! Shared data structures for `strucvars`.
 
+use std::{fmt::Display, str::FromStr};
+
 use super::data::intervals::Interval;
 
 /// Enumeration for SV type.
@@ -23,6 +25,15 @@ pub enum SvType {
     Del,
     /// Duplication, copy number gain.
     Dup,
+}
+
+impl Display for SvType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            SvType::Del => write!(f, "DEL"),
+            SvType::Dup => write!(f, "DUP"),
+        }
+    }
 }
 
 /// Representation of inner / outer coordinates.
@@ -54,11 +65,69 @@ pub struct StructuralVariant {
     pub ambiguous_range: Option<AmbiguousRange>,
 }
 
+impl FromStr for StructuralVariant {
+    type Err = anyhow::Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let arr = s.split(':').collect::<Vec<_>>();
+        if arr.len() != 4 {
+            anyhow::bail!("invalid number of fields: {:?}", &arr);
+        }
+        let svtype = match arr[0] {
+            "DEL" => SvType::Del,
+            "DUP" => SvType::Dup,
+            _ => anyhow::bail!("invalid SV type: {:?}", arr[0]),
+        };
+        let chrom = arr[1].trim_start_matches("chr").to_string();
+        let start = arr[2]
+            .parse::<u32>()
+            .map_err(|e| anyhow::anyhow!("could not parse start pos: {}", e))?;
+        let stop = arr[3]
+            .parse::<u32>()
+            .map_err(|e| anyhow::anyhow!("could not parse stop pos: {}", e))?;
+
+        Ok(StructuralVariant {
+            chrom,
+            start,
+            stop,
+            svtype,
+            ambiguous_range: None,
+        })
+    }
+}
+
+impl Display for StructuralVariant {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}:{}:{}:{}",
+            self.svtype, self.chrom, self.start, self.stop
+        )
+    }
+}
+
 impl From<StructuralVariant> for Interval {
     fn from(val: StructuralVariant) -> Self {
         Interval::new(
             val.chrom,
             val.start.saturating_sub(1).into()..val.stop.into(),
         )
+    }
+}
+
+#[cfg(test)]
+mod test {
+    #[rstest::rstest]
+    #[case("DEL:1:1000:2000")]
+    #[case("DEL:chr1:1000:2000")]
+    #[case("DUP:1:1000:2000")]
+    #[case("DUP:chr1:1000:2000")]
+    fn sv_from_str(#[case] val: &str) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", val.replace(':', "-"));
+
+        let sv = val.parse::<super::StructuralVariant>()?;
+        insta::assert_yaml_snapshot!(sv);
+
+        Ok(())
     }
 }

@@ -9,7 +9,7 @@ pub trait SuggestedScore {
 }
 
 /// Score range for a seciton.
-pub trait ScoreRange {
+pub trait HasScoreRange {
     /// Minimal score for the category.
     fn min_score(&self) -> f32;
 

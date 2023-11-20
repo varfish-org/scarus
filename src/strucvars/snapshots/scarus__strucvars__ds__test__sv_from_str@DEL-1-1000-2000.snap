@@ -1,0 +1,10 @@
+---
+source: src/strucvars/ds.rs
+expression: sv
+---
+chrom: "1"
+start: 1000
+stop: 2000
+svtype: del
+ambiguous_range: ~
+

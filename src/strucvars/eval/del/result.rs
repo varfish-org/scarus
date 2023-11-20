@@ -1,12 +1,88 @@
 //! Data structures for representing the actual results of DEL/copy number loss.
 
+use strum::IntoEnumIterator as _;
+
 use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     eval::{
-        common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
-        result::{ClinvarSvOverlap, GnomadSvOverlap, Pvs1Result},
+        common::{FunctionalElement, GeneOverlap, HasScoreRange, SuggestedScore},
+        result::{ClinicalSignificance, ClinvarSvOverlap, GnomadSvOverlap, Pvs1Result, ScoreRange},
     },
 };
+
+/// Evaluation summary.
+#[derive(Debug, Clone, Default, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct Summary {
+    /// Overall score.
+    pub score: f32,
+    /// Overall clinical significance.
+    pub clinical_significance: ClinicalSignificance,
+}
+
+impl Summary {
+    /// Construct with sections.
+    pub fn with_sections(sections: &Vec<Section>) -> Self {
+        let score = Self::get_score(sections);
+        Self {
+            score,
+            clinical_significance: Self::get_clinical_signifiance(score),
+        }
+    }
+
+    /// Return overall score.
+    fn get_score(sections: &Vec<Section>) -> f32 {
+        sections.iter().map(|s| s.suggested_score()).sum()
+    }
+
+    /// Return overall clinical significance.
+    fn get_clinical_signifiance(score: f32) -> ClinicalSignificance {
+        for clinsig in ClinicalSignificance::iter() {
+            let itv = clinsig.range();
+            if itv.contains(&ScoreRange::Singleton { at: score }) {
+                return clinsig;
+            }
+        }
+
+        unreachable!()
+    }
+}
+
+/// Overall evaluation results for all sections.
+#[derive(Debug, Clone, Default, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct Evaluation {
+    /// Summary of the evaluation.
+    pub summary: Summary,
+    /// All section results.
+    pub sections: Vec<Section>,
+}
+
+impl Evaluation {
+    /// Construct with sections.
+    pub fn from_sections(sections: Vec<Section>) -> Self {
+        let summary = Summary::with_sections(&sections);
+        Self { sections, summary }
+    }
+}
+
+impl Evaluation {
+    /// Return overall score.
+    pub fn score(&self) -> f32 {
+        self.sections.iter().map(|s| s.suggested_score()).sum()
+    }
+
+    /// Return the overall clinical significance.
+    pub fn clinical_signifiance(&self) -> ClinicalSignificance {
+        let score = self.score();
+        for clinsig in ClinicalSignificance::iter() {
+            let itv = clinsig.range();
+            if itv.contains(&ScoreRange::Singleton { at: score }) {
+                return clinsig;
+            }
+        }
+
+        unreachable!()
+    }
+}
 
 /// Evaluation results for each section of the ACMG rule.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -49,7 +125,7 @@ impl SuggestedScore for Section {
     }
 }
 
-impl ScoreRange for Section {
+impl HasScoreRange for Section {
     fn min_score(&self) -> f32 {
         match self {
             Section::L1(L1::L1A(_)) => 0.0,
