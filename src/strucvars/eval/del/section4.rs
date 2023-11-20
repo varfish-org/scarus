@@ -56,8 +56,16 @@ impl<'a> Evaluator<'a> {
         // Retrieve all overlapping ClinVar records.
         let clinvar_records = self.overlapping_clinvar_records(&sv_interval)?;
 
-        if let Some(result_clinvar_patho) = self.handle_clinvar_pathogenic(&sv_interval, &clinvar_records)? { result.push(result_clinvar_patho) }
-        if let Some(result_clinvar_benign) = self.handle_clinvar_benign(&sv_interval, &clinvar_records)? { result.push(result_clinvar_benign) }
+        if let Some(result_clinvar_patho) =
+            self.handle_clinvar_pathogenic(&sv_interval, &clinvar_records)?
+        {
+            result.push(result_clinvar_patho)
+        }
+        if let Some(result_clinvar_benign) =
+            self.handle_clinvar_benign(&sv_interval, &clinvar_records)?
+        {
+            result.push(result_clinvar_benign)
+        }
 
         tracing::warn!("Section 4 evaluation not implemented yet");
         Ok(result)
@@ -188,24 +196,39 @@ mod test {
 
     use super::super::super::test::global_evaluator_37;
 
-    // #[tracing_test::traced_test]
+    #[tracing_test::traced_test]
     #[rstest::rstest]
+    // pathogenic variant
+    #[case("17", 43_005_866, 43_377_096, "VCV000059587")]
+    // benign variant
+    #[case("X", 155_231_256, 155_251_871, "VCV000161054")]
     fn test_evaluate(
+        #[case] chrom: &str,
+        #[case] start: u32,
+        #[case] stop: u32,
+        #[case] label: &str,
         global_evaluator_37: &super::super::super::Evaluator,
     ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", label);
+
         let evaluator = super::Evaluator::with_parent(global_evaluator_37);
 
-        // TODO: write test after we have an actual implementation
-        assert_eq!(
-            evaluator.evaluate(&StructuralVariant::default())?,
-            Vec::new()
-        );
+        let strucvar = StructuralVariant {
+            chrom: chrom.into(),
+            start: start,
+            stop: stop,
+            svtype: SvType::Del,
+            ambiguous_range: None,
+        };
+
+        insta::assert_yaml_snapshot!(evaluator.evaluate(&strucvar)?);
 
         Ok(())
     }
 
     #[tracing_test::traced_test]
     #[rstest::rstest]
+    // same as in `evaluate` test above, keep in sync
     #[case("17", 43_005_866, 43_377_096, "VCV000059587")]
     fn handle_clinvar_pathogenic(
         #[case] chrom: &str,
@@ -237,6 +260,7 @@ mod test {
 
     #[tracing_test::traced_test]
     #[rstest::rstest]
+    // same as in `evaluate` test above, keep in sync
     #[case("X", 155_231_256, 155_251_871, "VCV000161054")]
     fn handle_clinvar_benign(
         #[case] chrom: &str,
