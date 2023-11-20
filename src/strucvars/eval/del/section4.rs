@@ -312,8 +312,8 @@ mod test {
 
         let strucvar = StructuralVariant {
             chrom: chrom.into(),
-            start: start,
-            stop: stop,
+            start,
+            stop,
             svtype: SvType::Del,
             ambiguous_range: None,
         };
@@ -339,8 +339,8 @@ mod test {
         let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let strucvar = StructuralVariant {
             chrom: chrom.into(),
-            start: start,
-            stop: stop,
+            start,
+            stop,
             svtype: SvType::Del,
             ambiguous_range: None,
         };
@@ -371,8 +371,8 @@ mod test {
         let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let strucvar = StructuralVariant {
             chrom: chrom.into(),
-            start: start,
-            stop: stop,
+            start,
+            stop,
             svtype: SvType::Del,
             ambiguous_range: None,
         };
@@ -406,8 +406,8 @@ mod test {
         let evaluator = super::Evaluator::with_parent(global_evaluator_37);
         let strucvar = StructuralVariant {
             chrom: chrom.into(),
-            start: start,
-            stop: stop,
+            start,
+            stop,
             svtype: SvType::Del,
             ambiguous_range: None,
         };

@@ -123,7 +123,7 @@ mod test {
     #[case("DUP:1:1000:2000")]
     #[case("DUP:chr1:1000:2000")]
     fn sv_from_str(#[case] val: &str) -> Result<(), anyhow::Error> {
-        mehari::common::set_snapshot_suffix!("{}", val.replace(":", "-"));
+        mehari::common::set_snapshot_suffix!("{}", val.replace(':', "-"));
 
         let sv = val.parse::<super::StructuralVariant>()?;
         insta::assert_yaml_snapshot!(sv);
