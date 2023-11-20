@@ -4,7 +4,7 @@ use crate::strucvars::{
     data::{clingen_dosage, hgnc::GeneIdInfo},
     eval::{
         common::{FunctionalElement, GeneOverlap, ScoreRange, SuggestedScore},
-        result::{ClinvarSvOverlap, Pvs1Result},
+        result::{ClinvarSvOverlap, GnomadSvOverlap, Pvs1Result},
     },
 };
 
@@ -470,7 +470,7 @@ pub struct L4O {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Accession identifiers of overlapping common variants.
-    pub common_variant_ids: Vec<String>,
+    pub overlaps: Vec<GnomadSvOverlap>,
 }
 
 impl SuggestedScore for L4O {

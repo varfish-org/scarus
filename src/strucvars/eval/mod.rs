@@ -10,6 +10,9 @@ use std::{path::Path, sync::Arc};
 use annonars::clinvar_sv::cli::query::IntervalTrees as ClinvarSvIntervalTrees;
 use annonars::common::spdi;
 use annonars::functional::cli::query::IntervalTrees as FunctionalIntervalTrees;
+use annonars::gnomad_pbs::exac_cnv;
+use annonars::gnomad_pbs::gnomad_sv2;
+use annonars::gnomad_pbs::gnomad_sv4;
 use annonars::gnomad_sv::cli::query::IntervalTrees as GnomadSvIntervalTrees;
 use annonars::gnomad_sv::cli::query::Record as GnomadSvRecord;
 use annonars::pbs::annonars::clinvar::v1::minimal::Record as ClinvarRecord;
@@ -34,6 +37,10 @@ pub struct Config {
     pub clinvar_sv_min_overlap_benign: f32,
     /// Minimal reciprocal overlap for pathogenic ClinVar SV records.
     pub clinvar_sv_min_overlap_pathogenic: f32,
+    /// Minimal reciprocal overlap for gnomAD SV records.
+    pub gnomad_sv_min_overlap: f32,
+    /// Minimal frequency in gnomAD to consider as "common".
+    pub gnomad_sv_min_freq_common: f32,
 }
 
 impl Default for Config {
@@ -41,6 +48,8 @@ impl Default for Config {
         Self {
             clinvar_sv_min_overlap_benign: 0.8,
             clinvar_sv_min_overlap_pathogenic: 0.8,
+            gnomad_sv_min_overlap: 0.8,
+            gnomad_sv_min_freq_common: 0.01,
         }
     }
 }
@@ -527,10 +536,12 @@ impl Evaluator {
         let start = start as i32;
         let stop = stop as i32;
 
-        let mut res_exomes = self.gnomad_sv_exomes
+        let mut res_exomes = self
+            .gnomad_sv_exomes
             .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
             .map_err(|e| anyhow::anyhow!("failed to query gnomAD SV db: {}", e))?;
-        let mut res_genomes = self.gnomad_sv_genomes
+        let mut res_genomes = self
+            .gnomad_sv_genomes
             .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
             .map_err(|e| anyhow::anyhow!("failed to query gnomAD SV db: {}", e))?;
 
@@ -546,13 +557,157 @@ pub trait IntoInterval {
     fn into_interval(self) -> Interval;
 }
 
-/// Convert ClinVar SV record into interval.
 impl IntoInterval for &ClinvarSvRecord {
     fn into_interval(self) -> Interval {
         Interval::new(
             self.chromosome.clone(),
             (self.start as u64 - 1)..(self.stop as u64),
         )
+    }
+}
+
+impl IntoInterval for &annonars::gnomad_sv::cli::query::Record {
+    fn into_interval(self) -> Interval {
+        match self {
+            annonars::gnomad_sv::cli::query::Record::ExacCnv(record) => {
+                let start = record.start as u64 - 1;
+                let stop = record.stop as u64;
+                let chrom = record.chrom.clone();
+                Interval::new(chrom, start..stop)
+            }
+            annonars::gnomad_sv::cli::query::Record::GnomadSv2(record) => {
+                let start = record.pos as u64 - 1;
+                let stop = record.end.unwrap_or(record.pos) as u64;
+                let chrom = record.chrom.clone();
+                Interval::new(chrom, start..stop)
+            }
+            annonars::gnomad_sv::cli::query::Record::GnomadCnv4(record) => {
+                let start = record.start as u64 - 1;
+                let stop = record.stop as u64;
+                let chrom = record.chrom.clone();
+                Interval::new(chrom, start..stop)
+            }
+            annonars::gnomad_sv::cli::query::Record::GnomadSv4(record) => {
+                let start = record.pos as u64 - 1;
+                let stop = record.end.unwrap_or(record.pos) as u64;
+                let chrom = record.chrom.clone();
+                Interval::new(chrom, start..stop)
+            }
+        }
+    }
+}
+
+/// Local consensus SV type.
+pub enum SvType {
+    /// Deletion
+    Del,
+    /// Duplication
+    Dup,
+    /// Copy number variable region
+    Cnv,
+}
+
+impl TryFrom<&annonars::gnomad_sv::cli::query::Record> for SvType {
+    type Error = anyhow::Error;
+
+    fn try_from(value: &annonars::gnomad_sv::cli::query::Record) -> Result<Self, Self::Error> {
+        Ok(match value {
+            GnomadSvRecord::ExacCnv(record) => {
+                if record.sv_type == exac_cnv::CnvType::Del as i32 {
+                    SvType::Del
+                } else if record.sv_type == exac_cnv::CnvType::Dup as i32 {
+                    SvType::Dup
+                } else {
+                    anyhow::bail!("unknown ExAC CNV type: {}", record.sv_type)
+                }
+            }
+            GnomadSvRecord::GnomadSv2(record) => {
+                if record.sv_type == gnomad_sv2::SvType::Del as i32 {
+                    SvType::Del
+                } else if record.sv_type == gnomad_sv2::SvType::Dup as i32 {
+                    SvType::Dup
+                } else if record.sv_type == gnomad_sv2::SvType::Mcnv as i32 {
+                    SvType::Cnv
+                } else {
+                    anyhow::bail!("unable to map gnomAD v2 SV type: {}", record.sv_type)
+                }
+            }
+            GnomadSvRecord::GnomadCnv4(record) => {
+                if record.sv_type == exac_cnv::CnvType::Del as i32 {
+                    SvType::Del
+                } else if record.sv_type == exac_cnv::CnvType::Dup as i32 {
+                    SvType::Dup
+                } else {
+                    anyhow::bail!("unknown gnomAD CNV type: {}", record.sv_type)
+                }
+            }
+            GnomadSvRecord::GnomadSv4(record) => {
+                if record.sv_type == gnomad_sv4::SvType::Del as i32 {
+                    SvType::Del
+                } else if record.sv_type == gnomad_sv4::SvType::Dup as i32 {
+                    SvType::Dup
+                } else if record.sv_type == gnomad_sv4::SvType::Cnv as i32 {
+                    SvType::Cnv
+                } else {
+                    anyhow::bail!("unable to map gnomAD v4 SV type: {}", record.sv_type)
+                }
+            }
+        })
+    }
+}
+
+/// Carrier frequency in gnomAD-SV.
+pub trait CarrierFrequency {
+    fn carrier_freq(&self) -> Result<f32, anyhow::Error>;
+}
+
+impl CarrierFrequency for annonars::gnomad_sv::cli::query::Record {
+    fn carrier_freq(&self) -> Result<f32, anyhow::Error> {
+        Ok(match self {
+            GnomadSvRecord::ExacCnv(_) => anyhow::bail!("ExAC CNV records must be aggregated..."),
+            GnomadSvRecord::GnomadSv2(record) => {
+                let allele_counts = &record
+                    .allele_counts
+                    .first()
+                    .as_ref()
+                    .expect("no allele counts")
+                    .by_sex
+                    .as_ref()
+                    .expect("no counts by sex")
+                    .overall
+                    .as_ref()
+                    .expect("no overall counts");
+                let total = allele_counts.an - allele_counts.n_bi_genos;
+                let carriers = allele_counts.n_het + allele_counts.n_homalt;
+                carriers as f32 / total as f32
+            }
+            GnomadSvRecord::GnomadCnv4(record) => {
+                let counts = record
+                    .counts
+                    .as_ref()
+                    .expect("no counts")
+                    .overall
+                    .as_ref()
+                    .expect("no counts by sex");
+                counts.sc as f32 / counts.sn as f32
+            }
+            GnomadSvRecord::GnomadSv4(record) => {
+                let allele_counts = record
+                    .allele_counts
+                    .first()
+                    .as_ref()
+                    .expect("no allele counts")
+                    .by_sex
+                    .as_ref()
+                    .expect("no counts by sex")
+                    .overall
+                    .as_ref()
+                    .expect("no overall counts");
+                let total = allele_counts.an - allele_counts.n_bi_genos;
+                let carriers = allele_counts.n_het + allele_counts.n_homalt;
+                carriers as f32 / total as f32
+            }
+        })
     }
 }
 
@@ -730,10 +885,18 @@ pub mod test {
     /// Test internal working of `gnomad_sv_overlap`.
     #[tracing_test::traced_test]
     #[rstest::rstest]
+    // DELs
+    //
     // ExAC-CNV
     #[case("10", 51_620_321, 51_748_701, "chr10-51620321-51748701-NFE")]
-    // gnomAD-SV2
+    // gnomAD-SV v2
     #[case("1", 21000, 26000, "gnomAD-SV_v2.1_DEL_1_")]
+    // DUPs
+    //
+    // ExAC-CNV
+    #[case("10", 92_994, 95_183, "chr10-92994-95183-NFE")]
+    // gnomAD-SV v2
+    #[case("1", 157_000, 166_000, "gnomAD-SV_v2.1_DUP_1_6")]
     fn gnomad_sv_overlaps(
         #[case] chrom: &str,
         #[case] start: u32,

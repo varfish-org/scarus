@@ -1,0 +1,65 @@
+---
+source: src/strucvars/eval/dup/section4.rs
+expression: "evaluator.handle_clinvar_benign(&sv_interval, &clinvar_records)?"
+---
+G4:
+  G4N:
+    overlaps:
+      - overlap: 1
+        record:
+          release: GRCh37
+          chromosome: "10"
+          start: 135252347
+          stop: 135378802
+          reference: ~
+          alternative: ~
+          inner_start: ~
+          inner_stop: ~
+          outer_start: ~
+          outer_stop: ~
+          variant_type: 1
+          vcv: VCV000221841
+          reference_assertions:
+            - rcv: RCV000225255
+              title: "GRCh38/hg38 10q26.3(chr10:133438843-133565298)x3 AND Premature ovarian failure"
+              clinical_significance: 4
+              review_status: 3
+      - overlap: 0.9765768
+        record:
+          release: GRCh37
+          chromosome: "10"
+          start: 135254039
+          stop: 135377532
+          reference: ~
+          alternative: ~
+          inner_start: 135254039
+          inner_stop: ~
+          outer_start: 135377532
+          outer_stop: ~
+          variant_type: 1
+          vcv: VCV000160995
+          reference_assertions:
+            - rcv: RCV000148215
+              title: "GRCh38/hg38 10q26.3(chr10:133440535-133564028)x3 AND See cases"
+              clinical_significance: 4
+              review_status: 3
+      - overlap: 0.9367211
+        record:
+          release: GRCh37
+          chromosome: "10"
+          start: 135254039
+          stop: 135372492
+          reference: ~
+          alternative: ~
+          inner_start: 135254039
+          inner_stop: ~
+          outer_start: 135372492
+          outer_stop: ~
+          variant_type: 1
+          vcv: VCV000057391
+          reference_assertions:
+            - rcv: RCV000051087
+              title: "GRCh38/hg38 10q26.3(chr10:133440535-133558988)x3 AND See cases"
+              clinical_significance: 4
+              review_status: 3
+

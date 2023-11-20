@@ -1,0 +1,657 @@
+---
+source: src/strucvars/eval/dup/section4.rs
+expression: evaluator.handle_gnomad_sv(&sv_interval)?
+---
+G4:
+  G4O:
+    suggested_score: -1
+    overlaps:
+      - overlap: 1
+        record:
+          gnomad_sv2:
+            chrom: "1"
+            pos: 157000
+            end: 166000
+            chrom2: ~
+            end2: ~
+            id: gnomAD-SV_v2.1_DUP_1_6
+            filters:
+              - 1
+              - 5
+            sv_type: 4
+            cpx_type: ~
+            allele_counts:
+              - cohort: ~
+                by_sex:
+                  overall:
+                    ac: 384
+                    an: 13770
+                    af: 0.027887
+                    n_bi_genos: 6885
+                    n_homref: 6505
+                    n_het: 376
+                    n_homalt: 4
+                    freq_homref: 0.944808
+                    freq_het: 0.0546115
+                    freq_homalt: 0.000580973
+                  xx:
+                    ac: 167
+                    an: 6902
+                    af: 0.024196
+                    n_bi_genos: 3451
+                    n_homref: 3285
+                    n_het: 165
+                    n_homalt: 1
+                    freq_homref: 0.951898
+                    freq_het: 0.0478122
+                    freq_homalt: 0.000289771
+                  xy:
+                    ac: 214
+                    an: 6834
+                    af: 0.031314
+                    n_bi_genos: 3417
+                    n_homref: 3206
+                    n_het: 208
+                    n_homalt: 3
+                    freq_homref: 0.93825
+                    freq_het: 0.0608721
+                    freq_homalt: 0.000877963
+                by_population:
+                  - population: 0
+                    counts:
+                      overall:
+                        ac: 256
+                        an: 5434
+                        af: 0.047111
+                        n_bi_genos: 2717
+                        n_homref: 2464
+                        n_het: 250
+                        n_homalt: 3
+                        freq_homref: 0.906883
+                        freq_het: 0.0920132
+                        freq_homalt: 0.00110416
+                      xx:
+                        ac: 113
+                        an: 2480
+                        af: 0.045565
+                        n_bi_genos: 1240
+                        n_homref: 1128
+                        n_het: 111
+                        n_homalt: 1
+                        freq_homref: 0.909677
+                        freq_het: 0.0895161
+                        freq_homalt: 0.000806452
+                      xy:
+                        ac: 141
+                        an: 2946
+                        af: 0.047862
+                        n_bi_genos: 1473
+                        n_homref: 1334
+                        n_het: 137
+                        n_homalt: 2
+                        freq_homref: 0.905635
+                        freq_het: 0.0930075
+                        freq_homalt: 0.00135777
+                  - population: 1
+                    counts:
+                      overall:
+                        ac: 23
+                        an: 970
+                        af: 0.023711
+                        n_bi_genos: 485
+                        n_homref: 462
+                        n_het: 23
+                        n_homalt: 0
+                        freq_homref: 0.952577
+                        freq_het: 0.0474227
+                        freq_homalt: 0
+                      xx:
+                        ac: 9
+                        an: 522
+                        af: 0.017241
+                        n_bi_genos: 261
+                        n_homref: 252
+                        n_het: 9
+                        n_homalt: 0
+                        freq_homref: 0.965517
+                        freq_het: 0.0344828
+                        freq_homalt: 0
+                      xy:
+                        ac: 14
+                        an: 446
+                        af: 0.03139
+                        n_bi_genos: 223
+                        n_homref: 209
+                        n_het: 14
+                        n_homalt: 0
+                        freq_homref: 0.93722
+                        freq_het: 0.0627803
+                        freq_homalt: 0
+                  - population: 2
+                    counts:
+                      overall:
+                        ac: 71
+                        an: 1366
+                        af: 0.051977
+                        n_bi_genos: 683
+                        n_homref: 613
+                        n_het: 69
+                        n_homalt: 1
+                        freq_homref: 0.897511
+                        freq_het: 0.101025
+                        freq_homalt: 0.00146413
+                      xx:
+                        ac: 24
+                        an: 576
+                        af: 0.041667
+                        n_bi_genos: 288
+                        n_homref: 264
+                        n_het: 24
+                        n_homalt: 0
+                        freq_homref: 0.916667
+                        freq_het: 0.0833333
+                        freq_homalt: 0
+                      xy:
+                        ac: 46
+                        an: 784
+                        af: 0.058673
+                        n_bi_genos: 392
+                        n_homref: 347
+                        n_het: 44
+                        n_homalt: 1
+                        freq_homref: 0.885204
+                        freq_het: 0.112245
+                        freq_homalt: 0.00255102
+                  - population: 3
+                    counts:
+                      overall:
+                        ac: 31
+                        an: 5874
+                        af: 0.005277
+                        n_bi_genos: 2937
+                        n_homref: 2906
+                        n_het: 31
+                        n_homalt: 0
+                        freq_homref: 0.989445
+                        freq_het: 0.010555
+                        freq_homalt: 0
+                      xx:
+                        ac: 18
+                        an: 3244
+                        af: 0.005549
+                        n_bi_genos: 1622
+                        n_homref: 1604
+                        n_het: 18
+                        n_homalt: 0
+                        freq_homref: 0.988903
+                        freq_het: 0.0110974
+                        freq_homalt: 0
+                      xy:
+                        ac: 13
+                        an: 2612
+                        af: 0.004977
+                        n_bi_genos: 1306
+                        n_homref: 1293
+                        n_het: 13
+                        n_homalt: 0
+                        freq_homref: 0.990046
+                        freq_het: 0.00995406
+                        freq_homalt: 0
+                  - population: 4
+                    counts:
+                      overall:
+                        ac: 3
+                        an: 126
+                        af: 0.02381
+                        n_bi_genos: 63
+                        n_homref: 60
+                        n_het: 3
+                        n_homalt: 0
+                        freq_homref: 0.952381
+                        freq_het: 0.047619
+                        freq_homalt: 0
+                      xx:
+                        ac: 3
+                        an: 80
+                        af: 0.0375
+                        n_bi_genos: 40
+                        n_homref: 37
+                        n_het: 3
+                        n_homalt: 0
+                        freq_homref: 0.925
+                        freq_het: 0.075
+                        freq_homalt: 0
+                      xy:
+                        ac: 0
+                        an: 46
+                        af: 0
+                        n_bi_genos: 23
+                        n_homref: 23
+                        n_het: 0
+                        n_homalt: 0
+                        freq_homref: 1
+                        freq_het: 0
+                        freq_homalt: 0
+              - cohort: controls
+                by_sex:
+                  overall:
+                    ac: 184
+                    an: 6596
+                    af: 0.027896
+                    n_bi_genos: 3298
+                    n_homref: 3116
+                    n_het: 180
+                    n_homalt: 2
+                    freq_homref: 0.944815
+                    freq_het: 0.0545785
+                    freq_homalt: 0.000606428
+                  xx:
+                    ac: 86
+                    an: 3356
+                    af: 0.025626
+                    n_bi_genos: 1678
+                    n_homref: 1592
+                    n_het: 86
+                    n_homalt: 0
+                    freq_homref: 0.948749
+                    freq_het: 0.0512515
+                    freq_homalt: 0
+                  xy:
+                    ac: 97
+                    an: 3228
+                    af: 0.03005
+                    n_bi_genos: 1614
+                    n_homref: 1519
+                    n_het: 93
+                    n_homalt: 2
+                    freq_homref: 0.94114
+                    freq_het: 0.0576208
+                    freq_homalt: 0.00123916
+                by_population:
+                  - population: 0
+                    counts:
+                      overall:
+                        ac: 98
+                        an: 2326
+                        af: 0.042132
+                        n_bi_genos: 1163
+                        n_homref: 1066
+                        n_het: 96
+                        n_homalt: 1
+                        freq_homref: 0.916595
+                        freq_het: 0.0825451
+                        freq_homalt: 0.000859845
+                      xx:
+                        ac: 51
+                        an: 1178
+                        af: 0.043294
+                        n_bi_genos: 589
+                        n_homref: 538
+                        n_het: 51
+                        n_homalt: 0
+                        freq_homref: 0.913413
+                        freq_het: 0.0865874
+                        freq_homalt: 0
+                      xy:
+                        ac: 47
+                        an: 1148
+                        af: 0.040941
+                        n_bi_genos: 574
+                        n_homref: 528
+                        n_het: 45
+                        n_homalt: 1
+                        freq_homref: 0.919861
+                        freq_het: 0.0783972
+                        freq_homalt: 0.00174216
+                  - population: 1
+                    counts:
+                      overall:
+                        ac: 19
+                        an: 660
+                        af: 0.028788
+                        n_bi_genos: 330
+                        n_homref: 311
+                        n_het: 19
+                        n_homalt: 0
+                        freq_homref: 0.942424
+                        freq_het: 0.0575758
+                        freq_homalt: 0
+                      xx:
+                        ac: 8
+                        an: 362
+                        af: 0.022099
+                        n_bi_genos: 181
+                        n_homref: 173
+                        n_het: 8
+                        n_homalt: 0
+                        freq_homref: 0.955801
+                        freq_het: 0.0441989
+                        freq_homalt: 0
+                      xy:
+                        ac: 11
+                        an: 296
+                        af: 0.037162
+                        n_bi_genos: 148
+                        n_homref: 137
+                        n_het: 11
+                        n_homalt: 0
+                        freq_homref: 0.925676
+                        freq_het: 0.0743243
+                        freq_homalt: 0
+                  - population: 2
+                    counts:
+                      overall:
+                        ac: 53
+                        an: 964
+                        af: 0.054979
+                        n_bi_genos: 482
+                        n_homref: 430
+                        n_het: 51
+                        n_homalt: 1
+                        freq_homref: 0.892116
+                        freq_het: 0.105809
+                        freq_homalt: 0.00207469
+                      xx:
+                        ac: 19
+                        an: 430
+                        af: 0.044186
+                        n_bi_genos: 215
+                        n_homref: 196
+                        n_het: 19
+                        n_homalt: 0
+                        freq_homref: 0.911628
+                        freq_het: 0.0883721
+                        freq_homalt: 0
+                      xy:
+                        ac: 33
+                        an: 528
+                        af: 0.0625
+                        n_bi_genos: 264
+                        n_homref: 232
+                        n_het: 31
+                        n_homalt: 1
+                        freq_homref: 0.878788
+                        freq_het: 0.117424
+                        freq_homalt: 0.00378788
+                  - population: 3
+                    counts:
+                      overall:
+                        ac: 13
+                        an: 2578
+                        af: 0.005043
+                        n_bi_genos: 1289
+                        n_homref: 1276
+                        n_het: 13
+                        n_homalt: 0
+                        freq_homref: 0.989915
+                        freq_het: 0.0100853
+                        freq_homalt: 0
+                      xx:
+                        ac: 7
+                        an: 1344
+                        af: 0.005208
+                        n_bi_genos: 672
+                        n_homref: 665
+                        n_het: 7
+                        n_homalt: 0
+                        freq_homref: 0.989583
+                        freq_het: 0.0104167
+                        freq_homalt: 0
+                      xy:
+                        ac: 6
+                        an: 1230
+                        af: 0.004878
+                        n_bi_genos: 615
+                        n_homref: 609
+                        n_het: 6
+                        n_homalt: 0
+                        freq_homref: 0.990244
+                        freq_het: 0.0097561
+                        freq_homalt: 0
+                  - population: 4
+                    counts:
+                      overall:
+                        ac: 1
+                        an: 68
+                        af: 0.014706
+                        n_bi_genos: 34
+                        n_homref: 33
+                        n_het: 1
+                        n_homalt: 0
+                        freq_homref: 0.970588
+                        freq_het: 0.0294118
+                        freq_homalt: 0
+                      xx:
+                        ac: 1
+                        an: 42
+                        af: 0.02381
+                        n_bi_genos: 21
+                        n_homref: 20
+                        n_het: 1
+                        n_homalt: 0
+                        freq_homref: 0.952381
+                        freq_het: 0.047619
+                        freq_homalt: 0
+                      xy:
+                        ac: 0
+                        an: 26
+                        af: 0
+                        n_bi_genos: 13
+                        n_homref: 13
+                        n_het: 0
+                        n_homalt: 0
+                        freq_homref: 1
+                        freq_het: 0
+                        freq_homalt: 0
+              - cohort: non_neuro
+                by_sex:
+                  overall:
+                    ac: 258
+                    an: 11128
+                    af: 0.023185
+                    n_bi_genos: 5564
+                    n_homref: 5308
+                    n_het: 254
+                    n_homalt: 2
+                    freq_homref: 0.95399
+                    freq_het: 0.0456506
+                    freq_homalt: 0.000359454
+                  xx:
+                    ac: 125
+                    an: 5936
+                    af: 0.021058
+                    n_bi_genos: 2968
+                    n_homref: 2843
+                    n_het: 125
+                    n_homalt: 0
+                    freq_homref: 0.957884
+                    freq_het: 0.0421159
+                    freq_homalt: 0
+                  xy:
+                    ac: 132
+                    an: 5166
+                    af: 0.025552
+                    n_bi_genos: 2583
+                    n_homref: 2453
+                    n_het: 128
+                    n_homalt: 2
+                    freq_homref: 0.949671
+                    freq_het: 0.0495548
+                    freq_homalt: 0.000774293
+                by_population:
+                  - population: 0
+                    counts:
+                      overall:
+                        ac: 130
+                        an: 2910
+                        af: 0.044674
+                        n_bi_genos: 1455
+                        n_homref: 1326
+                        n_het: 128
+                        n_homalt: 1
+                        freq_homref: 0.91134
+                        freq_het: 0.0879725
+                        freq_homalt: 0.000687285
+                      xx:
+                        ac: 71
+                        an: 1584
+                        af: 0.044823
+                        n_bi_genos: 792
+                        n_homref: 721
+                        n_het: 71
+                        n_homalt: 0
+                        freq_homref: 0.910354
+                        freq_het: 0.0896465
+                        freq_homalt: 0
+                      xy:
+                        ac: 59
+                        an: 1326
+                        af: 0.044495
+                        n_bi_genos: 663
+                        n_homref: 605
+                        n_het: 57
+                        n_homalt: 1
+                        freq_homref: 0.912519
+                        freq_het: 0.0859729
+                        freq_homalt: 0.0015083
+                  - population: 1
+                    counts:
+                      overall:
+                        ac: 23
+                        an: 970
+                        af: 0.023711
+                        n_bi_genos: 485
+                        n_homref: 462
+                        n_het: 23
+                        n_homalt: 0
+                        freq_homref: 0.952577
+                        freq_het: 0.0474227
+                        freq_homalt: 0
+                      xx:
+                        ac: 9
+                        an: 522
+                        af: 0.017241
+                        n_bi_genos: 261
+                        n_homref: 252
+                        n_het: 9
+                        n_homalt: 0
+                        freq_homref: 0.965517
+                        freq_het: 0.0344828
+                        freq_homalt: 0
+                      xy:
+                        ac: 14
+                        an: 446
+                        af: 0.03139
+                        n_bi_genos: 223
+                        n_homref: 209
+                        n_het: 14
+                        n_homalt: 0
+                        freq_homref: 0.93722
+                        freq_het: 0.0627803
+                        freq_homalt: 0
+                  - population: 2
+                    counts:
+                      overall:
+                        ac: 71
+                        an: 1366
+                        af: 0.051977
+                        n_bi_genos: 683
+                        n_homref: 613
+                        n_het: 69
+                        n_homalt: 1
+                        freq_homref: 0.897511
+                        freq_het: 0.101025
+                        freq_homalt: 0.00146413
+                      xx:
+                        ac: 24
+                        an: 576
+                        af: 0.041667
+                        n_bi_genos: 288
+                        n_homref: 264
+                        n_het: 24
+                        n_homalt: 0
+                        freq_homref: 0.916667
+                        freq_het: 0.0833333
+                        freq_homalt: 0
+                      xy:
+                        ac: 46
+                        an: 784
+                        af: 0.058673
+                        n_bi_genos: 392
+                        n_homref: 347
+                        n_het: 44
+                        n_homalt: 1
+                        freq_homref: 0.885204
+                        freq_het: 0.112245
+                        freq_homalt: 0.00255102
+                  - population: 3
+                    counts:
+                      overall:
+                        ac: 31
+                        an: 5756
+                        af: 0.005386
+                        n_bi_genos: 2878
+                        n_homref: 2847
+                        n_het: 31
+                        n_homalt: 0
+                        freq_homref: 0.989229
+                        freq_het: 0.0107714
+                        freq_homalt: 0
+                      xx:
+                        ac: 18
+                        an: 3174
+                        af: 0.005671
+                        n_bi_genos: 1587
+                        n_homref: 1569
+                        n_het: 18
+                        n_homalt: 0
+                        freq_homref: 0.988658
+                        freq_het: 0.0113422
+                        freq_homalt: 0
+                      xy:
+                        ac: 13
+                        an: 2564
+                        af: 0.00507
+                        n_bi_genos: 1282
+                        n_homref: 1269
+                        n_het: 13
+                        n_homalt: 0
+                        freq_homref: 0.98986
+                        freq_het: 0.0101404
+                        freq_homalt: 0
+                  - population: 4
+                    counts:
+                      overall:
+                        ac: 3
+                        an: 126
+                        af: 0.02381
+                        n_bi_genos: 63
+                        n_homref: 60
+                        n_het: 3
+                        n_homalt: 0
+                        freq_homref: 0.952381
+                        freq_het: 0.047619
+                        freq_homalt: 0
+                      xx:
+                        ac: 3
+                        an: 80
+                        af: 0.0375
+                        n_bi_genos: 40
+                        n_homref: 37
+                        n_het: 3
+                        n_homalt: 0
+                        freq_homref: 0.925
+                        freq_het: 0.075
+                        freq_homalt: 0
+                      xy:
+                        ac: 0
+                        an: 46
+                        af: 0
+                        n_bi_genos: 23
+                        n_homref: 23
+                        n_het: 0
+                        n_homalt: 0
+                        freq_homref: 1
+                        freq_het: 0
+                        freq_homalt: 0
+

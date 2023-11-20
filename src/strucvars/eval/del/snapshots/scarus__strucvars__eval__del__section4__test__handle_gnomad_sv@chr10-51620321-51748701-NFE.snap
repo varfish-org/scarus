@@ -1,0 +1,25 @@
+---
+source: src/strucvars/eval/del/section4.rs
+expression: evaluator.handle_gnomad_sv(&sv_interval)?
+---
+L4:
+  L4O:
+    suggested_score: 0
+    overlaps:
+      - overlap: 1
+        record:
+          exac_cnv:
+            chrom: "10"
+            start: 51620321
+            stop: 51748701
+            sv_type: 0
+            population: 4
+      - overlap: 0.8582318
+        record:
+          exac_cnv:
+            chrom: "10"
+            start: 51632845
+            stop: 51767839
+            sv_type: 0
+            population: 3
+
