@@ -77,6 +77,20 @@ annonars db-utils copy \
     --path-out tests/data/strucvars/hi_ts/clinvar-empty/rocksdb \
     --path-beds /dev/null
 
+# -- clinvar-sv --
+
+wget -O $TMPDIR/clinvar-data-extract-vars-20231112+0.12.0.tar.gz \
+    https://github.com/bihealth/clinvar-data-jsonl/releases/download/clinvar-weekly-20231112/clinvar-data-extract-vars-20231112+0.12.0.tar.gz
+tar -C $TMPDIR -xvf $TMPDIR/clinvar-data-extract-vars-20231112+0.12.0.tar.gz
+
+mkdir -p tests/data/strucvars/hi_ts/clinvar-sv
+rm -rf tests/data/strucvars/hi_ts/clinvar-sv/rocksdb
+
+annonars clinvar-sv import \
+    --genome-release grch37 \
+    --path-out-rocksdb tests/data/strucvars/hi_ts/clinvar-sv/rocksdb \
+    --path-in-jsonl $TMPDIR/clinvar-data-extract-vars-*/clinvar-variants-grch37-strucvars.jsonl.gz
+
 # -- functional elements --
 
 wget \
