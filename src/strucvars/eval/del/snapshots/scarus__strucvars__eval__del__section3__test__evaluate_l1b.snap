@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/section3.rs
 expression: "&evaluator.evaluate(&Section::L1(L1::L1B(L1B {})))?"
 ---
 l3:
-  l3_a:
+  l3a:
     suggested_score: 0
     num_genes: 0
     genes: []

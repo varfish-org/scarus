@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/section1.rs
 expression: res
 ---
 l1:
-  l1_a:
+  l1a:
     genes:
       - gene:
           hgnc_id: "HGNC:9965"
@@ -21,9 +21,8 @@ l1:
           stop: 8877943
           id: "id-GeneID:112590823"
           dbxref: "GeneID:112590823"
-          category: 6
-          regulatory_class: 2
-          note: ~
+          category: CATEGORY_REGULATORY
+          regulatoryClass: REGULATORY_CLASS_ENHANCER
           experiment: "EXISTENCE:reporter gene assay evidence [ECO:0000049][PMID:27701403]"
           function: activates a minimal TATA promoter and a strong SV40 promoter by Sharpr-MPRA in HepG2 and K562 cells
       - refseq:
@@ -32,9 +31,5 @@ l1:
           stop: 8877943
           id: "id-GeneID:112590823-2"
           dbxref: "GeneID:112590823"
-          category: 5
-          regulatory_class: ~
-          note: ~
-          experiment: ~
-          function: ~
+          category: CATEGORY_REGION
 

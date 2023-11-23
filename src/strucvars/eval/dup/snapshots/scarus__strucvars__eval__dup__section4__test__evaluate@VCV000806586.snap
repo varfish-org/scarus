@@ -3,7 +3,7 @@ source: src/strucvars/eval/dup/section4.rs
 expression: evaluator.evaluate(&strucvar)?
 ---
 - g4:
-    g4_patho:
+    g4patho:
       overlaps:
         - overlap: 1
           record:
@@ -11,17 +11,13 @@ expression: evaluator.evaluate(&strucvar)?
             chromosome: "10"
             start: 55581618
             stop: 56288162
-            reference: ~
-            alternative: ~
-            inner_start: 55581618
-            inner_stop: ~
-            outer_start: 56288162
-            outer_stop: ~
-            variant_type: 1
+            innerStart: 55581618
+            outerStart: 56288162
+            variantType: VARIANT_TYPE_DUPLICATION
             vcv: VCV000806586
-            reference_assertions:
+            referenceAssertions:
               - rcv: RCV000994529
                 title: "GRCh37/hg19 10q21.1(chr10:55581618-56288162)x6 AND not provided"
-                clinical_significance: 1
-                review_status: 3
+                clinicalSignificance: CLINICAL_SIGNIFICANCE_LIKELY_PATHOGENIC
+                reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 

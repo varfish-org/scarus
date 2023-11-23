@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
 l2:
-  l2_d1:
+  l2d1:
     gene:
       hgnc_id: "HGNC:2201"
       hgnc_symbol: COL3A1

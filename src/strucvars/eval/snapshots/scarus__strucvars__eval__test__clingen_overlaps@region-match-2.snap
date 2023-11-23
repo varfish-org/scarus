@@ -2,11 +2,11 @@
 source: src/strucvars/eval/mod.rs
 expression: regions
 ---
-- isca_id: ISCA-46303
-  isca_region_name: SOX9 upstream enhancer region
-  genomic_location: "17:67892996-69792434"
-  haploinsufficiency_score: sufficient_evidence
-  triplosensitivity_score: little_evidence
-  haploinsufficiency_disease_id: "MONDO:0007134"
-  triplosensitivity_disease_id: "MONDO:0009869"
+- iscaId: ISCA-46303
+  iscaRegionName: SOX9 upstream enhancer region
+  genomicLocation: "chr17:69896855-71796293"
+  haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+  triplosensitivityScore: CLINGEN_DOSAGE_SCORE_LITTLE_EVIDENCE
+  haploinsufficiencyDiseaseId: "MONDO:0007134"
+  triplosensitivityDiseaseId: "MONDO:0009869"
 

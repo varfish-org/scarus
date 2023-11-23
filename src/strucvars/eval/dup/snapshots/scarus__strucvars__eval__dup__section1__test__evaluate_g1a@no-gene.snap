@@ -3,7 +3,7 @@ source: src/strucvars/eval/dup/section1.rs
 expression: res
 ---
 g1:
-  g1_a:
+  g1a:
     genes: []
     functional_elements:
       - refseq:
@@ -12,10 +12,7 @@ g1:
           stop: 125424204
           id: "id-GeneID:116225306"
           dbxref: "GeneID:116225306"
-          category: 5
-          regulatory_class: ~
-          note: ~
-          experiment: ~
+          category: CATEGORY_REGION
           function: "regulatory_interactions: FEZ1"
       - refseq:
           chromosome: "11"
@@ -23,9 +20,8 @@ g1:
           stop: 125424204
           id: "id-GeneID:116225306-2"
           dbxref: "GeneID:116225306"
-          category: 6
-          regulatory_class: 16
-          note: ~
+          category: CATEGORY_REGULATORY
+          regulatoryClass: REGULATORY_CLASS_TRANSCRIPTIONAL_CIS_REGULATORY_REGION
           experiment: "EXISTENCE:mutant phenotype evidence [ECO:0000015][PMID:30612741]"
           function: positively regulates FEZ1 gene expression with high confidence in K562 cells
 

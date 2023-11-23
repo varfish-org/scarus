@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/mod.rs
 expression: result
 ---
 - l1:
-    l1_a:
+    l1a:
       genes:
         - gene:
             hgnc_id: "HGNC:16877"
@@ -15,7 +15,7 @@ expression: result
             - NM_014874.4
       functional_elements: []
 - l3:
-    l3_a:
+    l3a:
       suggested_score: 0
       num_genes: 1
       genes:

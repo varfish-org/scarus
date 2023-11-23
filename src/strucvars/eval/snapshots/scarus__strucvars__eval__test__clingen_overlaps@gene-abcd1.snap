@@ -2,18 +2,5795 @@
 source: src/strucvars/eval/mod.rs
 expression: genes
 ---
-- gene_symbol: BCAP31
-  ncbi_gene_id: "10134"
-  genomic_location: "X:152965947-152990201"
-  haploinsufficiency_score: sufficient_evidence
-  triplosensitivity_score: no_evidence_available
-  haploinsufficiency_disease_id: "MONDO:0010334"
-  triplosensitivity_disease_id: ~
-- gene_symbol: ABCD1
-  ncbi_gene_id: "215"
-  genomic_location: "X:152990323-153010216"
-  haploinsufficiency_score: sufficient_evidence
-  triplosensitivity_score: no_evidence_available
-  haploinsufficiency_disease_id: "MONDO:0018544"
-  triplosensitivity_disease_id: ~
+- clingen:
+    geneSymbol: BCAP31
+    ncbiGeneId: "10134"
+    genomicLocation37: "chrX:152965947-152990201"
+    genomicLocation38: "chrX:153700492-153724746"
+    haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+    triplosensitivityScore: CLINGEN_DOSAGE_SCORE_NO_EVIDENCE_AVAILABLE
+    haploinsufficiencyDiseaseId: "MONDO:0010334"
+  dbnsfp:
+    geneName: BCAP31
+    ensemblGene: ENSG00000185825
+    chr: X
+    geneOtherNames:
+      - DXS1357E
+      - BAP31
+      - 6C6-Ag
+      - CDM
+    uniprotAcc: P51572
+    uniprotId: BAP31_HUMAN
+    entrezGeneId: "10134"
+    ccdsId:
+      - CCDS14727
+      - CCDS48191
+    refseqId:
+      - NM_005745
+      - NM_001139441
+    ucscId: uc004fie.3
+    mimId:
+      - "300398"
+    omimId:
+      - "300398"
+    geneFullName: B cell receptor associated protein 31
+    pathwayUniprot: "."
+    pathwayConsensusPathDb:
+      - Protein processing in endoplasmic reticulum - Homo sapiens (human)
+      - Human papillomavirus infection - Homo sapiens (human)
+      - Apoptotic cleavage of cellular proteins
+      - Apoptotic execution phase
+      - Apoptosis
+      - Programmed Cell Death
+    functionDescription:
+      - "FUNCTION: Functions as a chaperone protein. Is one of the most abundant endoplasmic reticulum (ER) proteins. Plays a role in the export of secreted proteins in the ER, the recognition of abnormally folded protein and their targeting to the ER associated-degradation (ERAD). Also serves as a cargo receptor for the export of transmembrane proteins. May be involved in CASP8- mediated apoptosis. {ECO:0000269|PubMed:10958671, ECO:0000269|PubMed:18287538, ECO:0000269|PubMed:9396746}."
+    diseaseDescription:
+      - "DISEASE: Deafness, dystonia, and cerebral hypomyelination (DDCH) [MIM:300475]: An X-linked recessive mental retardation syndrome characterized by almost no psychomotor development, dysmorphic facial features, sensorineural deafness, dystonia, pyramidal signs, and hypomyelination on brain imaging. {ECO:0000269|PubMed:24011989}. Note=The disease is caused by mutations affecting the gene represented in this entry."
+      - "DISEASE: Note=BCAP31 is deleted in the chromosome Xq28 deletion syndrome which involves BCAP31 and the and the promoter region of ABCD1. {ECO:0000269|PubMed:11992258}."
+    mimPhenotypeId:
+      - "300475"
+    mimDisease:
+      - "[MIM:300475]Deafness, dystonia, and cerebral hypomyelination"
+    orphanetDisorderId:
+      - "369942"
+      - "369939"
+    orphanetDisorder:
+      - CADDS
+      - Severe motor and intellectual disabilities-sensorineural deafness-dystonia syndrome
+    orphanetAssociationType:
+      - Role in the phenotype of
+      - Disease-causing germline mutation(s) (loss of function) in
+    hpoId:
+      - "HP:0001999"
+      - "HP:0001508"
+      - "HP:0001272"
+      - "HP:0000486"
+      - "HP:0001332"
+      - "HP:0001419"
+      - "HP:0002445"
+      - "HP:0002059"
+      - "HP:0001263"
+      - "HP:0007256"
+      - "HP:0006808"
+      - "HP:0001250"
+      - "HP:0000648"
+      - "HP:0000252"
+      - "HP:0010864"
+      - "HP:0000407"
+      - "HP:0000718"
+      - "HP:0007371"
+      - "HP:0000648"
+      - "HP:0001954"
+      - "HP:0001511"
+      - "HP:0002445"
+      - "HP:0001272"
+      - "HP:0000365"
+      - "HP:0000752"
+      - "HP:0001999"
+      - "HP:0001508"
+      - "HP:0007256"
+      - "HP:0000252"
+      - "HP:0006808"
+      - "HP:0002120"
+      - "HP:0000486"
+    hpoName:
+      - Abnormal facial shape
+      - Failure to thrive
+      - Cerebellar atrophy
+      - Strabismus
+      - Dystonia
+      - X-linked recessive inheritance
+      - Tetraplegia
+      - Cerebral atrophy
+      - Global developmental delay
+      - Abnormal pyramidal sign
+      - Cerebral hypomyelination
+      - Seizure
+      - Optic atrophy
+      - Microcephaly
+      - "Intellectual disability, severe"
+      - Sensorineural hearing impairment
+      - Aggressive behavior
+      - Corpus callosum atrophy
+      - Optic atrophy
+      - Recurrent fever
+      - Intrauterine growth retardation
+      - Tetraplegia
+      - Cerebellar atrophy
+      - Hearing impairment
+      - Hyperactivity
+      - Abnormal facial shape
+      - Failure to thrive
+      - Abnormal pyramidal sign
+      - Microcephaly
+      - Cerebral hypomyelination
+      - Cerebral cortical atrophy
+      - Strabismus
+    goBiologicalProcess:
+      - antigen processing and presentation of peptide antigen via MHC class I
+      - intracellular protein transport
+      - endoplasmic reticulum to Golgi vesicle-mediated transport
+      - apoptotic process
+      - positive regulation of cytosolic calcium ion concentration
+      - spermatogenesis
+      - negative regulation of endoplasmic reticulum calcium ion concentration
+      - calcium-mediated signaling using intracellular calcium source
+      - positive regulation of cysteine-type endopeptidase activity involved in apoptotic process
+      - positive regulation of mitochondrial calcium ion concentration
+      - protein localization to endoplasmic reticulum exit site
+      - positive regulation of ER-associated ubiquitin-dependent protein catabolic process
+      - "positive regulation of retrograde protein transport, ER to cytosol"
+      - positive regulation of intrinsic apoptotic signaling pathway
+    goCellularComponent:
+      - mitochondrion
+      - endoplasmic reticulum
+      - Sec61 translocon complex
+      - endoplasmic reticulum membrane
+      - lipid droplet
+      - cytosol
+      - integral component of plasma membrane
+      - membrane
+      - clathrin-coated vesicle
+      - Golgi cisterna membrane
+      - endoplasmic reticulum-Golgi intermediate compartment membrane
+      - integral component of lumenal side of endoplasmic reticulum membrane
+      - perinuclear endoplasmic reticulum
+    goMolecularFunction:
+      - protein binding
+      - MHC class I protein binding
+      - protein-containing complex binding
+    tissueSpecificityUniprot:
+      - "Ubiquitous. Highly expressed in neurons and discrete endocrine cells. {ECO:0000269|PubMed:11561007}."
+    expressionEgenetics:
+      - pharynx
+      - stomach
+      - testis
+      - pineal gland
+      - choroid
+      - kidney
+      - uterus
+      - whole body
+      - pancreas
+      - bile duct
+      - skeletal muscle
+      - islets of Langerhans
+      - visual apparatus
+      - fovea centralis
+      - iris
+      - vein
+      - spleen
+      - liver
+      - germinal center
+      - heart
+      - lung
+      - salivary gland
+      - synovium
+      - thyroid
+      - oesophagus
+      - sympathetic chain
+      - placenta
+      - optic nerve
+      - thymus
+      - intestine
+      - tongue
+      - skin
+      - myocardium
+      - adrenal cortex
+      - lens
+      - unclassifiable (Anatomical System)
+      - retina
+      - head and neck
+      - mammary gland
+      - umbilical cord
+      - cervix
+      - hippocampus
+      - cartilage
+      - endometrium
+      - bone
+      - parathyroid
+      - brain
+      - blood
+      - bone marrow
+      - ovary
+      - macula lutea
+      - lymph node
+      - bladder
+      - colon
+      - prostate
+      - breast
+    interactionsIntact:
+      - "ATF2[22304920]"
+      - "TRAM1[18555783]"
+      - "GOLT1B[26496610]"
+      - "PKD2[19153608]"
+      - "SERPINA5[30021884]"
+      - "METTL14[29507755]"
+      - "CASP8[9334338"
+      - "11917123"
+      - "21183955]"
+      - "SPR[30021884]"
+      - "TCTN3[26638075]"
+      - "TCTN2[26638075]"
+      - "TCTN1[26638075]"
+      - "BCAP29[30021884]"
+      - "SEC61B[18555783]"
+      - "IKBKE[17353931]"
+      - "CEP290[26638075]"
+      - "RPS10[30021884]"
+      - "SERPINF2[21988832]"
+      - "HLA-B[17353931]"
+      - "TERF1[21044950]"
+      - "YWHAZ[15161933]"
+      - "FTSJ3[30021884]"
+      - "CLIP2[30021884]"
+      - "TMEM216[26638075]"
+      - "POLR1B[30021884]"
+      - "CANX[29568061]"
+      - "MYH9[26496610]"
+      - "TNIK[17353931]"
+      - "CFTR[18555783]"
+      - "OTUB1[26752685]"
+      - "RBM8A[26496610]"
+      - "SF3B6[30021884]"
+      - "DERL1[18555783]"
+      - "HTT[17500595]"
+      - "BAZ2B[30021884]"
+      - "HACD2[15024066]"
+      - "RNF5[18555783]"
+      - "SERTAD4[30021884]"
+      - "GNG4[30021884]"
+      - "TMEM67[26638075]"
+      - "MAPK6[26972000]"
+      - "DRD2[28298427]"
+      - "EVC2[26638075]"
+      - "FIS1[21183955]"
+      - "FDPS[30021884]"
+      - "TIMMDC1[unassigned1304]"
+      - "ISG15[26259872]"
+      - "PBX4[30021884]"
+      - "KLK10[21988832]"
+      - "KTN1[30021884]"
+      - "TMEM17[26638075]"
+      - "TMEM237[26638075]"
+      - "BCL2[9334338]"
+      - "BCL2L1[9334338]"
+    interactionsBiogrid:
+      - "APP[12529377]"
+      - "ATF2[22304920]"
+      - "TRAM1[18555783]"
+      - "ITGAM[15294914]"
+      - "GOLT1B[26496610]"
+      - "COX4I1[26344197]"
+      - "CISD1[26344197]"
+      - "OLA1[26344197]"
+      - "ENO1[22658674]"
+      - "AQP2[28931009]"
+      - "ACTG1[10958671"
+      - "12605685]"
+      - "SEC61A1[18555783]"
+      - "PPP6C[27684187]"
+      - "CASP8[9334338"
+      - "21183955"
+      - "15254227"
+      - "11917123]"
+      - "YWHAQ[15161933]"
+      - "TCTN3[26638075]"
+      - "TCTN2[26638075]"
+      - "TCTN1[26638075]"
+      - "CASP1[9334338]"
+      - "BCAP29[12886015"
+      - "19342655]"
+      - "SEC61B[18555783]"
+      - "CEP290[26638075]"
+      - "VKORC1[21103663]"
+      - "RAB2A[26344197]"
+      - "TPM2[26344197]"
+      - "SERPINF2[21988832]"
+      - "HLA-A[19342655"
+      - "17056546]"
+      - "ARMC8[29911972]"
+      - "SCAMP3[26344197]"
+      - "SCAMP2[26344197]"
+      - "GPRIN2[25416956]"
+      - "RER1[26344197]"
+      - "TMEM216[26638075]"
+      - "CANX[11851433"
+      - "11917123]"
+      - "VDAC3[26344197]"
+      - "VDAC2[26344197]"
+      - "MYH9[26496610]"
+      - "VDAC1[26344197]"
+      - "ZNF598[28685749]"
+      - "VAMP2[9396746]"
+      - "CFTR[18555783]"
+      - "VAMP3[9396746]"
+      - "HDAC4[27684187]"
+      - "RAB1A[26344197]"
+      - "NDUFB10[26344197]"
+      - "RBM8A[26496610]"
+      - "DERL1[18555783]"
+      - "PHB[26344197]"
+      - "PTPLB[15024066]"
+      - "RNF4[29180619]"
+      - "RNF5[18555783]"
+      - "LMAN1[19342655]"
+      - "NXF1[22658674]"
+      - "PGRMC1[21081644]"
+      - "EPCAM[24898727]"
+      - "TMEM67[26638075]"
+      - "COX2[15254227]"
+      - "SCN3B[28514442]"
+      - "MAPK6[26972000]"
+      - "MYH10[10958671"
+      - "12605685]"
+      - "BCAP31[12886015"
+      - "10958671"
+      - "19342655]"
+      - "UBL4A[23246001]"
+      - "NTRK1[25921289]"
+      - "EVC2[26638075]"
+      - "FIS1[21183955]"
+      - "CYB5A[28514442]"
+      - "RDX[26344197]"
+      - "RPA1[24332808]"
+      - "RPA2[24332808]"
+      - "BFAR[14502241]"
+      - "ATP2B2[28514442]"
+      - "KLK10[21988832]"
+      - "UBAC1[28514442]"
+      - "ATP4A[17255364]"
+      - "MOV10[22658674]"
+      - "TMEM17[26638075]"
+      - "TMEM237[26638075]"
+      - "RPA3[24332808]"
+      - "BCL2[9334338]"
+      - "RNF185[17558393]"
+      - "BCL2L1[9334338"
+      - "12594175]"
+    interactionsConsensusPathDb:
+      - "ITGAM[0.983]"
+      - "TRIM13[NA]"
+      - "RER1[NA]"
+      - "STAM[NA]"
+      - "SLC7A11[NA]"
+      - "STX10[NA]"
+      - "OSBP[NA]"
+      - "PALM[NA]"
+      - "WDR20[NA]"
+      - "SEMA4C[NA]"
+      - "PTPN2[NA]"
+      - "FZD6[NA]"
+      - "SLC5A3[NA]"
+      - "LRP8[NA]"
+      - "STEAP3[NA]"
+      - "CTNND1[NA]"
+      - "PGRMC2[NA]"
+      - "APPL1[NA]"
+      - "YIF1A[NA]"
+      - "TOLLIP[NA]"
+      - "SQSTM1[NA]"
+      - "CYFIP1[NA]"
+      - "MFAP3[NA]"
+      - "MB21D2[NA]"
+      - "ERICH5[NA]"
+      - "SPCS3[NA]"
+      - "ARFGAP3[NA]"
+      - "IGF2R[NA]"
+      - "SLC1A4[NA]"
+      - "LIN7C[NA]"
+      - "DSC2[NA]"
+      - "ADGRL2[NA]"
+      - "SLC20A2[NA]"
+      - "SLC4A7[NA]"
+      - "FAM219A[NA]"
+      - "SLC30A1[NA]"
+      - "USP6NL[NA]"
+      - "AP2S1[NA]"
+      - "ESYT2[NA]"
+      - "TNFRSF10B[NA]"
+      - "SCRIB[NA]"
+      - "TMEM30A[NA]"
+      - "FNDC3A[NA]"
+      - "ANO6[NA]"
+      - "DHRS7[NA]"
+      - "COPE[NA]"
+      - "BLZF1[NA]"
+      - "ATP1A1[NA]"
+      - "EHBP1[NA]"
+      - "GOSR2[NA]"
+      - "GPR180[NA]"
+      - "SLC12A7[NA]"
+      - "RABL6[NA]"
+      - "TMX1[NA]"
+      - "RPF2[NA]"
+      - "OSBPL8[NA]"
+      - "TMEM138[NA]"
+      - "LLGL1[NA]"
+      - "SNAP23[NA]"
+      - "CPNE8[NA]"
+      - "SLC12A6[NA]"
+      - "CYP51A1[NA]"
+      - "STOM[NA]"
+      - "NIPSNAP2[NA]"
+      - "SLC30A6[NA]"
+      - "PLEKHA1[NA]"
+      - "PDZD8[NA]"
+      - "TFG[NA]"
+      - "CBARP[NA]"
+      - "SEC24A[NA]"
+      - "TMEM115[NA]"
+      - "SLC29A1[NA]"
+      - "SCYL1[NA]"
+      - "SLC38A2[NA]"
+      - "NOTCH2[NA]"
+      - "PHACTR4[NA]"
+      - "FAM171A2[NA]"
+      - "DSG2[NA]"
+      - "FZD5[NA]"
+      - "VEZT[NA]"
+      - "GOPC[NA]"
+      - "CDCA3[NA]"
+      - "SLC12A2[NA]"
+      - "GOLGA5[NA]"
+      - "TMEM237[NA]"
+      - "IRS4[NA]"
+      - "ARFIP1[NA]"
+      - "SEMA6A[NA]"
+      - "NDRG1[NA]"
+      - "SCAMP1[NA]"
+      - "SCAMP4[NA]"
+      - "EMC3[NA]"
+      - "EMC7[NA]"
+      - "SLC38A1[NA]"
+      - "TMEM199[NA]"
+      - "PTPN1[NA]"
+      - "SLC35F2[NA]"
+      - "BET1[NA]"
+      - "MPP7[NA]"
+      - "GPR108[NA]"
+      - "HM13[NA]"
+      - "JAG2[NA]"
+      - "PDZD11[NA]"
+      - "CLCC1[NA]"
+      - "GPAT4[NA]"
+      - "SNX2[NA]"
+      - "STIM1[NA]"
+      - "CLCN7[NA]"
+      - "WDR6[NA]"
+      - "MARK2[NA]"
+      - "ARFGAP2[NA]"
+      - "SLC5A6[NA]"
+      - "SCYL2[NA]"
+      - "VMA21[NA]"
+      - "SMPD4[NA]"
+      - "RHBDD3[NA]"
+      - "HLA-A[NA]"
+      - "CNNM3[NA]"
+      - "EMD[NA]"
+      - "STX16[NA]"
+      - "ATP2B1[NA]"
+      - "SLC6A9[NA]"
+      - "SEC23B[NA]"
+      - "MTMR6[NA]"
+      - "ADIPOR1[NA]"
+      - "MMGT1[NA]"
+      - "KIRREL1[NA]"
+      - "LSR[NA]"
+      - "SCAMP3[NA]"
+      - "NDUFS8[NA]"
+      - "RELL1[NA]"
+      - "NUMB[NA]"
+      - "LNPK[NA]"
+      - "RHBDD2[NA]"
+      - "ATP6AP2[NA]"
+      - "GORASP2[NA]"
+      - "COG3[NA]"
+      - "STAM2[NA]"
+      - "DLG1[NA]"
+      - "ESYT1[NA]"
+      - "TBC1D5[NA]"
+      - "FRS2[NA]"
+      - "KIAA0319L[NA]"
+      - "STX7[NA]"
+      - "ATP6V1F[NA]"
+      - "VAMP2[NA]"
+      - "EPS15[NA]"
+      - "USO1[NA]"
+      - "ANK3[NA]"
+      - "PANX1[NA]"
+      - "EPB41L1[NA]"
+      - "ZDHHC5[NA]"
+      - "ALDH3A2[NA]"
+      - "ALG9[NA]"
+      - "GGA3[NA]"
+      - "EMC1[NA]"
+      - "SLC33A1[NA]"
+      - "ARCN1[NA]"
+      - "ACSL3[NA]"
+      - "CACHD1[NA]"
+      - "SLC7A2[NA]"
+      - "SCYL3[NA]"
+      - "TNIK[NA]"
+      - "FERMT2[NA]"
+      - "EPHB4[NA]"
+      - "UNC5B[NA]"
+      - "LMAN1[NA]"
+      - "PKP4[NA]"
+      - "CAV1[NA]"
+      - "TMEM9[NA]"
+      - "CLINT1[NA]"
+      - "TMEM209[NA]"
+      - "CD99[NA]"
+      - "FAM171B[NA]"
+      - "CXADR[NA]"
+      - "HSPA12A[NA]"
+      - "JUP[NA]"
+      - "WDR41[NA]"
+      - "SCAMP2[NA]"
+      - "CASK[NA]"
+      - "SLC19A1[NA]"
+      - "GOSR1[NA]"
+      - "SPRY4[NA]"
+      - "CDKAL1[NA]"
+      - "ITGA6[NA]"
+      - "NBEA[NA]"
+      - "MKS1[NA]"
+      - "RAB23[NA]"
+      - "ROR2[NA]"
+      - "AP3M1[NA]"
+      - "JPH1[NA]"
+      - "GPR107[NA]"
+      - "PALD1[NA]"
+      - "NDC1[NA]"
+      - "EMC2[NA]"
+      - "SNX3[NA]"
+      - "ANKLE2[NA]"
+      - "GGA1[NA]"
+      - "UBXN4[NA]"
+      - "WASF2[NA]"
+      - "SLCO4A1[NA]"
+      - "RAB7A[NA]"
+      - "SLC39A14[NA]"
+      - "VANGL2[NA]"
+      - "VAMP7[NA]"
+      - "ADD3[NA]"
+      - "SLC20A1[NA]"
+      - "WDR11[NA]"
+      - "ATP7A[NA]"
+      - "PTK7[NA]"
+      - "ITM2B[NA]"
+      - "YKT6[NA]"
+      - "STX8[NA]"
+      - "SLC9A1[NA]"
+      - "FNBP1[NA]"
+      - "SLC39A6[NA]"
+      - "LYN[NA]"
+      - "STX12[NA]"
+      - "TMEM87A[NA]"
+      - "ZDHHC20[NA]"
+      - "SLC1A3[NA]"
+      - "HMOX2[NA]"
+      - "FAM91A1[NA]"
+      - "CNNM2[NA]"
+      - "ITM2C[NA]"
+      - "VAMP8[NA]"
+      - "ATP6AP1[NA]"
+      - "MPZL1[NA]"
+      - "LNPEP[NA]"
+      - "SLC35B3[NA]"
+      - "MCAM[NA]"
+      - "VAMP3[NA]"
+      - "NECTIN2[NA]"
+      - "SEC23A[NA]"
+      - "ARFIP2[NA]"
+      - "SENP2[NA]"
+      - "MPP1[NA]"
+      - "SLC6A8[NA]"
+      - "EFNB1[NA]"
+      - "STX6[NA]"
+      - "EMC8[NA]"
+      - "CCDC115[NA]"
+      - "ABCC1[NA]"
+      - "PLEKHA5[NA]"
+      - "LRBA[NA]"
+      - "FLVCR1[NA]"
+      - "THEM6[NA]"
+      - "SEC23IP[NA]"
+      - "PRKCI[NA]"
+      - "VPS45[NA]"
+      - "ATP2C1[NA]"
+      - "DDRGK1[NA]"
+      - "NETO2[NA]"
+      - "AP1B1[NA]"
+      - "EFNB2[NA]"
+      - "NOTCH1[NA]"
+      - "SCFD1[NA]"
+      - "CKAP4[NA]"
+      - "ROR1[NA]"
+      - "CCDC47[NA]"
+      - "B9D1[NA]"
+      - "ACBD3[NA]"
+      - "TOR1AIP1[NA]"
+      - "COPA[NA]"
+      - "EPN2[NA]"
+      - "VKORC1L1[NA]"
+      - "NSDHL[NA]"
+      - "BET1L[NA]"
+      - "VRK2[NA]"
+      - "CAMLG[NA]"
+      - "SLC1A5[NA]"
+      - "MARVELD2[NA]"
+      - "SLC6A15[NA]"
+      - "FAM129B[NA]"
+      - "SOAT1[NA]"
+      - "WDR77[NA]"
+      - "PREB[NA]"
+      - "LBR[NA]"
+      - "SEC31A[NA]"
+      - "TBC1D22B[NA]"
+      - "PPFIBP1[NA]"
+      - "PACSIN2[NA]"
+      - "INSR[NA]"
+      - "FLOT2[NA]"
+      - "ZC3HAV1[NA]"
+      - "UBIAD1[NA]"
+      - "LYSMD3[NA]"
+      - "OCLN[NA]"
+      - "DVL1[NA]"
+      - "PCDH7[NA]"
+      - "VANGL1[NA]"
+      - "ARHGAP1[NA]"
+      - "SCARB1[NA]"
+      - "SEC24B[NA]"
+      - "VAMP4[NA]"
+      - "HGS[NA]"
+      - "PLD3[NA]"
+      - "ABCC5[NA]"
+      - "SLC3A2[NA]"
+      - "AP4E1[NA]"
+      - "EPHA2[NA]"
+      - "NUP155[NA]"
+      - "SHISA2[NA]"
+      - "SLC7A1[NA]"
+      - "SLC7A5[NA]"
+      - "YWHAH[NA]"
+      - "OCRL[NA]"
+      - "DEPDC1B[NA]"
+      - "LRP6[NA]"
+      - "EPN1[NA]"
+      - "SEC63[NA]"
+      - "AP4B1[NA]"
+      - "LEMD3[NA]"
+      - "BAIAP2L1[NA]"
+      - "SLC12A4[NA]"
+      - "RAB11FIP5[NA]"
+      - "OSBPL11[NA]"
+      - "CPD[NA]"
+      - "SLC30A5[NA]"
+      - "SLC39A10[NA]"
+      - "TMEM17[NA]"
+      - "EBAG9[NA]"
+      - "TMEM51[NA]"
+      - "AUP1[NA]"
+      - "CLNS1A[NA]"
+      - "SRPRA[NA]"
+      - "SLC6A6[NA]"
+      - "SNAP47[NA]"
+      - "GORAB[NA]"
+      - "MARK3[NA]"
+      - "VPS51[NA]"
+      - "UBE2J1[NA]"
+      - "PDXDC1[NA]"
+      - "COPG1[NA]"
+      - "ITGB1[NA]"
+      - "SMAP2[NA]"
+      - "BTF3[NA]"
+      - "ATP11C[NA]"
+      - "PAK4[NA]"
+      - "AHCYL1[NA]"
+      - "RABL3[NA]"
+      - "FAM234A[NA]"
+      - "ARL13B[NA]"
+      - "STX5[NA]"
+      - "TVP23B[NA]"
+      - "SMCR8[NA]"
+      - "EXOC3[NA]"
+      - "SEC22B[NA]"
+      - "HIP1[NA]"
+      - "GPAT3[NA]"
+      - "TFRC[NA]"
+      - "SEC11A[NA]"
+      - "MARCKSL1[NA]"
+      - "MOSPD2[NA]"
+      - "CASP8[0.999]"
+      - "BCL2[0.999]"
+      - "HACD2[0.999]"
+      - "CCDC115[NA]"
+      - "EMC8[NA]"
+      - "VAMP3[NA]"
+      - "SLC39A7[NA]"
+      - "TMEM214[NA]"
+      - "IKBIP[NA]"
+      - "CISD2[NA]"
+      - "MLEC[NA]"
+      - "TCTN2[NA]"
+      - "ATP6AP1[NA]"
+      - "VAPA[NA]"
+      - "HSD17B12[NA]"
+      - "VAPB[NA]"
+      - "ATP13A1[NA]"
+      - "HMOX2[NA]"
+      - "PLOD3[NA]"
+      - "PDIA6[NA]"
+      - "ZMPSTE24[NA]"
+      - "FKBP8[NA]"
+      - "TOR1AIP1[NA]"
+      - "CKAP4[NA]"
+      - "CCDC47[NA]"
+      - "HACD3[NA]"
+      - "DDRGK1[NA]"
+      - "KRTCAP2[NA]"
+      - "LMF2[NA]"
+      - "DNAJC16[NA]"
+      - "CACNA1A[NA]"
+      - "EMC6[NA]"
+      - "HACD2[NA]"
+      - "MFSD10[NA]"
+      - "LBR[NA]"
+      - "PREB[NA]"
+      - "SOAT1[NA]"
+      - "HYOU1[NA]"
+      - "CAMLG[NA]"
+      - "VRK2[NA]"
+      - "SGPL1[NA]"
+      - "BNIP1[NA]"
+      - "TMEM120B[NA]"
+      - "TLCD2[NA]"
+      - "VKORC1L1[NA]"
+      - "NSDHL[NA]"
+      - "LEMD3[NA]"
+      - "ADIPOR2[NA]"
+      - "SEC63[NA]"
+      - "MBOAT2[NA]"
+      - "FAF2[NA]"
+      - "DEPDC1B[NA]"
+      - "TMX3[NA]"
+      - "TMEM43[NA]"
+      - "CLGN[NA]"
+      - "DGKE[NA]"
+      - "NUS1[NA]"
+      - "ARHGAP1[NA]"
+      - "ANO10[NA]"
+      - "ITGB1[NA]"
+      - "PIGS[NA]"
+      - "ARL6IP5[NA]"
+      - "UBE2J1[NA]"
+      - "SNAP47[NA]"
+      - "CANX[NA]"
+      - "AUP1[NA]"
+      - "SRPRA[NA]"
+      - "ADIPOR1[NA]"
+      - "DDOST[NA]"
+      - "PDIA4[NA]"
+      - "TMEM161A[NA]"
+      - "SEC11A[NA]"
+      - "NDUFA5[NA]"
+      - "TAP2[NA]"
+      - "GPAT3[NA]"
+      - "SEC22B[NA]"
+      - "MBOAT7[NA]"
+      - "ALG3[NA]"
+      - "TMEM230[NA]"
+      - "RABL3[NA]"
+      - "LRRC59[NA]"
+      - "TMEM209[NA]"
+      - "SRPRB[NA]"
+      - "DOLPP1[NA]"
+      - "LMAN1[NA]"
+      - "RAB10[NA]"
+      - "STT3B[NA]"
+      - "ACSL3[NA]"
+      - "EMC1[NA]"
+      - "SLC33A1[NA]"
+      - "ALG9[NA]"
+      - "SPCS1[NA]"
+      - "EMC10[NA]"
+      - "ALDH3A2[NA]"
+      - "DNAJC1[NA]"
+      - "CLPTM1L[NA]"
+      - "MAGT1[NA]"
+      - "SPCS2[NA]"
+      - "VAMP2[NA]"
+      - "ATP6V1F[NA]"
+      - "ESYT1[NA]"
+      - "PIGU[NA]"
+      - "RHBDD2[NA]"
+      - "ATP6AP2[NA]"
+      - "LNPK[NA]"
+      - "CERS2[NA]"
+      - "TECR[NA]"
+      - "TLCD1[NA]"
+      - "NDUFS8[NA]"
+      - "TMPO[NA]"
+      - "ARF5[NA]"
+      - "SURF4[NA]"
+      - "POR[NA]"
+      - "TBL2[NA]"
+      - "YKT6[NA]"
+      - "EMC4[NA]"
+      - "RAB7A[NA]"
+      - "UBXN4[NA]"
+      - "RAB31[NA]"
+      - "EMC2[NA]"
+      - "CYB5R3[NA]"
+      - "NDC1[NA]"
+      - "CDKAL1[NA]"
+      - "MKS1[NA]"
+      - "DHCR7[NA]"
+      - "WDR41[NA]"
+      - "EBP[NA]"
+      - "DAD1[NA]"
+      - "PGRMC2[NA]"
+      - "RPN2[NA]"
+      - "HSP90B1[NA]"
+      - "TEX264[NA]"
+      - "RER1[NA]"
+      - "SNX19[NA]"
+      - "DHRS7[NA]"
+      - "SSR3[NA]"
+      - "ANO6[NA]"
+      - "DNAJB11[NA]"
+      - "VMP1[NA]"
+      - "SEC62[NA]"
+      - "AGPAT1[NA]"
+      - "RTN3[NA]"
+      - "SPCS3[NA]"
+      - "TMCO1[NA]"
+      - "NCOA2[NA]"
+      - "DHRS7B[NA]"
+      - "AAAS[NA]"
+      - "TMEM109[NA]"
+      - "OSBPL8[NA]"
+      - "RAB1A[NA]"
+      - "TMX1[NA]"
+      - "GOSR2[NA]"
+      - "EMC3[NA]"
+      - "RFT1[NA]"
+      - "REEP2[NA]"
+      - "VEZT[NA]"
+      - "RPN1[NA]"
+      - "HSPA5[NA]"
+      - "ABHD12[NA]"
+      - "FADS2[NA]"
+      - "JAGN1[NA]"
+      - "LMBR1L[NA]"
+      - "STIM1[NA]"
+      - "ATP2A2[NA]"
+      - "GPAT4[NA]"
+      - "TMEM38B[NA]"
+      - "BRI3BP[NA]"
+      - "CLCC1[NA]"
+      - "WLS[NA]"
+      - "HM13[NA]"
+      - "BET1[NA]"
+      - "PTPN1[NA]"
+      - "TMEM199[NA]"
+      - "TMEM222[NA]"
+      - "EMC7[NA]"
+      - "MMGT1[NA]"
+      - "APOL2[NA]"
+      - "PRAF2[NA]"
+      - "TMEM35B[NA]"
+      - "PTDSS1[NA]"
+      - "EMD[NA]"
+      - "SEC11C[NA]"
+      - "C1QBP[NA]"
+      - "VMA21[NA]"
+      - "SEC61B[0.999]"
+      - "TNIK[0.614]"
+      - "PGRMC2[NA]"
+      - "CTNND1[NA]"
+      - "STEAP3[NA]"
+      - "STAM[NA]"
+      - "RER1[NA]"
+      - "TRIM13[NA]"
+      - "TMX4[NA]"
+      - "TEX264[NA]"
+      - "OSBP[NA]"
+      - "STX10[NA]"
+      - "VMP1[NA]"
+      - "SLC4A7[NA]"
+      - "SLC20A2[NA]"
+      - "DHRS7[NA]"
+      - "ANO6[NA]"
+      - "ARFGAP3[NA]"
+      - "IGF2R[NA]"
+      - "AGPAT1[NA]"
+      - "SLC30A6[NA]"
+      - "NCOA2[NA]"
+      - "SNAP23[NA]"
+      - "TMEM115[NA]"
+      - "PDZD8[NA]"
+      - "OSBPL8[NA]"
+      - "TMX1[NA]"
+      - "USE1[NA]"
+      - "GOLGA5[NA]"
+      - "SLC12A2[NA]"
+      - "CDCA3[NA]"
+      - "EMC3[NA]"
+      - "SCAMP1[NA]"
+      - "SEMA6A[NA]"
+      - "SLC38A2[NA]"
+      - "GOPC[NA]"
+      - "VEZT[NA]"
+      - "STIM1[NA]"
+      - "GOLGA3[NA]"
+      - "JAGN1[NA]"
+      - "CLCN7[NA]"
+      - "PTPN1[NA]"
+      - "TMEM199[NA]"
+      - "SLC38A1[NA]"
+      - "GPAT4[NA]"
+      - "CLCC1[NA]"
+      - "BET1[NA]"
+      - "EMD[NA]"
+      - "MMGT1[NA]"
+      - "SLC6A9[NA]"
+      - "VMA21[NA]"
+      - "LRRC59[NA]"
+      - "STX5[NA]"
+      - "SMPD4[NA]"
+      - "SCYL3[NA]"
+      - "ACSL3[NA]"
+      - "EMC1[NA]"
+      - "SLC33A1[NA]"
+      - "ALG9[NA]"
+      - "DNAJC1[NA]"
+      - "CD99[NA]"
+      - "TMEM209[NA]"
+      - "RTN4[NA]"
+      - "TMEM9[NA]"
+      - "LMAN1[NA]"
+      - "GORASP2[NA]"
+      - "RHBDD2[NA]"
+      - "ATP6AP2[NA]"
+      - "LNPK[NA]"
+      - "RELL1[NA]"
+      - "CERS2[NA]"
+      - "LSR[NA]"
+      - "SPCS2[NA]"
+      - "VAMP2[NA]"
+      - "STX7[NA]"
+      - "ESYT1[NA]"
+      - "WDR11[NA]"
+      - "LPCAT1[NA]"
+      - "RAB7A[NA]"
+      - "UBXN4[NA]"
+      - "TMPO[NA]"
+      - "SLC39A6[NA]"
+      - "POR[NA]"
+      - "YKT6[NA]"
+      - "STX8[NA]"
+      - "SFT2D3[NA]"
+      - "WDR41[NA]"
+      - "CXADR[NA]"
+      - "EMC2[NA]"
+      - "ANKLE2[NA]"
+      - "GPR107[NA]"
+      - "JPH1[NA]"
+      - "NDC1[NA]"
+      - "ROR2[NA]"
+      - "CDKAL1[NA]"
+      - "GOSR1[NA]"
+      - "EIF2AK3[NA]"
+      - "NECTIN2[NA]"
+      - "VAMP3[NA]"
+      - "SLC39A7[NA]"
+      - "MCAM[NA]"
+      - "TMEM214[NA]"
+      - "CYB5B[NA]"
+      - "EFNB1[NA]"
+      - "STX6[NA]"
+      - "EMC8[NA]"
+      - "SLC6A8[NA]"
+      - "FAM91A1[NA]"
+      - "VAPB[NA]"
+      - "HMOX2[NA]"
+      - "TMEM87A[NA]"
+      - "STX12[NA]"
+      - "CISD2[NA]"
+      - "ATP6AP1[NA]"
+      - "VAPA[NA]"
+      - "ITM2C[NA]"
+      - "ACBD3[NA]"
+      - "GBA2[NA]"
+      - "GOLT1B[NA]"
+      - "TOR1AIP1[NA]"
+      - "CKAP4[NA]"
+      - "CCDC47[NA]"
+      - "SCFD1[NA]"
+      - "EFNB2[NA]"
+      - "DDRGK1[NA]"
+      - "VANGL1[NA]"
+      - "OCLN[NA]"
+      - "LYSMD3[NA]"
+      - "CAMLG[NA]"
+      - "SLC1A5[NA]"
+      - "VRK2[NA]"
+      - "SGPL1[NA]"
+      - "BET1L[NA]"
+      - "NSDHL[NA]"
+      - "LBR[NA]"
+      - "PREB[NA]"
+      - "SLC6A15[NA]"
+      - "SLC7A5[NA]"
+      - "LEMD3[NA]"
+      - "SEC63[NA]"
+      - "TMEM216[NA]"
+      - "SEC24B[NA]"
+      - "KTN1[NA]"
+      - "ARHGAP1[NA]"
+      - "ANO10[NA]"
+      - "NUP155[NA]"
+      - "SLC3A2[NA]"
+      - "AUP1[NA]"
+      - "SRPRA[NA]"
+      - "TMEM51[NA]"
+      - "ITGB1[NA]"
+      - "ARL6IP5[NA]"
+      - "PDXDC1[NA]"
+      - "UBE2J1[NA]"
+      - "SLC30A5[NA]"
+      - "CPD[NA]"
+      - "SLC12A4[NA]"
+      - "MTDH[NA]"
+      - "SLC39A10[NA]"
+      - "SEC11A[NA]"
+      - "CHP1[NA]"
+      - "TFRC[NA]"
+      - "CD99L2[NA]"
+      - "GPAT3[NA]"
+      - "MARCKSL1[NA]"
+      - "PDCL[NA]"
+      - "RABL3[NA]"
+      - "SEC22B[NA]"
+      - "POR[NA]"
+      - "DHX30[NA]"
+      - "YKT6[NA]"
+      - "SURF4[NA]"
+      - "TMPO[NA]"
+      - "RAB7A[NA]"
+      - "NDC1[NA]"
+      - "JPH1[NA]"
+      - "EBP[NA]"
+      - "LMAN1[NA]"
+      - "SRPRB[NA]"
+      - "TMEM209[NA]"
+      - "ALDH3A2[NA]"
+      - "SPCS1[NA]"
+      - "DNAJC1[NA]"
+      - "SLC33A1[NA]"
+      - "ACSL3[NA]"
+      - "CLPTM1L[NA]"
+      - "ATP6AP2[NA]"
+      - "TMEM35B[NA]"
+      - "APOL2[NA]"
+      - "MMGT1[NA]"
+      - "PRAF2[NA]"
+      - "PTDSS1[NA]"
+      - "EMD[NA]"
+      - "LRRC59[NA]"
+      - "CHMP7[NA]"
+      - "VMA21[NA]"
+      - "FADS2[NA]"
+      - "ATP2A2[NA]"
+      - "LMBR1L[NA]"
+      - "HM13[NA]"
+      - "WLS[NA]"
+      - "BET1[NA]"
+      - "BRI3BP[NA]"
+      - "TMEM38B[NA]"
+      - "GPAT4[NA]"
+      - "CLCC1[NA]"
+      - "EMC7[NA]"
+      - "TMEM199[NA]"
+      - "PTPN1[NA]"
+      - "EMC3[NA]"
+      - "RFT1[NA]"
+      - "RPN1[NA]"
+      - "VEZT[NA]"
+      - "C16orf58[NA]"
+      - "ABHD12[NA]"
+      - "HSPA5[NA]"
+      - "TMCO1[NA]"
+      - "DDX47[NA]"
+      - "LPCAT3[NA]"
+      - "TMEM109[NA]"
+      - "TP53I11[NA]"
+      - "AAAS[NA]"
+      - "GOSR2[NA]"
+      - "TMX1[NA]"
+      - "CAMLG[NA]"
+      - "SGPL1[NA]"
+      - "VRK2[NA]"
+      - "ANO6[NA]"
+      - "DHRS7[NA]"
+      - "SSR3[NA]"
+      - "SNX19[NA]"
+      - "TOR1AIP1[NA]"
+      - "FKBP8[NA]"
+      - "CCDC47[NA]"
+      - "CKAP4[NA]"
+      - "VMP1[NA]"
+      - "DNAJB11[NA]"
+      - "ZMPSTE24[NA]"
+      - "AGPAT1[NA]"
+      - "HACD3[NA]"
+      - "SCD[NA]"
+      - "LMF2[NA]"
+      - "KRTCAP2[NA]"
+      - "SCD5[NA]"
+      - "SPCS3[NA]"
+      - "DAD1[NA]"
+      - "CCDC115[NA]"
+      - "EMC8[NA]"
+      - "PTPN2[NA]"
+      - "TMEM214[NA]"
+      - "PGRMC2[NA]"
+      - "RPN2[NA]"
+      - "TCTN2[NA]"
+      - "ATP6AP1[NA]"
+      - "TEX264[NA]"
+      - "VAPA[NA]"
+      - "CISD2[NA]"
+      - "TRIM13[NA]"
+      - "RER1[NA]"
+      - "VAPB[NA]"
+      - "HMOX2[NA]"
+      - "ATP13A1[NA]"
+      - "EMC4[NA]"
+      - "TBL2[NA]"
+      - "UBXN4[NA]"
+      - "CDKAL1[NA]"
+      - "EMC2[NA]"
+      - "CYB5R3[NA]"
+      - "DHCR7[NA]"
+      - "WDR41[NA]"
+      - "EMC10[NA]"
+      - "ALG9[NA]"
+      - "EMC1[NA]"
+      - "STT3B[NA]"
+      - "ATP6V1F[NA]"
+      - "SPCS2[NA]"
+      - "ESYT1[NA]"
+      - "MAGT1[NA]"
+      - "LNPK[NA]"
+      - "RHBDD2[NA]"
+      - "TLCD1[NA]"
+      - "CERS2[NA]"
+      - "PIGU[NA]"
+      - "TMEM161A[NA]"
+      - "PDIA4[NA]"
+      - "DDOST[NA]"
+      - "GPAT3[NA]"
+      - "SEC11A[NA]"
+      - "STX5[NA]"
+      - "CNIH4[NA]"
+      - "MBOAT7[NA]"
+      - "SEC22B[NA]"
+      - "RABL3[NA]"
+      - "ARL6IP5[NA]"
+      - "UBE2J1[NA]"
+      - "ITGB1[NA]"
+      - "SRPRA[NA]"
+      - "AUP1[NA]"
+      - "CANX[NA]"
+      - "AGK[NA]"
+      - "SEC63[NA]"
+      - "ADIPOR2[NA]"
+      - "LEMD3[NA]"
+      - "C18orf32[NA]"
+      - "CLGN[NA]"
+      - "DEPDC1B[NA]"
+      - "TMEM43[NA]"
+      - "PLD3[NA]"
+      - "DGKE[NA]"
+      - "CACNA1A[NA]"
+      - "EMC6[NA]"
+      - "MFSD10[NA]"
+      - "PREB[NA]"
+      - "LBR[NA]"
+      - "SOAT1[NA]"
+      - "VKORC1L1[NA]"
+      - "TLCD2[NA]"
+      - "TMEM120B[NA]"
+      - "STIP1[NA]"
+      - "DYNC1H1[NA]"
+      - "EEF1D[NA]"
+      - "NDUFS3[NA]"
+      - "DDB1[NA]"
+      - "VDAC1[NA]"
+      - "CCT8[NA]"
+      - "LDHAL6A[NA]"
+      - "ENO1[NA]"
+      - "CHCHD2[NA]"
+      - "CLTC[NA]"
+      - "PHB2[NA]"
+      - "HTT[NA]"
+      - "CCT6A[NA]"
+      - "DERL1[0.999]"
+      - "TRIM13[NA]"
+      - "STAM[NA]"
+      - "STX10[NA]"
+      - "NDUFS3[NA]"
+      - "PALM[NA]"
+      - "MAP4K4[NA]"
+      - "PKP2[NA]"
+      - "CTNND1[NA]"
+      - "PGRMC2[NA]"
+      - "STEAP3[NA]"
+      - "ADCY9[NA]"
+      - "SQSTM1[NA]"
+      - "MB21D2[NA]"
+      - "AKT2[NA]"
+      - "ARFGAP3[NA]"
+      - "SLC1A4[NA]"
+      - "EXOC4[NA]"
+      - "IGF2R[NA]"
+      - "ADGRL2[NA]"
+      - "SLC30A1[NA]"
+      - "SLC4A7[NA]"
+      - "SLC20A2[NA]"
+      - "SCRIB[NA]"
+      - "ESYT2[NA]"
+      - "DHRS7[NA]"
+      - "ANO6[NA]"
+      - "COPE[NA]"
+      - "BLZF1[NA]"
+      - "GOSR2[NA]"
+      - "EHBP1[NA]"
+      - "ATP1A1[NA]"
+      - "OSBPL8[NA]"
+      - "DST[NA]"
+      - "TMX1[NA]"
+      - "RABL6[NA]"
+      - "SLC12A7[NA]"
+      - "CYP51A1[NA]"
+      - "SNAP23[NA]"
+      - "CPNE8[NA]"
+      - "PLEKHA1[NA]"
+      - "SLC30A6[NA]"
+      - "STOM[NA]"
+      - "KIAA1549[NA]"
+      - "SEC24A[NA]"
+      - "CBARP[NA]"
+      - "LRP2[NA]"
+      - "SLC29A1[NA]"
+      - "PHACTR4[NA]"
+      - "SLC38A2[NA]"
+      - "NOTCH2[NA]"
+      - "YES1[NA]"
+      - "DSG2[NA]"
+      - "FAM171A2[NA]"
+      - "VEZT[NA]"
+      - "GOPC[NA]"
+      - "TMEM237[NA]"
+      - "SLC12A2[NA]"
+      - "GOLGA5[NA]"
+      - "CDCA3[NA]"
+      - "ARFIP1[NA]"
+      - "IRS4[NA]"
+      - "NDRG1[NA]"
+      - "EMC3[NA]"
+      - "RAB2A[NA]"
+      - "SCAMP1[NA]"
+      - "SLC38A1[NA]"
+      - "SLC35F2[NA]"
+      - "PTPN1[NA]"
+      - "TMEM199[NA]"
+      - "MPP7[NA]"
+      - "GPAT4[NA]"
+      - "CLCC1[NA]"
+      - "EFR3B[NA]"
+      - "JAG2[NA]"
+      - "PDZD11[NA]"
+      - "STIM1[NA]"
+      - "WDR6[NA]"
+      - "CLCN7[NA]"
+      - "ARFGAP2[NA]"
+      - "GPRC5A[NA]"
+      - "MARK2[NA]"
+      - "VMA21[NA]"
+      - "SLC5A6[NA]"
+      - "SMPD4[NA]"
+      - "PTPN13[NA]"
+      - "RHBDD3[NA]"
+      - "HLA-A[NA]"
+      - "TENM3[NA]"
+      - "CNNM3[NA]"
+      - "EMD[NA]"
+      - "ATP2B1[NA]"
+      - "MMGT1[NA]"
+      - "KIRREL1[NA]"
+      - "SEC23B[NA]"
+      - "SLC6A9[NA]"
+      - "ATP6AP2[NA]"
+      - "RHBDD2[NA]"
+      - "RELL1[NA]"
+      - "NUMB[NA]"
+      - "SCAMP3[NA]"
+      - "LSR[NA]"
+      - "DLG1[NA]"
+      - "STIM2[NA]"
+      - "COG3[NA]"
+      - "STAM2[NA]"
+      - "PIGU[NA]"
+      - "GORASP2[NA]"
+      - "STX7[NA]"
+      - "TBC1D5[NA]"
+      - "ESYT1[NA]"
+      - "EPB41L1[NA]"
+      - "PANX1[NA]"
+      - "ATP2B4[NA]"
+      - "USO1[NA]"
+      - "EPS15[NA]"
+      - "ALDH3A2[NA]"
+      - "ZDHHC5[NA]"
+      - "PRRT3[NA]"
+      - "SCYL3[NA]"
+      - "CACHD1[NA]"
+      - "SLC7A2[NA]"
+      - "ACSL3[NA]"
+      - "PIK3R1[NA]"
+      - "ARCN1[NA]"
+      - "EMC1[NA]"
+      - "LMAN1[NA]"
+      - "UNC5B[NA]"
+      - "FERMT2[NA]"
+      - "CD99[NA]"
+      - "TMEM9[NA]"
+      - "KIDINS220[NA]"
+      - "CAV1[NA]"
+      - "PKP4[NA]"
+      - "JUP[NA]"
+      - "CXADR[NA]"
+      - "HSPA12A[NA]"
+      - "FAM171B[NA]"
+      - "DDX54[NA]"
+      - "SLC19A1[NA]"
+      - "CASK[NA]"
+      - "RASAL2[NA]"
+      - "ERBIN[NA]"
+      - "ROR2[NA]"
+      - "ITGA6[NA]"
+      - "MKS1[NA]"
+      - "CDKAL1[NA]"
+      - "SPRY4[NA]"
+      - "GOSR1[NA]"
+      - "EMC2[NA]"
+      - "NDC1[NA]"
+      - "PODXL[NA]"
+      - "JPH1[NA]"
+      - "CYB5R3[NA]"
+      - "GPR107[NA]"
+      - "SLCO4A1[NA]"
+      - "RAB7A[NA]"
+      - "ISCA1[NA]"
+      - "UBXN4[NA]"
+      - "ATP7A[NA]"
+      - "WDR11[NA]"
+      - "RAB11B[NA]"
+      - "SLC20A1[NA]"
+      - "VANGL2[NA]"
+      - "NCKAP1[NA]"
+      - "SLC39A14[NA]"
+      - "ADD3[NA]"
+      - "VAMP7[NA]"
+      - "SLC39A6[NA]"
+      - "SLC9A1[NA]"
+      - "STX8[NA]"
+      - "YKT6[NA]"
+      - "LYN[NA]"
+      - "ZDHHC20[NA]"
+      - "TMEM87A[NA]"
+      - "STX12[NA]"
+      - "CNNM2[NA]"
+      - "TRIP11[NA]"
+      - "FAM91A1[NA]"
+      - "SLC1A3[NA]"
+      - "HMOX2[NA]"
+      - "ATP6AP1[NA]"
+      - "VAMP8[NA]"
+      - "LNPEP[NA]"
+      - "FAM171A1[NA]"
+      - "SLCO4C1[NA]"
+      - "NECTIN2[NA]"
+      - "VAMP3[NA]"
+      - "MCAM[NA]"
+      - "RAI14[NA]"
+      - "SEC23A[NA]"
+      - "ABCC1[NA]"
+      - "STX6[NA]"
+      - "EMC8[NA]"
+      - "EFNB1[NA]"
+      - "SLC6A8[NA]"
+      - "FLVCR1[NA]"
+      - "LRBA[NA]"
+      - "PLEKHA5[NA]"
+      - "SEC23IP[NA]"
+      - "VPS45[NA]"
+      - "NOTCH1[NA]"
+      - "EFNB2[NA]"
+      - "GCC1[NA]"
+      - "TOR1AIP1[NA]"
+      - "ACBD3[NA]"
+      - "CCDC47[NA]"
+      - "CKAP4[NA]"
+      - "SCFD1[NA]"
+      - "COPA[NA]"
+      - "BET1L[NA]"
+      - "NSDHL[NA]"
+      - "SLC1A5[NA]"
+      - "CAMLG[NA]"
+      - "VRK2[NA]"
+      - "FAM129B[NA]"
+      - "SLC6A15[NA]"
+      - "LBR[NA]"
+      - "PREB[NA]"
+      - "WDR77[NA]"
+      - "UTRN[NA]"
+      - "SOAT1[NA]"
+      - "PPFIBP1[NA]"
+      - "UNC5C[NA]"
+      - "FLOT2[NA]"
+      - "INSR[NA]"
+      - "PACSIN2[NA]"
+      - "UBIAD1[NA]"
+      - "ZC3HAV1[NA]"
+      - "VANGL1[NA]"
+      - "KTN1[NA]"
+      - "ABCE1[NA]"
+      - "HGS[NA]"
+      - "VAMP4[NA]"
+      - "SEC24B[NA]"
+      - "ABCC5[NA]"
+      - "EPHA2[NA]"
+      - "SLC3A2[NA]"
+      - "SHISA2[NA]"
+      - "EPB41L5[NA]"
+      - "DEPDC1B[NA]"
+      - "APBB1[NA]"
+      - "YWHAH[NA]"
+      - "SLC7A5[NA]"
+      - "LEMD3[NA]"
+      - "NSA2[NA]"
+      - "SLC12A4[NA]"
+      - "BAIAP2L1[NA]"
+      - "SLC30A5[NA]"
+      - "CPD[NA]"
+      - "OSBPL11[NA]"
+      - "SLC39A10[NA]"
+      - "TMEM17[NA]"
+      - "SRPRA[NA]"
+      - "CLNS1A[NA]"
+      - "TMEM51[NA]"
+      - "RAB5B[NA]"
+      - "SNAP47[NA]"
+      - "SLC6A6[NA]"
+      - "PDXDC1[NA]"
+      - "VPS51[NA]"
+      - "MARK3[NA]"
+      - "SMAP2[NA]"
+      - "ITGB1[NA]"
+      - "RABL3[NA]"
+      - "AHCYL1[NA]"
+      - "PAK4[NA]"
+      - "ATP11C[NA]"
+      - "STX5[NA]"
+      - "AKAP5[NA]"
+      - "SEC22B[NA]"
+      - "EXOC3[NA]"
+      - "SEC11A[NA]"
+      - "TFRC[NA]"
+      - "MOSPD2[NA]"
+      - "FTSJ1[NA]"
+      - "MOGS[NA]"
+      - "SPCS3[NA]"
+      - "NUDCD3[NA]"
+      - "FNDC3A[NA]"
+      - "DHRS7[NA]"
+      - "TRIM13[NA]"
+      - "PGRMC2[NA]"
+      - "RPN1[NA]"
+      - "VEZT[NA]"
+      - "NUDCD2[NA]"
+      - "TMX1[NA]"
+      - "NUDC[NA]"
+      - "EVC2[NA]"
+      - "SMPD4[NA]"
+      - "VMA21[NA]"
+      - "EMD[NA]"
+      - "TMEM199[NA]"
+      - "STIM1[NA]"
+      - "SRPRA[NA]"
+      - "JPH1[NA]"
+      - "ANKLE2[NA]"
+      - "EMC2[NA]"
+      - "CDKAL1[NA]"
+      - "POR[NA]"
+      - "UBXN4[NA]"
+      - "MAGT1[NA]"
+      - "MACO1[NA]"
+      - "ESYT1[NA]"
+      - "SPCS2[NA]"
+      - "BAG2[NA]"
+      - "ATP6AP2[NA]"
+      - "SRPRB[NA]"
+      - "SLC33A1[NA]"
+      - "ACSL3[NA]"
+      - "STT3B[NA]"
+      - "ALDH3A2[NA]"
+      - "DDRGK1[NA]"
+      - "THEM6[NA]"
+      - "SCFD1[NA]"
+      - "CCDC47[NA]"
+      - "CKAP4[NA]"
+      - "TOR1AIP1[NA]"
+      - "ACBD3[NA]"
+      - "ATP6AP1[NA]"
+      - "HMOX2[NA]"
+      - "SEC24B[NA]"
+      - "PLD3[NA]"
+      - "SEC63[NA]"
+      - "SOAT1[NA]"
+      - "PREB[NA]"
+      - "LBR[NA]"
+      - "VRK2[NA]"
+      - "CAMLG[NA]"
+      - "NSDHL[NA]"
+      - "VANGL1[NA]"
+      - "AHCY[NA]"
+      - "MLXIPL[NA]"
+      - "STX5[NA]"
+      - "RABL3[NA]"
+      - "SEC11A[NA]"
+      - "GLMN[NA]"
+      - "TRAM1[0.999]"
+      - "RNF5[NA]"
+      - "DERL1[NA]"
+      - "ZC3HAV1[NA]"
+      - "HYOU1[NA]"
+      - "PREB[NA]"
+      - "LBR[NA]"
+      - "VRK2[NA]"
+      - "SEC63[NA]"
+      - "LEMD3[NA]"
+      - "OSBPL9[NA]"
+      - "KTN1[NA]"
+      - "DVL3[NA]"
+      - "WWOX[NA]"
+      - "LRRC49[NA]"
+      - "CCDC115[NA]"
+      - "VAPA[NA]"
+      - "ATP6AP1[NA]"
+      - "VAPB[NA]"
+      - "SCFD1[NA]"
+      - "CCDC47[NA]"
+      - "TOR1AIP1[NA]"
+      - "ACBD3[NA]"
+      - "DDRGK1[NA]"
+      - "EMC1[NA]"
+      - "ESYT1[NA]"
+      - "C11orf49[NA]"
+      - "ATP6V1F[NA]"
+      - "STIM2[NA]"
+      - "UBXN4[NA]"
+      - "EIF2AK3[NA]"
+      - "CDKAL1[NA]"
+      - "ANKLE2[NA]"
+      - "EMC2[NA]"
+      - "PDLIM1[NA]"
+      - "WDR41[NA]"
+      - "COPG1[NA]"
+      - "TPGS1[NA]"
+      - "BSG[NA]"
+      - "SRPRA[NA]"
+      - "STIM1[NA]"
+      - "NSF[NA]"
+      - "CANX[NA]"
+      - "LSM8[NA]"
+      - "SYAP1[NA]"
+      - "CLCC1[NA]"
+      - "EMC7[NA]"
+      - "MTDH[NA]"
+      - "TES[NA]"
+      - "TMEM199[NA]"
+      - "RRP12[NA]"
+      - "PTPN1[NA]"
+      - "OSBPL11[NA]"
+      - "DDOST[NA]"
+      - "MMGT1[NA]"
+      - "CHP1[NA]"
+      - "SMPD4[NA]"
+      - "STX5[NA]"
+      - "NUP37[NA]"
+      - "LRRC59[NA]"
+      - "TACC1[NA]"
+      - "RABL3[NA]"
+      - "PDZD8[NA]"
+      - "ALDH1A2[NA]"
+      - "CAMSAP1[NA]"
+      - "TMX1[NA]"
+      - "WDR44[NA]"
+      - "OSBPL8[NA]"
+      - "COPG2[NA]"
+      - "CDK5RAP3[NA]"
+      - "EMC3[NA]"
+      - "SCIN[NA]"
+      - "SLC12A2[NA]"
+      - "VEZT[NA]"
+      - "PGRMC2[NA]"
+      - "FNDC3A[NA]"
+      - "COPE[NA]"
+      - "RAB3GAP2[NA]"
+      - "LMAN1[NA]"
+      - "SRPRB[NA]"
+      - "ALDH3A2[NA]"
+      - "ACSL3[NA]"
+      - "ATP6AP2[NA]"
+      - "EGLN1[NA]"
+      - "NDC1[NA]"
+      - "COPB2[NA]"
+      - "JPH1[NA]"
+      - "FIS1[0.999]"
+      - "ARL6IP5[NA]"
+      - "ATP6V0A1[NA]"
+      - "UBE2J1[NA]"
+      - "DGAT1[NA]"
+      - "ITGB1[NA]"
+      - "PIGS[NA]"
+      - "MGST1[NA]"
+      - "AUP1[NA]"
+      - "SRPRA[NA]"
+      - "CANX[NA]"
+      - "HMGCR[NA]"
+      - "SLC39A10[NA]"
+      - "ATP6V0A2[NA]"
+      - "SLC30A5[NA]"
+      - "PDIA4[NA]"
+      - "DPY19L1[NA]"
+      - "ILVBL[NA]"
+      - "DDOST[NA]"
+      - "MOSPD2[NA]"
+      - "TM9SF3[NA]"
+      - "ORMDL2[NA]"
+      - "GPAT3[NA]"
+      - "TAP2[NA]"
+      - "NDUFA5[NA]"
+      - "SEC11A[NA]"
+      - "IDH3B[NA]"
+      - "REEP4[NA]"
+      - "TFRC[NA]"
+      - "TMED2[NA]"
+      - "CNIH4[NA]"
+      - "ALG3[NA]"
+      - "MBOAT7[NA]"
+      - "SEC22B[NA]"
+      - "UGGT1[NA]"
+      - "RABL3[NA]"
+      - "GANAB[NA]"
+      - "NUP205[NA]"
+      - "TAPT1[NA]"
+      - "RCN2[NA]"
+      - "UFL1[NA]"
+      - "EMC10[NA]"
+      - "ALG9[NA]"
+      - "EMC1[NA]"
+      - "STT3B[NA]"
+      - "ATP6V1F[NA]"
+      - "SPCS2[NA]"
+      - "ESYT1[NA]"
+      - "HSDL2[NA]"
+      - "MAGT1[NA]"
+      - "RHBDD2[NA]"
+      - "TLCD1[NA]"
+      - "NDUFS8[NA]"
+      - "CERS2[NA]"
+      - "PIGU[NA]"
+      - "POMK[NA]"
+      - "TRAM1[NA]"
+      - "EMC4[NA]"
+      - "SLC9A1[NA]"
+      - "UBXN4[NA]"
+      - "TXNDC5[NA]"
+      - "TMEM189[NA]"
+      - "PIGK[NA]"
+      - "EIF2AK3[NA]"
+      - "CDKAL1[NA]"
+      - "EMC2[NA]"
+      - "ANKLE2[NA]"
+      - "TMED9[NA]"
+      - "YIF1B[NA]"
+      - "CYB5R3[NA]"
+      - "DHCR7[NA]"
+      - "WFS1[NA]"
+      - "SCAMP2[NA]"
+      - "SELENOI[NA]"
+      - "SUN1[NA]"
+      - "CCDC115[NA]"
+      - "CYB5B[NA]"
+      - "SLC6A8[NA]"
+      - "EMC8[NA]"
+      - "CALR[NA]"
+      - "TMEM214[NA]"
+      - "IKBIP[NA]"
+      - "ACADSB[NA]"
+      - "SLC39A7[NA]"
+      - "SLC38A9[NA]"
+      - "ATP6AP1[NA]"
+      - "TMEM33[NA]"
+      - "MLEC[NA]"
+      - "UGT8[NA]"
+      - "HSD17B12[NA]"
+      - "CISD2[NA]"
+      - "HMOX2[NA]"
+      - "SLC1A3[NA]"
+      - "ATP13A1[NA]"
+      - "PDIA6[NA]"
+      - "TMEM184C[NA]"
+      - "GOLT1B[NA]"
+      - "TOR1AIP1[NA]"
+      - "FKBP8[NA]"
+      - "CKAP4[NA]"
+      - "CCDC47[NA]"
+      - "NUCB2[NA]"
+      - "ZMPSTE24[NA]"
+      - "TMEM41A[NA]"
+      - "NCLN[NA]"
+      - "HACD3[NA]"
+      - "LMF2[NA]"
+      - "RTN3[NA]"
+      - "SPCS3[NA]"
+      - "NDUFA9[NA]"
+      - "SCD5[NA]"
+      - "KRTCAP2[NA]"
+      - "SELENOF[NA]"
+      - "TMCO1[NA]"
+      - "DDX47[NA]"
+      - "DNAJC16[NA]"
+      - "VANGL1[NA]"
+      - "REEP5[NA]"
+      - "EMC6[NA]"
+      - "DHRS7B[NA]"
+      - "HACD2[NA]"
+      - "MFSD10[NA]"
+      - "PGRMC1[NA]"
+      - "LPCAT3[NA]"
+      - "ORMDL3[NA]"
+      - "SLC25A17[NA]"
+      - "SLC30A6[NA]"
+      - "HYOU1[NA]"
+      - "TRPM7[NA]"
+      - "PREB[NA]"
+      - "TP53I11[NA]"
+      - "LBR[NA]"
+      - "SOAT1[NA]"
+      - "LCLAT1[NA]"
+      - "AAAS[NA]"
+      - "VKORC1L1[NA]"
+      - "NSDHL[NA]"
+      - "ATP1A1[NA]"
+      - "TMEM120B[NA]"
+      - "TLCD2[NA]"
+      - "CAMLG[NA]"
+      - "TMX1[NA]"
+      - "SAMD8[NA]"
+      - "OSBPL8[NA]"
+      - "P4HA1[NA]"
+      - "VRK2[NA]"
+      - "ALG6[NA]"
+      - "SGPL1[NA]"
+      - "SUN2[NA]"
+      - "SEC63[NA]"
+      - "ADIPOR2[NA]"
+      - "UNC93B1[NA]"
+      - "EMC3[NA]"
+      - "LEMD3[NA]"
+      - "RFT1[NA]"
+      - "CLGN[NA]"
+      - "SLC12A2[NA]"
+      - "DPY19L3[NA]"
+      - "REEP2[NA]"
+      - "ERP29[NA]"
+      - "TMX3[NA]"
+      - "TMEM43[NA]"
+      - "ELOVL1[NA]"
+      - "P4HB[NA]"
+      - "RPN1[NA]"
+      - "VEZT[NA]"
+      - "ALDH1B1[NA]"
+      - "SAR1A[NA]"
+      - "CERS1[NA]"
+      - "PRKCSH[NA]"
+      - "HLA-A[NA]"
+      - "NUS1[NA]"
+      - "SLC38A2[NA]"
+      - "SLC37A4[NA]"
+      - "DGKE[NA]"
+      - "ABHD12[NA]"
+      - "TOR1AIP2[NA]"
+      - "HSPA5[NA]"
+      - "CLCN7[NA]"
+      - "JAGN1[NA]"
+      - "FADS2[NA]"
+      - "ATP2A2[NA]"
+      - "SRSF2[NA]"
+      - "NDUFS1[NA]"
+      - "TCTN3[NA]"
+      - "PTDSS2[NA]"
+      - "STIM1[NA]"
+      - "WLS[NA]"
+      - "HM13[NA]"
+      - "BET1[NA]"
+      - "GPAT4[NA]"
+      - "TMEM38B[NA]"
+      - "BRI3BP[NA]"
+      - "CLCC1[NA]"
+      - "EMC7[NA]"
+      - "TMEM199[NA]"
+      - "PTPN1[NA]"
+      - "PDIA3[NA]"
+      - "APOL2[NA]"
+      - "MMGT1[NA]"
+      - "DEGS1[NA]"
+      - "PRAF2[NA]"
+      - "DNAJC10[NA]"
+      - "PTDSS1[NA]"
+      - "EMD[NA]"
+      - "SMPD4[NA]"
+      - "FA2H[NA]"
+      - "C1QBP[NA]"
+      - "LRRC59[NA]"
+      - "VMA21[NA]"
+      - "LMAN1[NA]"
+      - "TMEM209[NA]"
+      - "DOLPP1[NA]"
+      - "SRPRB[NA]"
+      - "ALDH3A2[NA]"
+      - "SPCS1[NA]"
+      - "ATP6V0C[NA]"
+      - "DNAJC1[NA]"
+      - "SLC33A1[NA]"
+      - "ACSL3[NA]"
+      - "GARS[NA]"
+      - "POLR2A[NA]"
+      - "CLPTM1L[NA]"
+      - "NDUFV2[NA]"
+      - "SENP3[NA]"
+      - "ATP6AP2[NA]"
+      - "POR[NA]"
+      - "YKT6[NA]"
+      - "SURF4[NA]"
+      - "SLC35B4[NA]"
+      - "TMPO[NA]"
+      - "RAB7A[NA]"
+      - "RAB31[NA]"
+      - "GRAMD1A[NA]"
+      - "SLC11A2[NA]"
+      - "NDC1[NA]"
+      - "NDUFS2[NA]"
+      - "EBP[NA]"
+      - "DDX54[NA]"
+      - "PLOD1[NA]"
+      - "TMTC3[NA]"
+      - "DAD1[NA]"
+      - "YIF1A[NA]"
+      - "ERO1A[NA]"
+      - "TMEM41B[NA]"
+      - "NIPSNAP1[NA]"
+      - "TMEM245[NA]"
+      - "TAP1[NA]"
+      - "HSP90B1[NA]"
+      - "PGRMC2[NA]"
+      - "RPN2[NA]"
+      - "TM9SF2[NA]"
+      - "NDUFS3[NA]"
+      - "EI24[NA]"
+      - "CDS2[NA]"
+      - "TRIM13[NA]"
+      - "RER1[NA]"
+      - "DNAJC11[NA]"
+      - "ABCB10[NA]"
+      - "ERO1B[NA]"
+      - "ANO6[NA]"
+      - "GSTK1[NA]"
+      - "SSR3[NA]"
+      - "DHRS7[NA]"
+      - "SLC30A7[NA]"
+      - "SSR1[NA]"
+      - "COPE[NA]"
+      - "PPIB[NA]"
+      - "PIGT[NA]"
+      - "DERL1[NA]"
+      - "GPAA1[NA]"
+      - "DNAJB11[NA]"
+      - "VMP1[NA]"
+      - "ERGIC3[NA]"
+      - "RCN1[NA]"
+      - "DNAJC3[NA]"
+      - "ERGIC2[NA]"
+      - "SCD[NA]"
+      - "CFTR[0.999]"
+      - "ALDH3A2[NA]"
+      - "COPB2[NA]"
+      - "RAE1[NA]"
+      - "LRRC59[NA]"
+      - "MMGT1[NA]"
+      - "EMD[NA]"
+      - "WDR81[NA]"
+      - "MTPN[NA]"
+      - "EMC3[NA]"
+      - "TMEM237[NA]"
+      - "EMC8[NA]"
+      - "SRP9[NA]"
+      - "SRP72[NA]"
+      - "COPA[NA]"
+      - "CCDC47[NA]"
+      - "CKAP4[NA]"
+      - "TOR1AIP1[NA]"
+      - "MACO1[NA]"
+      - "EMC1[NA]"
+      - "EMC2[NA]"
+      - "CDKAL1[NA]"
+      - "ECH1[NA]"
+      - "MTDH[NA]"
+      - "SRPRA[NA]"
+      - "EMC6[NA]"
+      - "KTN1[NA]"
+      - "UGGT2[NA]"
+      - "GRAMD1A[NA]"
+      - "PLOD1[NA]"
+      - "TMTC3[NA]"
+      - "AP3M1[NA]"
+      - "KDELC2[NA]"
+      - "LMAN1[NA]"
+      - "TMED10[NA]"
+      - "OS9[NA]"
+      - "GARS[NA]"
+      - "DNAJC10[NA]"
+      - "PDIA3[NA]"
+      - "SRSF2[NA]"
+      - "GFPT1[NA]"
+      - "TCTN1[NA]"
+      - "MINPP1[NA]"
+      - "CLCC1[NA]"
+      - "APMAP[NA]"
+      - "TTC13[NA]"
+      - "ERLEC1[NA]"
+      - "EMC3[NA]"
+      - "MIA3[NA]"
+      - "HSPA5[NA]"
+      - "PLOD2[NA]"
+      - "RPN1[NA]"
+      - "P4HB[NA]"
+      - "TXNDC16[NA]"
+      - "SELENOF[NA]"
+      - "NUP210[NA]"
+      - "DDX47[NA]"
+      - "P4HA1[NA]"
+      - "TMX1[NA]"
+      - "FKBP2[NA]"
+      - "CKAP4[NA]"
+      - "NENF[NA]"
+      - "TOR1AIP1[NA]"
+      - "NUCB2[NA]"
+      - "DNAJB11[NA]"
+      - "CNPY2[NA]"
+      - "PDIA6[NA]"
+      - "PPIB[NA]"
+      - "SERPINH1[NA]"
+      - "SPCS3[NA]"
+      - "MOGS[NA]"
+      - "NCLN[NA]"
+      - "DNAJC3[NA]"
+      - "RCN1[NA]"
+      - "IKBIP[NA]"
+      - "HSP90B1[NA]"
+      - "DNM2[NA]"
+      - "CALR[NA]"
+      - "SEL1L[NA]"
+      - "RPN2[NA]"
+      - "COLGALT1[NA]"
+      - "POFUT1[NA]"
+      - "PRPS1[NA]"
+      - "ERO1A[NA]"
+      - "LRPAP1[NA]"
+      - "EMC8[NA]"
+      - "ERAP2[NA]"
+      - "ERO1B[NA]"
+      - "P3H1[NA]"
+      - "TOR1A[NA]"
+      - "MESD[NA]"
+      - "MLEC[NA]"
+      - "TXNDC5[NA]"
+      - "PRPS2[NA]"
+      - "MANF[NA]"
+      - "CHID1[NA]"
+      - "TMED9[NA]"
+      - "EMC1[NA]"
+      - "STT3B[NA]"
+      - "NUP205[NA]"
+      - "RCN2[NA]"
+      - "MAGT1[NA]"
+      - "SEC11A[NA]"
+      - "PDIA4[NA]"
+      - "DDOST[NA]"
+      - "UGGT1[NA]"
+      - "GANAB[NA]"
+      - "TMED2[NA]"
+      - "SIL1[NA]"
+      - "CANX[NA]"
+      - "FKBP10[NA]"
+      - "CALU[NA]"
+      - "ERP29[NA]"
+      - "SEC63[NA]"
+      - "PRKCSH[NA]"
+      - "ASPH[NA]"
+      - "MAP2K1[NA]"
+      - "SDF2L1[NA]"
+      - "HYOU1[NA]"
+      - "CYP51A1[NA]"
+      - "NUDC[NA]"
+      - "TMX1[NA]"
+      - "NUDCD2[NA]"
+      - "VEZT[NA]"
+      - "RPN1[NA]"
+      - "PGRMC2[NA]"
+      - "ISOC1[NA]"
+      - "TRIM13[NA]"
+      - "FNDC3A[NA]"
+      - "DHRS7[NA]"
+      - "NUDCD3[NA]"
+      - "HSPBP1[NA]"
+      - "ACSL3[NA]"
+      - "ALDH3A2[NA]"
+      - "SRPRB[NA]"
+      - "BAG2[NA]"
+      - "UNC45A[NA]"
+      - "ATP6AP2[NA]"
+      - "STIP1[NA]"
+      - "GYS1[NA]"
+      - "SUGT1[NA]"
+      - "GRM5[NA]"
+      - "NDC1[NA]"
+      - "CDKAL1[NA]"
+      - "STIM1[NA]"
+      - "LMBR1L[NA]"
+      - "SRPRA[NA]"
+      - "UBE2J1[NA]"
+      - "PTPN1[NA]"
+      - "CDC37[NA]"
+      - "TMEM199[NA]"
+      - "TTC1[NA]"
+      - "GLMN[NA]"
+      - "DNAJC7[NA]"
+      - "CLCC1[NA]"
+      - "EMD[NA]"
+      - "SEC11A[NA]"
+      - "VMA21[NA]"
+      - "RABL3[NA]"
+      - "EVC2[NA]"
+      - "STX5[NA]"
+      - "SMPD4[NA]"
+      - "AHCY[NA]"
+      - "VANGL1[NA]"
+      - "VRK2[NA]"
+      - "SOAT1[NA]"
+      - "PREB[NA]"
+      - "YWHAH[NA]"
+      - "SEC63[NA]"
+      - "SEC24B[NA]"
+      - "PLD3[NA]"
+      - "NUP155[NA]"
+      - "ACTR2[NA]"
+      - "ATP6AP1[NA]"
+      - "STUB1[NA]"
+      - "CCDC47[NA]"
+      - "CKAP4[NA]"
+      - "FKBP8[NA]"
+      - "TOR1AIP1[NA]"
+      - "ACBD3[NA]"
+      - "THEM6[NA]"
+      - "DDRGK1[NA]"
+      - "STT3B[NA]"
+      - "MAGT1[NA]"
+      - "MACO1[NA]"
+      - "ESYT1[NA]"
+      - "SPCS2[NA]"
+      - "UBXN4[NA]"
+      - "ST7[NA]"
+      - "ANKLE2[NA]"
+      - "EMC2[NA]"
+      - "TERF1[0.791]"
+      - "FIS1[NA]"
+      - "CASP8[NA]"
+      - "SPCS2[NA]"
+      - "PSMC4[NA]"
+      - "MAGT1[NA]"
+      - "EMC1[NA]"
+      - "STT3B[NA]"
+      - "EMC2[NA]"
+      - "UBXN4[NA]"
+      - "TOX3[NA]"
+      - "TMEM67[NA]"
+      - "VRK2[NA]"
+      - "PREB[NA]"
+      - "ATP6AP1[NA]"
+      - "PGRMC2[NA]"
+      - "KCNC4[NA]"
+      - "SPCS3[NA]"
+      - "CCDC47[NA]"
+      - "ATP6AP2[NA]"
+      - "PSMD4[NA]"
+      - "PSMD1[NA]"
+      - "TMEM199[NA]"
+      - "HM13[NA]"
+      - "PSMD2[NA]"
+      - "PSMC3[NA]"
+      - "VMA21[NA]"
+      - "ABCD3[NA]"
+      - "OCIAD1[NA]"
+      - "RPN1[NA]"
+      - "EMC3[NA]"
+      - "SERPINF2[0.512]"
+      - "HLA-B[0.999]"
+      - "IKBKE[0.998]"
+      - "BCL2L1[0.999]"
+      - "FLOT2[NA]"
+      - "NDUFA7[NA]"
+      - "PCDH7[NA]"
+      - "CHMP2B[NA]"
+      - "LBR[NA]"
+      - "ANXA1[NA]"
+      - "SOAT1[NA]"
+      - "VDAC2[NA]"
+      - "HYOU1[NA]"
+      - "CALU[NA]"
+      - "TMEM43[NA]"
+      - "FLOT1[NA]"
+      - "LGALS1[NA]"
+      - "CHCHD3[NA]"
+      - "CYBRD1[NA]"
+      - "MRPL14[NA]"
+      - "IST1[NA]"
+      - "ALDH18A1[NA]"
+      - "HGS[NA]"
+      - "NDUFA2[NA]"
+      - "KTN1[NA]"
+      - "PHB[NA]"
+      - "ATP5PO[NA]"
+      - "UQCRC1[NA]"
+      - "GOLGA2[NA]"
+      - "MYOF[NA]"
+      - "CCDC115[NA]"
+      - "CD97[NA]"
+      - "STOML2[NA]"
+      - "HTRA1[NA]"
+      - "VAPB[NA]"
+      - "YIPF5[NA]"
+      - "UQCRQ[NA]"
+      - "ATP6AP1[NA]"
+      - "PTGES[NA]"
+      - "MLEC[NA]"
+      - "VAPA[NA]"
+      - "PDCD6[NA]"
+      - "GOLT1B[NA]"
+      - "CKAP4[NA]"
+      - "RNF185[NA]"
+      - "CXCR4[NA]"
+      - "ATP2C1[NA]"
+      - "NDUFA10[NA]"
+      - "NDUFA12[NA]"
+      - "RAB5C[NA]"
+      - "ATP6V1H[NA]"
+      - "KIDINS220[NA]"
+      - "LNPK[NA]"
+      - "NDUFS6[NA]"
+      - "ATP6V1F[NA]"
+      - "SPCS2[NA]"
+      - "LRP10[NA]"
+      - "TPI1[NA]"
+      - "RAB11B[NA]"
+      - "ERLIN1[NA]"
+      - "NDUFA13[NA]"
+      - "MGST3[NA]"
+      - "NDUFS1[NA]"
+      - "SGPP1[NA]"
+      - "ATP2A2[NA]"
+      - "CPM[NA]"
+      - "CD59[NA]"
+      - "SNTB2[NA]"
+      - "GPRC5A[NA]"
+      - "ATP6V0A1[NA]"
+      - "NDUFV1[NA]"
+      - "CLCN7[NA]"
+      - "CHMP4B[NA]"
+      - "UQCRC2[NA]"
+      - "CHMP1A[NA]"
+      - "NDUFB1[NA]"
+      - "IMMT[NA]"
+      - "ASTE1[NA]"
+      - "NDUFS5[NA]"
+      - "PHKA2[NA]"
+      - "NDUFA5[NA]"
+      - "TFRC[NA]"
+      - "REEP4[NA]"
+      - "PIEZO1[NA]"
+      - "RABAC1[NA]"
+      - "PHB2[NA]"
+      - "MMGT1[NA]"
+      - "CAVIN1[NA]"
+      - "ETFB[NA]"
+      - "NDUFV3[NA]"
+      - "C6orf120[NA]"
+      - "RABL3[NA]"
+      - "VKORC1[NA]"
+      - "ATP6V1A[NA]"
+      - "ERLIN2[NA]"
+      - "MBOAT7[NA]"
+      - "UQCRFS1[NA]"
+      - "SEC22B[NA]"
+      - "C1QBP[NA]"
+      - "COX4I1[NA]"
+      - "ATP6V1D[NA]"
+      - "NCKAP5L[NA]"
+      - "DHRS7B[NA]"
+      - "NDUFS4[NA]"
+      - "FAM8A1[NA]"
+      - "ATP6V1B2[NA]"
+      - "OSBPL8[NA]"
+      - "CHSY1[NA]"
+      - "SUN2[NA]"
+      - "ATP1A1[NA]"
+      - "TCIRG1[NA]"
+      - "XPR1[NA]"
+      - "ABCD3[NA]"
+      - "TMEM109[NA]"
+      - "RECQL[NA]"
+      - "ATP6V1G1[NA]"
+      - "TMEM237[NA]"
+      - "DDR2[NA]"
+      - "DSG2[NA]"
+      - "SLC38A2[NA]"
+      - "MCU[NA]"
+      - "ATP6V0D1[NA]"
+      - "PDCD6IP[NA]"
+      - "ATP6V1E1[NA]"
+      - "NDUFB4[NA]"
+      - "CAVIN3[NA]"
+      - "CHCHD6[NA]"
+      - "ENDOD1[NA]"
+      - "ATP5F1A[NA]"
+      - "INTS7[NA]"
+      - "DNAJC11[NA]"
+      - "FUNDC2[NA]"
+      - "VDAC1[NA]"
+      - "NDUFS3[NA]"
+      - "NDUFA6[NA]"
+      - "PIP4P1[NA]"
+      - "ABCG2[NA]"
+      - "TGFBR1[NA]"
+      - "CYC1[NA]"
+      - "NDUFB7[NA]"
+      - "NDUFA9[NA]"
+      - "SARAF[NA]"
+      - "COX5A[NA]"
+      - "GOLIM4[NA]"
+      - "ACBD5[NA]"
+      - "CAV1[NA]"
+      - "ATP5F1B[NA]"
+      - "NDUFV2[NA]"
+      - "RAB8A[NA]"
+      - "UBAC2[NA]"
+      - "ATP5PF[NA]"
+      - "CDC42[NA]"
+      - "NDUFA8[NA]"
+      - "LIFR[NA]"
+      - "ITSN2[NA]"
+      - "PLGRKT[NA]"
+      - "NDUFS2[NA]"
+      - "JUP[NA]"
+      - "NDUFB8[NA]"
+      - "MPHOSPH9[NA]"
+      - "ARPC3[NA]"
+      - "WRAP73[NA]"
+      - "PTGES3[NA]"
+      - "LRRC49[NA]"
+      - "CEP131[NA]"
+      - "CCDC138[NA]"
+      - "YWHAH[NA]"
+      - "CCP110[NA]"
+      - "PIBF1[NA]"
+      - "KDELR2[NA]"
+      - "AHCY[NA]"
+      - "PAWR[NA]"
+      - "PMPCB[NA]"
+      - "ECH1[NA]"
+      - "TPGS1[NA]"
+      - "CEP97[NA]"
+      - "NEK1[NA]"
+      - "CYB5R3[NA]"
+      - "CEP290[NA]"
+      - "HAUS7[NA]"
+      - "ANP32A[NA]"
+      - "GYS1[NA]"
+      - "C11orf49[NA]"
+      - "CEP162[NA]"
+      - "CEP72[NA]"
+      - "AK2[NA]"
+      - "CSPP1[NA]"
+      - "CEP170[NA]"
+      - "ISOC1[NA]"
+      - "LUZP1[NA]"
+      - "RAB2A[NA]"
+      - "HAUS8[NA]"
+      - "MTPN[NA]"
+      - "IQCB1[NA]"
+      - "C21orf2[NA]"
+      - "MIF[NA]"
+      - "PLP2[NA]"
+      - "SSX2IP[NA]"
+      - "OFD1[NA]"
+      - "UBE2N[NA]"
+      - "DNAJA1[NA]"
+      - "KPNB1[NA]"
+      - "MTHFD1[NA]"
+      - "HSD17B12[NA]"
+      - "TLN1[NA]"
+      - "UBE2E3[NA]"
+      - "MRPS7[NA]"
+      - "PRDX5[NA]"
+      - "ACOT7[NA]"
+      - "ATP5MD[NA]"
+      - "TXN[NA]"
+      - "CALR[NA]"
+      - "ADSL[NA]"
+      - "ILKAP[NA]"
+      - "MCCC2[NA]"
+      - "UQCRH[NA]"
+      - "PLS3[NA]"
+      - "FARSB[NA]"
+      - "SRP54[NA]"
+      - "SDHA[NA]"
+      - "RPA1[NA]"
+      - "BPNT1[NA]"
+      - "PTGES3[NA]"
+      - "KHSRP[NA]"
+      - "YWHAQ[NA]"
+      - "RCC2[NA]"
+      - "HSPA6[NA]"
+      - "CKAP4[NA]"
+      - "STUB1[NA]"
+      - "HDGF[NA]"
+      - "APEX1[NA]"
+      - "AIMP2[NA]"
+      - "COPA[NA]"
+      - "EIF4A1[NA]"
+      - "PDIA6[NA]"
+      - "PRDX1[NA]"
+      - "SF1[NA]"
+      - "TBCA[NA]"
+      - "CACYBP[NA]"
+      - "VDAC2[NA]"
+      - "NTPCR[NA]"
+      - "LBR[NA]"
+      - "SSH3[NA]"
+      - "TRIR[NA]"
+      - "DYNLL1[NA]"
+      - "PFAS[NA]"
+      - "AHSA1[NA]"
+      - "UBE2D2[NA]"
+      - "ASNA1[NA]"
+      - "MAP4[NA]"
+      - "ATP5PB[NA]"
+      - "ATP5IF1[NA]"
+      - "CALM3[NA]"
+      - "FDPS[NA]"
+      - "CDK1[NA]"
+      - "FUBP3[NA]"
+      - "PRKCSH[NA]"
+      - "CSRP2[NA]"
+      - "UQCRC1[NA]"
+      - "LDHB[NA]"
+      - "PHB[NA]"
+      - "TDP2[NA]"
+      - "HSPA4L[NA]"
+      - "COPB1[NA]"
+      - "CALU[NA]"
+      - "CTPS1[NA]"
+      - "ERP29[NA]"
+      - "ARF4[NA]"
+      - "FAM136A[NA]"
+      - "PARK7[NA]"
+      - "RPL26L1[NA]"
+      - "PDCD5[NA]"
+      - "AGK[NA]"
+      - "RAN[NA]"
+      - "SYAP1[NA]"
+      - "CS[NA]"
+      - "TUFM[NA]"
+      - "RCC1[NA]"
+      - "CNN3[NA]"
+      - "GAPDH[NA]"
+      - "HIF1AN[NA]"
+      - "CANX[NA]"
+      - "SGTA[NA]"
+      - "UQCRC2[NA]"
+      - "CALD1[NA]"
+      - "MSH2[NA]"
+      - "HSPA4[NA]"
+      - "UBE2W[NA]"
+      - "CKB[NA]"
+      - "ACAT1[NA]"
+      - "SLC27A4[NA]"
+      - "AARS[NA]"
+      - "PFN1[NA]"
+      - "YTHDF2[NA]"
+      - "COX6C[NA]"
+      - "PHB2[NA]"
+      - "HSPA9[NA]"
+      - "EIF4H[NA]"
+      - "IDH3B[NA]"
+      - "PFN2[NA]"
+      - "SEC61B[NA]"
+      - "SLC25A3[NA]"
+      - "MARCKSL1[NA]"
+      - "UCHL1[NA]"
+      - "TARDBP[NA]"
+      - "SSR4[NA]"
+      - "MAIP1[NA]"
+      - "SET[NA]"
+      - "UBTD1[NA]"
+      - "UBA1[NA]"
+      - "CCNB1[NA]"
+      - "MAGED2[NA]"
+      - "LSM3[NA]"
+      - "HMGB2[NA]"
+      - "NME2[NA]"
+      - "FKBP4[NA]"
+      - "YWHAZ[NA]"
+      - "PPAT[NA]"
+      - "SFXN1[NA]"
+      - "BAG2[NA]"
+      - "ATP5F1B[NA]"
+      - "HSPH1[NA]"
+      - "CHORDC1[NA]"
+      - "ADSS[NA]"
+      - "BAG6[NA]"
+      - "STIP1[NA]"
+      - "HSPD1[NA]"
+      - "GARS[NA]"
+      - "PIN1[NA]"
+      - "LDHA[NA]"
+      - "EZR[NA]"
+      - "OAT[NA]"
+      - "YWHAB[NA]"
+      - "ARCN1[NA]"
+      - "CLIC1[NA]"
+      - "UBE2E2[NA]"
+      - "SELENOK[NA]"
+      - "NAP1L4[NA]"
+      - "SFN[NA]"
+      - "PSME3[NA]"
+      - "CD2BP2[NA]"
+      - "AK2[NA]"
+      - "MPG[NA]"
+      - "ARHGDIA[NA]"
+      - "PIN4[NA]"
+      - "HSP90AB2P[NA]"
+      - "HPRT1[NA]"
+      - "PPM1G[NA]"
+      - "QARS[NA]"
+      - "ELOC[NA]"
+      - "TMED10[NA]"
+      - "ACAT2[NA]"
+      - "SRPRB[NA]"
+      - "SLC16A1[NA]"
+      - "GSTP1[NA]"
+      - "DNAJC8[NA]"
+      - "PCNA[NA]"
+      - "XRCC5[NA]"
+      - "UBE2E1[NA]"
+      - "ACLY[NA]"
+      - "CAD[NA]"
+      - "CAND1[NA]"
+      - "ZC3H15[NA]"
+      - "NOSIP[NA]"
+      - "HSPA8[NA]"
+      - "FUBP1[NA]"
+      - "ANP32A[NA]"
+      - "HSP90AA1[NA]"
+      - "HSD17B10[NA]"
+      - "UBE2D3[NA]"
+      - "NDUFA4[NA]"
+      - "TMSB10[NA]"
+      - "UTS2[NA]"
+      - "NUP93[NA]"
+      - "ANP32E[NA]"
+      - "PSMF1[NA]"
+      - "TTLL12[NA]"
+      - "PNKD[NA]"
+      - "ARF5[NA]"
+      - "KARS[NA]"
+      - "UCHL3[NA]"
+      - "OSGEP[NA]"
+      - "SLC25A11[NA]"
+      - "CRKL[NA]"
+      - "TARS[NA]"
+      - "ALDOA[NA]"
+      - "PTMA[NA]"
+      - "PAICS[NA]"
+      - "KCTD12[NA]"
+      - "SLIT3[NA]"
+      - "TXLNA[NA]"
+      - "MCM6[NA]"
+      - "SLC25A13[NA]"
+      - "IPO5[NA]"
+      - "LAGE3[NA]"
+      - "PRDX6[NA]"
+      - "FLYWCH2[NA]"
+      - "HSP90B1[NA]"
+      - "RANGAP1[NA]"
+      - "STMN2[NA]"
+      - "CSDE1[NA]"
+      - "RPN2[NA]"
+      - "GART[NA]"
+      - "PPA1[NA]"
+      - "CTNND1[NA]"
+      - "ATP5F1A[NA]"
+      - "TRAFD1[NA]"
+      - "AIFM1[NA]"
+      - "STMN1[NA]"
+      - "CDKN2A[NA]"
+      - "OTUB1[NA]"
+      - "JPT2[NA]"
+      - "PCBP1[NA]"
+      - "ASNS[NA]"
+      - "SEPT2[NA]"
+      - "ANP32B[NA]"
+      - "PHGDH[NA]"
+      - "COX5A[NA]"
+      - "TRAP1[NA]"
+      - "ENO1[NA]"
+      - "TPT1[NA]"
+      - "TCEA1[NA]"
+      - "CBR1[NA]"
+      - "SLC25A1[NA]"
+      - "COX5B[NA]"
+      - "EIF6[NA]"
+      - "ATP1A1[NA]"
+      - "PKM[NA]"
+      - "GIGYF2[NA]"
+      - "FARSA[NA]"
+      - "PRDX2[NA]"
+      - "MTPN[NA]"
+      - "UBL4A[NA]"
+      - "RRM1[NA]"
+      - "HSPE1[NA]"
+      - "NUDC[NA]"
+      - "CBS[NA]"
+      - "EEF2[NA]"
+      - "HSPA5[NA]"
+      - "SRM[NA]"
+      - "LETM1[NA]"
+      - "TUBB4B[NA]"
+      - "P4HB[NA]"
+      - "RPN1[NA]"
+      - "TUBB4A[NA]"
+      - "EDF1[NA]"
+      - "GMPS[NA]"
+      - "ESD[NA]"
+      - "PGK1[NA]"
+      - "ATIC[NA]"
+      - "NASP[NA]"
+      - "TOMM22[NA]"
+      - "NSUN2[NA]"
+      - "ELP1[NA]"
+      - "DNAJC7[NA]"
+      - "QPCTL[NA]"
+      - "CSE1L[NA]"
+      - "DLD[NA]"
+      - "GCLM[NA]"
+      - "ABCF2[NA]"
+      - "UBE2D1[NA]"
+      - "CKAP2[NA]"
+      - "TBCB[NA]"
+      - "EPM2A[NA]"
+      - "SH3GL1[NA]"
+      - "SNX2[NA]"
+      - "BSG[NA]"
+      - "GPX4[NA]"
+      - "DNAJB1[NA]"
+      - "SLC25A5[NA]"
+      - "UBE2L3[NA]"
+      - "RANBP1[NA]"
+      - "FKBP3[NA]"
+      - "SDHB[NA]"
+      - "ATP6V1A[NA]"
+      - "LRRC59[NA]"
+      - "SEPT7[NA]"
+      - "SHMT2[NA]"
+      - "ZC3HAV1L[NA]"
+      - "FASN[NA]"
+      - "ERP44[NA]"
+      - "UBE2G2[NA]"
+      - "VDAC3[NA]"
+      - "PDIA3[NA]"
+      - "CARM1[NA]"
+      - "API5[NA]"
+      - "FEN1[NA]"
+      - "YWHAZ[0.988]"
+      - "PKD2[0.999]"
+      - "KLK10[0.005]"
+      - "TMED2[NA]"
+      - "GANAB[NA]"
+      - "UGGT1[NA]"
+      - "PDIA4[NA]"
+      - "DDOST[NA]"
+      - "CANX[NA]"
+      - "MANF[NA]"
+      - "TXNDC5[NA]"
+      - "MAGT1[NA]"
+      - "RCN2[NA]"
+      - "EMC1[NA]"
+      - "STT3B[NA]"
+      - "PDIA6[NA]"
+      - "NUCB2[NA]"
+      - "CKAP4[NA]"
+      - "CNPY3[NA]"
+      - "MLEC[NA]"
+      - "MESD[NA]"
+      - "LRPAP1[NA]"
+      - "SLC39A7[NA]"
+      - "COLGALT1[NA]"
+      - "CALR[NA]"
+      - "HSP90B1[NA]"
+      - "IKBIP[NA]"
+      - "TXNDC16[NA]"
+      - "ASPH[NA]"
+      - "RPN1[NA]"
+      - "P4HB[NA]"
+      - "HSPA5[NA]"
+      - "PRKCSH[NA]"
+      - "MIA3[NA]"
+      - "SEC63[NA]"
+      - "ERLEC1[NA]"
+      - "TTC13[NA]"
+      - "ERP29[NA]"
+      - "CALU[NA]"
+      - "HYOU1[NA]"
+      - "TMX1[NA]"
+      - "P4HA1[NA]"
+      - "PRDX4[NA]"
+      - "NUP210[NA]"
+      - "SELENOF[NA]"
+      - "SDF2L1[NA]"
+      - "ERLIN2[NA]"
+      - "PDIA3[NA]"
+      - "DNAJC10[NA]"
+      - "BRI3BP[NA]"
+      - "TCTN1[NA]"
+      - "MINPP1[NA]"
+      - "TMTC3[NA]"
+      - "UGGT2[NA]"
+      - "GRAMD1A[NA]"
+      - "OS9[NA]"
+      - "LMAN1[NA]"
+      - "KDELC2[NA]"
+      - "RCN1[NA]"
+      - "DNAJC3[NA]"
+      - "MOGS[NA]"
+      - "SERPINH1[NA]"
+      - "PPIB[NA]"
+      - "CNPY2[NA]"
+      - "DNAJB11[NA]"
+      - "NENF[NA]"
+      - "TOR1A[NA]"
+      - "CCDC134[NA]"
+      - "P3H1[NA]"
+      - "ERO1B[NA]"
+      - "ERAP2[NA]"
+      - "ERO1A[NA]"
+      - "SEL1L[NA]"
+      - "RPN2[NA]"
+      - "ORMDL3[NA]"
+      - "EMC6[NA]"
+      - "MFSD10[NA]"
+      - "CACNA1A[NA]"
+      - "CAMLG[NA]"
+      - "VRK2[NA]"
+      - "TMEM120B[NA]"
+      - "VKORC1L1[NA]"
+      - "LBR[NA]"
+      - "SOAT1[NA]"
+      - "HYOU1[NA]"
+      - "DEPDC1B[NA]"
+      - "TMX3[NA]"
+      - "ERP29[NA]"
+      - "CALU[NA]"
+      - "TMEM43[NA]"
+      - "CLGN[NA]"
+      - "ADIPOR2[NA]"
+      - "SEC63[NA]"
+      - "MBOAT2[NA]"
+      - "DGKE[NA]"
+      - "PRKCSH[NA]"
+      - "CERS1[NA]"
+      - "CALR[NA]"
+      - "IKBIP[NA]"
+      - "CCDC115[NA]"
+      - "EMC8[NA]"
+      - "SLC6A8[NA]"
+      - "LRPAP1[NA]"
+      - "ATP13A1[NA]"
+      - "HMOX2[NA]"
+      - "CISD2[NA]"
+      - "MLEC[NA]"
+      - "ATP6AP1[NA]"
+      - "ZMPSTE24[NA]"
+      - "NUCB2[NA]"
+      - "FKBP8[NA]"
+      - "TOR1AIP1[NA]"
+      - "CCDC47[NA]"
+      - "CKAP4[NA]"
+      - "PLOD3[NA]"
+      - "PDIA6[NA]"
+      - "KRTCAP2[NA]"
+      - "THEM6[NA]"
+      - "LMF2[NA]"
+      - "STT3B[NA]"
+      - "EMC1[NA]"
+      - "ALG9[NA]"
+      - "RCN2[NA]"
+      - "PIGU[NA]"
+      - "POMK[NA]"
+      - "RHBDD2[NA]"
+      - "LNPK[NA]"
+      - "CERS2[NA]"
+      - "TLCD1[NA]"
+      - "MAGT1[NA]"
+      - "SPCS2[NA]"
+      - "ESYT1[NA]"
+      - "UBXN4[NA]"
+      - "TBL2[NA]"
+      - "EMC4[NA]"
+      - "DHCR7[NA]"
+      - "EMC2[NA]"
+      - "CYB5R3[NA]"
+      - "CDKAL1[NA]"
+      - "PIGK[NA]"
+      - "CANX[NA]"
+      - "LMBR1L[NA]"
+      - "PTDSS2[NA]"
+      - "TCTN3[NA]"
+      - "SRPRA[NA]"
+      - "AUP1[NA]"
+      - "ATP2A2[NA]"
+      - "FADS2[NA]"
+      - "PIGS[NA]"
+      - "ITGB1[NA]"
+      - "ARL6IP5[NA]"
+      - "UBE2J1[NA]"
+      - "PTPN1[NA]"
+      - "TMEM199[NA]"
+      - "EMC7[NA]"
+      - "BRI3BP[NA]"
+      - "TMEM38B[NA]"
+      - "GPAT4[NA]"
+      - "CLCC1[NA]"
+      - "WLS[NA]"
+      - "HM13[NA]"
+      - "BET1[NA]"
+      - "SEC11A[NA]"
+      - "PTDSS1[NA]"
+      - "EMD[NA]"
+      - "REEP4[NA]"
+      - "GPAT3[NA]"
+      - "MMGT1[NA]"
+      - "APOL2[NA]"
+      - "PRAF2[NA]"
+      - "DDOST[NA]"
+      - "PDIA4[NA]"
+      - "PDIA3[NA]"
+      - "TMEM35B[NA]"
+      - "RABL3[NA]"
+      - "GANAB[NA]"
+      - "VMA21[NA]"
+      - "UGGT1[NA]"
+      - "LRRC59[NA]"
+      - "SEC22B[NA]"
+      - "MBOAT7[NA]"
+      - "DERL2[NA]"
+      - "ALG3[NA]"
+      - "CNIH4[NA]"
+      - "LPCAT3[NA]"
+      - "PGRMC1[NA]"
+      - "TMCO1[NA]"
+      - "SELENOF[NA]"
+      - "SAMD8[NA]"
+      - "TMX1[NA]"
+      - "RAB1A[NA]"
+      - "ALG6[NA]"
+      - "GOSR2[NA]"
+      - "ATP1A1[NA]"
+      - "AAAS[NA]"
+      - "TMEM109[NA]"
+      - "SIGMAR1[NA]"
+      - "DPY19L3[NA]"
+      - "SLC12A2[NA]"
+      - "EMC3[NA]"
+      - "UNC93B1[NA]"
+      - "RFT1[NA]"
+      - "HSPA5[NA]"
+      - "VEZT[NA]"
+      - "RPN1[NA]"
+      - "P4HB[NA]"
+      - "PGRMC2[NA]"
+      - "RPN2[NA]"
+      - "HSP90B1[NA]"
+      - "YIF1A[NA]"
+      - "DAD1[NA]"
+      - "RER1[NA]"
+      - "TRIM13[NA]"
+      - "EI24[NA]"
+      - "ASIC1[NA]"
+      - "VMP1[NA]"
+      - "DNAJB11[NA]"
+      - "PIGT[NA]"
+      - "PPIB[NA]"
+      - "DHRS7[NA]"
+      - "SSR3[NA]"
+      - "ANO6[NA]"
+      - "RTN3[NA]"
+      - "SPCS3[NA]"
+      - "SCD[NA]"
+      - "ERGIC2[NA]"
+      - "RCN1[NA]"
+      - "ACSL3[NA]"
+      - "SLC33A1[NA]"
+      - "ALDH3A2[NA]"
+      - "CHPT1[NA]"
+      - "DNAJC1[NA]"
+      - "TMEM209[NA]"
+      - "LMAN1[NA]"
+      - "ATP6AP2[NA]"
+      - "CLPTM1L[NA]"
+      - "RAB7A[NA]"
+      - "TMPO[NA]"
+      - "POR[NA]"
+      - "YKT6[NA]"
+      - "TMTC3[NA]"
+      - "EBP[NA]"
+      - "NDC1[NA]"
+      - "JPH1[NA]"
+      - "MTDH[NA]"
+      - "SRPRA[NA]"
+      - "EMC2[NA]"
+      - "EMC1[NA]"
+      - "CKAP4[NA]"
+      - "CCDC47[NA]"
+      - "KTN1[NA]"
+      - "TMEM237[NA]"
+      - "UPF2[NA]"
+      - "ZMYND8[NA]"
+      - "PKP3[NA]"
+      - "NOP9[NA]"
+      - "MAGOH[NA]"
+      - "THOC7[NA]"
+      - "PYM1[NA]"
+      - "CTSC[NA]"
+      - "APTX[NA]"
+      - "P4HB[NA]"
+      - "P4HA1[NA]"
+      - "TMEM263[NA]"
+      - "PGD[NA]"
+      - "SDE2[NA]"
+      - "CCDC9[NA]"
+      - "NCBP2-AS2[NA]"
+      - "P3H1[NA]"
+      - "CASC3[NA]"
+      - "ORC2[NA]"
+      - "CDC42BPA[NA]"
+      - "C2CD5[NA]"
+      - "UTRN[NA]"
+      - "RBM8A[NA]"
+      - "RNF113A[NA]"
+      - "POLD1[NA]"
+      - "POLR1A[NA]"
+      - "FAR1[NA]"
+      - "SGTA[NA]"
+      - "PSMC2[NA]"
+      - "HSPA4[NA]"
+      - "GLUL[NA]"
+      - "GPN1[NA]"
+      - "CTNNB1[NA]"
+      - "ECH1[NA]"
+      - "PSMD6[NA]"
+      - "SYAP1[NA]"
+      - "ECD[NA]"
+      - "BOLA2[NA]"
+      - "SUMO2[NA]"
+      - "HMGN2[NA]"
+      - "SLC25A3[NA]"
+      - "MAGED2[NA]"
+      - "TCEAL1[NA]"
+      - "SLC27A4[NA]"
+      - "MCM4[NA]"
+      - "ATP6V1H[NA]"
+      - "TMEM165[NA]"
+      - "PSME3[NA]"
+      - "CDC6[NA]"
+      - "PSMD11[NA]"
+      - "SFXN1[NA]"
+      - "HSDL2[NA]"
+      - "PSMC4[NA]"
+      - "NDUFA4[NA]"
+      - "PRKAR2A[NA]"
+      - "MAPK6[NA]"
+      - "METTL13[NA]"
+      - "TMBIM6[NA]"
+      - "SLC25A11[NA]"
+      - "PSMD13[NA]"
+      - "SLC16A1[NA]"
+      - "NEURL4[NA]"
+      - "HAX1[NA]"
+      - "HSPB1[NA]"
+      - "PTOV1[NA]"
+      - "CAD[NA]"
+      - "PSME2[NA]"
+      - "RSL1D1[NA]"
+      - "HSPA8[NA]"
+      - "PPT1[NA]"
+      - "HERC2[NA]"
+      - "RPS27[NA]"
+      - "PSMB4[NA]"
+      - "CCNT2[NA]"
+      - "DHX34[NA]"
+      - "ATP1B3[NA]"
+      - "RNF126[NA]"
+      - "ARMCX5[NA]"
+      - "DNAJA1[NA]"
+      - "PFDN6[NA]"
+      - "SSSCA1[NA]"
+      - "ATP6AP1[NA]"
+      - "STUB1[NA]"
+      - "TOR1AIP1[NA]"
+      - "ILF2[NA]"
+      - "AIMP2[NA]"
+      - "ADRM1[NA]"
+      - "ASPM[NA]"
+      - "LONP2[NA]"
+      - "POLR2B[NA]"
+      - "MCM7[NA]"
+      - "PSMC6[NA]"
+      - "VAT1[NA]"
+      - "MAGED1[NA]"
+      - "RIF1[NA]"
+      - "TOMM20[NA]"
+      - "DYNLL1[NA]"
+      - "IPO7[NA]"
+      - "PSMD14[NA]"
+      - "ASNA1[NA]"
+      - "TMCO1[NA]"
+      - "CALM3[NA]"
+      - "SPTLC1[NA]"
+      - "CCT2[NA]"
+      - "RAD50[NA]"
+      - "PSMD12[NA]"
+      - "ECI2[NA]"
+      - "ATP1A1[NA]"
+      - "FARSA[NA]"
+      - "NCOA4[NA]"
+      - "SLC1A5[NA]"
+      - "RAD23B[NA]"
+      - "MLF2[NA]"
+      - "RAF1[NA]"
+      - "VDAC2[NA]"
+      - "MARCH7[NA]"
+      - "ABCD3[NA]"
+      - "UBL4A[NA]"
+      - "AAAS[NA]"
+      - "TCAF1[NA]"
+      - "ATP5F1C[NA]"
+      - "CCT7[NA]"
+      - "NTPCR[NA]"
+      - "HSPA4L[NA]"
+      - "AURKA[NA]"
+      - "SLC7A1[NA]"
+      - "UCHL5[NA]"
+      - "VPS18[NA]"
+      - "IRS4[NA]"
+      - "CLPX[NA]"
+      - "CCT6A[NA]"
+      - "GET4[NA]"
+      - "ELP1[NA]"
+      - "POLR2C[NA]"
+      - "CALML5[NA]"
+      - "FAF2[NA]"
+      - "EGLN3[NA]"
+      - "PSMD7[NA]"
+      - "AP3D1[NA]"
+      - "RPS27L[NA]"
+      - "ATAD3A[NA]"
+      - "HUWE1[NA]"
+      - "MAPKAPK5[NA]"
+      - "UBE3A[NA]"
+      - "CCT4[NA]"
+      - "ATP5PD[NA]"
+      - "VIM[NA]"
+      - "DSC3[NA]"
+      - "CCNT1[NA]"
+      - "PSMC1[NA]"
+      - "LETM1[NA]"
+      - "ECPAS[NA]"
+      - "FANCI[NA]"
+      - "SSBP1[NA]"
+      - "POLR1C[NA]"
+      - "PSMD2[NA]"
+      - "SLC25A5[NA]"
+      - "ANKHD1[NA]"
+      - "IPO9[NA]"
+      - "WDR6[NA]"
+      - "PSMC3[NA]"
+      - "BRCA2[NA]"
+      - "DNAJC7[NA]"
+      - "NDUFB10[NA]"
+      - "SPART[NA]"
+      - "CDO1[NA]"
+      - "LSM5[NA]"
+      - "CXorf57[NA]"
+      - "PSMD4[NA]"
+      - "ACSL3[NA]"
+      - "LONP1[NA]"
+      - "PSMD3[NA]"
+      - "KRT16[NA]"
+      - "TELO2[NA]"
+      - "DTYMK[NA]"
+      - "CDC7[NA]"
+      - "ATP6AP2[NA]"
+      - "BAG2[NA]"
+      - "CCT3[NA]"
+      - "ATP5F1B[NA]"
+      - "CDKN2A[NA]"
+      - "POLR2H[NA]"
+      - "HSPH1[NA]"
+      - "UBR5[NA]"
+      - "POLR2A[NA]"
+      - "BAG6[NA]"
+      - "CDC42[NA]"
+      - "WAPL[NA]"
+      - "SUGT1[NA]"
+      - "ZNF281[NA]"
+      - "NDUFAF4[NA]"
+      - "DNAJB6[NA]"
+      - "DNAJB12[NA]"
+      - "MIS18A[NA]"
+      - "TMPO[NA]"
+      - "PSMD1[NA]"
+      - "DNAJA3[NA]"
+      - "PPFIA1[NA]"
+      - "TPD52[NA]"
+      - "ATP5F1A[NA]"
+      - "SQSTM1[NA]"
+      - "FUNDC2[NA]"
+      - "VDAC1[NA]"
+      - "CDIPT[NA]"
+      - "AURKB[NA]"
+      - "TM9SF2[NA]"
+      - "PSMC5[NA]"
+      - "SLC25A13[NA]"
+      - "NDUFS3[NA]"
+      - "AP2S1[NA]"
+      - "TCP1[NA]"
+      - "MYCBP2[NA]"
+      - "CEP170[NA]"
+      - "CCT8[NA]"
+      - "DNAJA2[NA]"
+      - "BCKDK[NA]"
+      - "ARFGAP3[NA]"
+      - "IRAK1[NA]"
+      - "CEPT1[NA]"
+      - "TMEM43[NA]"
+      - "SLC1A5[NA]"
+      - "KCNN4[NA]"
+      - "ISG15[NA]"
+      - "ATL3[NA]"
+      - "DHCR7[NA]"
+      - "QSOX2[NA]"
+      - "TECR[NA]"
+      - "MAGT1[NA]"
+      - "STT3B[NA]"
+      - "RTN4[NA]"
+      - "DHCR24[NA]"
+      - "SEC22B[NA]"
+      - "SMPD4[NA]"
+      - "OSTC[NA]"
+      - "FSTL4[NA]"
+      - "PRKDC[NA]"
+      - "ARL6IP5[NA]"
+      - "SEC61A1[NA]"
+      - "REEP5[NA]"
+      - "ERGIC3[NA]"
+      - "SLC4A7[NA]"
+      - "RPN2[NA]"
+      - "DAD1[NA]"
+      - "EBP[NA]"
+      - "SACM1L[NA]"
+      - "SURF4[NA]"
+      - "ERGIC1[NA]"
+      - "CLPTM1L[NA]"
+      - "NARS2[NA]"
+      - "UBIAD1[NA]"
+      - "VANGL1[NA]"
+      - "OCLN[NA]"
+      - "TBC1D22B[NA]"
+      - "TMF1[NA]"
+      - "MARVELD2[NA]"
+      - "SLC6A15[NA]"
+      - "LBR[NA]"
+      - "PREB[NA]"
+      - "SOAT1[NA]"
+      - "BET1L[NA]"
+      - "VKORC1L1[NA]"
+      - "CAMLG[NA]"
+      - "SLC1A5[NA]"
+      - "VRK2[NA]"
+      - "SEC63[NA]"
+      - "TMEM216[NA]"
+      - "LEMD3[NA]"
+      - "APBB1[NA]"
+      - "COPB1[NA]"
+      - "SLC7A5[NA]"
+      - "EPHA2[NA]"
+      - "NUP155[NA]"
+      - "SLC3A2[NA]"
+      - "ABCE1[NA]"
+      - "KTN1[NA]"
+      - "LSG1[NA]"
+      - "ARHGAP1[NA]"
+      - "PLD3[NA]"
+      - "TOR1AIP2[NA]"
+      - "SCARB1[NA]"
+      - "SEC24B[NA]"
+      - "SENP2[NA]"
+      - "CCDC115[NA]"
+      - "EFNB1[NA]"
+      - "EMC8[NA]"
+      - "SLC6A8[NA]"
+      - "LNPEP[NA]"
+      - "TMEM214[NA]"
+      - "NECTIN2[NA]"
+      - "VAMP3[NA]"
+      - "MCAM[NA]"
+      - "UGT8[NA]"
+      - "ATP6AP1[NA]"
+      - "VAPA[NA]"
+      - "ITM2C[NA]"
+      - "CISD2[NA]"
+      - "TMEM87A[NA]"
+      - "FAM91A1[NA]"
+      - "VAPB[NA]"
+      - "HMOX2[NA]"
+      - "FKBP8[NA]"
+      - "ACBD3[NA]"
+      - "TOR1AIP1[NA]"
+      - "CKAP4[NA]"
+      - "CCDC47[NA]"
+      - "SCFD1[NA]"
+      - "DDRGK1[NA]"
+      - "EFNB2[NA]"
+      - "VAT1[NA]"
+      - "THEM6[NA]"
+      - "LRBA[NA]"
+      - "SEC23IP[NA]"
+      - "UNC5B[NA]"
+      - "RTN4[NA]"
+      - "CLINT1[NA]"
+      - "ALG9[NA]"
+      - "RETREG1[NA]"
+      - "STT3B[NA]"
+      - "EMC1[NA]"
+      - "KIAA0319L[NA]"
+      - "VAMP2[NA]"
+      - "ATP6V1F[NA]"
+      - "ESYT1[NA]"
+      - "MACO1[NA]"
+      - "LNPK[NA]"
+      - "STAM2[NA]"
+      - "PKMYT1[NA]"
+      - "GORASP2[NA]"
+      - "UBXN4[NA]"
+      - "SLC39A14[NA]"
+      - "VANGL2[NA]"
+      - "CDKAL1[NA]"
+      - "GOSR1[NA]"
+      - "EIF2AK3[NA]"
+      - "EMC2[NA]"
+      - "ANKLE2[NA]"
+      - "PALD1[NA]"
+      - "CXADR[NA]"
+      - "SLC19A1[NA]"
+      - "SUN1[NA]"
+      - "WDR41[NA]"
+      - "COPG1[NA]"
+      - "WDR6[NA]"
+      - "ATP6V0A1[NA]"
+      - "PDXDC1[NA]"
+      - "ARL6IP5[NA]"
+      - "UBE2J1[NA]"
+      - "ARFGAP2[NA]"
+      - "ITGB1[NA]"
+      - "AUP1[NA]"
+      - "SRPRA[NA]"
+      - "TMEM51[NA]"
+      - "EBAG9[NA]"
+      - "GORAB[NA]"
+      - "STIM1[NA]"
+      - "TEX2[NA]"
+      - "SLC6A6[NA]"
+      - "SYAP1[NA]"
+      - "SLC39A10[NA]"
+      - "BET1[NA]"
+      - "GPR108[NA]"
+      - "GPAT4[NA]"
+      - "JAG2[NA]"
+      - "CLCC1[NA]"
+      - "MTDH[NA]"
+      - "EMC7[NA]"
+      - "SLC38A1[NA]"
+      - "SLC30A5[NA]"
+      - "OSBPL11[NA]"
+      - "CPD[NA]"
+      - "PTPN1[NA]"
+      - "TMEM199[NA]"
+      - "MOSPD2[NA]"
+      - "MMGT1[NA]"
+      - "SEC23B[NA]"
+      - "GPAT3[NA]"
+      - "SEC11A[NA]"
+      - "CHP1[NA]"
+      - "UBE2G2[NA]"
+      - "CD99L2[NA]"
+      - "TFRC[NA]"
+      - "EMD[NA]"
+      - "STX5[NA]"
+      - "SMPD4[NA]"
+      - "SEC22B[NA]"
+      - "LRRC59[NA]"
+      - "STX18[NA]"
+      - "RABL3[NA]"
+      - "VMA21[NA]"
+      - "TMEM115[NA]"
+      - "PDZD8[NA]"
+      - "SNAP23[NA]"
+      - "SLC30A6[NA]"
+      - "NCOA2[NA]"
+      - "TMEM109[NA]"
+      - "OSBPL8[NA]"
+      - "TMX1[NA]"
+      - "SEMA6A[NA]"
+      - "EPHA7[NA]"
+      - "EMC3[NA]"
+      - "SCAMP1[NA]"
+      - "SLC12A2[NA]"
+      - "GOLGA5[NA]"
+      - "CDCA3[NA]"
+      - "ARFIP1[NA]"
+      - "IRS4[NA]"
+      - "VEZT[NA]"
+      - "GOPC[NA]"
+      - "SLC38A2[NA]"
+      - "DSG2[NA]"
+      - "FZD6[NA]"
+      - "PTPN2[NA]"
+      - "CTNND1[NA]"
+      - "PGRMC2[NA]"
+      - "STEAP3[NA]"
+      - "TEX264[NA]"
+      - "STX10[NA]"
+      - "F11R[NA]"
+      - "TRIM13[NA]"
+      - "TMX4[NA]"
+      - "STAM[NA]"
+      - "DHRS7[NA]"
+      - "ANO6[NA]"
+      - "SSR1[NA]"
+      - "SLC4A7[NA]"
+      - "IGF2R[NA]"
+      - "DSC2[NA]"
+      - "ADGRL2[NA]"
+      - "MB21D2[NA]"
+      - "BSDC1[NA]"
+      - "ARFGAP3[NA]"
+      - "SPCS3[NA]"
+      - "LMAN1[NA]"
+      - "CD99[NA]"
+      - "TMEM209[NA]"
+      - "SRPRB[NA]"
+      - "TMEM9[NA]"
+      - "CAV1[NA]"
+      - "ALDH3A2[NA]"
+      - "DNAJC1[NA]"
+      - "SCYL3[NA]"
+      - "ARCN1[NA]"
+      - "SLC33A1[NA]"
+      - "STX7[NA]"
+      - "ATP6AP2[NA]"
+      - "LSR[NA]"
+      - "SLC39A6[NA]"
+      - "POR[NA]"
+      - "YKT6[NA]"
+      - "STX8[NA]"
+      - "APP[NA]"
+      - "TMPO[NA]"
+      - "RAB7A[NA]"
+      - "WDR11[NA]"
+      - "JPH1[NA]"
+      - "GPR107[NA]"
+      - "NDC1[NA]"
+      - "RRBP1[NA]"
+      - "NUP155[NA]"
+      - "SEC24B[NA]"
+      - "TOR1AIP2[NA]"
+      - "SNAP29[NA]"
+      - "ARHGAP1[NA]"
+      - "LSG1[NA]"
+      - "OSBPL9[NA]"
+      - "KTN1[NA]"
+      - "LEMD3[NA]"
+      - "CLMN[NA]"
+      - "SEC63[NA]"
+      - "CLGN[NA]"
+      - "SOAT1[NA]"
+      - "PREB[NA]"
+      - "LBR[NA]"
+      - "SLC6A15[NA]"
+      - "HYOU1[NA]"
+      - "VRK2[NA]"
+      - "CAMLG[NA]"
+      - "NSDHL[NA]"
+      - "CHML[NA]"
+      - "NFXL1[NA]"
+      - "ZC3HAV1[NA]"
+      - "NOP53[NA]"
+      - "NUP160[NA]"
+      - "FTSJ3[NA]"
+      - "RINT1[NA]"
+      - "DDX18[NA]"
+      - "DDRGK1[NA]"
+      - "RNF185[NA]"
+      - "NUP133[NA]"
+      - "NPLOC4[NA]"
+      - "NUP107[NA]"
+      - "SRP72[NA]"
+      - "C9orf72[NA]"
+      - "SCFD1[NA]"
+      - "CCDC47[NA]"
+      - "CKAP4[NA]"
+      - "TOR1AIP1[NA]"
+      - "ACBD3[NA]"
+      - "BASP1[NA]"
+      - "VAPA[NA]"
+      - "ATP6AP1[NA]"
+      - "HMOX2[NA]"
+      - "VAPB[NA]"
+      - "PRKAR1A[NA]"
+      - "EMC8[NA]"
+      - "CCDC115[NA]"
+      - "SEC23A[NA]"
+      - "C19orf25[NA]"
+      - "SENP2[NA]"
+      - "ANKLE2[NA]"
+      - "EMC2[NA]"
+      - "EIF2AK3[NA]"
+      - "CDKAL1[NA]"
+      - "DIP2A[NA]"
+      - "WDR41[NA]"
+      - "EMC4[NA]"
+      - "MXRA7[NA]"
+      - "UBXN4[NA]"
+      - "MACO1[NA]"
+      - "ESYT1[NA]"
+      - "ATP6V1F[NA]"
+      - "STT3A[NA]"
+      - "SPCS2[NA]"
+      - "GORASP2[NA]"
+      - "STIM2[NA]"
+      - "UFL1[NA]"
+      - "RTN4[NA]"
+      - "FAM169A[NA]"
+      - "UNC5B[NA]"
+      - "TAPT1[NA]"
+      - "EMC1[NA]"
+      - "STT3B[NA]"
+      - "NUP98[NA]"
+      - "DNAJC1[NA]"
+      - "ALDH3A2[NA]"
+      - "RETREG1[NA]"
+      - "CHCHD2[NA]"
+      - "SMCR8[NA]"
+      - "CCDC124[NA]"
+      - "NUP37[NA]"
+      - "SEC22B[NA]"
+      - "SMPD4[NA]"
+      - "TMEM230[NA]"
+      - "STX5[NA]"
+      - "GNB2[NA]"
+      - "RABL3[NA]"
+      - "AHCYL1[NA]"
+      - "STX18[NA]"
+      - "CHMP7[NA]"
+      - "LRRC59[NA]"
+      - "TACC1[NA]"
+      - "SEC23B[NA]"
+      - "MMGT1[NA]"
+      - "ATP2B1[NA]"
+      - "PDCL[NA]"
+      - "MOSPD2[NA]"
+      - "DDOST[NA]"
+      - "EMD[NA]"
+      - "CHP1[NA]"
+      - "GPAT3[NA]"
+      - "CLCC1[NA]"
+      - "GPAT4[NA]"
+      - "SYAP1[NA]"
+      - "TMEM199[NA]"
+      - "STBD1[NA]"
+      - "PTPN1[NA]"
+      - "OSBPL11[NA]"
+      - "CPD[NA]"
+      - "EMC7[NA]"
+      - "MTDH[NA]"
+      - "TACC2[NA]"
+      - "ITGB1[NA]"
+      - "NAT10[NA]"
+      - "UBE2J1[NA]"
+      - "TEX2[NA]"
+      - "STIM1[NA]"
+      - "NSF[NA]"
+      - "IP6K1[NA]"
+      - "RAB3GAP1[NA]"
+      - "CANX[NA]"
+      - "C1orf43[NA]"
+      - "BSG[NA]"
+      - "SRPRA[NA]"
+      - "AUP1[NA]"
+      - "RPN1[NA]"
+      - "VEZT[NA]"
+      - "DSG2[NA]"
+      - "NAPA[NA]"
+      - "CDK5RAP3[NA]"
+      - "EMC3[NA]"
+      - "TMPO[NA]"
+      - "MIA3[NA]"
+      - "DVL1P1[NA]"
+      - "CDCA3[NA]"
+      - "SLC12A2[NA]"
+      - "AAAS[NA]"
+      - "ATP5F1C[NA]"
+      - "SEC16A[NA]"
+      - "TRPM7[NA]"
+      - "TMX1[NA]"
+      - "WDR44[NA]"
+      - "OSBPL8[NA]"
+      - "EHBP1[NA]"
+      - "REEP5[NA]"
+      - "PDZD8[NA]"
+      - "SEC24A[NA]"
+      - "REXO4[NA]"
+      - "SWAP70[NA]"
+      - "PGRMC1[NA]"
+      - "IGF2R[NA]"
+      - "SPCS3[NA]"
+      - "SND1[NA]"
+      - "COPE[NA]"
+      - "MAP4K5[NA]"
+      - "FNDC3A[NA]"
+      - "CHTOP[NA]"
+      - "ANO6[NA]"
+      - "ESYT2[NA]"
+      - "RAB3GAP2[NA]"
+      - "SLC4A7[NA]"
+      - "TRIM13[NA]"
+      - "ADCY9[NA]"
+      - "RPN2[NA]"
+      - "PGRMC2[NA]"
+      - "NCK1[NA]"
+      - "UBE4A[NA]"
+      - "NDC1[NA]"
+      - "JPH1[NA]"
+      - "NOP16[NA]"
+      - "TMED8[NA]"
+      - "DDX54[NA]"
+      - "MIS18A[NA]"
+      - "DHX30[NA]"
+      - "YKT6[NA]"
+      - "GRAMD1A[NA]"
+      - "INF2[NA]"
+      - "EGLN1[NA]"
+      - "ATP6AP2[NA]"
+      - "ACBD5[NA]"
+      - "SRPRB[NA]"
+      - "TMEM209[NA]"
+      - "FERMT2[NA]"
+      - "LMAN1[NA]"
+      - "ACSL3[NA]"
+      - "CS[NA]"
+      - "CTNNB1[NA]"
+      - "FSCN1[NA]"
+      - "SLC2A1[NA]"
+      - "ITGB1[NA]"
+      - "UQCRC2[NA]"
+      - "CANX[NA]"
+      - "GAPDH[NA]"
+      - "PFN1[NA]"
+      - "GNB2[NA]"
+      - "GANAB[NA]"
+      - "HK1[NA]"
+      - "S100A2[NA]"
+      - "ACADVL[NA]"
+      - "PDIA4[NA]"
+      - "DDOST[NA]"
+      - "TFRC[NA]"
+      - "PHB2[NA]"
+      - "CTTN[NA]"
+      - "RHOC[NA]"
+      - "HSPD1[NA]"
+      - "ITGA2[NA]"
+      - "TIMM9[NA]"
+      - "SFXN1[NA]"
+      - "RTN4[NA]"
+      - "ITGB4[NA]"
+      - "MDH2[NA]"
+      - "S100A11[NA]"
+      - "YWHAB[NA]"
+      - "HSPB1[NA]"
+      - "RAB2B[NA]"
+      - "TPI1[NA]"
+      - "EIF5A[NA]"
+      - "TXNDC5[NA]"
+      - "HSP90AA1[NA]"
+      - "FUBP1[NA]"
+      - "PRDX5[NA]"
+      - "BASP1[NA]"
+      - "HBA1[NA]"
+      - "VAPA[NA]"
+      - "HADHA[NA]"
+      - "TPM3[NA]"
+      - "SLC25A12[NA]"
+      - "COLGALT1[NA]"
+      - "CALR[NA]"
+      - "CYCS[NA]"
+      - "FH[NA]"
+      - "HADHB[NA]"
+      - "TAGLN2[NA]"
+      - "YWHAG[NA]"
+      - "TPM4[NA]"
+      - "KRT8[NA]"
+      - "DES[NA]"
+      - "ANXA1[NA]"
+      - "S100A10[NA]"
+      - "VDAC2[NA]"
+      - "GLUD2[NA]"
+      - "TMX1[NA]"
+      - "NACA[NA]"
+      - "ANXA5[NA]"
+      - "PKM[NA]"
+      - "ATP1A1[NA]"
+      - "PPIA[NA]"
+      - "CALM3[NA]"
+      - "CCT2[NA]"
+      - "HNRNPH1[NA]"
+      - "HSPE1[NA]"
+      - "KRT7[NA]"
+      - "DDX39B[NA]"
+      - "AHCY[NA]"
+      - "HSP90AB1[NA]"
+      - "TACSTD2[NA]"
+      - "SQOR[NA]"
+      - "SLC3A2[NA]"
+      - "PHB[NA]"
+      - "ATP5PO[NA]"
+      - "RPN1[NA]"
+      - "P4HB[NA]"
+      - "LDHB[NA]"
+      - "UQCRC1[NA]"
+      - "CCT4[NA]"
+      - "VIM[NA]"
+      - "EEF2[NA]"
+      - "RAB11A[NA]"
+      - "RAB2A[NA]"
+      - "MARCKS[NA]"
+      - "RAB14[NA]"
+      - "ARF4[NA]"
+      - "ERP29[NA]"
+      - "CALU[NA]"
+      - "APMAP[NA]"
+      - "PGK1[NA]"
+      - "PPIF[NA]"
+      - "KRT18[NA]"
+      - "TPM1[NA]"
+      - "AHNAK[NA]"
+      - "ARF1[NA]"
+      - "PTPN1[NA]"
+      - "DLD[NA]"
+      - "IMMT[NA]"
+      - "PSMD2[NA]"
+      - "MYL6[NA]"
+      - "BSG[NA]"
+      - "ATP2A2[NA]"
+      - "TUBB[NA]"
+      - "SHMT2[NA]"
+      - "EEF1D[NA]"
+      - "ATP2A3[NA]"
+      - "PGAM1[NA]"
+      - "PDIA3[NA]"
+      - "VDAC3[NA]"
+      - "CCT5[NA]"
+      - "NME2P1[NA]"
+      - "STIP1[NA]"
+      - "HSPH1[NA]"
+      - "CCT3[NA]"
+      - "ATP5F1B[NA]"
+      - "YWHAZ[NA]"
+      - "TMED10[NA]"
+      - "ACTN1[NA]"
+      - "SFN[NA]"
+      - "CLIC1[NA]"
+      - "OAT[NA]"
+      - "LDHA[NA]"
+      - "PRDX3[NA]"
+      - "PCNA[NA]"
+      - "GSTP1[NA]"
+      - "MYDGF[NA]"
+      - "RAB7A[NA]"
+      - "ANXA3[NA]"
+      - "SLC25A13[NA]"
+      - "ALDOA[NA]"
+      - "AHSG[NA]"
+      - "VDAC1[NA]"
+      - "ERO1A[NA]"
+      - "CTNND1[NA]"
+      - "CD44[NA]"
+      - "HSP90B1[NA]"
+      - "CFL1[NA]"
+      - "GRPEL1[NA]"
+      - "PCBP1[NA]"
+      - "SERPINH1[NA]"
+      - "ATF2[NA]"
+      - "PPIB[NA]"
+      - "CAP1[NA]"
+      - "CYC1[NA]"
+      - "GLS[NA]"
+      - "TCP1[NA]"
+      - "ENO1[NA]"
+      - "MSN[0.985]"
+      - "CASP3[0.998]"
+      - "CANX[0.999]"
+      - "APP[0.970]"
+      - "ACTG1[0.868]"
+      - "VAMP3[0.985]"
+      - "IGHD[0.887]"
+      - "BCAP29[0.999]"
+      - "PLP2[0.999]"
+      - "CASP1[0.872]"
+      - "VAMP1[0.995]"
+      - "MYH10[0.769]"
+      - "VAMP2[0.999]"
+      - "RNF185[0.998]"
+      - "BFAR[0.999]"
+      - "RNF5[0.999]"
+      - "SEC61A1[0.999]"
+      - "LMAN1[0.999]"
+      - "VKORC1[0.999]"
+      - "PGRMC1[0.997]"
+      - "ATF2[0.524]"
+      - "UBL4A[0.948]"
+      - "ATP4A[0.991]"
+      - "YWHAQ[0.908]"
+      - "RPA3[0.778]"
+      - "RPA2[0.784]"
+      - "RPA1[0.782]"
+      - "MT-CO2[0.005]"
+      - "GPRIN2[0.004]"
+      - "CISD1[0.994]"
+      - "COX4I1[0.985]"
+      - "NDUFB10[0.993]"
+      - "OLA1[0.544]"
+      - "PHB[0.997]"
+      - "RAB1A[0.998]"
+      - "RAB2A[0.999]"
+      - "RDX[0.949]"
+      - "SCAMP2[0.998]"
+      - "SCAMP3[0.999]"
+      - "VDAC1[0.997]"
+      - "VDAC2[0.993]"
+      - "VDAC3[0.995]"
+      - "RER1[0.999]"
+      - "TPM2[0.921]"
+      - "NTRK1[0.999]"
+      - "EPCAM[0.970]"
+      - "TCTN2[0.909]"
+      - "TCTN3[0.787]"
+      - "CEP290[0.820]"
+      - "EVC2[0.967]"
+      - "TMEM237[0.878]"
+      - "TCTN1[0.572]"
+      - "TMEM17[0.974]"
+      - "TMEM216[0.899]"
+      - "TMEM67[0.998]"
+      - "MYH9[0.953]"
+      - "RBM8A[0.935]"
+      - "GOLT1B[0.999]"
+      - "SCN3B[0.985]"
+      - "UBAC1[0.982]"
+      - "ATP2B2[0.991]"
+      - "CYB5A[0.998]"
+      - "CASP7[0.999]"
+      - "TICAM2[0.998]"
+    haploinsufficiency: 0.20772
+    hipredScore: 0.59805965423584
+    hipred: Y
+    ghis: 0.493972785
+    prec: 0.16918
+    knownRecInfo: "."
+    rvisEvs: -0.01
+    rvisPercentileEvs: 53.19
+    lofFdrExac: 0.1823172
+    rvisExac: 0.19895192
+    rvisPercentileExac: 64.64497041
+    exacPli: 0.869367470623907
+    exacPrec: 0.128850068618979
+    exacPnull: 0.00178246075711406
+    exacNontcgaPli: 0.846392285571734
+    exacNontcgaPrec: 0.150891891933323
+    exacNontcgaPnull: 0.0027158224949424
+    exacNonpsychPli: 0.853900690489047
+    exacNonpsychPrec: 0.143213983234786
+    exacNonpsychPnull: 0.0028853262761673
+    gnomadPli: 0.42257
+    gnomadPrec: 0.57043
+    gnomadPnull: 0.0069995
+    exacCnvFlag: "."
+    gdi: 14.21644
+    gdiPhred: 0.51425
+    gdpAllDiseaseCausing: Medium
+    gdpAllMendelian: Medium
+    gdpAllMendelianAd: Medium
+    gdpMendelianAr: Medium
+    gdpPid: Medium
+    gdpPidAd: Medium
+    gdpPidAr: Medium
+    gdpCancer: Medium
+    gdbCancerRec: Medium
+    gdpCancerDom: Medium
+    sorvaLofMaf5HetOrHom: 0
+    sorvaLofMaf5HomOrComphet: 0
+    sorvaLofMaf1HetOrHom: 0
+    sorvaLofMaf1HomOrComphet: 0
+    sorvaLofOrMisMaf5HetOrHom: 0.005191693290734824
+    sorvaLofOrMisMaf5HomOrComphet: 0
+    sorvaLofOrMisMaf1HetOrHom: 0.001996805111821086
+    sorvaLofOrMisMaf1HomOrComphet: 0
+    essentialGene: "."
+    essentialGeneCrispr: N
+    essentialGeneCrispr2: N
+    essentialGeneGeneTrap: N
+    geneIndispensabilityScore: 0.53917561279198
+    geneIndispensabilityPred: E
+    mgiMouseGene: Bcap31
+    mgiMousePhenotype: "."
+    zfinZebrafishGene: "."
+    zfinZebrafishStructure: "."
+    zfinZebrafishPhenotypeQuality: "."
+    zfinZebrafishPhenotypeTag: "."
+  gnomadConstraints:
+    ensemblGeneId: ENSG00000185825
+    entrezId: "10134"
+    geneSymbol: BCAP31
+    expLof: 9.6858
+    expMis: 122.51
+    expSyn: 54.277
+    misZ: 1.3006
+    obsLof: 2
+    obsMis: 82
+    obsSyn: 53
+    oeLof: 0.20649
+    oeLofLower: 0.083
+    oeLofUpper: 0.65
+    oeMis: 0.66933
+    oeMisLower: 0.559
+    oeMisUpper: 0.804
+    oeSyn: 0.97648
+    oeSynLower: 0.782
+    oeSynUpper: 1.228
+    pli: 0.43366
+    synZ: 0.13621
+    exacPli: 0.86937
+    exacObsLof: 0
+    exacExpLof: 6.3768
+    exacOeLof: 0
+  hgnc:
+    hgncId: "HGNC:16695"
+    symbol: BCAP31
+    name: B cell receptor associated protein 31
+    locusGroup: protein-coding gene
+    locusType: gene with protein product
+    status: HGNC_STATUS_APPROVED
+    location: Xq28
+    locationSortable: Xq28
+    aliasSymbol:
+      - DXS1357E
+      - BAP31
+      - 6C6-Ag
+      - CDM
+    dateApprovedReserved: 2003-12-22
+    dateNameChanged: 2017-12-06
+    dateModified: 2023-07-25
+    entrezId: "10134"
+    ensemblGeneId: ENSG00000185825
+    vegaId: OTTHUMG00000024218
+    ucscId: uc004fie.3
+    ena:
+      - X81109
+    refseqAccession:
+      - NM_005745
+    ccdsId:
+      - CCDS48191
+      - CCDS14727
+    uniprotIds:
+      - P51572
+    pubmedId:
+      - 7806238
+      - 8612576
+      - 8706661
+    mgdId:
+      - "MGI:1350933"
+    rgdId:
+      - "RGD:1302944"
+    omimId:
+      - "300398"
+    orphanet: 376561
+    agr: "HGNC:16695"
+    maneSelect:
+      - ENST00000345046.12
+      - NM_001256447.2
+  ncbi:
+    geneId: "10134"
+    summary: "This gene encodes a member of the B-cell receptor associated protein 31 superfamily. The encoded protein is a multi-pass transmembrane protein of the endoplasmic reticulum that is involved in the anterograde transport of membrane proteins from the endoplasmic reticulum to the Golgi and in caspase 8-mediated apoptosis. Microdeletions in this gene are associated with contiguous ABCD1/DXS1375E deletion syndrome (CADDS), a neonatal disorder. Alternative splicing of this gene results in multiple transcript variants. Two related pseudogenes have been identified on chromosome 16. [provided by RefSeq, Jan 2012]"
+    rifEntries:
+      - text: HNF4A-BAP31-VDAC1 axis synchronously regulates cell proliferation and ferroptosis in gastric cancer.
+        pmids:
+          - 37296105
+      - text: "Further delineation of BCAP31-linked intellectual disability: description of 17 new families with LoF and missense variants."
+        pmids:
+          - 33603160
+      - text: "BAP31: Physiological functions and roles in disease."
+        pmids:
+          - 33930507
+      - text: Schimke XLID syndrome results from a deletion in BCAP31.
+        pmids:
+          - 32681719
+      - text: "Biological roles of the B cell receptor-associated protein 31: Functional Implication in Cancer."
+        pmids:
+          - 33439410
+      - text: Immunohistochemical expression of BCAP 31 in chronic plaque psoriasis.
+        pmids:
+          - 32608336
+      - text: "BCAP31, a cancer/testis antigen-like protein, can act as a probe for non-small-cell lung cancer metastasis."
+        pmids:
+          - 32132574
+      - text: BCAP31 drives TNBC development by modulating ligand-independent EGFR trafficking and spontaneous EGFR phosphorylation.
+        pmids:
+          - 31588230
+      - text: Loss of BAP31 Stimulates Tumor Invasion and Growth.
+        pmids:
+          - 31671609
+      - text: "BAP31 interacts with mitochondria-localized proteins, including Tom40, to stimulate the translocation of NDUFS4, the component of complex I from the cytosol to the mitochondria."
+        pmids:
+          - 31206022
+      - text: "BAP31 regulates cervical cancer cell proliferation by arresting the cell cycle at the G0/G1 stage and that depletion of BAP31 inhibits hyper-proliferation. Depletion of BAP31 inhibits cervical cancer cell invasion and migration by regulating the expression and subcellular localization of Drebrin, M-RIP, SPECC1L, and Nexilin, and then affect the cytoskeleton assemblage."
+        pmids:
+          - 30022068
+      - text: BAP31 levels were significantly increased in tumor tissues from patients with gastric intestinal-type adenocarcinoma. Study in gastric cancer cell lines and mouse xenograft model found that BAP31 could combine with p27kip1 and regulate its proteasome degradation.
+        pmids:
+          - 30338855
+      - text: essential role for BAP31 in the modulation of tumorigenesis and metastatic potential of cervical cancer
+        pmids:
+          - 30503502
+      - text: "Distal Xq28 microdeletions: clarification of the spectrum of contiguous gene deletions involving ABCD1, BCAP31, and SLC6A8 with a new case and review of the literature."
+        pmids:
+          - 25044748
+      - text: that BAP31 is a potential prognostic marker for colorectal cancer patients after surgery
+        pmids:
+          - 29653744
+      - text: "BAP31 expression is an independent prognostic factor for overall survival of patients with postoperative hepatocellular carcinoma (HCC), and low expression levels of BAP31 in HCC may indicate poor outcomes of HCC patient after surgical resection."
+        pmids:
+          - 25980696
+      - text: results suggest that enhanced expression of csBAP31 contributes to poor survival of NSCLC cells
+        pmids:
+          - 29145450
+      - text: "This patient's clinical features, muscle histopathology, brain MRI features, and family history were suggestive of mitochondrial encephalopathy. Whole exome sequencing research study confirmed the diagnosis of BCAP31-associated encephalopathy, DDCH syndrome."
+        pmids:
+          - 28332767
+      - text: "Data characterized the biochemical properties of plant orthologs of human B-cell receptor-associated protein BAP31 (HsBAP31) termed 'plant BAP-like proteins' (PBL proteins)."
+        pmids:
+          - 27770627
+      - text: Data show that tumor necrosis factor-related apoptosis-inducing ligand (TRAIL)-induced endoplasmic reticulum (ER) stress was triggered by caspase-8-mediated cleavage of B cell receptor-associated protein 31 (BAP31).
+        pmids:
+          - 26212606
+      - text: The C-terminal domain of BAP31 is exposed on the cell surface of human embryonic stem cells.
+        pmids:
+          - 26102500
+      - text: "both BCAP31 and ABCD1 were associated with hepatic cholestasis and death before 1 year. Remarkably, a patient with an isolated deletion at the 3'-end of SLC6A8 had a similar severe phenotype as seen in BCAP31 deficiency"
+        pmids:
+          - 24597975
+      - text: "Transfected human respiratory syncytial virus SH protein co-localizes with transfected BAP31 in cells, and pulls down endogenous BAP31."
+        pmids:
+          - 25854864
+      - text: "These findings provide, for the first time, mechanistic insights into how BAP31 regulates human embryonic stem cell stemness and survival via control of EpCAM expression."
+        pmids:
+          - 24898727
+      - text: Hypomethylation in BCAP31 is associated with breast cancer.
+        pmids:
+          - 24395279
+      - text: "the lack of BAP31 disturbs endoplasmic reticulum (ER) metabolism and impacts the Golgi apparatus, highlighting an important role for BAP31 in ER-to-Golgi crosstalk."
+        pmids:
+          - 24011989
+      - text: BAP31 and BiP are essential for dislocation of SV40 from the endoplasmic reticulum to the cytosol.
+        pmids:
+          - 21947079
+      - text: Membrane-Associated RING-CH proteins MARCH VIII and MARCH IV associate with Bap31 and target CD81 and CD44 to lysosomes
+        pmids:
+          - 21151997
+      - text: Fis1 and Bap31 bridge the mitochondria-ER interface to establish a platform for apoptosis induction.
+        pmids:
+          - 21183955
+      - text: Bap31 is a component of the endoplasmic reticulum (ER) quality control compartment and that it moves between the peripheral ER and a juxtanuclear ER or ER-related compartment distinct from the conventional ER-Golgi intermediate compartment.
+        pmids:
+          - 18287538
+      - text: Results identify B-cell-associated protein 31 as a novel binding partner of the high-risk human papillomavirus 16 E5 proteins and provide insight into how the E5 proteins may modulate the life cycle in differentiating cells.
+        pmids:
+          - 18684816
+      - text: "BAP31 associates with the N terminus of one of its newly synthesized client proteins, the DeltaF508 mutant of CFTR, and promotes its retrotranslocation from the endoplasmic reticulum and degradation by the cytoplasmic 26S proteasome system."
+        pmids:
+          - 18555783
+      - text: BAP31 may play a role in regulating intracellular trafficking of CD11b/CD18 in neutrophils
+        pmids:
+          - 15294914
+      - text: "Cleavage of BAP31 leads to the generation of ER- localized, proapoptotic BAP20, which may mediate mitochondrion-ER cross talk through a Ca(2+)-dependent mechanism"
+        pmids:
+          - 15254227
+      - text: "Bap31 performs quality control on class I molecules in two distinct phases: by exporting peptide-loaded class I molecules to the ER/Golgi, and by retrieving class I molecules that have lost peptides in the acidic post-ER environment."
+        pmids:
+          - 17056546
+      - text: "Data describe a novel human member of the protein tyrosine phosphatase-like B (PTPLB) family, an integral protein of the endoplasmic reticulum membrane, as a BAP31-interacting protein."
+        pmids:
+          - 15024066
+      - text: "Contiguous deletion of the X-linked adrenoleukodystrophy gene (ABCD1) and DXS1357E: a novel neonatal phenotype similar to peroxisomal biogenesis disorders."
+        pmids:
+          - 11992258
+      - text: "CASP8 cleavage product of BAP31 induces mitochondrial fission through endoplasmic reticulum calcium signals, enhancing cytochrome c release to the cytosol."
+        pmids:
+          - 12668660
+      - text: We have characterized a molecular mechanism by which calnexin regulates ER-stress-mediated apoptosis in a manner independent of its chaperone functions but dependent of its binding to Bap31.
+        pmids:
+          - 16858427
+      - {}
+  omim:
+    hgncId: "HGNC:16695"
+    omimDiseases:
+      - omimId: "OMIM:300475"
+        label: "Deafness, dystonia, and cerebral hypomyelination"
+  orpha:
+    hgncId: "HGNC:16695"
+    orphaDiseases:
+      - orphaId: "ORPHA:369942"
+        label: CADDS
+  shet:
+    hgncId: "HGNC:16695"
+    sHet: 0.012
+  gtex:
+    hgncId: "HGNC:16695"
+    ensemblGeneId: ENSG00000185825
+    ensemblGeneVersion: "15"
+    records:
+      - tissue: GTEX_TISSUE_ADIPOSE_TISSUE
+        tissueDetailed: GTEX_TISSUE_DETAILED_ADIPOSE_SUBCUTANEOUS
+        tpms:
+          - 82.21
+          - 169.25
+          - 228.6
+          - 308.45
+          - 597.8
+      - tissue: GTEX_TISSUE_ADIPOSE_TISSUE
+        tissueDetailed: GTEX_TISSUE_DETAILED_ADIPOSE_VISCERAL_OMENTUM
+        tpms:
+          - 68.85
+          - 162
+          - 219.7
+          - 300.2
+          - 509.6
+      - tissue: GTEX_TISSUE_ADRENAL_GLAND
+        tissueDetailed: GTEX_TISSUE_DETAILED_ADRENAL_GLAND
+        tpms:
+          - 57.2
+          - 157.2
+          - 184.5
+          - 209.35
+          - 296.4
+      - tissue: GTEX_TISSUE_BLADDER
+        tissueDetailed: GTEX_TISSUE_DETAILED_BLADDER
+        tpms:
+          - 100.5
+          - 132.8
+          - 145.1
+          - 226.9
+          - 300.5
+      - tissue: GTEX_TISSUE_BLOOD
+        tissueDetailed: GTEX_TISSUE_DETAILED_CELLS_EBV_TRANSFORMED_LYMPHOCYTES
+        tpms:
+          - 64.21
+          - 77.48
+          - 84.945
+          - 94.275
+          - 122.1
+      - tissue: GTEX_TISSUE_BLOOD
+        tissueDetailed: GTEX_TISSUE_DETAILED_WHOLE_BLOOD
+        tpms:
+          - 6.245
+          - 88.1
+          - 128.9
+          - 182.65
+          - 628.1
+      - tissue: GTEX_TISSUE_BLOOD_VESSEL
+        tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_AORTA
+        tpms:
+          - 104.2
+          - 140.8
+          - 154.1
+          - 167.95
+          - 221.3
+      - tissue: GTEX_TISSUE_BLOOD_VESSEL
+        tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_CORONARY
+        tpms:
+          - 56.58
+          - 134.15
+          - 150.9
+          - 171.875
+          - 307.5
+      - tissue: GTEX_TISSUE_BLOOD_VESSEL
+        tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_TIBIAL
+        tpms:
+          - 64.62
+          - 118.15
+          - 132.9
+          - 148.6
+          - 231.6
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_AMYGDALA
+        tpms:
+          - 24.35
+          - 56.49
+          - 76.23
+          - 103.225
+          - 224.9
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_ANTERIOR_CINGULATE_CORTEX
+        tpms:
+          - 31.77
+          - 76.84
+          - 100.85
+          - 126.225
+          - 236.9
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CAUDATE_BASAL_GANGLIA
+        tpms:
+          - 21.33
+          - 64.18
+          - 96.035
+          - 119.375
+          - 215.6
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CEREBELLAR_HEMISPHERE
+        tpms:
+          - 24.58
+          - 64.765
+          - 78.87
+          - 90.255
+          - 128.9
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CEREBELLUM
+        tpms:
+          - 28.81
+          - 63.38
+          - 73.41
+          - 81.71
+          - 114.8
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CORTEX
+        tpms:
+          - 28.32
+          - 85.915
+          - 105.8
+          - 120.7
+          - 219.6
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_FRONTAL_CORTEX
+        tpms:
+          - 33.32
+          - 97.35
+          - 128.6
+          - 153.7
+          - 251.3
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_HIPPOCAMPUS
+        tpms:
+          - 21.54
+          - 53.62
+          - 73.32
+          - 101.3
+          - 177.9
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_HYPOTHALAMUS
+        tpms:
+          - 21.37
+          - 67.945
+          - 98.305
+          - 127.9
+          - 256.7
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_NUCLEUS_ACCUMBENS
+        tpms:
+          - 20.95
+          - 68.83
+          - 93.86
+          - 117.7
+          - 200.7
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_PUTAMEN_BASAL_GANGLIA
+        tpms:
+          - 19.19
+          - 56.11
+          - 83.41
+          - 112.5
+          - 208.6
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_SPINAL_CORD
+        tpms:
+          - 20.48
+          - 71.4
+          - 96.31
+          - 120.55
+          - 180
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_SUBSTANTIA_NIGRA
+        tpms:
+          - 26.7
+          - 61.625
+          - 87.28
+          - 120.3
+          - 240
+      - tissue: GTEX_TISSUE_BREAST
+        tissueDetailed: GTEX_TISSUE_DETAILED_BREAST_MAMMARY_TISSUE
+        tpms:
+          - 86.4
+          - 153.2
+          - 189.3
+          - 257.2
+          - 488.9
+      - tissue: GTEX_TISSUE_CERVIX_UTERI
+        tissueDetailed: GTEX_TISSUE_DETAILED_CERVIX_ECTOCERVIX
+        tpms:
+          - 117.4
+          - 162.9
+          - 182.6
+          - 189
+          - 192.9
+      - tissue: GTEX_TISSUE_CERVIX_UTERI
+        tissueDetailed: GTEX_TISSUE_DETAILED_CERVIX_ENDOCERVIX
+        tpms:
+          - 125.7
+          - 165.5
+          - 178.35
+          - 186.8
+          - 199.7
+      - tissue: GTEX_TISSUE_COLON
+        tissueDetailed: GTEX_TISSUE_DETAILED_COLON_SIGMOID
+        tpms:
+          - 37.45
+          - 106.3
+          - 120.1
+          - 134.7
+          - 236
+      - tissue: GTEX_TISSUE_COLON
+        tissueDetailed: GTEX_TISSUE_DETAILED_COLON_TRANSVERSE
+        tpms:
+          - 49.42
+          - 99.3
+          - 112.75
+          - 127.475
+          - 319.6
+      - tissue: GTEX_TISSUE_ESOPHAGUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_GASTROESOPHAGEAL_JUNCTION
+        tpms:
+          - 42.68
+          - 110.85
+          - 129.5
+          - 145.65
+          - 299.7
+      - tissue: GTEX_TISSUE_ESOPHAGUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_MUCOSA
+        tpms:
+          - 68.17
+          - 166.55
+          - 181.9
+          - 200.1
+          - 260.9
+      - tissue: GTEX_TISSUE_ESOPHAGUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_MUSCULARIS
+        tpms:
+          - 43.13
+          - 114.9
+          - 131.4
+          - 144.5
+          - 218.1
+      - tissue: GTEX_TISSUE_FALLOPIAN_TUBE
+        tissueDetailed: GTEX_TISSUE_DETAILED_FALLOPIAN_TUBE
+        tpms:
+          - 143.9
+          - 147.1
+          - 170.2
+          - 176.4
+          - 191.7
+      - tissue: GTEX_TISSUE_HEART
+        tissueDetailed: GTEX_TISSUE_DETAILED_HEART_ATRIAL_APPENDAGE
+        tpms:
+          - 12.4
+          - 54.02
+          - 67.95
+          - 81
+          - 159.3
+      - tissue: GTEX_TISSUE_HEART
+        tissueDetailed: GTEX_TISSUE_DETAILED_HEART_LEFT_VENTRICLE
+        tpms:
+          - 5.27
+          - 29.3175
+          - 42.85
+          - 55.165
+          - 194.4
+      - tissue: GTEX_TISSUE_KIDNEY
+        tissueDetailed: GTEX_TISSUE_DETAILED_KIDNEY_CORTEX
+        tpms:
+          - 30.65
+          - 58.2
+          - 81.67
+          - 137.2
+          - 256.1
+      - tissue: GTEX_TISSUE_KIDNEY
+        tissueDetailed: GTEX_TISSUE_DETAILED_KIDNEY_MEDULLA
+        tpms:
+          - 86.03
+          - 103.4825
+          - 109.3
+          - 114.525
+          - 130.2
+      - tissue: GTEX_TISSUE_LIVER
+        tissueDetailed: GTEX_TISSUE_DETAILED_LIVER
+        tpms:
+          - 12.59
+          - 48.21
+          - 64.735
+          - 82.645
+          - 200.5
+      - tissue: GTEX_TISSUE_LUNG
+        tissueDetailed: GTEX_TISSUE_DETAILED_LUNG
+        tpms:
+          - 61
+          - 145.7
+          - 166
+          - 187.375
+          - 291.3
+      - tissue: GTEX_TISSUE_MUSCLE
+        tissueDetailed: GTEX_TISSUE_DETAILED_MUSCLE_SKELETAL
+        tpms:
+          - 15.39
+          - 29.615
+          - 35.47
+          - 45.63
+          - 98.7
+      - tissue: GTEX_TISSUE_NERVE
+        tissueDetailed: GTEX_TISSUE_DETAILED_NERVE_TIBIAL
+        tpms:
+          - 94.9
+          - 140.9
+          - 156.1
+          - 172.65
+          - 382
+      - tissue: GTEX_TISSUE_OVARY
+        tissueDetailed: GTEX_TISSUE_DETAILED_OVARY
+        tpms:
+          - 97.92
+          - 127.375
+          - 142.85
+          - 157.2
+          - 276.4
+      - tissue: GTEX_TISSUE_PANCREAS
+        tissueDetailed: GTEX_TISSUE_DETAILED_PANCREAS
+        tpms:
+          - 36.22
+          - 52.6125
+          - 62.16
+          - 71.93
+          - 103.5
+      - tissue: GTEX_TISSUE_PITUITARY
+        tissueDetailed: GTEX_TISSUE_DETAILED_PITUITARY
+        tpms:
+          - 84.13
+          - 124.15
+          - 139.7
+          - 157.55
+          - 271.1
+      - tissue: GTEX_TISSUE_PROSTATE
+        tissueDetailed: GTEX_TISSUE_DETAILED_PROSTATE
+        tpms:
+          - 54.46
+          - 135.8
+          - 167.5
+          - 193.9
+          - 272
+      - tissue: GTEX_TISSUE_SALIVARY_GLAND
+        tissueDetailed: GTEX_TISSUE_DETAILED_MINOR_SALIVARY_GLAND
+        tpms:
+          - 44.33
+          - 119.45
+          - 135.95
+          - 150.075
+          - 214.3
+      - tissue: GTEX_TISSUE_SKIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_CELLS_CULTURED_FIBROBLASTS
+        tpms:
+          - 117.8
+          - 157.725
+          - 182.1
+          - 204.125
+          - 321.4
+      - tissue: GTEX_TISSUE_SKIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_SKIN_NOT_SUN_EXPOSED_SUPRAPUBIC
+        tpms:
+          - 91.79
+          - 157.15
+          - 180.05
+          - 200.5
+          - 323.8
+      - tissue: GTEX_TISSUE_SKIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_SKIN_SUN_EXPOSED_LOWER_LEG
+        tpms:
+          - 65.64
+          - 162.8
+          - 180.1
+          - 197.1
+          - 310.2
+      - tissue: GTEX_TISSUE_SMALL_INTESTINE
+        tissueDetailed: GTEX_TISSUE_DETAILED_SMALL_INTESTINE_TERMINAL_ILEUM
+        tpms:
+          - 67.99
+          - 107.5
+          - 119.2
+          - 134.95
+          - 484.3
+      - tissue: GTEX_TISSUE_SPLEEN
+        tissueDetailed: GTEX_TISSUE_DETAILED_SPLEEN
+        tpms:
+          - 69.87
+          - 121.6
+          - 141.6
+          - 163
+          - 228.8
+      - tissue: GTEX_TISSUE_STOMACH
+        tissueDetailed: GTEX_TISSUE_DETAILED_STOMACH
+        tpms:
+          - 39.75
+          - 81.52
+          - 100.3
+          - 118.1
+          - 199.5
+      - tissue: GTEX_TISSUE_TESTIS
+        tissueDetailed: GTEX_TISSUE_DETAILED_TESTIS
+        tpms:
+          - 71.86
+          - 140.5
+          - 162.4
+          - 187.8
+          - 397.4
+      - tissue: GTEX_TISSUE_THYROID
+        tissueDetailed: GTEX_TISSUE_DETAILED_THYROID
+        tpms:
+          - 64.65
+          - 157.9
+          - 183.1
+          - 210.6
+          - 341.7
+      - tissue: GTEX_TISSUE_UTERUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_UTERUS
+        tpms:
+          - 114.5
+          - 164.125
+          - 180.15
+          - 201.1
+          - 284.7
+      - tissue: GTEX_TISSUE_VAGINA
+        tissueDetailed: GTEX_TISSUE_DETAILED_VAGINA
+        tpms:
+          - 114.7
+          - 151.35
+          - 166.35
+          - 186.175
+          - 262.3
+  decipherHi:
+    hgncId: "HGNC:16695"
+    hgncSymbol: BCAP31
+    pHi: 0.246665785
+    hiIndex: 31.87
+- clingen:
+    geneSymbol: ABCD1
+    ncbiGeneId: "215"
+    genomicLocation37: "chrX:152990323-153010216"
+    genomicLocation38: "chrX:153724851-153744755"
+    haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+    triplosensitivityScore: CLINGEN_DOSAGE_SCORE_NO_EVIDENCE_AVAILABLE
+    haploinsufficiencyDiseaseId: "MONDO:0018544"
+  dbnsfp:
+    geneName: ABCD1
+    ensemblGene: ENSG00000101986
+    chr: X
+    geneOldNames:
+      - ALD
+    geneOtherNames:
+      - AMN
+      - ALDP
+      - adrenoleukodystrophy
+    uniprotAcc: P33897
+    uniprotId: ABCD1_HUMAN
+    entrezGeneId: "215"
+    ccdsId:
+      - CCDS14728
+    refseqId:
+      - NM_000033
+    ucscId: uc004fif.2
+    mimId:
+      - "300371"
+    omimId:
+      - "300371"
+    geneFullName: ATP binding cassette subfamily D member 1
+    pathwayUniprot: "."
+    pathwayConsensusPathDb:
+      - Peroxisome - Homo sapiens (human)
+      - ABC transporters - Homo sapiens (human)
+      - Beta Oxidation of Very Long Chain Fatty Acids
+      - Oxidation of Branched Chain Fatty Acids
+      - Refsum Disease
+      - Phytanic Acid Peroxisomal Oxidation
+      - "Adrenoleukodystrophy, X-linked"
+      - Carnitine-acylcarnitine translocase deficiency
+      - Vitamin D Receptor Pathway
+      - Metabolism of lipids
+      - ABC transporters in lipid homeostasis
+      - alpha-linolenic acid (ALA) metabolism
+      - Linoleic acid (LA) metabolism
+      - alpha-linolenic (omega3) and linoleic (omega6) acid metabolism
+      - Beta-oxidation of very long chain fatty acids
+      - Peroxisomal lipid metabolism
+      - Metabolism
+      - Fatty acid metabolism
+      - Transport of small molecules
+      - ABC-family proteins mediated transport
+    pathwayKeggId:
+      - hsa02010
+    pathwayKeggFull:
+      - ABC transporters
+    functionDescription:
+      - "FUNCTION: Plays a role in the transport of free very-long-chain fatty acids (VLCFAs) as well as their CoA-esters across the peroxisomal membrane by acting as an ATP-specific binding subunit releasing ADP after ATP hydrolysis (PubMed:15682271, PubMed:11248239, PubMed:16946495). Thus, plays a role in regulation of VLCFAs and energy metabolism namely, in the degradation and biosynthesis of fatty acids by beta-oxidation, mitochondrial function and microsomal fatty acid elongation (PubMed:23671276). Involved in several processes"
+      - "namely, controls the active myelination phase by negatively regulating the microsomal fatty acid elongation activity and may also play a role in axon and myelin maintenance. Controls also the cellular response to oxidative stress by regulating mitochondrial function like, mitochondrial oxidative phosphorylation and depolarization. And finally controls the inflammatory response by positively regulating peroxisomal beta-oxidation of VLCFAs (By similarity). {ECO:0000250|UniProtKB:P48410, ECO:0000269|PubMed:11248239, ECO:0000269|PubMed:15682271, ECO:0000269|PubMed:16946495, ECO:0000269|PubMed:23671276}."
+    diseaseDescription:
+      - "DISEASE: Adrenoleukodystrophy (ALD) [MIM:300100]: A peroxisomal metabolic disorder characterized by progressive multifocal demyelination of the central nervous system and by peripheral adrenal insufficiency (Addison disease). It results in mental deterioration, corticospinal tract dysfunction, and cortical blindness. Different clinical manifestations exist like: cerebral childhood ALD (CALD), adult cerebral ALD (ACALD), adrenomyeloneuropathy (AMN) and 'Addison disease only' (ADO) phenotype. {ECO:0000269|PubMed:10369742, ECO:0000269|PubMed:10480364, ECO:0000269|PubMed:10551832, ECO:0000269|PubMed:10737980, ECO:0000269|PubMed:10980539, ECO:0000269|PubMed:11248239, ECO:0000269|PubMed:11438993, ECO:0000269|PubMed:11810273, ECO:0000269|PubMed:15643618, ECO:0000269|PubMed:21700483, ECO:0000269|PubMed:21889498, ECO:0000269|PubMed:23651979, ECO:0000269|PubMed:26686776, ECO:0000269|PubMed:7581394, ECO:0000269|PubMed:7717396, ECO:0000269|PubMed:7825602, ECO:0000269|PubMed:7849723, ECO:0000269|PubMed:7904210, ECO:0000269|PubMed:8040304, ECO:0000269|PubMed:8566952, ECO:0000269|PubMed:8651290, ECO:0000269|PubMed:9452087}. Note=The disease is caused by mutations affecting the gene represented in this entry."
+      - "DISEASE: Note=The promoter region of ABCD1 is deleted in the chromosome Xq28 deletion syndrome which involves ABCD1 and the neighboring gene BCAP31. {ECO:0000269|PubMed:11992258}."
+    mimPhenotypeId:
+      - "300100"
+    mimDisease:
+      - "[MIM:300100]Adrenoleukodystrophy"
+    orphanetDisorderId:
+      - "139396"
+      - "139399"
+      - "369942"
+    orphanetDisorder:
+      - X-linked cerebral adrenoleukodystrophy
+      - Adrenomyeloneuropathy
+      - CADDS
+    orphanetAssociationType:
+      - Disease-causing germline mutation(s) in
+      - Disease-causing germline mutation(s) in
+      - Role in the phenotype of
+    traitAssociationGwas:
+      - "Body mass index[26426971]"
+    hpoId:
+      - "HP:0000953"
+      - "HP:0000802"
+      - "HP:0002385"
+      - "HP:0000365"
+      - "HP:0003676"
+      - "HP:0002371"
+      - "HP:0000572"
+      - "HP:0001419"
+      - "HP:0002180"
+      - "HP:0000020"
+      - "HP:0001350"
+      - "HP:0002500"
+      - "HP:0002607"
+      - "HP:0000726"
+      - "HP:0002070"
+      - "HP:0008207"
+      - "HP:0000709"
+      - "HP:0001271"
+      - "HP:0001596"
+      - "HP:0007018"
+      - "HP:0002078"
+      - "HP:0002311"
+      - "HP:0006938"
+      - "HP:0000135"
+      - "HP:0000618"
+      - "HP:0001258"
+      - "HP:0003455"
+      - "HP:0001250"
+      - "HP:0002839"
+      - "HP:0007340"
+      - "HP:0001283"
+    hpoName:
+      - Hyperpigmentation of the skin
+      - Impotence
+      - Paraparesis
+      - Hearing impairment
+      - Progressive
+      - Loss of speech
+      - Visual loss
+      - X-linked recessive inheritance
+      - Neurodegeneration
+      - Urinary incontinence
+      - Slurred speech
+      - Abnormality of the cerebral white matter
+      - Bowel incontinence
+      - Dementia
+      - Limb ataxia
+      - Primary adrenal insufficiency
+      - Psychosis
+      - Polyneuropathy
+      - Alopecia
+      - Attention deficit hyperactivity disorder
+      - Truncal ataxia
+      - Incoordination
+      - Impaired vibration sensation at ankles
+      - Hypogonadism
+      - Blindness
+      - Spastic paraplegia
+      - Elevated circulating long chain fatty acid concentration
+      - Seizure
+      - Urinary bladder sphincter dysfunction
+      - Lower limb muscle weakness
+      - Bulbar palsy
+    goBiologicalProcess:
+      - regulation of oxidative phosphorylation
+      - fatty acid beta-oxidation
+      - peroxisome organization
+      - peroxisomal long-chain fatty acid import
+      - fatty-acyl-CoA transport
+      - peroxisomal membrane transport
+      - fatty acid elongation
+      - regulation of fatty acid beta-oxidation
+      - positive regulation of fatty acid beta-oxidation
+      - fatty acid beta-oxidation using acyl-CoA oxidase
+      - alpha-linolenic acid metabolic process
+      - very long-chain fatty-acyl-CoA catabolic process
+      - long-chain fatty acid catabolic process
+      - very long-chain fatty acid catabolic process
+      - myelin maintenance
+      - linoleic acid metabolic process
+      - regulation of mitochondrial depolarization
+      - transmembrane transport
+      - fatty acid homeostasis
+      - sterol homeostasis
+      - negative regulation of cytokine production involved in inflammatory response
+      - regulation of cellular response to oxidative stress
+      - negative regulation of reactive oxygen species biosynthetic process
+      - neuron projection maintenance
+      - positive regulation of unsaturated fatty acid biosynthetic process
+    goCellularComponent:
+      - cytoplasm
+      - lysosomal membrane
+      - peroxisome
+      - peroxisomal membrane
+      - integral component of peroxisomal membrane
+      - endoplasmic reticulum membrane
+      - cytosol
+      - membrane
+      - mitochondrial membrane
+      - perinuclear region of cytoplasm
+    goMolecularFunction:
+      - transporter activity
+      - long-chain fatty acid transporter activity
+      - protein binding
+      - ATP binding
+      - fatty-acyl-CoA transmembrane transporter activity
+      - ATPase activity
+      - enzyme binding
+      - "ATPase activity, coupled to transmembrane movement of substances"
+      - identical protein binding
+      - protein homodimerization activity
+      - ADP binding
+    expressionEgenetics:
+      - cervix
+      - alveolus
+      - cartilage
+      - skin
+      - stomach
+      - bone
+      - testis
+      - parathyroid
+      - brain
+      - blood
+      - unclassifiable (Anatomical System)
+      - lung
+      - choroid
+      - kidney
+      - ovary
+      - retina
+      - lymph node
+      - pancreas
+      - colon
+      - placenta
+      - adrenal gland
+      - skeletal muscle
+    expressionGnfAtlas:
+      - superior cervical ganglion
+      - skeletal muscle
+    interactionsIntact:
+      - "ABCD2[24658140]"
+      - "ABCD3[10551832]"
+      - "PEX19[20531392]"
+      - "VAPA[26496610]"
+      - "RPSA[21988832]"
+      - "VPS26B[26496610]"
+      - "ABCD1[10551832]"
+      - "HNRNPAB[30021884]"
+      - "RAB7A[26496610]"
+    interactionsBiogrid:
+      - "ABCD2[10551832]"
+      - "ABCD3[10551832"
+      - "22939629]"
+      - "NDUFA12[22939629]"
+      - "NDUFB4[22939629]"
+      - "ITPR3[22939629]"
+      - "VPS26B[26496610]"
+      - "RNF4[29180619]"
+      - "ELAVL1[22939629]"
+      - "BSG[26186194"
+      - "28514442]"
+      - "TRIM25[29117863]"
+      - "SCN3B[28514442]"
+      - "SLC39A4[26186194"
+      - "28514442]"
+      - "NTRK1[25921289]"
+      - "SLC15A1[28514442]"
+      - "PEX19[11883941"
+      - "10777694]"
+      - "RPSA[21988832]"
+      - "ATP2B2[28514442]"
+      - "SLC39A12[28514442]"
+      - "IQCF1[26186194]"
+      - "TERF2[20811636]"
+      - "VASN[28514442]"
+      - "MAS1[28514442]"
+      - "VAPA[26496610]"
+      - "PEX3[22939629]"
+      - "AGPS[22939629]"
+      - "APLNR[28514442]"
+      - "POT1[20811636]"
+      - "SLC27A2[16781659]"
+      - "RAB7A[26496610]"
+    interactionsConsensusPathDb:
+      - "ABCD2[1]"
+      - "ABCD3[1]"
+      - "VPS29[NA]"
+      - "KIF5A[NA]"
+      - "MTO1[NA]"
+      - "TBC1D5[NA]"
+      - "VPS35[NA]"
+      - "ANKRD27[NA]"
+      - "VPS26B[NA]"
+      - "ERLIN2[NA]"
+      - "ATP2B1[NA]"
+      - "CAVIN1[NA]"
+      - "IMMT[NA]"
+      - "CHMP2A[NA]"
+      - "PC[NA]"
+      - "ATP2A2[NA]"
+      - "NDUFS1[NA]"
+      - "GPRC5A[NA]"
+      - "JUP[NA]"
+      - "NDUFB8[NA]"
+      - "RAB7A[NA]"
+      - "NDUFA8[NA]"
+      - "RHOG[NA]"
+      - "NDUFV2[NA]"
+      - "CAV1[NA]"
+      - "CFL1[NA]"
+      - "ABCG2[NA]"
+      - "NDUFB7[NA]"
+      - "VDAC1[NA]"
+      - "CHCHD6[NA]"
+      - "RPN2[NA]"
+      - "CCDC115[NA]"
+      - "KTN1[NA]"
+      - "ATP6V0D1[NA]"
+      - "MCU[NA]"
+      - "CAVIN3[NA]"
+      - "MUC13[NA]"
+      - "NDUFB4[NA]"
+      - "PHB[NA]"
+      - "CHCHD3[NA]"
+      - "CYBRD1[NA]"
+      - "ATP6V1G1[NA]"
+      - "TMEM43[NA]"
+      - "FLOT1[NA]"
+      - "IST1[NA]"
+      - "VDAC2[NA]"
+      - "CHMP2B[NA]"
+      - "SOAT1[NA]"
+      - "ABCD3[NA]"
+      - "XPR1[NA]"
+      - "LRPPRC[NA]"
+      - "FLOT2[NA]"
+      - "NDUFA7[NA]"
+      - "ATP6V1B2[NA]"
+      - "C6orf120[NA]"
+      - "GNB2[NA]"
+      - "MBOAT7[NA]"
+      - "PHB2[NA]"
+      - "PIEZO1[NA]"
+      - "TFRC[NA]"
+      - "CHMP1A[NA]"
+      - "ATP6V0A1[NA]"
+      - "CHMP4B[NA]"
+      - "CPM[NA]"
+      - "ERLIN1[NA]"
+      - "NDUFS6[NA]"
+      - "STT3B[NA]"
+      - "KIDINS220[NA]"
+      - "RILP[NA]"
+      - "CKAP4[NA]"
+      - "CPT1A[NA]"
+      - "UQCRQ[NA]"
+      - "YIPF5[NA]"
+      - "ATP6AP1[NA]"
+      - "MLEC[NA]"
+      - "AP2M1[NA]"
+      - "MYOF[NA]"
+      - "STOML2[NA]"
+      - "ORC3[NA]"
+      - "GOSR2[NA]"
+      - "PTAR1[NA]"
+      - "ABCD3[NA]"
+      - "XPR1[NA]"
+      - "GBE1[NA]"
+      - "NDUFS4[NA]"
+      - "ATP6V1B2[NA]"
+      - "ATP6V0D1[NA]"
+      - "MCU[NA]"
+      - "NDUFB4[NA]"
+      - "CAVIN3[NA]"
+      - "NDUFB11[NA]"
+      - "ATP6V1G1[NA]"
+      - "ARHGEF12[NA]"
+      - "EIF3K[NA]"
+      - "GPR89A[NA]"
+      - "CCDC127[NA]"
+      - "RMDN3[NA]"
+      - "PITPNM3[NA]"
+      - "HELLS[NA]"
+      - "VDAC1[NA]"
+      - "ITPR3[NA]"
+      - "NDUFA6[NA]"
+      - "OSBP[NA]"
+      - "TMED1[NA]"
+      - "PITPNM2[NA]"
+      - "CHCHD6[NA]"
+      - "TAP1[NA]"
+      - "YIF1A[NA]"
+      - "NDUFA9[NA]"
+      - "GLB1[NA]"
+      - "CEPT1[NA]"
+      - "OSBPL10[NA]"
+      - "ZFPL1[NA]"
+      - "SLC25A1[NA]"
+      - "COX5B[NA]"
+      - "FNDC3A[NA]"
+      - "OSBPL6[NA]"
+      - "COX6B1[NA]"
+      - "NDUFV2[NA]"
+      - "GOLIM4[NA]"
+      - "NEU1[NA]"
+      - "ATAD1[NA]"
+      - "ACBD5[NA]"
+      - "CAV1[NA]"
+      - "LPGAT1[NA]"
+      - "NDUFS2[NA]"
+      - "NDUFB8[NA]"
+      - "MGST3[NA]"
+      - "SURF4[NA]"
+      - "TTC1[NA]"
+      - "OSBPL11[NA]"
+      - "IMMT[NA]"
+      - "NDUFS5[NA]"
+      - "NDUFS1[NA]"
+      - "DDX58[NA]"
+      - "NDUFV1[NA]"
+      - "VKORC1[NA]"
+      - "PARD3[NA]"
+      - "TACC1[NA]"
+      - "ATP6V1A[NA]"
+      - "ERLIN2[NA]"
+      - "UQCRFS1[NA]"
+      - "MBOAT7[NA]"
+      - "PITPNM1[NA]"
+      - "NDUFA5[NA]"
+      - "PIEZO1[NA]"
+      - "SMARCA4[NA]"
+      - "PHB2[NA]"
+      - "COX6C[NA]"
+      - "ROBO2[NA]"
+      - "MMGT1[NA]"
+      - "CAVIN1[NA]"
+      - "NDUFV3[NA]"
+      - "SOAT1[NA]"
+      - "VDAC2[NA]"
+      - "NDUFA7[NA]"
+      - "FLOT2[NA]"
+      - "NDUFA2[NA]"
+      - "OSBPL9[NA]"
+      - "LSG1[NA]"
+      - "PHB[NA]"
+      - "UQCRC1[NA]"
+      - "FLOT1[NA]"
+      - "TMEM43[NA]"
+      - "CHCHD3[NA]"
+      - "CMTR1[NA]"
+      - "VAPB[NA]"
+      - "YIPF5[NA]"
+      - "PRKAR1A[NA]"
+      - "LGALS3BP[NA]"
+      - "VAPA[NA]"
+      - "NANP[NA]"
+      - "PEX14[NA]"
+      - "SLC25A12[NA]"
+      - "STOML2[NA]"
+      - "NDUFA10[NA]"
+      - "FKBP8[NA]"
+      - "CKAP4[NA]"
+      - "CTSA[NA]"
+      - "NDUFS6[NA]"
+      - "ZMYM1[NA]"
+      - "OSBPL3[NA]"
+      - "NDUFA12[NA]"
+      - "STT3B[NA]"
+      - "ACBD4[NA]"
+      - "KIDINS220[NA]"
+      - "ERLIN1[NA]"
+      - "NDUFA13[NA]"
+      - "PEX19[1]"
+      - "TERF2[0.779]"
+      - "POT1[0.613]"
+      - "PEX3[1]"
+      - "NDUFA12[0.999]"
+      - "NDUFB4[0.999]"
+      - "AGPS[1]"
+      - "ITPR3[0.984]"
+      - "ELAVL1[0.893]"
+      - "SLC27A2[1]"
+      - "RPSA[0.994]"
+      - "BSG[0.999]"
+      - "SLC39A4[0.996]"
+      - "IQCF1[0.004]"
+      - "NTRK1[0.985]"
+      - "RAB7A[0.731]"
+      - "VAPA[0.997]"
+      - "VPS26B[0.974]"
+      - "ATP2B2[0.986]"
+      - "VASN[0.377]"
+      - "MAS1[0.530]"
+      - "APLNR[0.926]"
+      - "SCN3B[0.781]"
+      - "SLC15A1[0.036]"
+      - "SLC39A12[0.565]"
+    haploinsufficiency: 0.44245
+    hipredScore: 0.685321390628815
+    hipred: Y
+    ghis: 0.429466378
+    prec: 0.76942
+    knownRecInfo: "."
+    rvisEvs: -0.54
+    rvisPercentileEvs: 20.54
+    lofFdrExac: 0.007149064
+    rvisExac: -0.473600005
+    rvisPercentileExac: 24.70414201
+    exacPli: 0.982118837885542
+    exacPrec: 0.0178689981752655
+    exacPnull: 0.0000121639391929071
+    exacNontcgaPli: 0.97416610003774
+    exacNontcgaPrec: 0.0258038397578406
+    exacNontcgaPnull: 0.0000300602044190559
+    exacNonpsychPli: 0.975290028112706
+    exacNonpsychPrec: 0.0246770800987746
+    exacNonpsychPnull: 0.0000328917885192011
+    gnomadPli: 0.9093
+    gnomadPrec: 0.090068
+    gnomadPnull: 0.00063446
+    exacCnvFlag: "."
+    gdi: 23.16292
+    gdiPhred: 0.77329
+    gdpAllDiseaseCausing: Medium
+    gdpAllMendelian: Medium
+    gdpAllMendelianAd: Medium
+    gdpMendelianAr: Medium
+    gdpPid: Medium
+    gdpPidAd: Medium
+    gdpPidAr: Medium
+    gdpCancer: Medium
+    gdbCancerRec: Medium
+    gdpCancerDom: Medium
+    loftoolScore: 0.0188
+    sorvaLofMaf5HetOrHom: 0.0007987220447284345
+    sorvaLofMaf5HomOrComphet: 0
+    sorvaLofMaf1HetOrHom: 0.0007987220447284345
+    sorvaLofMaf1HomOrComphet: 0
+    sorvaLofOrMisMaf5HetOrHom: 0.01597444089456869
+    sorvaLofOrMisMaf5HomOrComphet: 0
+    sorvaLofOrMisMaf1HetOrHom: 0.01437699680511182
+    sorvaLofOrMisMaf1HomOrComphet: 0
+    essentialGene: N
+    essentialGeneCrispr: N
+    essentialGeneCrispr2: N
+    essentialGeneGeneTrap: N
+    geneIndispensabilityScore: 0.783215763281755
+    geneIndispensabilityPred: E
+    mgiMouseGene: Abcd1
+    mgiMousePhenotype: "hematopoietic system phenotype; normal phenotype; mortality/aging (the observable characteristics related to the ability of a mammalian organism to live and age that are manifested throughout development and life span); reproductive system phenotype; behavior/neurological phenotype (the observable actions or reactions of mammalian organisms that are manifested through development and lifespan); immune system phenotype; nervous system phenotype (the observable morphological and physiological characteristics of the extensive, intricate network of electochemical structures in the body that is comprised of the brain, spinal cord, nerves, ganglia and parts of the receptor organs that are manifested through development and lifespan); vision/eye phenotype; endocrine/exocrine gland phenotype; homeostasis/metabolism phenotype; "
+    zfinZebrafishGene: abcd1
+    zfinZebrafishStructure: whole organism
+    zfinZebrafishPhenotypeQuality: increased amount
+    zfinZebrafishPhenotypeTag: abnormal
+  gnomadConstraints:
+    ensemblGeneId: ENSG00000101986
+    entrezId: "215"
+    geneSymbol: ABCD1
+    expLof: 19.909
+    expMis: 347.95
+    expSyn: 158.05
+    misZ: 1.8659
+    obsLof: 0
+    obsMis: 250
+    obsSyn: 151
+    oeLof: 0
+    oeLofLower: 0
+    oeLofUpper: 0.15
+    oeMis: 0.7185
+    oeMisLower: 0.647
+    oeMisUpper: 0.798
+    oeSyn: 0.9554
+    oeSynLower: 0.836
+    oeSynUpper: 1.094
+    pli: 0.99896
+    synZ: 0.44075
+    exacPli: 0.98212
+    exacObsLof: 0
+    exacExpLof: 11.985
+    exacOeLof: 0
+  hgnc:
+    hgncId: "HGNC:61"
+    symbol: ABCD1
+    name: ATP binding cassette subfamily D member 1
+    locusGroup: protein-coding gene
+    locusType: gene with protein product
+    status: HGNC_STATUS_APPROVED
+    location: Xq28
+    locationSortable: Xq28
+    aliasSymbol:
+      - AMN
+      - ALDP
+      - adrenoleukodystrophy
+    prevSymbol:
+      - ALD
+    prevName:
+      - "ATP-binding cassette, sub-family D (ALD), member 1"
+    geneGroup:
+      - ATP binding cassette subfamily D
+    geneGroupId:
+      - 808
+    dateApprovedReserved: 1986-01-01
+    dateNameChanged: 2015-11-13
+    dateModified: 2023-01-20
+    entrezId: "215"
+    ensemblGeneId: ENSG00000101986
+    vegaId: OTTHUMG00000024215
+    ucscId: uc004fif.2
+    ena:
+      - Z21876
+    refseqAccession:
+      - NM_000033
+    ccdsId:
+      - CCDS14728
+    uniprotIds:
+      - P33897
+    pubmedId:
+      - 8441467
+      - 6795626
+    mgdId:
+      - "MGI:1349215"
+    rgdId:
+      - "RGD:1562128"
+    lsdb:
+      - name: "http://www.x-ald.nl"
+        url: X-linked Adrenoleukodystrophy Database
+      - name: "https://databases.lovd.nl/shared/genes/ABCD1"
+        url: Global Variome shared LOVD
+      - name: "http://ftp.ebi.ac.uk/pub/databases/lrgex/LRG_1017.xml"
+        url: LRG_1017
+    omimId:
+      - "300371"
+    orphanet: 117677
+    iuphar: "objectId:788"
+    agr: "HGNC:61"
+    maneSelect:
+      - ENST00000218104.6
+      - NM_000033.4
+  ncbi:
+    geneId: "215"
+    summary: "The protein encoded by this gene is a member of the superfamily of ATP-binding cassette (ABC) transporters. ABC proteins transport various molecules across extra- and intra-cellular membranes. ABC genes are divided into seven distinct subfamilies (ABC1, MDR/TAP, MRP, ALD, OABP, GCN20, White). This protein is a member of the ALD subfamily, which is involved in peroxisomal import of fatty acids and/or fatty acyl-CoAs in the organelle. All known peroxisomal ABC transporters are half transporters which require a partner half transporter molecule to form a functional homodimeric or heterodimeric transporter. This peroxisomal membrane protein is likely involved in the peroxisomal transport or catabolism of very long chain fatty acids. Defects in this gene have been identified as the underlying cause of adrenoleukodystrophy, an X-chromosome recessively inherited demyelinating disorder of the nervous system. [provided by RefSeq, Jul 2008]"
+    rifEntries:
+      - text: Structural insights into substrate recognition and translocation of human peroxisomal ABC transporter ALDP.
+        pmids:
+          - 36810450
+      - text: Structural and functional insights of the human peroxisomal ABC transporter ALDP.
+        pmids:
+          - 36374178
+      - text: Structural basis of substrate recognition and translocation by human very long-chain fatty acid transporter ABCD1.
+        pmids:
+          - 35676282
+      - text: Structural basis of acyl-CoA transport across the peroxisomal membrane by human ABCD1.
+        pmids:
+          - 34754073
+      - text: "Structure and Function of the ABCD1 Variant Database: 20 Years, 940 Pathogenic Variants, and 3400 Cases of Adrenoleukodystrophy."
+        pmids:
+          - 35053399
+      - text: Structures of the human peroxisomal fatty acid transporter ABCD1 in a lipid environment.
+        pmids:
+          - 35013584
+      - text: "Drug discovery for X-linked adrenoleukodystrophy: An unbiased screen for compounds that lower very long-chain fatty acids."
+        pmids:
+          - 34056752
+      - text: Biochemical Studies in Fibroblasts to Interpret Variants of Unknown Significance in the ABCD1 Gene.
+        pmids:
+          - 34946879
+      - text: Investigating ABCD1 mutations in a Taiwanese cohort with hereditary spastic paraplegia phenotype.
+        pmids:
+          - 34649108
+      - text: "Molecular Biomarkers for Adrenoleukodystrophy: An Unmet Need."
+        pmids:
+          - 34943935
+      - text: Evolution of adrenoleukodystrophy model systems.
+        pmids:
+          - 33373044
+      - text: Diverse clinical manifestations of X-linked adrenoleukodystrophy in a Chinese family with identical multisite variants of ABCD1 gene.
+        pmids:
+          - 34347682
+      - text: Acyl-CoA thioesterase activity of peroxisomal ABC protein ABCD1 is required for the transport of very long-chain acyl-CoA into peroxisomes.
+        pmids:
+          - 33500543
+      - text: "A Large Family with p.Arg554His Mutation in ABCD1: Clinical Features and Genotype/Phenotype Correlation in Female Carriers."
+        pmids:
+          - 34069712
+      - text: "Adrenoleukodystrophy siblings with a novel ABCD1 missense variant presenting with phenotypic differences: a case report and literature review."
+        pmids:
+          - 33127985
+      - text: "Peroxisomal ABC Transporters: An Update."
+        pmids:
+          - 34198763
+      - text: Hexacosenoyl-CoA is the most abundant very long-chain acyl-CoA in ATP binding cassette transporter D1-deficient cells.
+        pmids:
+          - 32075856
+      - text: Proteasome-dependent protein quality control of the peroxisomal membrane protein Pxa1p.
+        pmids:
+          - 32416190
+      - text: A state-wide Minnesota newborn screening for X-linked adrenoleukodystrophy revealed ABCD1 mutations in affected newborns and their relatives.
+        pmids:
+          - 31074578
+      - text: ABCD1 gene mutation is associated with X-linked adrenoleukodystrophy.
+        pmids:
+          - 31665121
+      - text: "Distal Xq28 microdeletions: clarification of the spectrum of contiguous gene deletions involving ABCD1, BCAP31, and SLC6A8 with a new case and review of the literature."
+        pmids:
+          - 25044748
+      - text: Description of a new clinical variant of adult adrenomyeloneuropathy that is possibly caused by a novel ABCD1 gene mutation.
+        pmids:
+          - 29966135
+      - text: a novel heterozygous mutation IVS4+2T>A (c.1393+2T>A) of the ABCD1 gene are associated with different clinical phenotypes in a family with adrenoleukodystrophy.
+        pmids:
+          - 28601575
+      - text: Expression of human ABCD1 in oligodendrocytes rescued apoptosis in the abcd1 mutant.
+        pmids:
+          - 28911205
+      - text: "In X-linked adrenoleukodystrophy, lack of ABCD1 function causes increased capillary flow heterogeneity in asymptomatic hemizygotes predominantly in the white matter regions and developmental stages with the highest probability for conversion to cerebral disease."
+        pmids:
+          - 29136088
+      - text: "To assist in the evaluation process, the New York Newborn Screening Program also routinely performs Sanger sequencing to determine if there are mutations in the ABCD1 gene."
+        pmids:
+          - 27337030
+      - text: "ABCD1 and ABCD2 are involved in the transport of long and very long chain fatty acids (VLCFA) or their CoA-derivatives into peroxisomes with different substrate specificities, while ABCD3 is involved in the transport of branched chain acyl-CoA into peroxisomes.ABCD4 is deduced to take part in the transport of vitamin B12 from lysosomes into the cytosol."
+        pmids:
+          - 27766264
+      - text: "This study showed that the mutations of were detected in SPG11, ATL1, NIPA1, and ABCD1 in patient with hereditary spastic paraplegia."
+        pmids:
+          - 27084228
+      - text: Phenotypic variability in a Tunisian family with X-linked adrenoleukodystrophy caused by the p.Gln316Pro novel mutation
+        pmids:
+          - 26686776
+      - text: CCALD is the most common phenotype (64%) in our Chinese patients with X-ALD. Eight novel mutations in the ABCD1 gene identified are disease-causing mutations.
+        pmids:
+          - 26454440
+      - text: The current study demonstrates that a single splicing mutation affects the ABCD1 transcripts and the ALDP protein function.
+        pmids:
+          - 25835712
+      - text: "both BCAP31 and ABCD1 were associated with hepatic cholestasis and death before 1 year. Remarkably, a patient with an isolated deletion at the 3'-end of SLC6A8 had a similar severe phenotype as seen in BCAP31 deficiency"
+        pmids:
+          - 24597975
+      - text: "Exome sequencing in two brothers with distinct phenotype including congenital language disorder, growth retardation, intellectual disability and urinary and fecal incontinence, identifies missense mutations in ABCD1 and DACH2."
+        pmids:
+          - 25234129
+      - text: "As a result of loss of ABCD1, there is pathogenic accumulation of very long chain fatty acids which leads to mitochondrial dysfunction."
+        pmids:
+          - 25393703
+      - text: We detected the same mutation of the ABCD1 gene in two unrelated patients with X-linked adrenoleukodystrophy.
+        pmids:
+          - 25275259
+      - text: We describe four unrelated women with a late-onset progressive spastic paraparesis and heterozygous mutations in the ABCD1 gene
+        pmids:
+          - 24154795
+      - text: X-inactivation pattern of the ABCD1 gene is associated with symptomatic status in female X-linked adrenoleukodystrophy carriers.
+        pmids:
+          - 24480483
+      - text: This study unveil unequivocally that cryptic splicing-induced aberrant messenger-RNA carrying an internal frameshift deletion results from an intronic mutation in the ABCD1 gene.
+        pmids:
+          - 23835273
+      - text: Array comparative genomic hybridization analysis suggested that the deletion was a genomic rearrangement in the 90-kb span starting in exon 4 and included ABCD1
+        pmids:
+          - 22994209
+      - text: "Identified 8 mutationsof ABCD1 , including one novel deletion (c.1477_1488+11del23) and 7 known mutations."
+        pmids:
+          - 23566833
+      - text: "in contrast to yeast cells, very long-chain acyl-CoA esters are transported into peroxisomes by ABCD1 independently of additional synthetase activity"
+        pmids:
+          - 23671276
+      - text: Adrenoleukodystrophy and skewed x chromosome inactivation in favor of the mutatnt ABCD1 allele is associated with symptoms manifestation in heterozygotes from a Chinese pedigree.
+        pmids:
+          - 23469258
+      - text: Identification of novel mutations in ABCD1 in unrelated Argentinean X-linked adrenoleukodystrophy patients
+        pmids:
+          - 23300730
+      - text: "Very long chain fatty acid (VLCFA) is beta-oxidized in ABCD1-dependent pathway, but the ABCD1-independent peroxisomal and mitochondrial beta-oxidation pathways significantly contribute to VLCFA beta-oxidation in astrocytes"
+        pmids:
+          - 23123468
+      - text: These results indicate that preferential X chromosome inactivation leads to the favored expression of the mutant ABCD1 allele.
+        pmids:
+          - 22280810
+      - text: Single germ line mutation was identified in each index case in ABCD1 gene. Results detected 4 novel mutations (2 missense and 2 deletion/insertion) and 3 novel SNPS. Data observed a variable protein expression in different patients.
+        pmids:
+          - 21966424
+      - text: standardized conformation sensitive gel electrophoresis (CSGE) method to detect mutations in ABCD1 gene in twenty Indian patients with X-ALD. The results were confirmed by sequencing. Genotype-phenotype correlation was also attempted
+        pmids:
+          - 21889498
+      - text: "Amongst 489 X-linked adrenoleukodystrophy families, 20 cases in which the ABCD1 mutation was de novo in the index case, indicating that the mutation arose in the maternal germ line."
+        pmids:
+          - 21700483
+      - text: Novel mutation in ATP-binding domain of ABCD1 gene in adrenoleukodystrophy is reported.
+        pmids:
+          - 21273699
+      - text: HsABCD1 and HsABCD2 have distinct substrate specificities
+        pmids:
+          - 21145416
+      - text: "Three female patients heterozygous for ABCD1 gene mutation were first reported in China, and a novel mutation, p.H283R, was identified in this X-linked adrenoleukodystrophy family."
+        pmids:
+          - 20376793
+      - text: A family harbors a novel deletion of 1 base pair in exon 8 at nucleotide position 2245 (2245delA) in the ABCD1 gene.
+        pmids:
+          - 20042197
+      - text: ABCD1 downregulation may be involved in human renal tumorigenesis.
+        pmids:
+          - 19787628
+      - text: "study reports 3 novel ABCD1 gene variants (c.67_83del17, c.395G>A, c.1938_1939dupGG) in 3 unrelated Indian families with X-linked adrenoleukodystrophy"
+        pmids:
+          - 19406751
+      - text: A family with combined point mutations of the hemophilia A (F8)and X-linked adrenoleukodystrophy (ABCD1) genes.
+        pmids:
+          - 18481121
+      - text: "ABCD1 gene mutations were found in 4 cases of X-linked adrenoleukodystrophy with high VLCFAs levels of amniocytes, no mutation was found in other 4 cases with normal VLCFAs levels of amniocytes."
+        pmids:
+          - 17285533
+      - text: This study concluded that de novo mutations occurred in this gene resulting in the disease.
+        pmids:
+          - 18973459
+      - text: Observational study of gene-disease association. (HuGE Navigator)
+        pmids:
+          - 20661612
+          - 19343046
+          - 19204726
+      - text: Data show that fetus 1 had R617G mutation on his ABCD1 gene and he was an adrenoleukodystrophy hemizygote. Fetus 2 had no P534R mutation on his ABCD1 gene and he was a normal hemizygote.
+        pmids:
+          - 16331554
+      - text: "ABCD1 mutation in the ethiopathogenesis of X-linked adrenoleukodystrophy. Its defect causes accumulation of the very long chain fatty acids in the tissues of the central and peripheral nervous system, adrenal glands and in the body fluids."
+        pmids:
+          - 18306728
+      - text: ALDP deficiency enhances metabolic distress in oligodendrocytes that are compromised a priori by destabilised myelin. The age at which this occurs precedes the onset of axonal degeneration in Abcd1-deficient mice.
+        pmids:
+          - 17828604
+      - text: Observational study of genotype prevalence. (HuGE Navigator)
+        pmids:
+          - 17504626
+      - text: This study examined a patient with Adult onset cerebral form of X-linked adrenoleukodystrophy with dementia of frontal lobe type with new L160P mutation in ABCD1 gene.
+        pmids:
+          - 17662307
+      - text: "ALDP-encoding mRNA is most abundant in tissues with high energy requirements such as heart, muscle, liver, and the renal and endocrine systems. ALDP selectively occurs in specific cell types of the brain."
+        pmids:
+          - 17761426
+      - text: "mutant ALDPs, which have a mutation in COOH-terminal half of ALDP, including S606L, R617H, & H667D, were degraded by proteasomes after dimerization. region between transmembrane domain 2 and 3 is important for the targeting of ALDP to the peroxisome."
+        pmids:
+          - 17542813
+      - text: analysis of the PEX19-binding site of human adrenoleukodystrophy protein
+        pmids:
+          - 15781447
+      - text: Six different missense mutations in ALD were identified in seven Japanese families.
+        pmids:
+          - 12624723
+      - text: Eight novel mutations are described.
+        pmids:
+          - 12175782
+      - text: "There were no hot spot mutations in ABCD1 gene in China, mutations in gene were found over 70% of patients with ALD and the ABCD1 gene mutations identified revealed no obvious correlation between the type of mutation and phenotype."
+        pmids:
+          - 14767898
+      - text: "For the first time, mutations in ABCD1 are identified in Chinese adrenoleukodystrophy patients in the mainland of China."
+        pmids:
+          - 14556192
+      - text: Mutations are heterogeneously distributed over functional domains of ALDP and alter peroxisomal transport function.
+        pmids:
+          - 12530690
+      - text: "over half of the mutations (19/34) were located in exon 1 and exon 6, suggesting possible hot exons"
+        pmids:
+          - 16087056
+      - text: ABCA1-independent but cytoskeleton-dependent cholesterol removal pathway may help to prevent early atherosclerosis in Tangier disease.
+        pmids:
+          - 15001567
+      - text: Accumulation of very long-chain fatty acids does not affect mitochondrial function in ABCD1 protein deficiency.
+        pmids:
+          - 15772093
+      - text: "ALDP facilitates the interaction between peroxisomes and mitochondria, resulting, when ALDP is deficient in X-ALD, in increased VLCFA accumulation"
+        pmids:
+          - 12509471
+      - text: "Adrenomyeloneuropathy must be considered in the differential diagnosis of spastic paraparesis in men or women. We report an ABCD1 gene mutation in the French-Canadian population, which should lead to the recognition of other cases in the future."
+        pmids:
+          - 16018167
+      - text: "Contiguous deletion of the X-linked adrenoleukodystrophy gene (ABCD1) and DXS1357E: a novel neonatal phenotype similar to peroxisomal biogenesis disorders."
+        pmids:
+          - 11992258
+      - text: "The splice mutation in 5' end of intron 5 leading to abnormal splice in exon 5 and exon 6 appears to be one of the causes of X-linked recessive adrenoleukodystrophy."
+        pmids:
+          - 12579499
+      - text: Fifteen new mutations are described in Adrenoleukodystrophy patients
+        pmids:
+          - 10737980
+      - text: "ALDP interacts with PMP70.  This interaction occurs via the C-terminus of ALDP [361-745] and the C-terminus of PMP70 [338-659].  ALDP mutations P484R and R591Q abolish the interaction."
+        pmids:
+          - 10551832
+      - text: ALDP and ALDRP interact via their carboxy termini.  ALDP mutations P484R and R591Q abolish this interaction.  This interaction was demonstrated using human ALDP and murine ALDRP.
+        pmids:
+          - 10551832
+      - text: "ALDP homodimerizes via the C-terminal cytosolic domain [361-745].  Residues Pro-484 and Arg-591 are important for the interaction."
+        pmids:
+          - 10551832
+      - text: mutational analysis in patients with X-linked adrenoleukodystrophy
+        pmids:
+          - 11438993
+  omim:
+    hgncId: "HGNC:61"
+    omimDiseases:
+      - omimId: "OMIM:300100"
+        label: Adrenoleukodystrophy
+  orpha:
+    hgncId: "HGNC:61"
+    orphaDiseases:
+      - orphaId: "ORPHA:369942"
+        label: CADDS
+      - orphaId: "ORPHA:388"
+        label: Hirschsprung disease
+  shet:
+    hgncId: "HGNC:61"
+    sHet: 0.017
+  gtex:
+    hgncId: "HGNC:61"
+    ensemblGeneId: ENSG00000101986
+    ensemblGeneVersion: "11"
+    records:
+      - tissue: GTEX_TISSUE_ADIPOSE_TISSUE
+        tissueDetailed: GTEX_TISSUE_DETAILED_ADIPOSE_SUBCUTANEOUS
+        tpms:
+          - 4.979
+          - 14.66
+          - 20.65
+          - 29.36
+          - 85.67
+      - tissue: GTEX_TISSUE_ADIPOSE_TISSUE
+        tissueDetailed: GTEX_TISSUE_DETAILED_ADIPOSE_VISCERAL_OMENTUM
+        tpms:
+          - 3.615
+          - 10.68
+          - 14.88
+          - 22.02
+          - 55.37
+      - tissue: GTEX_TISSUE_ADRENAL_GLAND
+        tissueDetailed: GTEX_TISSUE_DETAILED_ADRENAL_GLAND
+        tpms:
+          - 10.94
+          - 29.515
+          - 38.03
+          - 49.3575
+          - 109.8
+      - tissue: GTEX_TISSUE_BLADDER
+        tissueDetailed: GTEX_TISSUE_DETAILED_BLADDER
+        tpms:
+          - 8.476
+          - 14.79
+          - 16.61
+          - 25.24
+          - 45.94
+      - tissue: GTEX_TISSUE_BLOOD
+        tissueDetailed: GTEX_TISSUE_DETAILED_CELLS_EBV_TRANSFORMED_LYMPHOCYTES
+        tpms:
+          - 2.305
+          - 3.93175
+          - 4.7765
+          - 5.86875
+          - 9.067
+      - tissue: GTEX_TISSUE_BLOOD
+        tissueDetailed: GTEX_TISSUE_DETAILED_WHOLE_BLOOD
+        tpms:
+          - 0.6884
+          - 6.909
+          - 11.34
+          - 18.275
+          - 45.29
+      - tissue: GTEX_TISSUE_BLOOD_VESSEL
+        tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_AORTA
+        tpms:
+          - 7.882
+          - 18.47
+          - 22.955
+          - 27.635
+          - 53.81
+      - tissue: GTEX_TISSUE_BLOOD_VESSEL
+        tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_CORONARY
+        tpms:
+          - 3.046
+          - 14.225
+          - 17.51
+          - 21.095
+          - 35.56
+      - tissue: GTEX_TISSUE_BLOOD_VESSEL
+        tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_TIBIAL
+        tpms:
+          - 4.899
+          - 12.575
+          - 15.04
+          - 17.815
+          - 36.74
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_AMYGDALA
+        tpms:
+          - 0.5422
+          - 1.528
+          - 1.988
+          - 2.6415
+          - 28.6
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_ANTERIOR_CINGULATE_CORTEX
+        tpms:
+          - 0.8668
+          - 1.66625
+          - 2.0615
+          - 2.3565
+          - 19.48
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CAUDATE_BASAL_GANGLIA
+        tpms:
+          - 0.4904
+          - 2.5175
+          - 3.26
+          - 4.1095
+          - 9.345
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CEREBELLAR_HEMISPHERE
+        tpms:
+          - 0.6319
+          - 1.4165
+          - 1.765
+          - 2.1805
+          - 11.58
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CEREBELLUM
+        tpms:
+          - 0.9164
+          - 1.878
+          - 2.311
+          - 2.677
+          - 5.044
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CORTEX
+        tpms:
+          - 0.6468
+          - 2.339
+          - 2.792
+          - 3.398
+          - 10.21
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_FRONTAL_CORTEX
+        tpms:
+          - 0.6928
+          - 1.762
+          - 2.204
+          - 2.632
+          - 17.5
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_HIPPOCAMPUS
+        tpms:
+          - 0.705
+          - 1.662
+          - 2.254
+          - 3.096
+          - 24.3
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_HYPOTHALAMUS
+        tpms:
+          - 0.6072
+          - 2.07225
+          - 3.087
+          - 4.0585
+          - 16.59
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_NUCLEUS_ACCUMBENS
+        tpms:
+          - 0.496
+          - 1.942
+          - 2.4765
+          - 3.1105
+          - 16.1
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_PUTAMEN_BASAL_GANGLIA
+        tpms:
+          - 0.6952
+          - 2.306
+          - 3.055
+          - 3.967
+          - 8.358
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_SPINAL_CORD
+        tpms:
+          - 0.9342
+          - 3.283
+          - 4.741
+          - 6.4895
+          - 11.07
+      - tissue: GTEX_TISSUE_BRAIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_SUBSTANTIA_NIGRA
+        tpms:
+          - 0.8206
+          - 1.815
+          - 2.596
+          - 3.4345
+          - 9.459
+      - tissue: GTEX_TISSUE_BREAST
+        tissueDetailed: GTEX_TISSUE_DETAILED_BREAST_MAMMARY_TISSUE
+        tpms:
+          - 3.953
+          - 10.31
+          - 14.35
+          - 23.75
+          - 71.82
+      - tissue: GTEX_TISSUE_CERVIX_UTERI
+        tissueDetailed: GTEX_TISSUE_DETAILED_CERVIX_ECTOCERVIX
+        tpms:
+          - 5.727
+          - 11.1
+          - 13.19
+          - 23.36
+          - 27.06
+      - tissue: GTEX_TISSUE_CERVIX_UTERI
+        tissueDetailed: GTEX_TISSUE_DETAILED_CERVIX_ENDOCERVIX
+        tpms:
+          - 8.136
+          - 14.2075
+          - 17.5
+          - 18.335
+          - 21.47
+      - tissue: GTEX_TISSUE_COLON
+        tissueDetailed: GTEX_TISSUE_DETAILED_COLON_SIGMOID
+        tpms:
+          - 5.411
+          - 19.71
+          - 24.14
+          - 28.18
+          - 62.68
+      - tissue: GTEX_TISSUE_COLON
+        tissueDetailed: GTEX_TISSUE_DETAILED_COLON_TRANSVERSE
+        tpms:
+          - 3.771
+          - 8.48575
+          - 12.815
+          - 19.225
+          - 38.69
+      - tissue: GTEX_TISSUE_ESOPHAGUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_GASTROESOPHAGEAL_JUNCTION
+        tpms:
+          - 2.589
+          - 15.52
+          - 19.96
+          - 24.31
+          - 45.49
+      - tissue: GTEX_TISSUE_ESOPHAGUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_MUCOSA
+        tpms:
+          - 1.326
+          - 3.4475
+          - 4.349
+          - 5.503
+          - 16.27
+      - tissue: GTEX_TISSUE_ESOPHAGUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_MUSCULARIS
+        tpms:
+          - 6.771
+          - 14.92
+          - 18.47
+          - 22.165
+          - 44.77
+      - tissue: GTEX_TISSUE_FALLOPIAN_TUBE
+        tissueDetailed: GTEX_TISSUE_DETAILED_FALLOPIAN_TUBE
+        tpms:
+          - 10.79
+          - 12.04
+          - 19.54
+          - 25.43
+          - 28.93
+      - tissue: GTEX_TISSUE_HEART
+        tissueDetailed: GTEX_TISSUE_DETAILED_HEART_ATRIAL_APPENDAGE
+        tpms:
+          - 1.409
+          - 6.182
+          - 7.737
+          - 9.798
+          - 27.41
+      - tissue: GTEX_TISSUE_HEART
+        tissueDetailed: GTEX_TISSUE_DETAILED_HEART_LEFT_VENTRICLE
+        tpms:
+          - 0.5406
+          - 4.408
+          - 6.926
+          - 8.90075
+          - 23.97
+      - tissue: GTEX_TISSUE_KIDNEY
+        tissueDetailed: GTEX_TISSUE_DETAILED_KIDNEY_CORTEX
+        tpms:
+          - 2.172
+          - 3.764
+          - 5.243
+          - 9.659
+          - 19.03
+      - tissue: GTEX_TISSUE_KIDNEY
+        tissueDetailed: GTEX_TISSUE_DETAILED_KIDNEY_MEDULLA
+        tpms:
+          - 4.693
+          - 6.2635
+          - 7.555
+          - 9.18725
+          - 11.78
+      - tissue: GTEX_TISSUE_LIVER
+        tissueDetailed: GTEX_TISSUE_DETAILED_LIVER
+        tpms:
+          - 2.092
+          - 6.29025
+          - 7.921
+          - 9.94625
+          - 20.5
+      - tissue: GTEX_TISSUE_LUNG
+        tissueDetailed: GTEX_TISSUE_DETAILED_LUNG
+        tpms:
+          - 3.974
+          - 10.8075
+          - 13.3
+          - 16.3125
+          - 30.2
+      - tissue: GTEX_TISSUE_MUSCLE
+        tissueDetailed: GTEX_TISSUE_DETAILED_MUSCLE_SKELETAL
+        tpms:
+          - 3.483
+          - 9.4835
+          - 13
+          - 18.795
+          - 46.12
+      - tissue: GTEX_TISSUE_NERVE
+        tissueDetailed: GTEX_TISSUE_DETAILED_NERVE_TIBIAL
+        tpms:
+          - 5.022
+          - 11.11
+          - 13.07
+          - 15.695
+          - 28.47
+      - tissue: GTEX_TISSUE_OVARY
+        tissueDetailed: GTEX_TISSUE_DETAILED_OVARY
+        tpms:
+          - 3.481
+          - 8.05525
+          - 9.73
+          - 11.6125
+          - 45.09
+      - tissue: GTEX_TISSUE_PANCREAS
+        tissueDetailed: GTEX_TISSUE_DETAILED_PANCREAS
+        tpms:
+          - 3.116
+          - 5.21325
+          - 6.622
+          - 7.89825
+          - 17.47
+      - tissue: GTEX_TISSUE_PITUITARY
+        tissueDetailed: GTEX_TISSUE_DETAILED_PITUITARY
+        tpms:
+          - 2.374
+          - 14.415
+          - 16.93
+          - 19.325
+          - 28.69
+      - tissue: GTEX_TISSUE_PROSTATE
+        tissueDetailed: GTEX_TISSUE_DETAILED_PROSTATE
+        tpms:
+          - 5.1
+          - 13.72
+          - 16.78
+          - 21.35
+          - 44.09
+      - tissue: GTEX_TISSUE_SALIVARY_GLAND
+        tissueDetailed: GTEX_TISSUE_DETAILED_MINOR_SALIVARY_GLAND
+        tpms:
+          - 2.995
+          - 6.09775
+          - 8.1035
+          - 9.8845
+          - 27.12
+      - tissue: GTEX_TISSUE_SKIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_CELLS_CULTURED_FIBROBLASTS
+        tpms:
+          - 3.1
+          - 8.268
+          - 10.265
+          - 12.1825
+          - 28
+      - tissue: GTEX_TISSUE_SKIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_SKIN_NOT_SUN_EXPOSED_SUPRAPUBIC
+        tpms:
+          - 1.092
+          - 3.977
+          - 5.251
+          - 7.0915
+          - 48
+      - tissue: GTEX_TISSUE_SKIN
+        tissueDetailed: GTEX_TISSUE_DETAILED_SKIN_SUN_EXPOSED_LOWER_LEG
+        tpms:
+          - 1.729
+          - 4.848
+          - 6.201
+          - 7.765
+          - 45.75
+      - tissue: GTEX_TISSUE_SMALL_INTESTINE
+        tissueDetailed: GTEX_TISSUE_DETAILED_SMALL_INTESTINE_TERMINAL_ILEUM
+        tpms:
+          - 8.005
+          - 14.795
+          - 19.3
+          - 24.205
+          - 58.8
+      - tissue: GTEX_TISSUE_SPLEEN
+        tissueDetailed: GTEX_TISSUE_DETAILED_SPLEEN
+        tpms:
+          - 8.814
+          - 17.53
+          - 21.26
+          - 24.88
+          - 36.86
+      - tissue: GTEX_TISSUE_STOMACH
+        tissueDetailed: GTEX_TISSUE_DETAILED_STOMACH
+        tpms:
+          - 1.921
+          - 4.72
+          - 6.241
+          - 11.94
+          - 33.13
+      - tissue: GTEX_TISSUE_TESTIS
+        tissueDetailed: GTEX_TISSUE_DETAILED_TESTIS
+        tpms:
+          - 5.543
+          - 33.34
+          - 39.64
+          - 46.86
+          - 81.04
+      - tissue: GTEX_TISSUE_THYROID
+        tissueDetailed: GTEX_TISSUE_DETAILED_THYROID
+        tpms:
+          - 2.188
+          - 9.853
+          - 11.66
+          - 13.37
+          - 23.64
+      - tissue: GTEX_TISSUE_UTERUS
+        tissueDetailed: GTEX_TISSUE_DETAILED_UTERUS
+        tpms:
+          - 9.725
+          - 23.8025
+          - 32
+          - 50.8575
+          - 206.8
+      - tissue: GTEX_TISSUE_VAGINA
+        tissueDetailed: GTEX_TISSUE_DETAILED_VAGINA
+        tpms:
+          - 1.536
+          - 6.35825
+          - 9.2935
+          - 14.7125
+          - 30.93
+  decipherHi:
+    hgncId: "HGNC:61"
+    hgncSymbol: ABCD1
+    pHi: 0.05959621
+    hiIndex: 59.98
 

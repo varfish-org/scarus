@@ -1,0 +1,695 @@
+---
+source: src/strucvars/eval/mod.rs
+expression: res
+---
+dbnsfp:
+  geneName: CRYBB3
+  ensemblGene: ENSG00000100053
+  chr: "22"
+  geneOldNames:
+    - CRYB3
+  uniprotAcc: P26998
+  uniprotId: CRBB3_HUMAN
+  entrezGeneId: "1417"
+  ccdsId:
+    - CCDS13830
+  refseqId:
+    - NM_004076
+  ucscId: uc003abo.3
+  mimId:
+    - "123630"
+  omimId:
+    - "123630"
+  geneFullName: crystallin beta B3
+  pathwayUniprot: "."
+  functionDescription:
+    - "FUNCTION: Crystallins are the dominant structural components of the vertebrate eye lens."
+  diseaseDescription:
+    - "DISEASE: Cataract 22, multiple types (CTRCT22) [MIM:609741]: An opacification of the crystalline lens of the eye that frequently results in visual impairment or blindness. Opacities vary in morphology, are often confined to a portion of the lens, and may be static or progressive. In general, the more posteriorly located and dense an opacity, the greater the impact on visual function. CTRCT22 includes nuclear cataract among others. Nuclear cataracts affect the central nucleus of the eye, and are often not highly visually significant. The density of the opacities varies greatly from fine dots to a dense, white and chalk-like, central cataract. The condition is usually bilateral. Nuclear cataracts are often combined with opacified cortical fibers encircling the nuclear opacity, which are referred to as cortical riders. {ECO:0000269|PubMed:15914629, ECO:0000269|PubMed:23508780}. Note=The disease is caused by mutations affecting the gene represented in this entry."
+  mimPhenotypeId:
+    - "609741"
+  mimDisease:
+    - "[MIM:609741]Cataract 22, multiple types"
+  orphanetDisorderId:
+    - "98988"
+    - "98991"
+  orphanetDisorder:
+    - Early-onset anterior polar cataract
+    - Early-onset nuclear cataract
+  orphanetAssociationType:
+    - Disease-causing germline mutation(s) in
+    - Disease-causing germline mutation(s) in
+  hpoId:
+    - "HP:0000501"
+    - "HP:0000007"
+    - "HP:0100018"
+    - "HP:0000006"
+    - "HP:0000519"
+  hpoName:
+    - Glaucoma
+    - Autosomal recessive inheritance
+    - Nuclear cataract
+    - Autosomal dominant inheritance
+    - Developmental cataract
+  goBiologicalProcess:
+    - visual perception
+  goMolecularFunction:
+    - structural constituent of eye lens
+    - protein binding
+  expressionEgenetics:
+    - lens
+    - visual apparatus
+  expressionGnfAtlas:
+    - pons
+    - ciliary ganglion
+    - subthalamic nucleus
+    - dorsal root ganglion
+    - trigeminal ganglion
+    - superior cervical ganglion
+    - atrioventricular node
+    - uterus corpus
+    - parietal lobe
+    - skeletal muscle
+    - cerebellum peduncles
+    - globus pallidus
+  interactionsIntact:
+    - "DOK6[unassigned1304]"
+    - "CRYBB3[17662718]"
+    - "CRYBA2[17662718]"
+    - "CRYBA1[17662718"
+    - "25416956"
+    - "unassigned1304]"
+    - "GRB2[17474147]"
+  interactionsBiogrid:
+    - "C11orf85[28514442]"
+    - "CRYBA1[25416956]"
+    - "TAB1[28514442]"
+    - "SRRM1[16159877]"
+  interactionsConsensusPathDb:
+    - "CRYBA1[0.013]"
+    - "CRYBA2[0.004]"
+    - "DOK6[0.004]"
+    - "GRB2[0.005]"
+    - "SRRM1[0.004]"
+    - "MAJIN[0.004]"
+    - "TAB1[0.005]"
+  haploinsufficiency: 0.12131
+  hipredScore: 0.284251481294632
+  hipred: N
+  ghis: 0.483319316
+  prec: 0.12533
+  knownRecInfo: "."
+  rvisEvs: 0.82
+  rvisPercentileEvs: 87.99
+  lofFdrExac: 0.9834425
+  rvisExac: 1.007147429
+  rvisPercentileExac: 91.13908801
+  exacPli: 0.000000000407383009403585
+  exacPrec: 0.0274072365310746
+  exacPnull: 0.972592763061542
+  exacNontcgaPli: 0.00000025617915654034
+  exacNontcgaPrec: 0.161020589699775
+  exacNontcgaPnull: 0.838979154121068
+  exacNonpsychPli: 0.0000000208631523944418
+  exacNonpsychPrec: 0.0680362802256712
+  exacNonpsychPnull: 0.931963698911176
+  gnomadPli: 0.00000003985
+  gnomadPrec: 0.058596
+  gnomadPnull: 0.9414
+  exacDelScore: 1.12341873113611
+  exacDupScore: -0.102572326180916
+  exacCnvScore: 0.316437667140523
+  exacCnvFlag: Y
+  gdi: 414.22991
+  gdiPhred: 4.2628
+  gdpAllDiseaseCausing: Medium
+  gdpAllMendelian: Medium
+  gdpAllMendelianAd: Medium
+  gdpMendelianAr: Medium
+  gdpPid: Medium
+  gdpPidAd: Medium
+  gdpPidAr: Medium
+  gdpCancer: Medium
+  gdbCancerRec: Medium
+  gdpCancerDom: Medium
+  loftoolScore: 0.808
+  sorvaLofMaf5HetOrHom: 0.0007987220447284345
+  sorvaLofMaf5HomOrComphet: 0
+  sorvaLofMaf1HetOrHom: 0.0007987220447284345
+  sorvaLofMaf1HomOrComphet: 0
+  sorvaLofOrMisMaf5HetOrHom: 0.022364217252396165
+  sorvaLofOrMisMaf5HomOrComphet: 0.0011980830670926517
+  sorvaLofOrMisMaf1HetOrHom: 0.014776357827476038
+  sorvaLofOrMisMaf1HomOrComphet: 0.00039936102236421724
+  essentialGene: "."
+  essentialGeneCrispr: N
+  essentialGeneCrispr2: N
+  essentialGeneGeneTrap: N
+  geneIndispensabilityScore: 0.375854163110784
+  geneIndispensabilityPred: N
+  mgiMouseGene: Crybb3
+  mgiMousePhenotype: "skeleton phenotype; "
+  zfinZebrafishGene: "."
+  zfinZebrafishStructure: "."
+  zfinZebrafishPhenotypeQuality: "."
+  zfinZebrafishPhenotypeTag: "."
+gnomadConstraints:
+  ensemblGeneId: ENSG00000100053
+  entrezId: "1417"
+  geneSymbol: CRYBB3
+  expLof: 13.189
+  expMis: 146.7
+  expSyn: 53.706
+  misZ: -0.1261
+  obsLof: 15
+  obsMis: 151
+  obsSyn: 58
+  oeLof: 1.1373
+  oeLofLower: 0.759
+  oeLofUpper: 1.712
+  oeMis: 1.0293
+  oeMisLower: 0.901
+  oeMisUpper: 1.178
+  oeSyn: 1.08
+  oeSynLower: 0.873
+  oeSynUpper: 1.344
+  pli: 0.000000000035766
+  synZ: -0.46065
+  exacPli: 0.00000000040738
+  exacObsLof: 13
+  exacExpLof: 10.4
+  exacOeLof: 1.25
+hgnc:
+  hgncId: "HGNC:2400"
+  symbol: CRYBB3
+  name: crystallin beta B3
+  locusGroup: protein-coding gene
+  locusType: gene with protein product
+  status: HGNC_STATUS_APPROVED
+  location: 22q11.23
+  locationSortable: 22q11.23
+  prevSymbol:
+    - CRYB3
+  prevName:
+    - "crystallin, beta B3"
+  geneGroup:
+    - Beta-gamma crystallins
+  geneGroupId:
+    - 1359
+  dateApprovedReserved: 1988-05-11
+  dateNameChanged: 2015-11-12
+  dateModified: 2023-01-20
+  entrezId: "1417"
+  ensemblGeneId: ENSG00000100053
+  vegaId: OTTHUMG00000150869
+  ucscId: uc003abo.3
+  refseqAccession:
+    - NM_004076
+  ccdsId:
+    - CCDS13830
+  uniprotIds:
+    - P26998
+  pubmedId:
+    - 8999933
+  mgdId:
+    - "MGI:102717"
+  rgdId:
+    - "RGD:61980"
+  lsdb:
+    - name: "https://databases.lovd.nl/shared/genes/CRYBB3"
+      url: Global Variome shared LOVD
+  omimId:
+    - "123630"
+  orphanet: 120846
+  agr: "HGNC:2400"
+  maneSelect:
+    - ENST00000215855.7
+    - NM_004076.5
+ncbi:
+  geneId: "1417"
+  summary: "Crystallins are separated into two classes: taxon-specific, or enzyme, and ubiquitous. The latter class constitutes the major proteins of vertebrate eye lens and maintains the transparency and refractive index of the lens. Since lens central fiber cells lose their nuclei during development, these crystallins are made and then retained throughout life, making them extremely stable proteins. Mammalian lens crystallins are divided into alpha, beta, and gamma families; beta and gamma crystallins are also considered as a superfamily. Alpha and beta families are further divided into acidic and basic groups. Seven protein regions exist in crystallins: four homologous motifs, a connecting peptide, and N- and C-terminal extensions. Beta-crystallins, the most heterogeneous, differ by the presence of the C-terminal extension (present in the basic group, none in the acidic group). Beta-crystallins form aggregates of different sizes and are able to self-associate to form dimers or to form heterodimers with other beta-crystallins. This gene, a beta basic group member, is part of a gene cluster with beta-A4, beta-B1, and beta-B2. Mutations in this gene result in cataract congenital nuclear autosomal recessive type 2. [provided by RefSeq, Feb 2013]"
+  rifEntries:
+    - text: "The first pregnancy was terminated in week 22. Copy number variation analysis revealed, in both the aborted fetus and the mother, a 495 kb duplication at 22q11.23 encompassing CRYBB3 and CRYBB2"
+      pmids:
+        - 27256633
+    - text: "a common ancestral mutation in CRYBB3 associated with autosomal recessive congenital cataracts identified in four familial cases of Pakistani origin, is reported."
+      pmids:
+        - 27326458
+    - text: "For the first time, a mutation in CRYBB3 is reported in two consanguineous Pakistani families with autosomal recessive congenital cataracts."
+      pmids:
+        - 15914629
+omim:
+  hgncId: "HGNC:2400"
+  omimDiseases:
+    - omimId: "OMIM:609741"
+      label: "Cataract 22, multiple types"
+rcnv:
+  hgncId: "HGNC:2400"
+  pHaplo: 0.215998647561162
+  pTriplo: 0.0610664667479153
+gtex:
+  hgncId: "HGNC:2400"
+  ensemblGeneId: ENSG00000100053
+  ensemblGeneVersion: "9"
+  records:
+    - tissue: GTEX_TISSUE_ADIPOSE_TISSUE
+      tissueDetailed: GTEX_TISSUE_DETAILED_ADIPOSE_SUBCUTANEOUS
+      tpms:
+        - 0
+        - 0.081715
+        - 0.1918
+        - 0.366
+        - 1.834
+    - tissue: GTEX_TISSUE_ADIPOSE_TISSUE
+      tissueDetailed: GTEX_TISSUE_DETAILED_ADIPOSE_VISCERAL_OMENTUM
+      tpms:
+        - 0
+        - 0.09734
+        - 0.2275
+        - 0.4446
+        - 1.711
+    - tissue: GTEX_TISSUE_ADRENAL_GLAND
+      tissueDetailed: GTEX_TISSUE_DETAILED_ADRENAL_GLAND
+      tpms:
+        - 0
+        - 0.29535
+        - 0.52915
+        - 0.81
+        - 10.39
+    - tissue: GTEX_TISSUE_BLADDER
+      tissueDetailed: GTEX_TISSUE_DETAILED_BLADDER
+      tpms:
+        - 0
+        - 0.1692
+        - 0.338
+        - 0.6007
+        - 1.332
+    - tissue: GTEX_TISSUE_BLOOD
+      tissueDetailed: GTEX_TISSUE_DETAILED_CELLS_EBV_TRANSFORMED_LYMPHOCYTES
+      tpms:
+        - 0
+        - 0
+        - 0
+        - 0.0376825
+        - 0.6973
+    - tissue: GTEX_TISSUE_BLOOD
+      tissueDetailed: GTEX_TISSUE_DETAILED_WHOLE_BLOOD
+      tpms:
+        - 0
+        - 0
+        - 0
+        - 0.05739
+        - 1.016
+    - tissue: GTEX_TISSUE_BLOOD_VESSEL
+      tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_AORTA
+      tpms:
+        - 0
+        - 0.570575
+        - 1.048
+        - 2.24525
+        - 15.79
+    - tissue: GTEX_TISSUE_BLOOD_VESSEL
+      tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_CORONARY
+      tpms:
+        - 0
+        - 0.3492
+        - 0.59685
+        - 1.14625
+        - 9.307
+    - tissue: GTEX_TISSUE_BLOOD_VESSEL
+      tissueDetailed: GTEX_TISSUE_DETAILED_ARTERY_TIBIAL
+      tpms:
+        - 0
+        - 0.3368
+        - 0.6437
+        - 1.1525
+        - 5.984
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_AMYGDALA
+      tpms:
+        - 0
+        - 0.0407125
+        - 0.1248
+        - 0.2523
+        - 3.983
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_ANTERIOR_CINGULATE_CORTEX
+      tpms:
+        - 0
+        - 0.0586975
+        - 0.12915
+        - 0.233125
+        - 1.262
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CAUDATE_BASAL_GANGLIA
+      tpms:
+        - 0
+        - 0.1068
+        - 0.18235
+        - 0.294975
+        - 0.942
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CEREBELLAR_HEMISPHERE
+      tpms:
+        - 0
+        - 0
+        - 0.05958
+        - 0.1268
+        - 0.4393
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CEREBELLUM
+      tpms:
+        - 0
+        - 0
+        - 0.09245
+        - 0.1946
+        - 0.6499
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_CORTEX
+      tpms:
+        - 0
+        - 0.089355
+        - 0.1557
+        - 0.2633
+        - 0.9567
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_FRONTAL_CORTEX
+      tpms:
+        - 0
+        - 0.06363
+        - 0.1477
+        - 0.253
+        - 1.143
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_HIPPOCAMPUS
+      tpms:
+        - 0
+        - 0.08843
+        - 0.1612
+        - 0.2463
+        - 1.961
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_HYPOTHALAMUS
+      tpms:
+        - 0
+        - 0.0535825
+        - 0.133
+        - 0.220775
+        - 1.475
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_NUCLEUS_ACCUMBENS
+      tpms:
+        - 0
+        - 0.1566
+        - 0.25925
+        - 0.4181
+        - 1.971
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_PUTAMEN_BASAL_GANGLIA
+      tpms:
+        - 0
+        - 0.0562
+        - 0.1286
+        - 0.2183
+        - 1.203
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_SPINAL_CORD
+      tpms:
+        - 0
+        - 0
+        - 0.07806
+        - 0.1642
+        - 0.881
+    - tissue: GTEX_TISSUE_BRAIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_BRAIN_SUBSTANTIA_NIGRA
+      tpms:
+        - 0
+        - 0.05237
+        - 0.1106
+        - 0.19495
+        - 0.7339
+    - tissue: GTEX_TISSUE_BREAST
+      tissueDetailed: GTEX_TISSUE_DETAILED_BREAST_MAMMARY_TISSUE
+      tpms:
+        - 0
+        - 0.17285
+        - 0.4624
+        - 0.9497
+        - 5.151
+    - tissue: GTEX_TISSUE_CERVIX_UTERI
+      tissueDetailed: GTEX_TISSUE_DETAILED_CERVIX_ECTOCERVIX
+      tpms:
+        - 0.2192
+        - 0.2538
+        - 0.6792
+        - 1.362
+        - 1.57
+    - tissue: GTEX_TISSUE_CERVIX_UTERI
+      tissueDetailed: GTEX_TISSUE_DETAILED_CERVIX_ENDOCERVIX
+      tpms:
+        - 0.1412
+        - 0.4506
+        - 0.7659
+        - 1.938
+        - 6.934
+    - tissue: GTEX_TISSUE_COLON
+      tissueDetailed: GTEX_TISSUE_DETAILED_COLON_SIGMOID
+      tpms:
+        - 0
+        - 0.08339
+        - 0.2146
+        - 0.4831
+        - 1.729
+    - tissue: GTEX_TISSUE_COLON
+      tissueDetailed: GTEX_TISSUE_DETAILED_COLON_TRANSVERSE
+      tpms:
+        - 0
+        - 0.346
+        - 0.7432
+        - 1.20675
+        - 3.89
+    - tissue: GTEX_TISSUE_ESOPHAGUS
+      tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_GASTROESOPHAGEAL_JUNCTION
+      tpms:
+        - 0
+        - 0.1562
+        - 0.3143
+        - 0.5842
+        - 2.066
+    - tissue: GTEX_TISSUE_ESOPHAGUS
+      tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_MUCOSA
+      tpms:
+        - 0.04384
+        - 0.6443
+        - 1.064
+        - 1.703
+        - 5.654
+    - tissue: GTEX_TISSUE_ESOPHAGUS
+      tissueDetailed: GTEX_TISSUE_DETAILED_ESOPHAGUS_MUSCULARIS
+      tpms:
+        - 0
+        - 0.13865
+        - 0.283
+        - 0.48125
+        - 2.214
+    - tissue: GTEX_TISSUE_FALLOPIAN_TUBE
+      tissueDetailed: GTEX_TISSUE_DETAILED_FALLOPIAN_TUBE
+      tpms:
+        - 0.1465
+        - 0.2795
+        - 0.6181
+        - 0.7468
+        - 2.846
+    - tissue: GTEX_TISSUE_HEART
+      tissueDetailed: GTEX_TISSUE_DETAILED_HEART_ATRIAL_APPENDAGE
+      tpms:
+        - 0
+        - 0.07718
+        - 0.1943
+        - 0.354
+        - 1.683
+    - tissue: GTEX_TISSUE_HEART
+      tissueDetailed: GTEX_TISSUE_DETAILED_HEART_LEFT_VENTRICLE
+      tpms:
+        - 0
+        - 0.060055
+        - 0.13605
+        - 0.247175
+        - 1.426
+    - tissue: GTEX_TISSUE_KIDNEY
+      tissueDetailed: GTEX_TISSUE_DETAILED_KIDNEY_CORTEX
+      tpms:
+        - 0.1729
+        - 0.7523
+        - 1.201
+        - 1.867
+        - 11.73
+    - tissue: GTEX_TISSUE_KIDNEY
+      tissueDetailed: GTEX_TISSUE_DETAILED_KIDNEY_MEDULLA
+      tpms:
+        - 1.074
+        - 1.13175
+        - 1.1725
+        - 1.39875
+        - 2.013
+    - tissue: GTEX_TISSUE_LIVER
+      tissueDetailed: GTEX_TISSUE_DETAILED_LIVER
+      tpms:
+        - 0.1299
+        - 0.837425
+        - 1.306
+        - 2.02075
+        - 5.78
+    - tissue: GTEX_TISSUE_LUNG
+      tissueDetailed: GTEX_TISSUE_DETAILED_LUNG
+      tpms:
+        - 0
+        - 0.254275
+        - 0.53655
+        - 0.963
+        - 5.991
+    - tissue: GTEX_TISSUE_MUSCLE
+      tissueDetailed: GTEX_TISSUE_DETAILED_MUSCLE_SKELETAL
+      tpms:
+        - 0
+        - 0.04889
+        - 0.1299
+        - 0.25925
+        - 2.468
+    - tissue: GTEX_TISSUE_NERVE
+      tissueDetailed: GTEX_TISSUE_DETAILED_NERVE_TIBIAL
+      tpms:
+        - 0
+        - 0.3557
+        - 0.6582
+        - 1.026
+        - 4.052
+    - tissue: GTEX_TISSUE_OVARY
+      tissueDetailed: GTEX_TISSUE_DETAILED_OVARY
+      tpms:
+        - 0
+        - 0.1731
+        - 0.3421
+        - 0.577775
+        - 2.814
+    - tissue: GTEX_TISSUE_PANCREAS
+      tissueDetailed: GTEX_TISSUE_DETAILED_PANCREAS
+      tpms:
+        - 0
+        - 0.120075
+        - 0.2304
+        - 0.3869
+        - 2.331
+    - tissue: GTEX_TISSUE_PITUITARY
+      tissueDetailed: GTEX_TISSUE_DETAILED_PITUITARY
+      tpms:
+        - 0
+        - 0.46485
+        - 0.7008
+        - 1.0245
+        - 4.47
+    - tissue: GTEX_TISSUE_PROSTATE
+      tissueDetailed: GTEX_TISSUE_DETAILED_PROSTATE
+      tpms:
+        - 0
+        - 0.9271
+        - 1.875
+        - 3.049
+        - 10.36
+    - tissue: GTEX_TISSUE_SALIVARY_GLAND
+      tissueDetailed: GTEX_TISSUE_DETAILED_MINOR_SALIVARY_GLAND
+      tpms:
+        - 0
+        - 0.5972
+        - 1.0295
+        - 1.76575
+        - 4.336
+    - tissue: GTEX_TISSUE_SKIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_CELLS_CULTURED_FIBROBLASTS
+      tpms:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0.2454
+    - tissue: GTEX_TISSUE_SKIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_SKIN_NOT_SUN_EXPOSED_SUPRAPUBIC
+      tpms:
+        - 0
+        - 0.334
+        - 0.6101
+        - 1.02875
+        - 4.421
+    - tissue: GTEX_TISSUE_SKIN
+      tissueDetailed: GTEX_TISSUE_DETAILED_SKIN_SUN_EXPOSED_LOWER_LEG
+      tpms:
+        - 0
+        - 0.29
+        - 0.5804
+        - 0.9657
+        - 5.557
+    - tissue: GTEX_TISSUE_SMALL_INTESTINE
+      tissueDetailed: GTEX_TISSUE_DETAILED_SMALL_INTESTINE_TERMINAL_ILEUM
+      tpms:
+        - 0
+        - 0.3618
+        - 0.7209
+        - 1.2975
+        - 6.277
+    - tissue: GTEX_TISSUE_SPLEEN
+      tissueDetailed: GTEX_TISSUE_DETAILED_SPLEEN
+      tpms:
+        - 0
+        - 0.109
+        - 0.2353
+        - 0.4088
+        - 2.539
+    - tissue: GTEX_TISSUE_STOMACH
+      tissueDetailed: GTEX_TISSUE_DETAILED_STOMACH
+      tpms:
+        - 0
+        - 0.15235
+        - 0.2963
+        - 0.5119
+        - 1.395
+    - tissue: GTEX_TISSUE_TESTIS
+      tissueDetailed: GTEX_TISSUE_DETAILED_TESTIS
+      tpms:
+        - 0.0817
+        - 0.482
+        - 0.7038
+        - 1.032
+        - 2.71
+    - tissue: GTEX_TISSUE_THYROID
+      tissueDetailed: GTEX_TISSUE_DETAILED_THYROID
+      tpms:
+        - 0.05771
+        - 1.956
+        - 2.964
+        - 4.148
+        - 14.83
+    - tissue: GTEX_TISSUE_UTERUS
+      tissueDetailed: GTEX_TISSUE_DETAILED_UTERUS
+      tpms:
+        - 0
+        - 0.14875
+        - 0.4241
+        - 0.771425
+        - 4.228
+    - tissue: GTEX_TISSUE_VAGINA
+      tissueDetailed: GTEX_TISSUE_DETAILED_VAGINA
+      tpms:
+        - 0
+        - 0.69125
+        - 1.233
+        - 1.99275
+        - 5.841
+domino:
+  geneSymbol: CRYBB3
+  score: 0.28893537
+decipherHi:
+  hgncId: "HGNC:2400"
+  hgncSymbol: CRYBB3
+  pHi: 0.089980356
+  hiIndex: 53.23
+

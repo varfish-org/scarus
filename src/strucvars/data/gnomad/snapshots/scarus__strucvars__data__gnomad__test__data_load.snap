@@ -1,8 +1,0 @@
----
-source: src/strucvars/data/gnomad/mod.rs
-expression: "data.by_hgnc_id(\"HGNC:5\")"
----
-hgnc_id: "HGNC:5"
-pli: 0.0000000049917
-oe_lof_upper: 1.208
-

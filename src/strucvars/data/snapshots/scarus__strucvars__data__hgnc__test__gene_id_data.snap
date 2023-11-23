@@ -1,9 +1,0 @@
----
-source: src/strucvars/data/hgnc.rs
-expression: "data.by_hgnc_id(\"HGNC:1100\")"
----
-hgnc_id: "HGNC:1100"
-hgnc_symbol: BRCA1
-ensembl_gene_id: ENSG00000012048
-ncbi_gene_id: "672"
-

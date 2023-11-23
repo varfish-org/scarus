@@ -11,26 +11,52 @@ use std::{path::Path, sync::Arc};
 use annonars::clinvar_sv::cli::query::IntervalTrees as ClinvarSvIntervalTrees;
 use annonars::common::spdi;
 use annonars::functional::cli::query::IntervalTrees as FunctionalIntervalTrees;
-use annonars::gnomad_pbs::exac_cnv;
-use annonars::gnomad_pbs::gnomad_sv2;
-use annonars::gnomad_pbs::gnomad_sv4;
 use annonars::gnomad_sv::cli::query::IntervalTrees as GnomadSvIntervalTrees;
 use annonars::gnomad_sv::cli::query::Record as GnomadSvRecord;
-use annonars::pbs::annonars::clinvar::v1::minimal::Record as ClinvarRecord;
-use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
-use annonars::pbs::annonars::functional::v1::refseq::Record as FunctionalRecord;
+use annonars::pbs::clinvar::minimal::Record as ClinvarRecord;
+use annonars::pbs::clinvar::sv::Record as ClinvarSvRecord;
+use annonars::pbs::functional::refseq::Record as FunctionalRecord;
+use annonars::pbs::genes::base::Record as GeneRecord;
+use annonars::pbs::gnomad::exac_cnv;
+use annonars::pbs::gnomad::gnomad_sv2;
+use annonars::pbs::gnomad::gnomad_sv4;
+use annonars::pbs::regions::clingen::Region as ClingenRegionRecord;
+use annonars::regions::cli::query::IntervalTrees as RegionsIntervalTrees;
 use bio::bio_types::genome::{AbstractInterval, Interval};
+use bio::data_structures::interval_tree::ArrayBackedIntervalTree;
 use hgvs::data::interface::Provider;
 use itertools::Itertools as _;
 use prost::Message as _;
+use rustc_hash::FxHashMap;
 
 use self::common::GeneOverlap;
 
-use super::data::clingen_dosage::{Data as ClingenDosageData, Gene, Region};
-use super::data::decipher_hi::Data as DecipherHiData;
-use super::data::gnomad::Data as GnomadConstraintData;
-use super::data::hgnc::Data as GeneIdData;
-use super::ds::StructuralVariant;
+use super::ds::{GeneIdInfo, StructuralVariant};
+
+impl From<GeneRecord> for GeneIdInfo {
+    fn from(val: GeneRecord) -> Self {
+        let hgnc = val.hgnc.expect("no HGNC info");
+        GeneIdInfo {
+            hgnc_id: hgnc.hgnc_id,
+            hgnc_symbol: Some(hgnc.symbol),
+            ensembl_gene_id: hgnc.ensembl_gene_id,
+            ncbi_gene_id: hgnc.entrez_id,
+        }
+    }
+}
+
+impl From<&GeneRecord> for GeneIdInfo {
+    fn from(val: &GeneRecord) -> Self {
+        let hgnc = val.hgnc.as_ref().expect("no HGNC info");
+        GeneIdInfo {
+            hgnc_id: hgnc.hgnc_id.clone(),
+            hgnc_symbol: Some(hgnc.symbol.clone()),
+            ensembl_gene_id: hgnc.ensembl_gene_id.clone(),
+            ncbi_gene_id: hgnc.entrez_id.clone(),
+        }
+    }
+}
+
 /// Configuration for the evaluator.
 #[derive(Debug, Clone)]
 pub struct Config {
@@ -59,22 +85,65 @@ impl Default for Config {
 #[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct Paths {
     pub path_tx_db: PathBuf,
-    pub path_hgnc: PathBuf,
-    pub path_clingen_dosage_genes: PathBuf,
-    pub path_clingen_dosage_regions: PathBuf,
-    pub path_decipher_hi: PathBuf,
-    pub path_gnomad_constraints: PathBuf,
-    pub path_clinvar_minimal: PathBuf,
-    pub path_functional: PathBuf,
-    pub path_clinvar_sv: PathBuf,
-    pub path_gnomad_sv_genomes: PathBuf,
+    pub path_annonars_genes: PathBuf,
+    pub path_annonars_functional: PathBuf,
+    pub path_annonars_regions: PathBuf,
+    pub path_clinvar_seqvars: PathBuf,
+    pub path_clinvar_strucvars: PathBuf,
     pub path_gnomad_sv_exomes: PathBuf,
+    pub path_gnomad_sv_genomes: PathBuf,
+}
+
+/// Helper data structure that indexes the gene records with interval trees.
+pub struct GeneIntervalTrees {
+    /// Per-chromosome interval trees to HGNC ID.
+    trees: rustc_hash::FxHashMap<String, ArrayBackedIntervalTree<u64, String>>,
+}
+
+impl GeneIntervalTrees {
+    /// Construct with assembly and genes RocksDB.
+    pub fn with_genes_db(
+        assembly: biocommons_bioutils::assemblies::Assembly,
+        db: Arc<rocksdb::DBWithThreadMode<rocksdb::MultiThreaded>>,
+        cf_data: Arc<rocksdb::BoundColumnFamily>,
+    ) -> Result<Self, anyhow::Error> {
+        let mut trees: rustc_hash::FxHashMap<String, ArrayBackedIntervalTree<u64, String>> =
+            FxHashMap::default();
+
+        let mut iter = db.raw_iterator_cf(&cf_data);
+        iter.seek(b"");
+        while iter.valid() {
+            if let Some(raw_value) = iter.value() {
+                let record = GeneRecord::decode(raw_value)?;
+                let hgnc_id = record.hgnc.expect("no hgnc").hgnc_id;
+                if let Some(clingen) = record.clingen {
+                    let interval: Interval = clingen.get_interval(assembly)?;
+                    trees
+                        .entry(
+                            interval
+                                .contig()
+                                .strip_prefix("chr")
+                                .unwrap_or(interval.contig())
+                                .to_string(),
+                        )
+                        .or_default()
+                        .insert(interval.range(), hgnc_id);
+                }
+                iter.next();
+            } else {
+                break;
+            }
+        }
+
+        trees.values_mut().for_each(|tree| tree.index());
+
+        Ok(GeneIntervalTrees { trees })
+    }
 }
 
 /// Evaluator for structural variants.
 pub struct Evaluator {
     /// The assembly to be used.
-    #[allow(dead_code)]
     assembly: biocommons_bioutils::assemblies::Assembly,
     /// Configuration
     config: Config,
@@ -84,25 +153,24 @@ pub struct Evaluator {
     /// Mapping from chromosome name to accession for the given assembly.
     chrom_to_ac: rustc_hash::FxHashMap<String, String>,
 
-    /// The gene identifier data.
-    gene_id_data: GeneIdData,
-    /// The ClinGen dosage data.
-    clingen_dosage_data: ClingenDosageData,
-    /// The DECIPHER HI data.
-    decipher_hi_data: DecipherHiData,
-    /// The gnomAD constraint data.
-    gnomad_constraint_data: GnomadConstraintData,
-
-    /// The ClinVar minimal database.
-    clinvar_db: Arc<rocksdb::DBWithThreadMode<rocksdb::MultiThreaded>>,
+    /// The ClinVar seqvars database.
+    clinvar_seqvars: Arc<rocksdb::DBWithThreadMode<rocksdb::MultiThreaded>>,
     /// The ClinVar SV database wrapped/indexed by `IntervalTrees`.
-    clinvar_sv: ClinvarSvIntervalTrees,
+    clinvar_strucvars: ClinvarSvIntervalTrees,
+
     /// The gnomAD SV (genomes) database wrapped/indexed by `IntervalTrees`.
     gnomad_sv_genomes: GnomadSvIntervalTrees,
     /// The gnomAD SV (exomes) database wrapped/indexed by `IntervalTrees`.
     gnomad_sv_exomes: GnomadSvIntervalTrees,
+
+    /// Indexed genes by clingen regions.
+    genes_clingen_trees: GeneIntervalTrees,
+    /// The genes RocksDB database.
+    genes: Arc<rocksdb::DBWithThreadMode<rocksdb::MultiThreaded>>,
     /// The functional elements database wrapped/indexed by `IntervalTrees`.
     functional: FunctionalIntervalTrees,
+    /// The regions database wrapped/indexed by `IntervalTree`.
+    regions: RegionsIntervalTrees,
 }
 
 impl Evaluator {
@@ -125,41 +193,37 @@ impl Evaluator {
         paths: Paths,
         config: Config,
     ) -> Result<Self, anyhow::Error> {
+        tracing::debug!("loading mehari data ...");
         let provider = Self::load_provider(assembly, paths.path_tx_db.as_ref())
             .map_err(|e| anyhow::anyhow!("failed to load transcript database: {}", e))?;
-        let gene_id_data = GeneIdData::new(paths.path_hgnc)
-            .map_err(|e| anyhow::anyhow!("failed to load gene identifier data: {}", e))?;
-        let clingen_dosage_data = ClingenDosageData::new(
-            paths.path_clingen_dosage_genes,
-            paths.path_clingen_dosage_regions,
-            &gene_id_data,
-            assembly.into(),
-        )
-        .map_err(|e| anyhow::anyhow!("failed to load clingen dosage data: {}", e))?;
-        let decipher_hi_data = DecipherHiData::load(paths.path_decipher_hi)
-            .map_err(|e| anyhow::anyhow!("failed to load decipher hi data: {}", e))?;
-        let gnomad_constraint_data =
-            GnomadConstraintData::load(paths.path_gnomad_constraints, &gene_id_data)
-                .map_err(|e| anyhow::anyhow!("failed to load gnomAD constraint data: {}", e))?;
-        let (clinvar_db, _) = annonars::clinvar_minimal::cli::query::open_rocksdb(
-            &paths.path_clinvar_minimal,
-            "clinvar",
-            "meta",
-            "clinvar_by_accession",
-        )
-        .map_err(|e| anyhow::anyhow!("failed to open 'minimal' ClinVar RocksDB: {}", e))?;
 
-        let (clinvar_sv_db, clinvar_sv_meta) = annonars::clinvar_sv::cli::query::open_rocksdb(
-            &paths.path_clinvar_sv,
+        tracing::debug!("loading clinvar seqvars data ...");
+        let (clinvar_seqvars, _clinvar_seqvars_meta) =
+            annonars::clinvar_sv::cli::query::open_rocksdb(
+                &paths.path_clinvar_seqvars,
+                "clinvar",
+                "meta",
+                "clinvar_by_accession",
+            )
+            .map_err(|e| anyhow::anyhow!("failed to open clinvar RocksDB: {}", e))?;
+
+        tracing::debug!("loading clinvar strucvars data ...");
+        let (clinvar_strucvars_db, clinvar_strucvars_meta) =
+            annonars::clinvar_sv::cli::query::open_rocksdb(
+                &paths.path_clinvar_strucvars,
+                "clinvar_sv",
+                "meta",
+                "clinvar_sv_by_rcv",
+            )
+            .map_err(|e| anyhow::anyhow!("failed to open clinvar-sv RocksDB: {}", e))?;
+        let clinvar_strucvars = ClinvarSvIntervalTrees::with_db(
+            clinvar_strucvars_db,
             "clinvar_sv",
-            "meta",
-            "clinvar_sv_by_rcv",
+            clinvar_strucvars_meta,
         )
-        .map_err(|e| anyhow::anyhow!("failed to open clinvar_sv RocksDB: {}", e))?;
-        let clinvar_sv =
-            ClinvarSvIntervalTrees::with_db(clinvar_sv_db, "clinvar_sv", clinvar_sv_meta)
-                .map_err(|e| anyhow::anyhow!("failed to load ClinVar SV data: {}", e))?;
+        .map_err(|e| anyhow::anyhow!("failed to load ClinVar SV data: {}", e))?;
 
+        tracing::debug!("loading gnomad-sv genomes data ...");
         let (gnomad_sv_genomes_db, gnomad_sv_genomes_meta) =
             annonars::gnomad_sv::cli::query::open_rocksdb(
                 &paths.path_gnomad_sv_genomes,
@@ -174,6 +238,7 @@ impl Evaluator {
         )
         .map_err(|e| anyhow::anyhow!("failed to load gnomAD SV data: {}", e))?;
 
+        tracing::debug!("loading gnomad-sv exomes data ...");
         let (gnomad_sv_exomes_db, gnomad_sv_exomes_meta) =
             annonars::gnomad_sv::cli::query::open_rocksdb(
                 &paths.path_gnomad_sv_exomes,
@@ -185,8 +250,20 @@ impl Evaluator {
             GnomadSvIntervalTrees::with_db(gnomad_sv_exomes_db, "gnomad_sv", gnomad_sv_exomes_meta)
                 .map_err(|e| anyhow::anyhow!("failed to load gnomAD SV data: {}", e))?;
 
+        tracing::debug!("loading genes data ...");
+        let genes =
+            annonars::genes::cli::query::open_rocksdb(&paths.path_annonars_genes, "genes", "meta")
+                .map_err(|e| anyhow::anyhow!("failed to open genes RocksDB: {}", e))?;
+        let genes_clingen_trees = GeneIntervalTrees::with_genes_db(
+            assembly,
+            genes.clone(),
+            genes.cf_handle("genes").expect("no genes cf"),
+        )
+        .map_err(|e| anyhow::anyhow!("failed to index genes data: {}", e))?;
+
+        tracing::debug!("loading functional data ...");
         let (functional_db, functional_meta) = annonars::functional::cli::query::open_rocksdb(
-            &paths.path_functional,
+            &paths.path_annonars_functional,
             "functional",
             "meta",
         )
@@ -195,20 +272,29 @@ impl Evaluator {
             FunctionalIntervalTrees::with_db(functional_db, "functional", functional_meta)
                 .map_err(|e| anyhow::anyhow!("failed to load functional element data: {}", e))?;
 
+        tracing::debug!("loading regions data ...");
+        let (regions_db, regions_meta) = annonars::regions::cli::query::open_rocksdb(
+            &paths.path_annonars_regions,
+            "regions",
+            "meta",
+        )
+        .map_err(|e| anyhow::anyhow!("failed to open functional element RocksDB: {}", e))?;
+        let regions = RegionsIntervalTrees::with_db(regions_db, "regions", regions_meta)
+            .map_err(|e| anyhow::anyhow!("failed to load functional element data: {}", e))?;
+
         Ok(Self {
-            config,
             assembly,
+            config,
             chrom_to_ac: Self::chrom_to_acc(assembly, &provider),
             provider,
-            gene_id_data,
-            clingen_dosage_data,
-            decipher_hi_data,
-            gnomad_constraint_data,
-            clinvar_db,
-            clinvar_sv,
+            clinvar_seqvars,
+            clinvar_strucvars,
             gnomad_sv_genomes,
             gnomad_sv_exomes,
+            genes_clingen_trees,
+            genes,
             functional,
+            regions,
         })
     }
 
@@ -253,16 +339,21 @@ impl Evaluator {
         chrom_to_acc
     }
 
-    // /// Perform evaluation of the given structural variant.
-    // pub fn evaluate(&self, sv: &StructuralVariant) -> Result<
+    /// Query for gene by accession.
+    pub fn query_gene(&self, hgnc_id: &str) -> Result<Option<GeneRecord>, anyhow::Error> {
+        let key = hgnc_id.as_bytes();
+        let cf_data = self.genes.cf_handle("genes").expect("no genes cf");
+        let value = self
+            .genes
+            .get_cf(&cf_data, key)
+            .map_err(|e| anyhow::anyhow!("failed to query genes database: {}", e))?;
 
-    /// Return the gene identifier data.
-    ///
-    /// # Returns
-    ///
-    /// The gene identifier data.
-    pub fn gene_id_data(&self) -> &GeneIdData {
-        &self.gene_id_data
+        value
+            .map(|value| {
+                GeneRecord::decode(value.as_slice())
+                    .map_err(|e| anyhow::anyhow!("failed to decode gene record: {}", e))
+            })
+            .transpose()
     }
 
     /// Query for ClinVar variants in 1-based range.
@@ -292,10 +383,10 @@ impl Evaluator {
 
         // Obtain iterator and seek to start.
         let cf_handle = self
-            .clinvar_db
+            .clinvar_seqvars
             .cf_handle("clinvar")
             .expect("missing clinvar column family");
-        let mut iter = self.clinvar_db.raw_iterator_cf(&cf_handle);
+        let mut iter = self.clinvar_seqvars.raw_iterator_cf(&cf_handle);
         let pos_start = annonars::common::keys::Pos {
             chrom: chrom.to_string(),
             pos: start,
@@ -400,16 +491,16 @@ impl Evaluator {
             .into_iter()
             .group_by(|(hgnc, _)| hgnc.clone())
             .into_iter()
-            .map(|(hgnc, group)| {
-                let txs = group.map(|(_, tx)| tx).collect::<Vec<_>>();
+            .map(|(hgnc, group)| -> Result<_, anyhow::Error> {
                 let gene = self
-                    .gene_id_data
-                    .by_hgnc_id(&hgnc)
-                    .expect("could not resolve HGNC ID")
-                    .clone();
-                GeneOverlap::new(gene, txs)
+                    .query_gene(&hgnc)
+                    .map_err(|e| anyhow::anyhow!("failed to query gene `{}`: {}", hgnc, e))?
+                    .ok_or_else(|| anyhow::anyhow!("gene `{}` not found", hgnc))?
+                    .into();
+                let txs = group.map(|(_, tx)| tx).collect::<Vec<_>>();
+                Ok(GeneOverlap::new(gene, txs))
             })
-            .collect::<Vec<_>>();
+            .collect::<Result<Vec<_>, _>>()?;
 
         tracing::trace!(
             "found gene overlaps for strucvar {}:{}-{}: {:?}",
@@ -464,17 +555,80 @@ impl Evaluator {
     pub fn clingen_overlaps(
         &self,
         sv_interval: &bio::bio_types::genome::Interval,
-    ) -> (Vec<Gene>, Vec<Region>) {
-        let mut clingen_genes = self.clingen_dosage_data.gene_by_overlap(sv_interval);
-        clingen_genes.sort_by(|a, b| a.ncbi_gene_id.cmp(&b.ncbi_gene_id));
-        let mut clingen_regions = self.clingen_dosage_data.region_by_overlap(sv_interval);
-        clingen_regions.sort_by(|a, b| a.isca_id.cmp(&b.isca_id));
+    ) -> (Vec<GeneRecord>, Vec<ClingenRegionRecord>) {
+        let clingen_genes = self.clingen_gene_overlaps(sv_interval);
+        let clingen_regions = self.clingen_region_overlaps(sv_interval);
+
         tracing::debug!(
             "overlaps with {} ClinGen regions and {} genes",
             clingen_regions.len(),
             clingen_genes.len()
         );
         (clingen_genes, clingen_regions)
+    }
+
+    /// Query ClinGen gene overlaps.
+    fn clingen_gene_overlaps(&self, sv_interval: &Interval) -> Vec<GeneRecord> {
+        self.genes_clingen_trees
+            .trees
+            .get(
+                sv_interval
+                    .contig()
+                    .strip_prefix("chr")
+                    .unwrap_or(sv_interval.contig()),
+            )
+            .map(|tree| {
+                tree.find(sv_interval.range())
+                    .into_iter()
+                    .map(|entry| {
+                        self.query_gene(entry.data())
+                            .expect("unknown gene")
+                            .expect("no gene found")
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .unwrap_or_default()
+    }
+
+    /// Query ClinGen region overlaps.
+    fn clingen_region_overlaps(&self, sv_interval: &Interval) -> Vec<ClingenRegionRecord> {
+        tracing::debug!("querying ClinGen regions for {:?}", sv_interval);
+        let clingen_regions = {
+            // let acc = self
+            //     .chrom_to_ac
+            //     .get(
+            //         sv_interval
+            //             .contig()
+            //             .strip_prefix("chr")
+            //             .unwrap_or(sv_interval.contig()),
+            //     )
+            //     .expect("could not resolve chromosome name")
+            //     .clone();
+            let range = spdi::Range::new(
+                sv_interval
+                    .contig()
+                    .strip_prefix("chr")
+                    .unwrap_or(sv_interval.contig())
+                    .to_string(),
+                sv_interval.range().start as i32 + 1,
+                sv_interval.range().end as i32,
+            );
+            tracing::debug!("range = {:?}", &range);
+            // tracing::debug!("trees = {:#?}", &self.regions);
+            let mut clingen_regions = self
+                .regions
+                .query(&range)
+                .expect("problem querying regions")
+                .into_iter()
+                .map(|region| match region {
+                    annonars::regions::cli::query::Record::ClingenDosage(record) => record,
+                })
+                .collect::<Vec<_>>();
+            clingen_regions.sort_by(|a, b| a.isca_id.cmp(&b.isca_id));
+            tracing::debug!("regions = {:#?}", &clingen_regions);
+            clingen_regions
+        };
+        clingen_regions
     }
 
     /// Query functional elements by overlap.
@@ -509,7 +663,7 @@ impl Evaluator {
         let start = start as i32;
         let stop = stop as i32;
 
-        self.clinvar_sv
+        self.clinvar_strucvars
             .query(&spdi::Range::new(chrom.replace("chr", ""), start, stop))
             .map_err(|e| anyhow::anyhow!("failed to query ClinVar SV db: {}", e))
     }
@@ -715,9 +869,12 @@ impl CarrierFrequency for annonars::gnomad_sv::cli::query::Record {
             }
             GnomadSvRecord::GnomadCnv4(record) => {
                 let counts = record
-                    .counts
-                    .as_ref()
+                    .carrier_counts
+                    .first()
                     .expect("no counts")
+                    .by_sex
+                    .as_ref()
+                    .expect("no by sex")
                     .overall
                     .as_ref()
                     .expect("no counts by sex");
@@ -825,21 +982,14 @@ pub mod test {
         Evaluator::new(
             biocommons_bioutils::assemblies::Assembly::Grch37p10,
             super::Paths {
-                path_tx_db: "tests/data/strucvars/hi_ts/txs_example_hi.bin.zst".into(),
-                path_hgnc: "tests/data/hgnc.tsv".into(),
-                path_clingen_dosage_genes:
-                    "tests/data/strucvars/ClinGen_gene_curation_list_GRCh37.tsv".into(),
-                path_clingen_dosage_regions:
-                    "tests/data/strucvars/ClinGen_region_curation_list_GRCh37.tsv".into(),
-                path_decipher_hi: "tests/data/strucvars/decipher_hi_prediction.tsv".into(),
-                path_gnomad_constraints: "tests/data/strucvars/gnomad_constraints.tsv".into(),
-                path_clinvar_minimal: "tests/data/strucvars/hi_ts/clinvar/rocksdb".into(),
-                path_functional: "tests/data/strucvars/hi_ts/functional/rocksdb".into(),
-                path_clinvar_sv: "tests/data/strucvars/hi_ts/clinvar-sv/rocksdb".into(),
-                path_gnomad_sv_genomes: "tests/data/strucvars/hi_ts/gnomad-sv/gnomad-sv2/rocksdb"
-                    .into(),
-                path_gnomad_sv_exomes: "tests/data/strucvars/hi_ts/gnomad-sv/exac-cnv/rocksdb"
-                    .into(),
+                path_tx_db: "tests/data/strucvars/txs_example_hi.bin.zst".into(),
+                path_annonars_genes: "tests/data/strucvars/genes/rocksdb".into(),
+                path_annonars_functional: "tests/data/strucvars/functional/rocksdb".into(),
+                path_annonars_regions: "tests/data/strucvars/regions/rocksdb".into(),
+                path_clinvar_seqvars: "tests/data/strucvars/clinvar/rocksdb".into(),
+                path_clinvar_strucvars: "tests/data/strucvars/clinvar-sv/rocksdb".into(),
+                path_gnomad_sv_exomes: "tests/data/strucvars/gnomad-sv/exac-cnv/rocksdb".into(),
+                path_gnomad_sv_genomes: "tests/data/strucvars/gnomad-sv/gnomad-sv2/rocksdb".into(),
             },
             Default::default(),
         )
@@ -858,8 +1008,11 @@ pub mod test {
     /// Test internal working of `clingen_overlaps`.
     #[tracing_test::traced_test]
     #[rstest::rstest]
-    #[case("17", 67_892_000, 69_793_000, "region-match")]
+    #[case("17", 69_896_855, 71_796_293, "region-match")]
     #[case("X", 152_990_000, 153_011_000, "gene-abcd1")]
+    #[case("1", 12_929_369, 12_939_070, "ISCA-46311-contained-in")] // contained
+    #[case("1", 12_939_071, 12_939_075, "ISCA-46311-right-of")] // right of
+    #[case("1", 12_929_365, 12_929_368, "ISCA-46311-left-of")] // left of
     fn clingen_overlaps(
         #[case] chrom: &str,
         #[case] start: u64,
@@ -869,8 +1022,7 @@ pub mod test {
     ) -> Result<(), anyhow::Error> {
         mehari::common::set_snapshot_suffix!("{}", label);
 
-        let sv_interval =
-            crate::strucvars::data::intervals::Interval::new(chrom.into(), start..stop);
+        let sv_interval = bio::bio_types::genome::Interval::new(chrom.into(), start..stop);
 
         let (genes, regions) = global_evaluator_37.clingen_overlaps(&sv_interval);
 
@@ -955,7 +1107,8 @@ pub mod test {
     #[rstest::rstest]
     // currently RNA genes not imported
     // #[case("HGNC:53963", Some(false))]
-    #[case("HGNC:39941", Some(true))]
+    #[case("HGNC:18443", Some(true))]
+    #[case("HGNC:2400", Some(true))]
     #[case("HGNC:xxx", None)]
     fn is_protein_coding(
         #[case] hgnc_id: &str,
@@ -965,6 +1118,28 @@ pub mod test {
         mehari::common::set_snapshot_suffix!("{}", hgnc_id);
 
         assert_eq!(global_evaluator_37.protein_coding(hgnc_id)?, expected);
+
+        Ok(())
+    }
+
+    /// Test `query_gene`.
+    #[tracing_test::traced_test]
+    #[rstest::rstest]
+    #[case("HGNC:18443", true)]
+    #[case("HGNC:2400", true)]
+    #[case("HGNC:xxx", false)]
+    fn query_gene(
+        #[case] hgnc_id: &str,
+        #[case] expected_found: bool,
+        global_evaluator_37: &super::Evaluator,
+    ) -> Result<(), anyhow::Error> {
+        mehari::common::set_snapshot_suffix!("{}", hgnc_id);
+
+        let res = global_evaluator_37.query_gene(hgnc_id)?;
+        assert_eq!(expected_found, res.is_some());
+        if let Some(res) = res {
+            insta::assert_yaml_snapshot!(res);
+        }
 
         Ok(())
     }

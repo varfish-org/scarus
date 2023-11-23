@@ -1,6 +1,6 @@
 //! Common functions and data structures for evaluation.
 
-use crate::strucvars::data::hgnc::GeneIdInfo;
+use crate::strucvars::ds::GeneIdInfo;
 
 /// Scores of the results in individual categories.
 pub trait SuggestedScore {
@@ -47,7 +47,7 @@ impl GeneOverlap {
 #[serde(rename_all = "snake_case")]
 pub enum FunctionalElement {
     /// Overlap with functional element with RefSeq.
-    Refseq(annonars::pbs::annonars::functional::v1::refseq::Record),
+    Refseq(annonars::pbs::functional::refseq::Record),
 }
 
 impl FunctionalElement {

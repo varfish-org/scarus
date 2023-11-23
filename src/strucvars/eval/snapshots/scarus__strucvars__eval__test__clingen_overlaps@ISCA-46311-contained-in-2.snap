@@ -1,0 +1,10 @@
+---
+source: src/strucvars/eval/mod.rs
+expression: regions
+---
+- iscaId: ISCA-46311
+  iscaRegionName: 1p36.21 population region (gnomAD-SV_v2.1_DEL_1_1094)
+  genomicLocation: "chr1:12929369-12939070"
+  haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_UNLIKELY
+  triplosensitivityScore: CLINGEN_DOSAGE_SCORE_NO_EVIDENCE_AVAILABLE
+

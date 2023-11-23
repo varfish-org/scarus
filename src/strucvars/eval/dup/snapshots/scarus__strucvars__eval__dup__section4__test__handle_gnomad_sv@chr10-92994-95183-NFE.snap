@@ -3,7 +3,7 @@ source: src/strucvars/eval/dup/section4.rs
 expression: evaluator.handle_gnomad_sv(&sv_interval)?
 ---
 g4:
-  g4_o:
+  g4o:
     suggested_score: 0
     overlaps:
       - overlap: 1
@@ -12,14 +12,14 @@ g4:
             chrom: "10"
             start: 92994
             stop: 95183
-            sv_type: 1
-            population: 3
+            svType: CNV_TYPE_DUP
+            population: POPULATION_FIN
       - overlap: 1
         record:
           exac_cnv:
             chrom: "10"
             start: 92994
             stop: 95183
-            sv_type: 1
-            population: 3
+            svType: CNV_TYPE_DUP
+            population: POPULATION_FIN
 

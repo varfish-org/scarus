@@ -1,7 +1,7 @@
 //! Common code for evaluation results of CNVs.
 
 use annonars::gnomad_sv::cli::query::Record as GnomadSvRecord;
-use annonars::pbs::annonars::clinvar::v1::sv::Record as ClinvarSvRecord;
+use annonars::pbs::clinvar::sv::Record as ClinvarSvRecord;
 use intervals_general::bound_pair::BoundPair;
 
 use super::{del, dup};

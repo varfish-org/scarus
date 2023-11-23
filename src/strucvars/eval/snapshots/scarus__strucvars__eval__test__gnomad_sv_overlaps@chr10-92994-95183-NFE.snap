@@ -6,12 +6,12 @@ expression: result
     chrom: "10"
     start: 92994
     stop: 95183
-    sv_type: 1
-    population: 3
+    svType: CNV_TYPE_DUP
+    population: POPULATION_FIN
 - exac_cnv:
     chrom: "10"
     start: 92994
     stop: 95183
-    sv_type: 1
-    population: 3
+    svType: CNV_TYPE_DUP
+    population: POPULATION_FIN
 

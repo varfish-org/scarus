@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/section4.rs
 expression: "evaluator.handle_clinvar_benign(&sv_interval, &clinvar_records)?"
 ---
 l4:
-  l4_n:
+  l4n:
     overlaps:
       - overlap: 1
         record:
@@ -11,74 +11,58 @@ l4:
           chromosome: X
           start: 155231256
           stop: 155251871
-          reference: ~
-          alternative: ~
-          inner_start: 155231256
-          inner_stop: ~
-          outer_start: 155251871
-          outer_stop: ~
-          variant_type: 0
+          innerStart: 155231256
+          outerStart: 155251871
+          variantType: VARIANT_TYPE_DELETION
           vcv: VCV000161053
-          reference_assertions:
+          referenceAssertions:
             - rcv: RCV000148261
               title: "GRCh38/hg38 Xq28(chrX:156001591-156022206)x1 AND See cases"
-              clinical_significance: 4
-              review_status: 3
+              clinicalSignificance: CLINICAL_SIGNIFICANCE_BENIGN
+              reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
       - overlap: 1
         record:
           release: GRCh37
           chromosome: X
           start: 155231256
           stop: 155251871
-          reference: ~
-          alternative: ~
-          inner_start: 155231256
-          inner_stop: ~
-          outer_start: 155251871
-          outer_stop: ~
-          variant_type: 0
+          innerStart: 155231256
+          outerStart: 155251871
+          variantType: VARIANT_TYPE_DELETION
           vcv: VCV000161054
-          reference_assertions:
+          referenceAssertions:
             - rcv: RCV000050306
               title: "GRCh38/hg38 Xq28(chrX:156001591-156022206)x0 AND See cases"
-              clinical_significance: 4
-              review_status: 3
+              clinicalSignificance: CLINICAL_SIGNIFICANCE_BENIGN
+              reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
       - overlap: 0.8559684
         record:
           release: GRCh37
           chromosome: X
           start: 155227787
           stop: 155251871
-          reference: ~
-          alternative: ~
-          inner_start: 155227787
-          inner_stop: ~
-          outer_start: 155251871
-          outer_stop: ~
-          variant_type: 0
+          innerStart: 155227787
+          outerStart: 155251871
+          variantType: VARIANT_TYPE_DELETION
           vcv: VCV000057513
-          reference_assertions:
+          referenceAssertions:
             - rcv: RCV000051224
               title: "GRCh38/hg38 Xq28(chrX:155998122-156022206)x0 AND See cases"
-              clinical_significance: 4
-              review_status: 3
+              clinicalSignificance: CLINICAL_SIGNIFICANCE_BENIGN
+              reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
       - overlap: 0.8559684
         record:
           release: GRCh37
           chromosome: X
           start: 155227787
           stop: 155251871
-          reference: ~
-          alternative: ~
-          inner_start: 155227787
-          inner_stop: ~
-          outer_start: 155251871
-          outer_stop: ~
-          variant_type: 0
+          innerStart: 155227787
+          outerStart: 155251871
+          variantType: VARIANT_TYPE_DELETION
           vcv: VCV000144127
-          reference_assertions:
+          referenceAssertions:
             - rcv: RCV000051225
               title: "GRCh38/hg38 Xq28(chrX:155998122-156022206)x1 AND See cases"
-              clinical_significance: 4
-              review_status: 3
+              clinicalSignificance: CLINICAL_SIGNIFICANCE_BENIGN
+              reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 

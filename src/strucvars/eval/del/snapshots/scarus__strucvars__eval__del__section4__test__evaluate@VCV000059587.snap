@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/section4.rs
 expression: evaluator.evaluate(&strucvar)?
 ---
 - l4:
-    l4_patho:
+    l4patho:
       overlaps:
         - overlap: 1
           record:
@@ -11,17 +11,13 @@ expression: evaluator.evaluate(&strucvar)?
             chromosome: "17"
             start: 43005866
             stop: 43377096
-            reference: ~
-            alternative: ~
-            inner_start: 43005866
-            inner_stop: ~
-            outer_start: 43377096
-            outer_stop: ~
-            variant_type: 0
+            innerStart: 43005866
+            outerStart: 43377096
+            variantType: VARIANT_TYPE_DELETION
             vcv: VCV000059587
-            reference_assertions:
+            referenceAssertions:
               - rcv: RCV000053430
                 title: "GRCh38/hg38 17q21.31(chr17:44928498-45299730)x1 AND See cases"
-                clinical_significance: 0
-                review_status: 3
+                clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+                reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 

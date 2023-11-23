@@ -93,7 +93,6 @@ pub mod test {
         };
 
         let res = evaluator.evaluate(&strucvar)?;
-        eprintln!("{:?}", &res);
 
         assert!(matches!(res, Section::L1(L1::L1A(_))));
         insta::assert_yaml_snapshot!(res);

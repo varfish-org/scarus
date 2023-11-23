@@ -1,9 +1,0 @@
----
-source: src/strucvars/data/decipher_hi.rs
-expression: "data.by_hgnc_id(\"HGNC:1100\")"
----
-hgnc_id: "HGNC:1100"
-hgnc_symbol: BRCA1
-p_hi: 0.986984945
-hi_index: 1.2
-

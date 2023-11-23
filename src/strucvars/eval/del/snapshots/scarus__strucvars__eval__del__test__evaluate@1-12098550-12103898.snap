@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/mod.rs
 expression: result
 ---
 - l1:
-    l1_a:
+    l1a:
       genes: []
       functional_elements:
         - refseq:
@@ -12,9 +12,8 @@ expression: result
             stop: 12099428
             id: "id-GeneID:115801416"
             dbxref: "GeneID:115801416"
-            category: 6
-            regulatory_class: 16
-            note: ~
+            category: CATEGORY_REGULATORY
+            regulatoryClass: REGULATORY_CLASS_TRANSCRIPTIONAL_CIS_REGULATORY_REGION
             experiment: "EXISTENCE:mutant phenotype evidence [ECO:0000015][PMID:30612741]"
             function: positively regulates MIIP gene expression in K562 cells
         - refseq:
@@ -23,13 +22,10 @@ expression: result
             stop: 12099428
             id: "id-GeneID:115801416-2"
             dbxref: "GeneID:115801416"
-            category: 5
-            regulatory_class: ~
-            note: ~
-            experiment: ~
+            category: CATEGORY_REGION
             function: "regulatory_interactions: MIIP"
 - l3:
-    l3_a:
+    l3a:
       suggested_score: 0
       num_genes: 0
       genes: []
