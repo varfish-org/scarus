@@ -13,8 +13,7 @@ name = "scarus"
 path = "src/main.rs"
 
 [dependencies]
-#annonars = "0.29.2"
-annonars = { path = "../annonars" }
+annonars = "0.29.4"
 anyhow = "1.0"
 bio = "1.4"
 biocommons-bioutils = "0.1.4"
@@ -31,7 +30,7 @@ rocksdb = { version = "0.21.0", features = ["multi-threaded-cf"] }
 rustc-hash = "1.1"
 serde_json = "1.0"
 serde = { version = "1.0", features = ["serde_derive"] }
-serde_with = { version = "3.3", features = ["indexmap_2"] }
+serde_with = { version = "3.3", features=["alloc", "macros", "indexmap_2"], default-features = false }
 thiserror = "1.0"
 tokio = { version = "1.33", features = ["full"] }
 tracing = "0.1"
