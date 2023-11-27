@@ -69,7 +69,7 @@ impl Evaluator {
 
 #[cfg(test)]
 mod test {
-    use crate::strucvars::data::hgnc::GeneIdInfo;
+    use crate::strucvars::ds::GeneIdInfo;
     use crate::strucvars::eval::common::GeneOverlap;
     use crate::strucvars::eval::dup::result::{G3Count, Section, G1, G1A, G1B, G3};
 

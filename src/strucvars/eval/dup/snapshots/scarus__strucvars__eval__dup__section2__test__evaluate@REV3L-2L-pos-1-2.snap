@@ -3,8 +3,8 @@ source: src/strucvars/eval/dup/section2.rs
 expression: res
 ---
 - g2:
-    g2_l:
-      suggested_score: 0.45
+    g2l:
+      suggested_score: 0
       genes:
         - hgnc_id: "HGNC:9968"
           hgnc_symbol: REV3L

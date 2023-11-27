@@ -2,7 +2,7 @@
 
 use std::{fmt::Display, str::FromStr};
 
-use super::data::intervals::Interval;
+use bio::bio_types::genome::Interval;
 
 /// Enumeration for SV type.
 #[derive(
@@ -115,6 +115,21 @@ impl From<StructuralVariant> for Interval {
     }
 }
 
+/// Mapping of gene identifiers.
+#[derive(Debug, Clone, Default, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct GeneIdInfo {
+    /// HGNC identifier.
+    pub hgnc_id: String,
+    /// Official HGNC gene symbol.
+    #[serde(alias = "gene_symbol")]
+    pub hgnc_symbol: Option<String>,
+    /// ENSEMBL gene identifier.
+    pub ensembl_gene_id: Option<String>,
+    /// NCBI gene identifier.
+    #[serde(alias = "entrez_id")]
+    pub ncbi_gene_id: Option<String>,
+}
+
 #[cfg(test)]
 mod test {
     #[rstest::rstest]
@@ -129,5 +144,117 @@ mod test {
         insta::assert_yaml_snapshot!(sv);
 
         Ok(())
+    }
+}
+
+pub mod intervals {
+    //! Interval operations for rust-bio Intervals.
+
+    use bio::bio_types::genome::AbstractInterval as _;
+
+    /// The type to work with.
+    pub type Interval = bio::bio_types::genome::Interval;
+
+    /// Returns whether two intervals overlap.
+    ///
+    /// # Arguments
+    ///
+    /// * `lhs` - Left-hand side interval.
+    /// * `rhs` - Right-hand side interval.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the intervals overlap, `false` otherwise.
+    pub fn do_overlap(lhs: &Interval, rhs: &Interval) -> bool {
+        let lhs_contig = lhs.contig().strip_prefix("chr").unwrap_or(lhs.contig());
+        let rhs_contig: &str = rhs.contig().strip_prefix("chr").unwrap_or(rhs.contig());
+        if lhs_contig != rhs_contig {
+            false
+        } else {
+            let a = lhs.range();
+            let b = rhs.range();
+            let intersect = std::cmp::max(a.start, b.start)..std::cmp::min(a.end, b.end);
+            intersect.start < intersect.end
+        }
+    }
+
+    /// Returns whether `lhs` interval contains the `rhs` one.
+    ///
+    /// # Arguments
+    ///
+    /// * `lhs` - Left-hand side interval.
+    /// * `rhs` - Right-hand side interval.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the intervals overlap, `false` otherwise.
+    pub fn contains(lhs: &Interval, rhs: &Interval) -> bool {
+        let lhs_contig = lhs.contig().strip_prefix("chr").unwrap_or(lhs.contig());
+        let rhs_contig: &str = rhs.contig().strip_prefix("chr").unwrap_or(rhs.contig());
+        if lhs_contig != rhs_contig {
+            false
+        } else {
+            let a = lhs.range();
+            let b = rhs.range();
+            a.start <= b.start && a.end >= b.end
+        }
+    }
+
+    /// Helper function that converts an `TxExonsRecord` into an Interval.
+    pub fn exon_to_interval(
+        chrom: String,
+        record: &hgvs::data::interface::TxExonsRecord,
+    ) -> Interval {
+        Interval::new(
+            chrom,
+            (record.alt_start_i as u64)..(record.alt_end_i as u64),
+        )
+    }
+
+    #[cfg(test)]
+    mod test {
+        use super::*;
+
+        #[test]
+        fn interval_overlaps_true() {
+            let a = Interval::new("chr1".into(), 10..20);
+            let b = Interval::new("chr1".into(), 15..25);
+            assert!(do_overlap(&a, &b));
+        }
+
+        #[test]
+        fn interval_overlaps_false() {
+            let a = Interval::new("chr1".into(), 10..15);
+            let b = Interval::new("chr1".into(), 15..25);
+            assert!(!do_overlap(&a, &b));
+        }
+
+        #[test]
+        fn interval_overlaps_different_contig() {
+            let a = Interval::new("chr1".into(), 10..20);
+            let b = Interval::new("chr2".into(), 15..25);
+            assert!(!do_overlap(&a, &b));
+        }
+
+        #[test]
+        fn interval_contains_true() {
+            let a = Interval::new("chr1".into(), 10..20);
+            let b = Interval::new("chr1".into(), 15..18);
+            assert!(contains(&a, &b));
+        }
+
+        #[test]
+        fn interval_contains_false() {
+            let a = Interval::new("chr1".into(), 10..20);
+            let b = Interval::new("chr1".into(), 15..25);
+            assert!(!contains(&a, &b));
+        }
+
+        #[test]
+        fn interval_contains_different_contig() {
+            let a = Interval::new("chr1".into(), 10..20);
+            let b = Interval::new("chr2".into(), 15..20);
+            assert!(!contains(&a, &b));
+        }
     }
 }

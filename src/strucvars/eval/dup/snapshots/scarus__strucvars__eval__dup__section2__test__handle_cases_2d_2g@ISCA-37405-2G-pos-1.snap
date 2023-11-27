@@ -3,20 +3,18 @@ source: src/strucvars/eval/dup/section2.rs
 expression: res
 ---
 - g2:
-    g2_g:
+    g2g:
       suggested_score: 0
       benign_region:
-        isca_id: ISCA-37405
-        isca_region_name: 2q13 recurrent region (includes NPHP1)
-        genomic_location: "2:110862108-110983703"
-        haploinsufficiency_score: gene_associated_with_recessive_phenotype
-        triplosensitivity_score: dosage_sensitivity_unlikely
-        haploinsufficiency_disease_id: ~
-        triplosensitivity_disease_id: ~
+        iscaId: ISCA-46459
+        iscaRegionName: 11q14.3 population region (gnomAD-SV_v2.1_DUP_11_33042)
+        genomicLocation: "chr11:89786909-89923863"
+        haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_NO_EVIDENCE_AVAILABLE
+        triplosensitivityScore: CLINGEN_DOSAGE_SCORE_UNLIKELY
       genes:
-        - hgnc_id: "HGNC:39941"
-          hgnc_symbol: LIMS4
-          ensembl_gene_id: ENSG00000256671
-          ncbi_gene_id: "100288695"
+        - hgnc_id: "HGNC:14525"
+          hgnc_symbol: CHORDC1
+          ensembl_gene_id: ENSG00000110172
+          ncbi_gene_id: "26973"
       functional_elements: []
 

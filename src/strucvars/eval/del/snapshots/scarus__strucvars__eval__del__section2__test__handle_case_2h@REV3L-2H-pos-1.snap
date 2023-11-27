@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
 l2:
-  l2_h:
+  l2h:
     suggested_score: 0.15
     gene_hi_predictions:
       - gene:

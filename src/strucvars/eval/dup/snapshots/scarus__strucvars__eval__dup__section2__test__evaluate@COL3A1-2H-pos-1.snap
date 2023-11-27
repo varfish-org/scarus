@@ -3,7 +3,7 @@ source: src/strucvars/eval/dup/section2.rs
 expression: res
 ---
 - g2:
-    g2_h:
+    g2h:
       suggested_score: 0
       hi_genes:
         - hgnc_id: "HGNC:2201"

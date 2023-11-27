@@ -16,7 +16,7 @@ use crate::strucvars::{
 use annonars::{
     clinvar_sv::cli::query::EXAC_CNV_CASES,
     gnomad_sv::cli::query::Record as GnomadSvRecord,
-    pbs::annonars::clinvar::v1::{
+    pbs::clinvar::{
         minimal::{ClinicalSignificance, ReviewStatus, VariantType},
         sv::Record as ClinvarSvRecord,
     },

@@ -1,16 +1,20 @@
 //! Implementation of evaluation of copy number loss section 2.
 
-use annonars::pbs::annonars::clinvar::v1::minimal::{ClinicalSignificance, ReviewStatus};
-use bio::bio_types::genome::AbstractInterval;
+use annonars::pbs::genes::base::Record as GeneRecord;
+use annonars::pbs::regions::clingen::Region as ClingenRegionRecord;
+use annonars::pbs::{
+    clinvar::minimal::{ClinicalSignificance, ReviewStatus},
+    genes::base::ClingenDosageScore,
+};
+use bio::bio_types::genome::{AbstractInterval, Interval};
 use hgvs::data::interface::{Provider, TxExonsRecord, TxInfoRecord};
 
 use super::result::{GeneHiPrediction, GeneHiPredictorResult, Section, L2H};
 use crate::strucvars::{
-    data::{
-        clingen_dosage::{Gene, Region, Score},
-        intervals::{contains, do_overlap, exon_to_interval, Interval},
+    ds::{
+        intervals::{contains, do_overlap, exon_to_interval},
+        StructuralVariant,
     },
-    ds::StructuralVariant,
     eval::{common::SuggestedScore as _, del::result::L2D3},
     eval::{
         del::result::{L2, L2A, L2B, L2C1, L2C2, L2D1, L2D2, L2D4, L2E, L2F, L2G},
@@ -56,17 +60,22 @@ impl<'a> Evaluator<'a> {
         // Check each overlapping ClinGen region/gene.  If `sv_interval` completely contains
         // a region/gene and the region/gene has a "sufficient evidence" score for HI then we
         // have case 2A.
-        if let Some(result) = Self::handle_case_2a(&clingen_genes, &clingen_regions, &sv_interval) {
+        if let Some(result) = self.handle_case_2a(&clingen_genes, &clingen_regions, &sv_interval) {
             tracing::debug!("case 2A fired: {:?}", &result);
             return Ok(result);
         }
         // Otherwise, we need to test case 2B.
-        let has_hi_genes = clingen_genes
-            .iter()
-            .any(|gene| gene.haploinsufficiency_score == Score::SufficientEvidence);
-        let has_hi_region = clingen_regions
-            .iter()
-            .any(|region| region.haploinsufficiency_score == Score::SufficientEvidence);
+        let has_hi_genes = clingen_genes.iter().any(|gene| {
+            gene.clingen
+                .as_ref()
+                .expect("no clingen")
+                .haploinsufficiency_score
+                == ClingenDosageScore::SufficientEvidenceAvailable as i32
+        });
+        let has_hi_region = clingen_regions.iter().any(|region| {
+            region.haploinsufficiency_score
+                == ClingenDosageScore::SufficientEvidenceAvailable as i32
+        });
         let mut result = if has_hi_genes || has_hi_region {
             let result = vec![Section::L2(L2::L2B(L2B::default()))];
             tracing::debug!("case 2B fired: {:?}", &result);
@@ -91,7 +100,7 @@ impl<'a> Evaluator<'a> {
         let benign_regions = clingen_regions
             .iter()
             .filter(|clingen_region| {
-                clingen_region.haploinsufficiency_score == Score::DosageSensitivityUnlikely
+                clingen_region.haploinsufficiency_score == ClingenDosageScore::Unlikely as i32
             })
             .cloned()
             .collect::<Vec<_>>();
@@ -130,19 +139,21 @@ impl<'a> Evaluator<'a> {
 
     /// Handle case 2A.
     fn handle_case_2a(
-        clingen_genes: &[Gene],
-        clingen_regions: &[Region],
+        &self,
+        clingen_genes: &[GeneRecord],
+        clingen_regions: &[ClingenRegionRecord],
         sv_interval: &bio::bio_types::genome::Interval,
     ) -> Option<Vec<Section>> {
         let hi_genes = clingen_genes
             .iter()
+            .map(|gene| gene.clingen.as_ref().expect("no clingen"))
             .filter(|clingen_gene| {
-                let clingen_interval: Interval = (*clingen_gene)
-                    .clone()
-                    .try_into()
+                let clingen_interval: Interval = clingen_gene
+                    .get_interval(self.parent.assembly)
                     .expect("no interval for gene");
                 contains(sv_interval, &clingen_interval)
-                    && clingen_gene.haploinsufficiency_score == Score::SufficientEvidence
+                    && clingen_gene.haploinsufficiency_score
+                        == ClingenDosageScore::SufficientEvidenceAvailable as i32
             })
             .cloned()
             .collect::<Vec<_>>();
@@ -154,7 +165,8 @@ impl<'a> Evaluator<'a> {
                     .try_into()
                     .expect("no interval for region");
                 contains(sv_interval, &clingen_interval)
-                    && clingen_region.haploinsufficiency_score == Score::SufficientEvidence
+                    && clingen_region.haploinsufficiency_score
+                        == ClingenDosageScore::SufficientEvidenceAvailable as i32
             })
             .cloned()
             .collect::<Vec<_>>();
@@ -173,17 +185,20 @@ impl<'a> Evaluator<'a> {
     fn handle_cases_2c_2e(
         &self,
         sv_interval: &bio::bio_types::genome::Interval,
-        clingen_genes: &[Gene],
+        clingen_genes: &[GeneRecord],
     ) -> Result<Option<Section>, anyhow::Error> {
         // Get HGNC ids of HI genes.
         let hi_hgnc_ids = clingen_genes
             .iter()
-            .filter_map(|clingen_gene| {
-                if clingen_gene.haploinsufficiency_score == Score::SufficientEvidence {
-                    self.parent
-                        .gene_id_data
-                        .by_ncbi_gene_id(&clingen_gene.ncbi_gene_id)
-                        .map(|gene_id_info| gene_id_info.hgnc_id.clone())
+            .filter_map(|gene| {
+                if gene
+                    .clingen
+                    .as_ref()
+                    .expect("no clingen")
+                    .haploinsufficiency_score
+                    == ClingenDosageScore::SufficientEvidenceAvailable as i32
+                {
+                    Some(gene.hgnc.as_ref().expect("no hgnc").hgnc_id.clone())
                 } else {
                     None
                 }
@@ -306,10 +321,10 @@ impl<'a> Evaluator<'a> {
             );
             let gene = self
                 .parent
-                .gene_id_data
-                .by_hgnc_id(&tx_info.hgnc)
-                .expect("no gene id info?")
-                .clone();
+                .query_gene(&tx_info.hgnc)
+                .expect("could not query for gene")
+                .expect("gene not found")
+                .into();
             if do_overlap(sv_interval, &cds_interval) {
                 // Case 2C-1 positive.
                 tracing::debug!("case 2C-1: {:?} vs. {:?}", sv_interval, &cds_interval);
@@ -376,10 +391,10 @@ impl<'a> Evaluator<'a> {
 
             let gene = self
                 .parent
-                .gene_id_data
-                .by_hgnc_id(&tx_info.hgnc)
-                .expect("no gene id info?")
-                .clone();
+                .query_gene(&tx_info.hgnc)
+                .expect("could not query for gene")
+                .expect("gene not found")
+                .into();
             if !do_overlap(sv_interval, &cds_interval) {
                 // Case 2D-1 positive: only 3' UTR is involved.
                 tracing::debug!("case 2D-1 fired: {:?} vs. {:?}", sv_interval, &cds_interval);
@@ -476,10 +491,11 @@ impl<'a> Evaluator<'a> {
 
     /// Handle case 2F: complete contained within benign region.
     fn handle_case_2f(
-        benign_regions: &[Region],
+        benign_regions: &[ClingenRegionRecord],
         sv_interval: &bio::bio_types::genome::Interval,
         result: &[Section],
     ) -> Option<Vec<Section>> {
+        tracing::trace!("considering case 2F...");
         let containing_benign_regions = benign_regions
             .iter()
             .filter(|clingen_region| {
@@ -487,11 +503,16 @@ impl<'a> Evaluator<'a> {
                     .clone()
                     .try_into()
                     .expect("no interval for region");
+                tracing::trace!("  considering {:?} >= {:?}", &clingen_interval, sv_interval);
                 contains(&clingen_interval, sv_interval)
             })
             .map(|region| (*region).clone())
             .collect::<Vec<_>>();
-        if !containing_benign_regions.is_empty() {
+        tracing::trace!(
+            "  containing benign regions: {:?}",
+            &containing_benign_regions
+        );
+        let res = if !containing_benign_regions.is_empty() {
             let mut result = Vec::from_iter(result.iter().cloned());
             result.push(Section::L2(L2::L2F(L2F {
                 suggested_score: -1.0,
@@ -501,7 +522,9 @@ impl<'a> Evaluator<'a> {
             Some(result)
         } else {
             None
-        }
+        };
+        tracing::trace!("... done considering case 2F");
+        res
     }
 
     /// Handle case 2H.
@@ -556,20 +579,26 @@ impl<'a> Evaluator<'a> {
     /// And checks whether the gene is predicted to be haploinsufficient by two or more
     /// predictors using the criteria outlined in documentation of `Self::handle_case_2h()`.
     fn get_gene_hi_predictions(&self, hgnc_id: &str) -> Option<GeneHiPrediction> {
-        let hi_record = self.parent.decipher_hi_data.by_hgnc_id(hgnc_id);
-        let gnomad_record = self.parent.gnomad_constraint_data.by_hgnc_id(hgnc_id);
-        tracing::info!("HI = {:?}, gnomad = {:?}", &hi_record, &gnomad_record);
+        let gene = match self.parent.query_gene(hgnc_id) {
+            Ok(Some(gene)) => gene,
+            Ok(None) => {
+                tracing::warn!("failed to locate gene: {}", hgnc_id);
+                return None;
+            }
+            Err(e) => {
+                tracing::warn!("failed to query gene: {}", e);
+                return None;
+            }
+        };
+        let hi_record = gene.decipher_hi.as_ref();
+        let gnomad_record = gene.gnomad_constraints.as_ref();
+        tracing::debug!("HI = {:?}, gnomad = {:?}", &hi_record, &gnomad_record);
         if let (Some(hi_record), Some(gnomad_record)) = (hi_record, gnomad_record) {
             if let (Some(pli), Some(oe_lof_upper)) = (gnomad_record.pli, gnomad_record.oe_lof_upper)
             {
                 if hi_record.hi_index <= 10.0 && pli >= 0.9 && oe_lof_upper < 0.35 {
                     Some(GeneHiPrediction {
-                        gene: self
-                            .parent
-                            .gene_id_data
-                            .by_hgnc_id(hgnc_id)
-                            .expect("could not resolve HGNC ID")
-                            .clone(),
+                        gene: (&gene).into(),
                         results: vec![
                             GeneHiPredictorResult::DecipherHiIndex {
                                 hi_index: hi_record.hi_index,
@@ -612,10 +641,10 @@ mod test {
     #[tracing_test::traced_test]
     #[rstest::rstest]
     // Case 2A: with region ISCA-46303
-    #[case("17", 67_892_996, 69_792_434, "ISCA-46303", "2A-pos")] // full
-    #[case("17", 67_892_996, 69_792_433, "ISCA-46303", "2A-neg-1")] // partial left
-    #[case("17", 67_892_997, 69_792_434, "ISCA-46303", "2A-neg-2")] // partial right
-    #[case("17", 67_892_997, 69_792_433, "ISCA-46303", "2A-neg-3")]
+    #[case("17", 69_896_855, 71_796_293, "ISCA-46303", "2A-pos")] // full
+    #[case("17", 69_896_755, 69_896_955, "ISCA-46303", "2A-neg-1")] // partial left
+    #[case("17", 71_796_193, 71_796_393, "ISCA-46303", "2A-neg-2")] // partial right
+    #[case("17", 69_896_655, 69_896_755, "ISCA-46303", "2A-neg-3")]
     // contained
     // Case 2A: with gene COL3A1 (negative cases have no overlap so other cases don't trigger)
     #[case("2", 189_839_099, 189_877_472, "COL3A1", "2A-pos")] // full
@@ -645,12 +674,12 @@ mod test {
     #[case("2", 189_839_528, 189_876_186, "COL3A1", "2E")]
     #[case("2", 21_226_513, 21_266_591, "APOB", "2E")]
     // Case 2F: completely contained in benign region
-    #[case("1", 12_989_199, 12_998_900, "ISCA-46311", "2F-pos")] // contained
-    #[case("1", 12_998_901, 12_998_901, "ISCA-46311", "2F-neg-1")] // right of
-    #[case("1", 12_989_198, 12_989_198, "ISCA-46311", "2F-neg-2")] // left of
+    #[case("1", 12_929_369, 12_939_070, "ISCA-46311", "2F-pos")] // contained
+    #[case("1", 12_939_071, 12_939_080, "ISCA-46311", "2F-neg-1")] // right of
+    #[case("1", 12_929_328, 12_929_368, "ISCA-46311", "2F-neg-2")] // left of
     // Case 2G: overlapping benign region, but additional material
-    #[case("1", 12_989_199, 12_998_901, "ISCA-46311", "2G-pos-1")] // additional right
-    #[case("1", 12_989_198, 12_998_900, "ISCA-46311", "2G-pos-2")]
+    #[case("1", 12_929_369, 12_939_071, "ISCA-46311", "2G-pos-1")] // additional right
+    #[case("1", 12_929_368, 12_939_070, "ISCA-46311", "2G-pos-2")]
     // additional left
     // Case 2H: two or more HI predictors suggest AT LEAST ONE gene in the interval is HI
     #[case("1", 12_040_238, 12_073_572, "MFN2", "2H-neg")] // MFN2 not DECIPHER HI
@@ -684,12 +713,20 @@ mod test {
         Ok(())
     }
 
-    /// Test inernal working of `handle_case_2a` (complete overlap).
+    /// Test internal working of `handle_case_2a` (complete overlap).
     #[tracing_test::traced_test]
     #[rstest::rstest]
     // Note: same cases as in `evaluate` above -- keep in sync!
-    #[case("17", 67_892_996, 69_792_434, "ISCA-46303", "2A-pos")]
-    #[case("2", 189_839_099, 189_877_472, "COL3A1", "2A-pos")]
+    // Case 2A: with region ISCA-46303
+    #[case("17", 69_896_855, 71_796_293, "ISCA-46303", "2A-pos")] // full
+    #[case("17", 69_896_755, 69_896_955, "ISCA-46303", "2A-neg-1")] // partial left
+    #[case("17", 71_796_193, 71_796_393, "ISCA-46303", "2A-neg-2")] // partial right
+    #[case("17", 69_896_655, 69_896_755, "ISCA-46303", "2A-neg-3")]
+    // contained
+    // Case 2A: with gene COL3A1 (negative cases have no overlap so other cases don't trigger)
+    #[case("2", 189_839_099, 189_877_472, "COL3A1", "2A-pos")] // full
+    #[case("2", 189_877_473, 189_878_473, "COL3A1", "2A-neg-1")] // left
+    #[case("2", 189_838_099, 189_839_098, "COL3A1", "2A-neg-2")] // right
     fn handle_case_2a(
         #[case] chrom: &str,
         #[case] start: u64,
@@ -708,14 +745,11 @@ mod test {
             ambiguous_range: None,
         };
         let sv_interval = strucvar.into();
-        let genes = global_evaluator_37
-            .clingen_dosage_data
-            .gene_by_overlap(&sv_interval);
-        let regions = global_evaluator_37
-            .clingen_dosage_data
-            .region_by_overlap(&sv_interval);
 
-        let res = super::Evaluator::handle_case_2a(&genes, &regions, &sv_interval);
+        let (genes, regions) = global_evaluator_37.clingen_overlaps(&sv_interval);
+        let evaluator = super::Evaluator::with_parent(global_evaluator_37);
+
+        let res = evaluator.handle_case_2a(&genes, &regions, &sv_interval);
         insta::assert_yaml_snapshot!(res);
 
         Ok(())
@@ -926,9 +960,9 @@ mod test {
     #[rstest::rstest]
     // Note: same cases as in `evaluate` above -- keep in sync!
     // Case 2F: completely contained in benign region
-    #[case("1", 12_989_199, 12_998_900, "ISCA-46311", "2F-pos")] // contained
-    #[case("1", 12_998_901, 12_998_901, "ISCA-46311", "2F-neg-1")] // right of
-    #[case("1", 12_989_198, 12_989_198, "ISCA-46311", "2F-neg-2")] // left of
+    #[case("1", 12_929_369, 12_939_070, "ISCA-46311", "2F-pos")] // contained
+    #[case("1", 12_939_071, 12_939_080, "ISCA-46311", "2F-neg-1")] // right of
+    #[case("1", 12_929_328, 12_929_368, "ISCA-46311", "2F-neg-2")] // left of
     fn handle_case_2f(
         #[case] chrom: &str,
         #[case] start: u64,

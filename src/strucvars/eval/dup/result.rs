@@ -1,9 +1,13 @@
 //! Data structures for representing the actual results of DEL/copy number gain.
 
+use annonars::pbs::{
+    genes::base::ClingenDosageRecord as ClingenGeneRecord,
+    regions::clingen::Region as ClingenRegionRecord,
+};
 use strum::IntoEnumIterator as _;
 
 use crate::strucvars::{
-    data::{clingen_dosage, hgnc::GeneIdInfo},
+    ds::GeneIdInfo,
     eval::{
         common::{FunctionalElement, GeneOverlap, HasScoreRange, SuggestedScore},
         result::{ClinicalSignificance, ClinvarSvOverlap, GnomadSvOverlap, Pvs1Result, ScoreRange},
@@ -30,7 +34,7 @@ impl Summary {
     }
 
     /// Return overall score.
-    fn get_score(sections: &Vec<Section>) -> f32 {
+    fn get_score(sections: &[Section]) -> f32 {
         sections.iter().map(|s| s.suggested_score()).sum()
     }
 
@@ -66,7 +70,7 @@ impl Evaluation {
 
 /// Evaluation results for each section of the ACMG rule.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum Section {
     /// Results of Section G1.
     G1(G1),
@@ -156,7 +160,7 @@ impl HasScoreRange for Section {
 
 /// Enumeration of the categories for the copy number gain evaluation, Section 1.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum G1 {
     /// Contains protein-coding or other known functionally important elements.
     G1A(G1A),
@@ -193,7 +197,7 @@ impl SuggestedScore for G1B {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum G2 {
     /// Complete overlap; Tthe TS gene or minimal criticala reegion is fully contained
     /// within the observed copy number gain.
@@ -231,9 +235,9 @@ pub struct G2A {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping TS genes.
-    pub ts_genes: Vec<clingen_dosage::Gene>,
+    pub ts_genes: Vec<ClingenGeneRecord>,
     /// Overlapping TS genomic regions.
-    pub ts_regions: Vec<clingen_dosage::Region>,
+    pub ts_regions: Vec<ClingenRegionRecord>,
 }
 
 impl SuggestedScore for G2A {
@@ -246,7 +250,7 @@ impl SuggestedScore for G2A {
 #[derive(Debug, Clone, PartialEq, Default, serde::Deserialize, serde::Serialize)]
 pub struct G2B {
     /// Overlapping TS genomic regions.
-    pub ts_regions: Vec<clingen_dosage::Region>,
+    pub ts_regions: Vec<ClingenRegionRecord>,
 }
 
 impl SuggestedScore for G2B {
@@ -262,7 +266,7 @@ pub struct G2C {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping TS genomic regions.
-    pub benign_regions: Vec<clingen_dosage::Region>,
+    pub benign_regions: Vec<ClingenRegionRecord>,
 }
 
 impl SuggestedScore for G2C {
@@ -278,7 +282,7 @@ pub struct G2D {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping benign genomic region.
-    pub benign_region: clingen_dosage::Region,
+    pub benign_region: ClingenRegionRecord,
 }
 
 impl SuggestedScore for G2D {
@@ -294,7 +298,7 @@ pub struct G2E {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping benign genomic regions.
-    pub benign_region: clingen_dosage::Region,
+    pub benign_region: ClingenRegionRecord,
     /// Potentially affected genes.
     pub genes: Vec<GeneIdInfo>,
     /// Overlapping functional elements.
@@ -314,7 +318,7 @@ pub struct G2F {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping benign genomic regions.
-    pub benign_region: clingen_dosage::Region,
+    pub benign_region: ClingenRegionRecord,
 }
 
 impl SuggestedScore for G2F {
@@ -330,7 +334,7 @@ pub struct G2G {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping benign genomic regions.
-    pub benign_region: clingen_dosage::Region,
+    pub benign_region: ClingenRegionRecord,
     /// Additional genes.
     pub genes: Vec<GeneIdInfo>,
     /// Overlapping functional elements.
@@ -412,7 +416,7 @@ impl SuggestedScore for G2L {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum G3 {
     /// <=34 genes.
     G3A(G3Count),
@@ -444,7 +448,7 @@ impl SuggestedScore for G3Count {
 ///
 /// Only 4O can be automatically determined.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum G4 {
     /// Overlap with pathogenic variants; must be evaluated by a human.
     ///

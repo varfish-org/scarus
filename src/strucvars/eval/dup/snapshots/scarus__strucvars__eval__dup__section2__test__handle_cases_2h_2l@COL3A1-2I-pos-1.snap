@@ -3,7 +3,7 @@ source: src/strucvars/eval/dup/section2.rs
 expression: res
 ---
 - g2:
-    g2_i:
+    g2i:
       suggested_score: 0.9
       pvs1_result: pvs1
       hi_genes:

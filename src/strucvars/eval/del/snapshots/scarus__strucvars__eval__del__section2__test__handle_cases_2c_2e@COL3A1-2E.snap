@@ -3,7 +3,7 @@ source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
 l2:
-  l2_e:
+  l2e:
     suggested_score: 0.9
     pvs1_result: pvs1
 

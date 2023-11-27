@@ -1,0 +1,28 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- g2:
+    g2g:
+      suggested_score: 0
+      benign_region:
+        iscaId: ISCA-46459
+        iscaRegionName: 11q14.3 population region (gnomAD-SV_v2.1_DUP_11_33042)
+        genomicLocation: "chr11:89786909-89923863"
+        haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_NO_EVIDENCE_AVAILABLE
+        triplosensitivityScore: CLINGEN_DOSAGE_SCORE_UNLIKELY
+      genes:
+        - hgnc_id: "HGNC:38877"
+          hgnc_symbol: TRIM49C
+          ensembl_gene_id: ENSG00000204449
+          ncbi_gene_id: "642612"
+      functional_elements: []
+- g2:
+    g2l:
+      suggested_score: 0
+      genes:
+        - hgnc_id: "HGNC:14526"
+          hgnc_symbol: NAALAD2
+          ensembl_gene_id: ENSG00000077616
+          ncbi_gene_id: "10003"
+

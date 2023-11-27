@@ -1,9 +1,13 @@
 //! Data structures for representing the actual results of DEL/copy number loss.
 
+use annonars::pbs::{
+    genes::base::ClingenDosageRecord as ClingenGeneRecord,
+    regions::clingen::Region as ClingenRegionRecord,
+};
 use strum::IntoEnumIterator as _;
 
 use crate::strucvars::{
-    data::{clingen_dosage, hgnc::GeneIdInfo},
+    ds::GeneIdInfo,
     eval::{
         common::{FunctionalElement, GeneOverlap, HasScoreRange, SuggestedScore},
         result::{ClinicalSignificance, ClinvarSvOverlap, GnomadSvOverlap, Pvs1Result, ScoreRange},
@@ -30,7 +34,7 @@ impl Summary {
     }
 
     /// Return overall score.
-    fn get_score(sections: &Vec<Section>) -> f32 {
+    fn get_score(sections: &[Section]) -> f32 {
         sections.iter().map(|s| s.suggested_score()).sum()
     }
 
@@ -86,7 +90,7 @@ impl Evaluation {
 
 /// Evaluation results for each section of the ACMG rule.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum Section {
     /// Results of Section L1.
     L1(L1),
@@ -179,7 +183,7 @@ impl HasScoreRange for Section {
 
 /// Enumeration of the categories for the copy number loss evaluation, Section 1.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum L1 {
     /// Contains protein-coding or other known functionally important elements.
     L1A(L1A),
@@ -216,7 +220,7 @@ impl SuggestedScore for L1B {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum L2 {
     /// Complete overlap of an established HI gene/genomic region.
     L2A(L2A),
@@ -254,9 +258,9 @@ pub struct L2A {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping HI genes.
-    pub hi_genes: Vec<clingen_dosage::Gene>,
+    pub hi_genes: Vec<ClingenGeneRecord>,
     /// Overlapping HI genomic regions.
-    pub hi_regions: Vec<clingen_dosage::Region>,
+    pub hi_regions: Vec<ClingenRegionRecord>,
 }
 
 impl SuggestedScore for L2A {
@@ -400,7 +404,7 @@ pub struct L2F {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping CNV benign genomic regions.
-    pub benign_regions: Vec<clingen_dosage::Region>,
+    pub benign_regions: Vec<ClingenRegionRecord>,
 }
 
 impl SuggestedScore for L2F {
@@ -416,7 +420,7 @@ pub struct L2G {
     /// Suggested score for the subsection.
     pub suggested_score: f32,
     /// Overlapping CNV benign genomic regions.
-    pub benign_regions: Vec<clingen_dosage::Region>,
+    pub benign_regions: Vec<ClingenRegionRecord>,
 }
 
 impl SuggestedScore for L2G {
@@ -470,7 +474,7 @@ impl SuggestedScore for L2H {
 
 /// Enumeration of the categories for the structural variant evaluation, Section 2.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum L3 {
     /// <=24 genes.
     L3A(L3Count),
@@ -502,7 +506,7 @@ impl SuggestedScore for L3Count {
 ///
 /// Only 4O can be automatically determined.
 #[derive(Debug, Clone, PartialEq, serde::Deserialize, serde::Serialize)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "lowercase")]
 pub enum L4 {
     /// Overlap with pathogenic variants; must be evaluated by a human.
     ///

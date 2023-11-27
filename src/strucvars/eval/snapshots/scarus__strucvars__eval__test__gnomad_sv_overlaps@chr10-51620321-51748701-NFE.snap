@@ -6,12 +6,12 @@ expression: result
     chrom: "10"
     start: 51620321
     stop: 51748701
-    sv_type: 0
-    population: 4
+    svType: CNV_TYPE_DEL
+    population: POPULATION_NFE
 - exac_cnv:
     chrom: "10"
     start: 51632845
     stop: 51767839
-    sv_type: 0
-    population: 3
+    svType: CNV_TYPE_DEL
+    population: POPULATION_FIN
 

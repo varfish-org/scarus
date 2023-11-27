@@ -3,15 +3,22 @@ source: src/strucvars/eval/del/section2.rs
 expression: res
 ---
 - l2:
-    l2_a:
+    l2a:
       suggested_score: 1
-      hi_genes: []
+      hi_genes:
+        - geneSymbol: SOX9
+          ncbiGeneId: "6662"
+          genomicLocation37: "chr17:70117161-70122561"
+          genomicLocation38: "chr17:72121020-72126416"
+          haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          triplosensitivityScore: CLINGEN_DOSAGE_SCORE_NO_EVIDENCE_AVAILABLE
+          haploinsufficiencyDiseaseId: "MONDO:0007251"
       hi_regions:
-        - isca_id: ISCA-46303
-          isca_region_name: SOX9 upstream enhancer region
-          genomic_location: "17:67892996-69792434"
-          haploinsufficiency_score: sufficient_evidence
-          triplosensitivity_score: little_evidence
-          haploinsufficiency_disease_id: "MONDO:0007134"
-          triplosensitivity_disease_id: "MONDO:0009869"
+        - iscaId: ISCA-46303
+          iscaRegionName: SOX9 upstream enhancer region
+          genomicLocation: "chr17:69896855-71796293"
+          haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          triplosensitivityScore: CLINGEN_DOSAGE_SCORE_LITTLE_EVIDENCE
+          haploinsufficiencyDiseaseId: "MONDO:0007134"
+          triplosensitivityDiseaseId: "MONDO:0009869"
 

@@ -1,0 +1,18 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- g2:
+    g2a:
+      suggested_score: 1
+      ts_genes:
+        - geneSymbol: PLP1
+          ncbiGeneId: "5354"
+          genomicLocation37: "chrX:103031434-103047548"
+          genomicLocation38: "chrX:103776506-103792619"
+          haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          triplosensitivityScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          haploinsufficiencyDiseaseId: "MONDO:0010714"
+          triplosensitivityDiseaseId: "MONDO:0010714"
+      ts_regions: []
+

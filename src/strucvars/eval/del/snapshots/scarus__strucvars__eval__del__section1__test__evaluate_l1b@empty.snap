@@ -3,5 +3,5 @@ source: src/strucvars/eval/del/section1.rs
 expression: res
 ---
 l1:
-  l1_b: {}
+  l1b: {}
 

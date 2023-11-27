@@ -6,731 +6,559 @@ expression: result
   chromosome: "1"
   start: 47851
   stop: 249228449
-  reference: ~
-  alternative: ~
-  inner_start: 47851
-  inner_stop: ~
-  outer_start: 249228449
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 47851
+  outerStart: 249228449
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000599659
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000736295
       title: "GRCh37/hg19 1p36.33-q44(chr1:47851-249228449)x3 AND not provided"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 82154
   stop: 12699337
-  reference: ~
-  alternative: ~
-  inner_start: 82154
-  inner_stop: ~
-  outer_start: 12699337
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 82154
+  outerStart: 12699337
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000252976
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000239416
       title: "GRCh37/hg19 1p36.33-36.22(chr1:82154-12699337)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 82154
   stop: 249218992
-  reference: ~
-  alternative: ~
-  inner_start: 82154
-  inner_stop: ~
-  outer_start: 249218992
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 82154
+  outerStart: 249218992
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000599669
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000736305
       title: "GRCh37/hg19 1p36.33-q44(chr1:82154-249218992)x3 AND not provided"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 82154
   stop: 11784118
-  reference: ~
-  alternative: ~
-  inner_start: 82154
-  inner_stop: ~
-  outer_start: 11784118
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 82154
+  outerStart: 11784118
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000638124
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000790592
       title: "GRCh37/hg19 1p36.33-36.22(chr1:82154-11784118)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 554375
   stop: 9779842
-  reference: ~
-  alternative: ~
-  inner_start: ~
-  inner_stop: ~
-  outer_start: ~
-  outer_stop: ~
-  variant_type: 0
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000635907
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000787413
       title: Single allele AND Neurodevelopmental disorder
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 564405
   stop: 8597804
-  reference: ~
-  alternative: ~
-  inner_start: 564405
-  inner_stop: ~
-  outer_start: 8597804
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 564405
+  outerStart: 8597804
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000058242
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000051993
       title: "GRCh38/hg38 1p36.33-36.23(chr1:629025-8537745)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 746608
   stop: 15077159
-  reference: ~
-  alternative: ~
-  inner_start: 746608
-  inner_stop: ~
-  outer_start: 15077159
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 746608
+  outerStart: 15077159
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000253459
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000240403
       title: "GRCh37/hg19 1p36.33-36.21(chr1:746608-15077159)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 779727
   stop: 8231974
-  reference: ~
-  alternative: ~
-  inner_start: 779727
-  inner_stop: ~
-  outer_start: 8231974
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 779727
+  outerStart: 8231974
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000147354
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000136554
       title: "GRCh38/hg38 1p36.33-36.23(chr1:844347-8171914)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 779727
   stop: 12530188
-  reference: ~
-  alternative: ~
-  inner_start: 779727
-  inner_stop: ~
-  outer_start: 12530188
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 779727
+  outerStart: 12530188
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000147521
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000136695
       title: "GRCh38/hg38 1p36.33-36.22(chr1:844347-12470133)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 794595
   stop: 8807706
-  reference: ~
-  alternative: ~
-  inner_start: 794595
-  inner_stop: ~
-  outer_start: 8807706
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 794595
+  outerStart: 8807706
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000058294
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000052045
       title: "GRCh38/hg38 1p36.33-36.23(chr1:859215-8747647)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 837491
   stop: 9616363
-  reference: ~
-  alternative: ~
-  inner_start: 837491
-  inner_stop: ~
-  outer_start: 9616363
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 837491
+  outerStart: 9616363
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000153078
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000141577
       title: "GRCh38/hg38 1p36.33-36.22(chr1:902111-9556305)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 846680
   stop: 9389984
-  reference: ~
-  alternative: ~
-  inner_start: 846680
-  inner_stop: ~
-  outer_start: 9389984
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 846680
+  outerStart: 9389984
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000154548
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000142615
       title: "GRCh38/hg38 1p36.33-36.22(chr1:911300-9329925)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 849466
   stop: 9627180
-  reference: ~
-  alternative: ~
-  inner_start: 849466
-  inner_stop: ~
-  outer_start: 9627180
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 849466
+  outerStart: 9627180
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000153663
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000141970
       title: "GRCh38/hg38 1p36.33-36.22(chr1:914086-9567122)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 849466
   stop: 8901938
-  reference: ~
-  alternative: ~
-  inner_start: 849466
-  inner_stop: ~
-  outer_start: 8901938
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 849466
+  outerStart: 8901938
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000443883
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000512568
       title: "GRCh37/hg19 1p36.33-36.23(chr1:849466-8901938)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 849466
   stop: 17525065
-  reference: ~
-  alternative: ~
-  inner_start: 849466
-  inner_stop: ~
-  outer_start: 17525065
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 849466
+  outerStart: 17525065
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV001340028
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV001832902
       title: "GRCh37/hg19 1p36.33-36.13(chr1:849466-17525065)x1 AND not provided"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 849466
   stop: 10258804
-  reference: ~
-  alternative: ~
-  inner_start: 849466
-  inner_stop: ~
-  outer_start: 10258804
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 849466
+  outerStart: 10258804
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV001703629
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV002280717
       title: "GRCh37/hg19 1p36.33-36.22(chr1:849466-10258804) AND Chromosome 1p36 deletion syndrome, proximal"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 849467
   stop: 249224684
-  reference: ~
-  alternative: ~
-  inner_start: 849467
-  inner_stop: ~
-  outer_start: 249224684
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 849467
+  outerStart: 249224684
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000442386
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000510383
       title: "GRCh37/hg19 1p36.33-q44(chr1:849467-249224684)x3 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 849467
   stop: 249224684
-  reference: ~
-  alternative: ~
-  inner_start: 849467
-  inner_stop: ~
-  outer_start: 249224684
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 849467
+  outerStart: 249224684
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000442387
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000510926
       title: "GRCh37/hg19 1p36.33-q44(chr1:849467-249224684) AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 849467
   stop: 12448956
-  reference: ~
-  alternative: ~
-  inner_start: 849467
-  inner_stop: ~
-  outer_start: 12448956
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 849467
+  outerStart: 12448956
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV001808634
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV002473951
       title: "GRCh37/hg19 1p36.33-36.22(chr1:849467-12448956)x1 AND not provided"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 2761325
   stop: 8068000
-  reference: ~
-  alternative: ~
-  inner_start: 2761325
-  inner_stop: ~
-  outer_start: 8068000
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 2761325
+  outerStart: 8068000
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000057390
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000051086
       title: "GRCh38/hg38 1p36.32-36.23(chr1:2844760-8007940)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 2922757
   stop: 18015429
-  reference: ~
-  alternative: ~
-  inner_start: 2922757
-  inner_stop: ~
-  outer_start: 18015429
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 2922757
+  outerStart: 18015429
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000059846
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000053714
       title: "GRCh38/hg38 1p36.32-36.13(chr1:3006193-17688934)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 4558588
   stop: 13187457
-  reference: ~
-  alternative: ~
-  inner_start: 4558588
-  inner_stop: ~
-  outer_start: 13187457
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 4558588
+  outerStart: 13187457
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000395144
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000446359
       title: "GRCh37/hg19 1p36.32-36.21(chr1:4558588-13187457)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 4958499
   stop: 13178528
-  reference: ~
-  alternative: ~
-  inner_start: 4958499
-  inner_stop: ~
-  outer_start: 13178528
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 4958499
+  outerStart: 13178528
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000059856
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000053724
       title: "GRCh38/hg38 1p36.32-36.21(chr1:4898439-13111056)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 4958499
   stop: 12971757
-  reference: ~
-  alternative: ~
-  inner_start: 4958499
-  inner_stop: ~
-  outer_start: 12971757
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 4958499
+  outerStart: 12971757
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000148387
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000137461
       title: "GRCh38/hg38 1p36.32-36.21(chr1:4898439-12911913)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 4965631
   stop: 8106987
-  reference: ~
-  alternative: ~
-  inner_start: 4965631
-  inner_stop: ~
-  outer_start: 8106987
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 4965631
+  outerStart: 8106987
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000599730
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000736366
       title: "GRCh37/hg19 1p36.32-36.23(chr1:4965631-8106987)x1 AND not provided"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 5423886
   stop: 18686796
-  reference: ~
-  alternative: ~
-  inner_start: 5423886
-  inner_stop: ~
-  outer_start: 18686796
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 5423886
+  outerStart: 18686796
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000154704
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000142771
       title: "GRCh38/hg38 1p36.31-36.13(chr1:5363826-18360302)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 6363701
   stop: 16125588
-  reference: ~
-  alternative: ~
-  inner_start: 6363701
-  inner_stop: ~
-  outer_start: 16125588
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 6363701
+  outerStart: 16125588
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000148885
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000137948
       title: "GRCh38/hg38 1p36.31-36.21(chr1:6303641-15799093)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 6614945
   stop: 16382506
-  reference: ~
-  alternative: ~
-  inner_start: 6614945
-  inner_stop: ~
-  outer_start: 16382506
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 6614945
+  outerStart: 16382506
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000154839
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000142906
       title: "GRCh38/hg38 1p36.31-36.13(chr1:6554885-16056011)x3 AND See cases"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 6712399
   stop: 12784811
-  reference: ~
-  alternative: ~
-  inner_start: 6712399
-  inner_stop: ~
-  outer_start: 12784811
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 6712399
+  outerStart: 12784811
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000058051
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000051794
       title: "GRCh38/hg38 1p36.31-36.21(chr1:6652339-12724844)x3 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 6758933
   stop: 19287770
-  reference: ~
-  alternative: ~
-  inner_start: 6758933
-  inner_stop: ~
-  outer_start: 19287770
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 6758933
+  outerStart: 19287770
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV001808934
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV002474779
       title: "GRCh37/hg19 1p36.31-36.13(chr1:6758933-19287770)x1 AND not provided"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 6823203
   stop: 8427633
-  reference: ~
-  alternative: ~
-  inner_start: 6823203
-  inner_stop: ~
-  outer_start: 8427633
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 6823203
+  outerStart: 8427633
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000154639
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000142706
       title: "GRCh38/hg38 1p36.31-36.23(chr1:6763143-8367573)x1 AND See cases"
-      clinical_significance: 2
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_UNCERTAIN_SIGNIFICANCE
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 7225096
   stop: 13178528
-  reference: ~
-  alternative: ~
-  inner_start: 7225096
-  inner_stop: ~
-  outer_start: 13178528
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 7225096
+  outerStart: 13178528
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000059884
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000053755
       title: "GRCh38/hg38 1p36.23-36.21(chr1:7165036-13111056)x1 AND See cases"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 7331314
   stop: 9427796
-  reference: ~
-  alternative: ~
-  inner_start: 7331314
-  inner_stop: ~
-  outer_start: 9427796
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 7331314
+  outerStart: 9427796
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000565070
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000684545
       title: "GRCh37/hg19 1p36.23-36.22(chr1:7331314-9427796)x1 AND not provided"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 7391956
   stop: 9775929
-  reference: ~
-  alternative: ~
-  inner_start: 7391956
-  inner_stop: ~
-  outer_start: 9775929
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 7391956
+  outerStart: 9775929
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000565071
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000684546
       title: "GRCh37/hg19 1p36.23-36.22(chr1:7391956-9775929)x1 AND not provided"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 7526232
   stop: 8290521
-  reference: ~
-  alternative: ~
-  inner_start: 7526232
-  inner_stop: ~
-  outer_start: 8290521
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 7526232
+  outerStart: 8290521
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV001808723
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV002474568
       title: "GRCh37/hg19 1p36.23(chr1:7526232-8290521)x1 AND not provided"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 7700440
   stop: 8601397
-  reference: ~
-  alternative: ~
-  inner_start: 7700440
-  inner_stop: ~
-  outer_start: 8601397
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 7700440
+  outerStart: 8601397
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV002425758
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV003116550
       title: "NC_000001.10:g.(?_7700440)_(8601397_?)dup AND not provided"
-      clinical_significance: 2
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_UNCERTAIN_SIGNIFICANCE
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 7995073
   stop: 8031023
-  reference: ~
-  alternative: ~
-  inner_start: 7995073
-  inner_stop: ~
-  outer_start: 8031023
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 7995073
+  outerStart: 8031023
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV001098717
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV001420678
       title: "Single allele AND Parkinson Disease, Juvenile"
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 7997771
   stop: 8255222
-  reference: ~
-  alternative: ~
-  inner_start: 7997771
-  inner_stop: ~
-  outer_start: 8255222
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 7997771
+  outerStart: 8255222
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000394697
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000446114
       title: "GRCh37/hg19 1p36.23(chr1:7997771-8255222)x3 AND See cases"
-      clinical_significance: 2
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_UNCERTAIN_SIGNIFICANCE
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 8020162
   stop: 8022197
-  reference: ~
-  alternative: ~
-  inner_start: 8020162
-  inner_stop: ~
-  outer_start: 8022197
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 8020162
+  outerStart: 8022197
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000599743
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000736379
       title: "GRCh37/hg19 1p36.23(chr1:8020162-8022197)x0 AND not provided"
-      clinical_significance: 4
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_BENIGN
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 8022836
   stop: 8031035
-  reference: ~
-  alternative: ~
-  inner_start: 8022836
-  inner_stop: ~
-  outer_start: 8031035
-  outer_stop: ~
-  variant_type: 1
+  innerStart: 8022836
+  outerStart: 8031035
+  variantType: VARIANT_TYPE_DUPLICATION
   vcv: VCV000650723
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000805924
       title: "NC_000001.10:g.(?_8022836)_(8031035_?)dup AND Autosomal recessive early-onset Parkinson disease 7"
-      clinical_significance: 2
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_UNCERTAIN_SIGNIFICANCE
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 8022846
   stop: 8037799
-  reference: ~
-  alternative: ~
-  inner_start: 8022846
-  inner_stop: 8018845
-  outer_start: 8037799
-  outer_stop: 8044954
-  variant_type: 0
+  innerStart: 8022846
+  innerStop: 8018845
+  outerStart: 8037799
+  outerStop: 8044954
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000007063
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000007479
       title: nsv513788 AND Autosomal recessive early-onset Parkinson disease 7
-      clinical_significance: 0
-      review_status: 5
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_NO_ASSERTION_CRITERIA_PROVIDED
 - release: GRCh37
   chromosome: "1"
   start: 8022846
   stop: 8037818
-  reference: ~
-  alternative: ~
-  inner_start: 8022846
-  inner_stop: ~
-  outer_start: 8037818
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 8022846
+  outerStart: 8037818
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV002425707
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV003109631
       title: "NC_000001.10:g.(?_8022846)_(8037818_?)del AND Autosomal recessive early-onset Parkinson disease 7"
-      clinical_significance: 0
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 - release: GRCh37
   chromosome: "1"
   start: 8029385
   stop: 8029484
-  reference: ~
-  alternative: ~
-  inner_start: 8029385
-  inner_stop: ~
-  outer_start: 8029484
-  outer_stop: ~
-  variant_type: 0
+  innerStart: 8029385
+  outerStart: 8029484
+  variantType: VARIANT_TYPE_DELETION
   vcv: VCV000584372
-  reference_assertions:
+  referenceAssertions:
     - rcv: RCV000708516
       title: "NC_000001.11:g.(?_7969325)_(7969424_?)del AND Autosomal recessive early-onset Parkinson disease 7"
-      clinical_significance: 1
-      review_status: 3
+      clinicalSignificance: CLINICAL_SIGNIFICANCE_LIKELY_PATHOGENIC
+      reviewStatus: REVIEW_STATUS_CRITERIA_PROVIDED_SINGLE_SUBMITTER
 
