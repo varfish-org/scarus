@@ -4,7 +4,7 @@ expression: res
 ---
 - g2:
     g2l:
-      suggested_score: 0.45
+      suggested_score: 0
       genes:
         - hgnc_id: "HGNC:9968"
           hgnc_symbol: REV3L

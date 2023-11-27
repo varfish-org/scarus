@@ -1107,8 +1107,8 @@ pub mod test {
     #[rstest::rstest]
     // currently RNA genes not imported
     // #[case("HGNC:53963", Some(false))]
-    #[case("HGNC:18443", Some(true))]
-    #[case("HGNC:2400", Some(true))]
+    #[case("HGNC:6637", Some(true))]
+    #[case("HGNC:9086", Some(true))]
     #[case("HGNC:xxx", None)]
     fn is_protein_coding(
         #[case] hgnc_id: &str,

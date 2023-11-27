@@ -34,7 +34,7 @@ impl Summary {
     }
 
     /// Return overall score.
-    fn get_score(sections: &Vec<Section>) -> f32 {
+    fn get_score(sections: &[Section]) -> f32 {
         sections.iter().map(|s| s.suggested_score()).sum()
     }
 

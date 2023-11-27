@@ -515,9 +515,9 @@ impl<'a> Evaluator<'a> {
         }
 
         {
-            // For case 2K: one breakpoint in HI gene.
+            // For case 2J: one breakpoint in HI gene.
             //
-            // As mentioned above, we won't do 2J as we cannot incorporate the phenotype.
+            // As mentioned above, we won't do 2K as we cannot incorporate the phenotype.
             let hi_genes = clingen_genes
                 .iter()
                 .flat_map(|gene| {
@@ -622,7 +622,7 @@ impl<'a> Evaluator<'a> {
                 // Case 2L: one breakpoint is in any gene
                 tracing::debug!("case 2L fired: {:?}", &hgnc_ids);
                 result.push(Section::G2(G2::G2L(G2L {
-                    suggested_score: 0.45,
+                    suggested_score: 0.0,
                     genes,
                 })));
             }
@@ -644,26 +644,27 @@ pub mod test {
     #[tracing_test::traced_test]
     #[rstest::rstest]
     // Case 2A
-    #[case("X", 69_896_855, 71_796_293, "ISCA-46303", "2A-pos")]
+    #[case("22", 18_924_718, 21_111_383, "ISCA-37446", "2A-pos")]
     #[case("X", 103_031_434, 103_047_548, "PLP1", "2A-pos")]
     // Case 2C
-    #[case("2", 110_104_531, 110_228_181, "ISCA-37405", "2C-pos-1")] // exact match
-    #[case("2", 110_802_355, 110_984_922, "ISCA-37405", "2C-pos-2")] // full: MALL, MTLN
-    #[case("2", 110_862_108, 111_246_742, "ISCA-37405", "2C-neg-1")] // extra: LIMS4
-    #[case("2", 110_879_569, 110_983_703, "ISCA-37405", "2C-neg-2")]
+    #[case("11", 89_786_909, 89_923_863, "ISCA-46459", "2C-pos-1")] // exact match
+    #[case("11", 89_786_000, 89_924_000, "ISCA-46459", "2C-pos-2")] // slightly larger, same genes
+    #[case("11", 89_760_000, 89_923_863, "ISCA-46459", "2C-neg-1")] // extra: TRIM49C
+    #[case("11", 89_786_909, 89_960_000, "ISCA-46459", "2C-neg-2")]
+    // excludes: MALL
     // excludes: MALL
     // Case 2D: smaller than established benign region, no coding genes interrupted.
-    #[case("2", 110_876_929, 110_965_509, "ISCA-37405", "2D-pos-1")]
+    #[case("11", 89_787_000, 89_860_000, "ISCA-37405", "2D-pos-1")]
+    // don't cut NAALAD2
     // smaller, no interrupt
     // Case 2E: smaller than established benign region, potential protein coding interrupt.
-    #[case("2", 110_862_109, 110_983_702, "ISCA-37405", "2E-pos-1")] // region (-1bp) interrupts
-    #[case("2", 110_878_786, 110_969_992, "ISCA-37405", "2E-pos-2")] // interrupt MTLN
-    #[case("2", 110_882_589, 110_961_118, "ISCA-37405", "2E-pos-3")]
+    #[case("11", 89_786_909, 89_819_950, "ISCA-37405", "2E-pos-1")]
+    // interrupt UBTFL1
     // interrupt NPHP1
     // Case 2F: larger than established benign region, no additional genetic material.
-    #[case("2", 110_862_107, 110_983_704, "ISCA-37405", "2F-pos-1")] // +1bp
+    #[case("11", 89_786_908, 89_923_864, "ISCA-37405", "2F-pos-1")] // +1bp
     // Case 2G: larger than established benign region, additional protein-coding gene.
-    #[case("2", 110_833_712, 111_236_476, "ISCA-37405", "2G-pos-1")] // adds LIMS4
+    #[case("11", 89_786_909, 89_960_000, "ISCA-37405", "2G-pos-1")] // adds CHORDC1
     // Case 2H: HI gene fully contained within observed copy number gain.
     #[case("2", 189839099, 189877472, "COL3A1", "2H-pos-1")]
     // Case 2I: Both breakpoints in the same HI gene.
@@ -705,7 +706,7 @@ pub mod test {
     #[tracing_test::traced_test]
     #[rstest::rstest]
     // Note: same cases as in `evaluate` above -- keep in sync!
-    #[case("X", 69_896_855, 71_796_293, "ISCA-46303", "2A-pos")]
+    #[case("22", 18_924_718, 21_111_383, "ISCA-37446", "2A-pos")]
     #[case("X", 103_031_434, 103_047_548, "PLP1", "2A-pos")]
     fn handle_case_2a(
         #[case] chrom: &str,
@@ -738,10 +739,10 @@ pub mod test {
     #[tracing_test::traced_test]
     #[rstest::rstest]
     // Note: same cases as in `evaluate` above -- keep in sync!
-    #[case("2", 110_862_108, 110_983_703, "ISCA-37405", "2C-pos-1")] // exact match
-    #[case("2", 110_802_355, 110_984_922, "ISCA-37405", "2C-pos-2")] // full: MALL, MTLN
-    #[case("2", 110_862_108, 111_246_742, "ISCA-37405", "2C-neg-1")] // extra: LIMS4
-    #[case("2", 110_879_569, 110_983_703, "ISCA-37405", "2C-neg-2")] // excludes: MALL
+    #[case("11", 89_786_909, 89_923_863, "ISCA-46459", "2C-pos-1")] // exact match
+    #[case("11", 89_786_000, 89_924_000, "ISCA-46459", "2C-pos-2")] // slightly larger, same genes
+    #[case("11", 89_760_000, 89_923_863, "ISCA-46459", "2C-neg-1")] // extra: TRIM49C
+    #[case("11", 89_786_909, 89_960_000, "ISCA-46459", "2C-neg-2")] // excludes: MALL
     fn handle_case_2c(
         #[case] chrom: &str,
         #[case] start: u64,
@@ -780,17 +781,17 @@ pub mod test {
     // Note: same cases as in `evaluate` above -- keep in sync!
     //
     // Case 2D: smaller than established benign region, no coding genes interrupted.
-    #[case("2", 110_876_929, 110_965_509, "ISCA-37405", "2D-pos-1")]
+    #[case("11", 89_787_000, 89_860_000, "ISCA-37405", "2D-pos-1")]
+    // don't cut NAALAD2
     // smaller, no interrupt
     // Case 2E: smaller than established benign region, potential protein coding interrupt.
-    #[case("2", 110_862_109, 110_983_702, "ISCA-37405", "2E-pos-1")] // region (-1bp) interrupts
-    #[case("2", 110_878_786, 110_969_992, "ISCA-37405", "2E-pos-2")] // interrupt MTLN
-    #[case("2", 110_882_589, 110_961_118, "ISCA-37405", "2E-pos-3")]
+    #[case("11", 89_786_909, 89_819_950, "ISCA-37405", "2E-pos-1")]
+    // interrupt UBTFL1
     // interrupt NPHP1
     // Case 2F: larger than established benign region, no additional genetic material.
-    #[case("2", 110_862_107, 110_983_704, "ISCA-37405", "2F-pos-1")] // +1bp
+    #[case("11", 89_786_908, 89_923_864, "ISCA-37405", "2F-pos-1")] // +1bp
     // Case 2G: larger than established benign region, additional protein-coding gene.
-    #[case("2", 110_833_712, 111_236_476, "ISCA-37405", "2G-pos-1")] // adds LIMS4
+    #[case("11", 89_786_909, 89_960_000, "ISCA-37405", "2G-pos-1")] // adds CHORDC1
     fn handle_cases_2d_2g(
         #[case] chrom: &str,
         #[case] start: u64,

@@ -166,7 +166,9 @@ pub mod intervals {
     ///
     /// `true` if the intervals overlap, `false` otherwise.
     pub fn do_overlap(lhs: &Interval, rhs: &Interval) -> bool {
-        if lhs.contig() != rhs.contig() {
+        let lhs_contig = lhs.contig().strip_prefix("chr").unwrap_or(lhs.contig());
+        let rhs_contig: &str = rhs.contig().strip_prefix("chr").unwrap_or(rhs.contig());
+        if lhs_contig != rhs_contig {
             false
         } else {
             let a = lhs.range();

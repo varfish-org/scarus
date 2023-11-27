@@ -19,11 +19,10 @@ if [[ ! -e $SCRIPTPATH/mehari/txs_example_hi.bin.zst.ok ]]; then
     LMNB1
     PLP1
 
-    TMEM211
-    SGSM1
-    KIAA1671
-    PIWIL3
-    CRYBB3
+    UBTFL1
+    NAALAD2
+    TRIM49C
+    CHORDC1
 
     MFN2
     REV3L

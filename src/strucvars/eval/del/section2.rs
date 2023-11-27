@@ -508,7 +508,10 @@ impl<'a> Evaluator<'a> {
             })
             .map(|region| (*region).clone())
             .collect::<Vec<_>>();
-        tracing::trace!("  containing benign regions: {:?}", &containing_benign_regions);
+        tracing::trace!(
+            "  containing benign regions: {:?}",
+            &containing_benign_regions
+        );
         let res = if !containing_benign_regions.is_empty() {
             let mut result = Vec::from_iter(result.iter().cloned());
             result.push(Section::L2(L2::L2F(L2F {

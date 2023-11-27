@@ -1,0 +1,24 @@
+---
+source: src/strucvars/eval/dup/section2.rs
+expression: res
+---
+- g2:
+    g2a:
+      suggested_score: 1
+      ts_genes: []
+      ts_regions:
+        - iscaId: ISCA-37433
+          iscaRegionName: "22q11.2 recurrent (DGS/VCFS) region (proximal, A-B) (includes TBX1)"
+          genomicLocation: "chr22:18924718-20299685"
+          haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          triplosensitivityScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          haploinsufficiencyDiseaseId: "MONDO:0008564"
+          triplosensitivityDiseaseId: "MONDO:0012020"
+        - iscaId: ISCA-37446
+          iscaRegionName: "22q11.2 recurrent (DGS/VCFS) region (proximal, A-D) (includes TBX1)"
+          genomicLocation: "chr22:18924718-21111383"
+          haploinsufficiencyScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          triplosensitivityScore: CLINGEN_DOSAGE_SCORE_SUFFICIENT_EVIDENCE_AVAILABLE
+          haploinsufficiencyDiseaseId: "MONDO:0008564"
+          triplosensitivityDiseaseId: "MONDO:0012020"
+

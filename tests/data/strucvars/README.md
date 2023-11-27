@@ -68,37 +68,28 @@ These are the two only (2023-11-14) established TS genes with level 3.
     - gene: HGNC:18159
     - chrX:6451659-6453159
 
-## Additional Gnes
+## Established TS Region
 
-The following genes were extracted for proximity to benign regions for "same genomic material" condition.
+- region: ISCA-37446
+    - fully contains COMT, CLDN5 (and others)
+    - partially contains PI4KA
+    - nearby: USP18 (left)
+        - HGNC:12616
+    - nearby: SNAP29 (right)
+        - HGNC:11133
 
-- region: ISCA-46732
-    - fully contains TMEM211
-    - partially contains SGSM1
-    - partially contains KIAA1671
-    - nearby: PIWIL3 (left)
-        - HGNC:18443
-    - nearby: CRYBB3 (right)
-        - HGNC:2400
+## Established TS Benign Region
 
-PREVIOUSLY NOW NOT USED ANY MORE:
-    - region ISCA-37405
-        - fully contains NPHP1
-        - partially contains MALL
-        - completely contains MTLN
-        - genes
-            - gene: NPHP1
-                - HGNC:7905
-                - chr2:110880913-110962639
-                - contained in ISCA-37405
-            - gene: MALL
-                - HGNC:6818
-            - gene: MTLN
-                - HGNC:27339
-        - extra genes:
-            - gene: LIMS4
-                - HGNC:39941
-    
+- region: ISCA-46459
+    - chr11:89786909-89923863
+    - contained: UBTFL1, NAALAD2
+    - nearby: TRIM49C (left)
+        - HGNC:38877
+    - nearby: CHORDC1 (right)
+        - HGNC:14525
+
+## Additional Genes
+
 The following lincRNA genes are included for testing protein-coding/non-coding gene distinction.
 
 - gene: MACORIS
