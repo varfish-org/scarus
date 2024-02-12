@@ -13,7 +13,7 @@ name = "scarus"
 path = "src/main.rs"
 
 [dependencies]
-annonars = "0.34.0"
+annonars = "0.35.0"
 anyhow = "1.0"
 bio = "1.4"
 biocommons-bioutils = "0.1.4"
